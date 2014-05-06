@@ -1,0 +1,24 @@
+------------------------------------------------------------------------------
+
+MySQL JDBC Driver Name = com.mysql.jdbc.Driver
+MySQL JDBC Database URL = jdbc:mysql://localhost:10000/RLFDB
+MySQL JDBC Username = DGXSoftware
+MySQL JDBC Password = DGXPassword
+
+
+
+------------------------------------------------------------------------------
+
+MySQL - InnoDB Size Limits 
+• Max # of tables: 4 G 
+• Max size of a table: 32TB 
+• Columns per table: 1000 
+• Max row size: n*4 GB 
+• 8 kB if stored on the same page 
+• n*4 GB with n BLOBs 
+• Max key length: 3500 
+• Maximum tablespace size: 64 TB 
+• Max # of concurrent trxs: 1023
+
+
+

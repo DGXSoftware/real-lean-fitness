@@ -1,0 +1,591 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<!-- Set the Title for the Website Page -->
+<title>DataTables example</title>
+
+<!-- Set the Favicon for the Website page -->
+<link rel='Shortcut Icon' type='image/ico' href='Images/favicon.ico'/>
+
+<!-- Set the Character Encoding for the Website page -->
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+
+<!-- Include the Stylesheet Files -->
+<link rel="stylesheet" type="text/css" href="demo_page.css" />
+<link rel="stylesheet" type="text/css" href="demo_table.css" />
+
+<!-- Include the JavaScript Files -->
+<script type="text/javascript" language="javascript" src="jquery.js"></script>
+<script type="text/javascript" language="javascript" src="jquery.dataTables.js"></script>
+
+<!-- Enable the JavaScript Data Table handler -->
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+
+//var oTable = $('#example').dataTable();
+
+var oTable = $('#example').dataTable( {
+"iDisplayLength": 15,
+"aLengthMenu": [[15, 50, 100, -1], [15, 50, 100, "All"]],
+"sScrollX": "800px",
+"sScrollY": "200px",
+"bPaginate": true
+} );
+
+// Sort immediately with column 3 Descending and column 4 Ascending
+//oTable.fnSort( [ [3,'desc'], [4,'asc'] ] );
+
+} );
+</script>
+
+</head>
+<body>
+<div id="dt_example">
+<div id="container">
+<div id="demo">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+<thead>
+<tr>
+    <th>Join Username's Event</th>
+    <th>Event Name</th>
+	<th>Description</th>
+	<th>Address</th>
+	<th>Start Time</th>
+	<th>End Time</th>
+	<th>Distance</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+    <th>Join Username's Event</th>
+    <th>Event Name</th>
+	<th>Description</th>
+	<th>Address</th>
+	<th>Start Time</th>
+	<th>End Time</th>
+	<th>Distance</th>
+</tr>
+</tfoot>
+<tbody>
+<tr class="odd gradeX">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="odd gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="odd gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="odd gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="odd gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="odd gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeX">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeA">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeX">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeX">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeX">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeC">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+<tr class="gradeU">
+    <td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+    <td>-</td>
+	<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+</body>
+</html>
+

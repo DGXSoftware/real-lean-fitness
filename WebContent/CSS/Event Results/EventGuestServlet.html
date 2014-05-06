@@ -1,0 +1,351 @@
+<?xml version = '1.0'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+
+<!-- The xmlns attribute is required in XHTML but it is invalid in HTML. -->
+<!-- the namespace 'xmlns=http://www.w3.org/1999/xhtml' is default, and will be added to the <html> tag in XHTML even if you do not include it. -->
+<html xmlns='http://www.w3.org/1999/xhtml'>
+
+<head>
+
+<!-- Set the Title for the Website Page -->
+<title>Event Guest Servlet</title>
+
+<!-- Set the Favicon for the Website page -->
+<link rel='Shortcut Icon' type='image/ico' href='../Images/favicon.ico'/>
+
+<!-- Set the Character Encoding for the Website page -->
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+
+<!-- Include the Stylesheet Files -->
+
+<link rel='stylesheet' type='text/css' href='Event Results.css'/>
+<link rel='stylesheet' type='text/css' href='ENM Style.css' />
+
+<!-- Include the JavaScript Files -->
+<script language='javascript' type='text/javascript' src='../JavaScript/Validation/Event Join Page Validation.js' > </script>
+<script language='javascript' type='text/javascript' src='Event Results Drop-Down Menu Population.js'></script>
+
+</head>
+
+<body>
+<div id='container'>
+<div id='main'>
+<div id='header'></div>
+<div id='nav'>
+<ul>
+<!-- START DYNAMIC HTML -->
+<li><a href='/UserProfileServlet'>1</a></li>
+<!-- END DYNAMIC HTML -->
+<li><a href='/EventHostServlet'>Create Event</a></li>
+<li><a href='/EventGuestServlet'>Join Event</a></li>
+<li><a href='#'></a></li>
+<li><a href='/UserInformationServlet'>Edit Profile</a></li>
+<li><a href='/LogOutServlet'>Log Out</a></li>
+</ul>
+</div>
+<div id='content'>
+<div id='left'>
+<div class='post'>
+<h1>Join Events</h1>
+
+<p align='left'>&#160;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- START the Event Results Form  -->
+<div class='EventResultsBody'>
+<div class='EventResultsBodyContainer'>
+
+
+<!-- START SEARCH BAR HERE -->
+<div class='EventSearchSection'>
+
+<!-- TABS -->
+<center>
+<div class='EventSearchTabBar'>
+<div class='EventSearchSelectedTab'><center><span class='EventSearchTabTitle'>Basic Search</span></center></div>
+<div class='EventSearchAvailableTab'><center><span class='EventSearchTabTitle'><a class='EventSearchAvailableTabLink' href='' >Advanced Search</a></span></center></div>
+</div>
+</center>
+
+<!-- START ADVANCED SEARCH ROW -->
+<!-- START DYNAMIC HTML -->
+<div class='EventSearchRow'>
+<center>
+<form action='/EventJoinServlet' method='get' id='EventJoinForm' name='EventJoinForm' onsubmit='return validateEventJoinFormInput()'>
+<table class='EventSearchSectionTable'>
+<tr>
+
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>1.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchOrganizer' id='EventSearchOrganizer' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>2.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchEventID' id='EventSearchEventID' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>3.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchEventName' id='EventSearchEventName' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>4.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchEventDescription' id='EventSearchEventDescription' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>5.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchEventStartDateAndTime' id='EventSearchEventStartDateAndTime' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+<td class='EventSearchSectionTableData' valign='middle' width='60'><span class='EventSearchPromptText'>6.</span>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchEventEndDateAndTime' id='EventSearchEventEndDateAndTime' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+
+</tr>
+</table>
+</center>
+</div>
+<!-- END DYNAMIC HTML -->
+<!-- END ADVANCED SEARCH ROW -->
+
+
+<!-- START BASIC SEARCH ROW -->
+
+<div class='EventSearchRow'><center>
+<table class='EventSearchSectionTable'>
+<tr>
+
+<!-- Create and Populate the EventSearchCategoryMenu Drop-Down Menu -->
+<td class='EventSearchSectionTableData'>
+<select class='EventSearchSectionCategoryDropDownMenu' id='EventSearchCategoryMenu' NAME='EventSearchCategoryMenu' size='1'></select>
+<script type='text/javascript'>populateEventCategoryMenu('EventSearchCategoryMenu');</script> 
+</td>
+
+<!-- Create and Populate the EventSearchSubCategoryMenu Drop-Down Menu -->
+<td class='EventSearchSectionTableData'>
+<select class='EventSearchSectionSubCategoryDropDownMenu' id='EventSearchSubCategoryMenu' NAME='EventSearchSubCategoryMenu' size='1'></select>
+<script type='text/javascript'>populateEventSubCategoryMenu('EventSearchSubCategoryMenu');</script> 
+</td>
+
+<!-- Create and Populate the EventSearchCountryMenu Drop-Down Menu -->
+<td class='EventSearchSectionTableData' valign='middle'>
+<select class='EventSearchSectionCountryDropDownMenu' id='EventSearchCountryMenu' name='EventSearchCountryMenu' onchange='getstates(this);resetZipcode();resetCity()' size='1' cols='15'></select>
+<script type='text/javascript'>populateCountryMenu('EventSearchCountryMenu');</script> 
+</td>
+
+<!-- Create the EventSearchAddress -->
+<td class='EventSearchSectionTableData'><center><span class='EventSearchPromptText'>City&nbsp;/&nbsp;Zip Code&nbsp;</span></center></td>
+<td class='EventSearchSectionTableData'><input class='EventSearchSectionTitle' type='text' name='EventSearchAddress' id='EventSearchAddress' value='' size='8' maxlength='40' onchange='resetZipcode();'></td>
+
+
+<!-- Create and Populate the EventSearchMilesMenu Drop-Down Menu -->
+<td class='EventSearchSectionTableData'>
+<select class='EventSearchSectionMilesDropDownMenu' id='EventSearchMilesMenu' name='EventSearchMilesMenu'></select>
+<script type='text/javascript'>populateEventMilesMenu('EventSearchMilesMenu',5);</script> 
+</td>
+
+
+<!-- Create the EventSearchSortMenu -->
+<td class='EventSearchSectionTableData'><span class='EventSearchPromptText'>Sort</span></td>
+<td class='EventSearchSectionTableData'>
+<select class='EventSearchSectionSortDropDownMenu' id='EventSearchSortMenu' name='EventSearchSortMenu'>
+<option value=0 SELECTED>Newest Events</option>
+<option value=1 >Oldest Events</option>
+</select>
+</td>
+
+<!-- BUTTON -->
+<td class='EventSearchSectionTableData' align='center' valign='middle' width='6%'>
+<input type='submit' class='EventSearchSubmitButton' name='cmdSearch' value='Search'>  
+</td>
+
+
+</tr>
+
+
+<tr>
+<td class='EventSearchSectionTableData' colspan='12'>
+<center>
+<!-- START ERROR MESSAGE -->
+<!-- START DYNAMIC HTML -->
+<!--
+<span class='EventSearchErrorText'><strong>You can only filter images if you enter a valid city and postal or zip code.</strong></span>
+-->
+<!-- START DYNAMIC HTML -->
+<!-- END ERROR MESSAGE -->
+</center>
+</td>
+</tr>
+
+
+</table> 
+</form>
+</center>
+</div>
+
+<!-- END BASIC SEARCH ROW -->
+ 
+ 
+<center></span><br /></center>
+
+</div>
+<!-- END SEARCH BAR HERE -->
+
+
+<!-- START Search overview -->
+<div class='EventResultsSection'>
+<span class='EventResultsNotice'>SEARCH RESULTS</span>
+<!-- START DYNAMIC HTML -->
+<strong class='EventResultsNoticeFooter'> - Results 0 to 9 out of 600+ results are shown below </strong>
+<!-- END DYNAMIC HTML -->
+<!-- END Search overview -->
+
+<!-- START USER LIST HERE -->
+<!-- START DYNAMIC HTML -->
+<!-- User 1 -->
+<div class='EventCard'>
+<div class='EventCardContainer'>
+<div class='EventCardImageArea'>
+<a href='#' class=''>
+<img class='EventCardImageSize' src='http://www.kidsmathgamesonline.com/images/pictures/numbers120/number10.jpg' border='0' alt=''/>
+</a>
+</div>
+<div class='EventCardDescriptionArea'>
+<div class='EventCardHeadlineArea'>
+<span class='EventCardHeadlineAreaTitle'>1. Headline Here</span>
+<span class='EventCardHeadlineAreaFooter'>&nbsp;&nbsp;&nbsp;&nbsp;1. City,&nbsp;State</span>
+</div>
+<span class='EventCardDescriptionAreaText'>1. EventCardDescriptionArea (Limit to 200 Characters)</span>
+<br/>
+<div class='EventCardAboutArea'>
+<a class='EventUsernameLink' href='#'>1. Username</a>
+<span class='EventUsernameLinkFooter'>&nbsp;1. Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Category / Goal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Credentials&nbsp;&nbsp;&nbsp;</span>
+<a class='EventJoinLink' href='#' onclick=''>1. Join this event.</a>
+</div></div></div></div>
+
+
+<!-- User 2 -->
+<div class='EventCard'>
+<div class='EventCardContainer'>
+<div class='EventCardImageArea'>
+<a href='#' class=''>
+<img class='EventCardImageSize' src='http://www.kidsmathgamesonline.com/images/pictures/numbers120/number18.jpg' border='0' alt=''/>
+</a>
+</div>
+<div class='EventCardDescriptionArea'>
+<div class='EventCardHeadlineArea'>
+<span class='EventCardHeadlineAreaTitle'>2. Headline Here</span>
+<span class='EventCardHeadlineAreaFooter'>&nbsp;&nbsp;&nbsp;&nbsp;2. City,&nbsp;State</span>
+</div>
+<span class='EventCardDescriptionAreaText'>2. EventCardDescriptionArea (Limit to 200 Characters)</span>
+<br/>
+<div class='EventCardAboutArea'>
+<a class='EventUsernameLink' href='#'>2. Username</a>
+<span class='EventUsernameLinkFooter'>&nbsp;2. Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Category / Goal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Credentials&nbsp;&nbsp;&nbsp;</span>
+<a class='EventJoinLink' href='#' onclick=''>2. Join this event.</a>
+</div></div></div></div>
+
+<!-- User 3 -->
+<div class='EventCard'>
+<div class='EventCardContainer'>
+<div class='EventCardImageArea'>
+<a href='#' class=''>
+<img class='EventCardImageSize' src='http://www.kidsmathgamesonline.com/images/pictures/numbers120/number24.jpg' border='0' alt=''/>
+</a>
+</div>
+<div class='EventCardDescriptionArea'>
+<div class='EventCardHeadlineArea'>
+<span class='EventCardHeadlineAreaTitle'>3. Headline Here</span>
+<span class='EventCardHeadlineAreaFooter'>&nbsp;&nbsp;&nbsp;&nbsp;3. City,&nbsp;State</span>
+</div>
+<span class='EventCardDescriptionAreaText'>3. EventCardDescriptionArea (Limit to 200 Characters)</span>
+<br/>
+<div class='EventCardAboutArea'>
+<a class='EventUsernameLink' href='#'>3. Username</a>
+<span class='EventUsernameLinkFooter'>&nbsp;3. Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Category / Goal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Credentials&nbsp;&nbsp;&nbsp;</span>
+<a class='EventJoinLink' href='#' onclick=''>3. Join this event.</a>
+</div></div></div></div>
+<!-- END DYNAMIC HTML -->
+<!-- END USER LIST HERE -->
+
+<!-- START PAGE BROWSING HERE -->
+<!-- START DYNAMIC HTML -->
+<center>
+<a class='EventDisabledPageLink'>Previous</a>
+<a class='EventDisabledPageLink'>1</a>
+<a class='EventEnabledPageLink' href='#'>2</a>
+<a class='EventEnabledPageLink' href='#'>3</a>
+<a class='EventEnabledPageLink' href='#'>4</a>
+<a class='EventEnabledPageLink' href='#'>5</a>  
+<a class='EventEnabledPageLink' href='#'>6</a>
+<a class='EventEnabledPageLink' href='#'>7</a>
+<a class='EventEnabledPageLink' href='#'>8</a>
+<a class='EventEnabledPageLink' href='#'>9</a>
+<a class='EventEnabledPageLink' href='#'>10</a>
+<a class='EventEnabledPageLink' href='#'>11</a>
+<a class='EventEnabledPageLink' href='#'>12</a>
+<a class='EventEnabledPageLink' href='#'>13</a>
+<a class='EventEnabledPageLink' href='#'>14</a>
+<a class='EventEnabledPageLink' href='#'>15</a>
+<a class='EventEnabledPageLink' href='#'>16</a>
+<a class='EventEnabledPageLink' href='#'>17</a>
+<a class='EventEnabledPageLink' href='#'>18</a>
+<a class='EventEnabledPageLink' href='#'>19</a>
+<a class='EventEnabledPageLink' href='#'>20</a>
+<a class='EventEnabledPageLink' href='#'>21</a>
+<a class='EventEnabledPageLink' href='#'>22</a>
+<a class='EventEnabledPageLink' href='#'>23</a>
+<a class='EventEnabledPageLink' href='#'>24</a>
+<a class='EventEnabledPageLink' href='#'>25</a>
+<a class='EventEnabledPageLink' href='#'>26</a>
+<a class='EventEnabledPageLink' href='#'>27</a>
+<a class='EventEnabledPageLink' href='#'>28</a>
+<a class='EventEnabledPageLink' href='#'>29</a>
+<a class='EventEnabledPageLink' href='#'>30</a>
+<a class='EventEnabledPageLink' href='#'>Next</a>
+</center>
+<!-- END DYNAMIC HTML -->
+<!-- END PAGE BROWSING HERE -->
+
+</div>
+<br />
+
+<!-- END PAGE BROWSING HERE -->
+
+
+
+</div>
+</div>
+<!-- END the Event Results Form  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+<div class='clear'></div>
+</div>
+</div>
+
+<div id='footer'>
+<ul>
+<li><a href='#'></a></li>
+<li><a href='#'></a></li>
+<li><a href='#'></a></li>
+<li><a href='#'></a></li>
+<li><a href='#'></a></li>
+<li><a href='#'></a></li>
+</ul>
+<span>Copyright © 2012</span>
+</div>
+</div>
+</body>
+</html>

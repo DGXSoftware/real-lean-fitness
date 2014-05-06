@@ -1,0 +1,15 @@
+:: Environmental System Variable = Right Click Computer > Properties > Advanced System Settings > Environment Variables::
+:: Manualy add the JDK Bin path to the Environmental System Variable "path" ::
+:: NOTE: Separate paths with the semi-colon delimiter ";" ::
+C:\Program Files (x86)\Java\jdk1.7.0_07\bin
+C:\Program Files (x86)\Java\jdk1.7.0_21\bin
+C:\Program Files (x86)\Java\jdk1.7.0_25\bin
+
+:: Command Prompt = Start > Run > CMD::
+:: Set User Variable CATALINA_HOME ::
+setx "CATALINA_HOME" "C:\DMGX's\Programming Projects\Java\Tomcat Server"
+
+:: Set User Variable JAVA_HOME ::
+setx "JAVA_HOME" "C:\Program Files (x86)\Java\jdk1.7.0_07"
+setx "JAVA_HOME" "C:\Program Files (x86)\Java\jdk1.7.0_21"
+setx "JAVA_HOME" "C:\Program Files (x86)\Java\jdk1.7.0_25"

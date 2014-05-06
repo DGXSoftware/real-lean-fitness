@@ -1,0 +1,202 @@
+<web-app xmlns= "http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">                                       
+
+<!-- General description of your Web application -->
+<display-name>RLF</display-name>                                     
+<description>Description Coming Soon...</description>                                 
+
+    <!-- Start of Servlet definitions -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START AGenericServlet Definition -->
+<servlet>
+    <servlet-name>AGenericServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.AGenericServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>AGenericServlet</servlet-name><url-pattern>/AGenericServlet</url-pattern></servlet-mapping>
+<!-- END AGenericServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START BrowserValidationServlet Definition -->
+<servlet>
+    <servlet-name>BrowserValidationServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.BrowserValidationServlet</servlet-class>
+</servlet>
+<servlet-mapping><servlet-name>BrowserValidationServlet</servlet-name><url-pattern>/BrowserValidationServlet</url-pattern></servlet-mapping>
+<!-- END BrowserValidationServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START EventCreateServlet Definition -->
+<servlet>
+    <servlet-name>EventCreateServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.EventCreateServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>EventCreateServlet</servlet-name><url-pattern>/EventCreateServlet</url-pattern></servlet-mapping>
+<!-- END EventCreateServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START EventGuestServlet Definition -->
+<servlet>
+    <servlet-name>EventGuestServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.EventGuestServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>EventGuestServlet</servlet-name><url-pattern>/EventGuestServlet</url-pattern></servlet-mapping>
+<!-- END EventGuestServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START EventHostServlet Definition -->
+<servlet>
+    <servlet-name>EventHostServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.EventHostServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>EventHostServlet</servlet-name><url-pattern>/EventHostServlet</url-pattern></servlet-mapping>
+<!-- END EventHostServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START HomePageServlet Definition -->
+<!--
+<servlet>
+    <servlet-name>HomePageServlet</servlet-name>
+    <description>Connects to a database from a servlet.</description>
+	<servlet-class>dgx.software.com.ServletPackage.HomePageServlet</servlet-class>
+</servlet>
+<servlet-mapping><servlet-name>HomePageServlet</servlet-name><url-pattern>/HomePageServlet</url-pattern></servlet-mapping>
+-->
+<!-- END HomePageServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START LoginServlet Definition -->
+<servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.LoginServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>LoginServlet</servlet-name><url-pattern>/LoginServlet</url-pattern></servlet-mapping>
+<!-- END LoginServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START RegistrationServlet Definition -->
+<servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+	<!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.RegistrationServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>RegistrationServlet</servlet-name><url-pattern>/RegistrationServlet</url-pattern></servlet-mapping>
+<!-- END RegistrationServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START UserProfileServlet Definition -->
+<servlet>
+    <servlet-name>UserProfileServlet</servlet-name>
+	<!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.UserProfileServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>UserProfileServlet</servlet-name><url-pattern>/UserProfileServlet</url-pattern></servlet-mapping>
+<!-- END UserProfileServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START UserInformationServlet Definition -->
+<servlet>
+    <servlet-name>UserInformationServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.UserInformationServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>UserInformationServlet</servlet-name><url-pattern>/UserInformationServlet</url-pattern></servlet-mapping>
+<!-- END UserInformationServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START ImageFileUploadServlet Definition -->
+<servlet>
+    <servlet-name>ImageFileUploadServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.ImageFileUploadServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>ImageFileUploadServlet</servlet-name><url-pattern>/ImageFileUploadServlet</url-pattern></servlet-mapping>
+<!-- END ImageFileUploadServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START LogOutServlet Definition -->
+<servlet>
+    <servlet-name>LogOutServlet</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description> -->
+	<servlet-class>dgx.software.com.ServletPackage.LogOutServlet</servlet-class>
+</servlet>
+<servlet-mapping><servlet-name>LogOutServlet</servlet-name><url-pattern>/LogOutServlet</url-pattern></servlet-mapping>
+<!-- END LogOutServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+    <!-- END Of Servlet definitions -->
+
+  <!-- START of Welcome File definition -->
+<welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+</welcome-file-list>
+  <!-- END of Welcome File definition -->
+
+</web-app>
+
+<!-- NOTES -->
+<!-- Servlet Mapping specifies the Servlet Name (Doesn't have to be the name of the Servlet.class file) and URL Pattern to help the server determine which requests are sent to the servlet -->
+

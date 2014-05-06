@@ -1,0 +1,137 @@
+/* EventResultsBody */
+.EventResultsBody{height:100%;text-align:center;line-height:1.5;background:#FFF;background-image:url("");word-wrap:break-word;font-size:.80em;color:#323232;font-family:Arial, Helvetica, sans-serif;margin:0;}
+
+/* EventResultsBody Container */
+.EventResultsBody .EventResultsBodyContainer{width:978px;border-left:1px solid #d4d4d4;border-right:1px solid #d4d4d4;min-height:600px;background-color:#fff;-webkit-box-shadow:0 8px 10px rgba(222,222,222,1);-moz-box-shadow:0 8px 10px rgba(222,222,222,1);box-shadow:0 8px 10px rgba(222,222,222,1);border-top:1px #d8d8d8 solid;margin:0 auto;padding:20px 0 0;}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------- START EventSearch CSS -------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* EventResultsBody EventSearch Section */
+.EventResultsBody .EventSearchSection{}
+.EventResultsBody .EventSearchSectionTable{width:95%;border-spacing:0;margin-bottom:0;border-collapse:collapse;}
+.EventResultsBody .EventSearchSectionTableData{text-align:left;font-weight:400;float:none;padding:4px 0 0;}
+.EventResultsBody .EventSearchSectionCategoryDropDownMenu{background-color:#fff;border:1px solid #bbb;-moz-border-radius:0;border-radius:0;border-width:1px;padding:4px;width:115px;}
+.EventResultsBody .EventSearchSectionSubCategoryDropDownMenu{background-color:#fff;border:1px solid #bbb;-moz-border-radius:0;border-radius:0;border-width:1px;padding:4px;width:115px;}
+.EventResultsBody .EventSearchSectionCountryDropDownMenu{background-color:#fff;border:1px solid #bbb;-moz-border-radius:0;border-radius:0;border-width:1px;padding:4px;width:100px;}
+.EventResultsBody .EventSearchSectionMilesDropDownMenu{background-color:#fff;border:1px solid #bbb;-moz-border-radius:0;border-radius:0;border-width:1px;padding:4px;}
+.EventResultsBody .EventSearchSectionSortDropDownMenu{background-color:#fff;border:1px solid #bbb;-moz-border-radius:0;border-radius:0;border-width:1px;padding:4px;}
+.EventResultsBody .EventSearchSectionTitle{background-color:#fff;border:1px solid #bbb;margin:.5em 0;padding:5px;font-size:1em;width:70px;}
+.EventResultsBody .EventSearchSectionTitle:focus{border-color:#666;}
+
+/* EventResultsBody EventSearch Tabs */
+.EventResultsBody .EventSearchTabBar{width:100%;height:32px;background-color:#f5fafb;border-top:1px #CEE3EC solid;border-bottom:1px #CEE3EC solid;}
+.EventResultsBody .EventSearchSelectedTab{background-color:#f5fafb;border-top:0 #cee3ec solid;border-right:1px #cee3ec solid;border-bottom:3px solid #f5fafb;border-left:1px #fff solid;width:100px;height:20px;text-align:center;float:left;margin:auto;padding:5px;width:135px; border-left:none;}
+.EventResultsBody .EventSearchAvailableTab{background-color:#f7f7f7;border-left:1px #fff solid;border-right:1px #cee3ec solid;width:100px;text-align:center;float:left;margin:auto;padding:5px;width:135px;}
+.EventResultsBody .EventSearchAvailableTabLink{color:#1f768e;text-decoration:none;}
+.EventResultsBody .EventSearchAvailableTabLink:focus{color:#105f75;text-decoration:underline;}
+.EventResultsBody .EventSearchAvailableTabLink:hover{color:#105f75;text-decoration:underline;}
+.EventResultsBody .EventSearchTabTitle{padding-bottom:10px;color:#1f768e;font-size:14px;font-weight:700;}
+
+/* EventResultsBody EventSearch Search Row */
+.EventResultsBody .EventSearchRow{background-color:#f5fafb;border:1px #cee3ec solid;width:100%;border-left:0;border-right:0;border-top:1px solid #f5fafb;padding:0px;}
+.EventResultsBody .EventSearchPromptText{padding-bottom:10px;color:#323232;font-size:12px;font-weight:700;}
+
+/* EventResultsBody EventSearch Submit Button */
+.EventResultsBody .EventSearchSubmitButton{-moz-border-radius:5px;border-radius:5px;color:#fff;font-weight:700;border:0;text-shadow:1px 1px 0 rgba(0,0,0,0.4);font-family:Arial, Helvetica, sans-serif;margin:auto;padding:5px;*font-size:18px;}
+.EventResultsBody .EventSearchSubmitButton:hover{text-decoration:none;cursor:pointer;text-decoration:none;}
+.EventResultsBody .EventSearchSubmitButton:focus{outline:0;}
+.EventResultsBody .EventSearchSubmitButton{font-size:14px;overflow:visible;background:#429fb8;-webkit-box-shadow:inset 1px 2px 0 0 rgba(145,217,238,1);-moz-box-shadow:inset 1px 2px 0 0 rgba(145,217,238,1);box-shadow:inset 1px 2px 0 0 rgba(145,217,238,1);padding:8px 12px;}
+.EventResultsBody .EventSearchSubmitButton:hover{cursor:pointer;text-decoration:none;}
+
+/* EventResultsBody EventSearch Error Text */
+.EventResultsBody .EventSearchErrorText{color:#b61848;font-size:16px;font-weight:700;}
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------- END EventSearch CSS ---------------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------- START EventResultsBody CSS --------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* EventResultsBody EventResults Section */
+.EventResultsBody .EventResultsSection{text-align:left;margin:0;background-color:#f8f8f8;border:1px #d4d4d4 solid;width:100%;border-left:0;border-right:0;}
+
+/* EventResultsBody EventResults Notice */
+.EventResultsBody .EventResultsNotice{color:#1f768e;font-size:20px;font-weight:700;padding-left:20px;line-height:45px;padding-bottom:10px;line-height:60px;}
+.EventResultsBody .EventResultsNoticeFooter{font-size:13px;font-weight:700;}
+
+/* EventResultsBody Event Card */
+.EventResultsBody .EventCard{background-color:#fff;border:1px #dedede solid;width:880px;text-align:left;word-wrap:break-word;overflow:hidden;-moz-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 2px #dfdfdf;-webkit-box-shadow:0 1px 2px #dfdfdf;box-shadow:0 1px 2px #dfdfdf;margin:auto auto 12px;padding:10px 0;}
+.EventResultsBody .EventCardContainer{width:875px;}
+.EventResultsBody .EventCardImageArea{float:left;padding:5px 10px;}
+.EventResultsBody .EventCardImageSize{width:90px;height:90px;}
+.EventResultsBody .EventCardDescriptionArea{padding-left:10px;overflow:hidden;font-size:13px;}
+.EventResultsBody .EventCardHeadlineArea{padding-bottom:10px;font-weight:700;}
+.EventResultsBody .EventCardHeadlineAreaTitle{color:#1f768e;font-size:16px;padding-bottom:10px;font-weight:700;}
+.EventResultsBody .EventCardHeadlineAreaFooter{color:#000000;font-size:13px;}
+.EventResultsBody .EventCardDescriptionAreaText{}
+.EventResultsBody .EventCardAboutArea{padding-top:10px;font-weight:700;}
+
+/* EventResultsBody Username Link Highlight */
+.EventResultsBody .EventUsernameLink {color:#1f768e;text-decoration:none;}
+.EventResultsBody .EventUsernameLink:focus{color:#105f75;text-decoration:underline;}
+.EventResultsBody .EventUsernameLink:hover{color:#105f75;text-decoration:underline;}
+
+/* EventResultsBody Username Link Footer */
+.EventResultsBody .EventUsernameLinkFooter{}
+
+/* EventResultsBody Join Link Highlight */
+.EventResultsBody .EventJoinLink{color:#017004;font-weight:700;}
+.EventResultsBody .EventJoinLink:link{color:#017004;font-weight:700;}
+.EventResultsBody .EventJoinLink:visited{color:#017004;text-decoration:underline;font-weight:700;}
+.EventResultsBody .EventJoinLink:hover{color:#017004;text-decoration:underline;font-weight:700;}
+.EventResultsBody .EventJoinLink:active{color:#017004;font-weight:700;}
+.EventResultsBody .EventJoinLink:focus{color:#017004;text-decoration:underline;}
+.EventResultsBody .EventJoinLink{text-decoration:none;}
+
+/* EventResultsBody Enabled Page Button Link Highlight */
+.EventResultsBody .EventEnabledPageLink{font-size:14px;color:#1f768e;font-weight:700;color:#1f768e;text-decoration:none;}
+.EventResultsBody .EventEnabledPageLink:focus{color:#105f75;text-decoration:underline;}
+.EventResultsBody .EventEnabledPageLink:hover{color:#105f75;text-decoration:underline;}
+
+/* EventResultsBody Disabled Page Button Link Highlight */
+.EventResultsBody .EventDisabledPageLink{font-size:13px;color:#323232;font-weight:700;}
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------- END EventResultsBody CSS ----------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* ----------------------------------- START ENM Style.css CSS Override -------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* RESIZE EVENT RESULTS *//*
+.EventResultsBody .EventResultsBodyContainer{width:700px!important;}
+.EventResultsBody .EventCard{width:698px!important;}
+.EventResultsBody .EventSearchSectionTable{width:95%!important;}
+*/
+
+/* Handle ENM Style.css CSS Override For the EventResults Section *//*
+.EventResultsBody .EventUsernameLink {color:#1f768e!important;font-size:13px!important;font-weight:700!important;margin-left:8px!important;}
+.EventResultsBody .EventJoinLink{color:#017004!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventEnabledPageLink{color:#1f768e!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventDisabledPageLink{color:#323232!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventCardHeadlineArea{color:#017004!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventCardHeadlineAreaTitle{color:#1f768e!important;font-size:16px!important;font-weight:700!important;}
+.EventResultsBody .EventCardHeadlineAreaFooter{color:#000000!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventCardDescriptionAreaText{color:#000000!important;font-size:13px!important;font-weight:normal!important;}
+.EventResultsBody .EventUsernameLinkFooter{color:#000000!important;font-size:13px!important;font-weight:700!important;}
+*/
+/* Handle ENM Style.css CSS Override For the EventSearch Section *//*
+.EventResultsBody .EventSearchAvailableTabLink{color:#1f768e!important;font-weight:700!important;text-decoration:none;}
+.EventResultsBody .EventSearchAvailableTabLink:focus{color:#105f75!important;text-decoration:underline!important;}
+.EventResultsBody .EventSearchAvailableTabLink:hover{color:#105f75!important;text-decoration:underline!important;}
+.EventResultsBody .EventSearchTabTitle{color:#1f768e!important;font-size:13px!important;font-weight:700!important;}
+.EventResultsBody .EventSearchPromptText{color:#323232!important;font-size:12px!important;font-weight:700!important;}
+.EventResultsBody .EventSearchErrorText{color:#b61848!important;font-size:16px!important;font-weight:700!important;}
+.EventResultsBody .EventResultsNotice{color:#1f768e!important;font-size:20px!important;font-weight:700!important;}
+*/
+/* ----------------------------------------------------------------------------------------------------- */
+/* ------------------------------------- END ENM Style.css CSS Override -------------------------------- */
+/* ----------------------------------------------------------------------------------------------------- */

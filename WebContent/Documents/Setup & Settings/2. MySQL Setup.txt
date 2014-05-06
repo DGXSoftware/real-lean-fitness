@@ -1,0 +1,8 @@
+/* MySQLWindows Service Name (Configuration) */
+DGXMySQL
+
+/* DGX SQL Service Port (Configuration) */
+Mysql@localhost:10000
+
+/* Root Password */
+DGXPassword
