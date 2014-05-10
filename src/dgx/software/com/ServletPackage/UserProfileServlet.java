@@ -19,6 +19,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -27,50 +28,64 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dgx.software.com.UtilityPackage.GlobalMethods;
+
 @SuppressWarnings("serial")
 public class UserProfileServlet extends HttpServlet {
 	
-	private Connection connection;
-	private Statement statement;
+	private Connection SQLConnection;
+	private Statement SQLStatement;
+	private ServletConfig InitConfig;
 
 	// set up database connection and create SQL statement
 	public void init(ServletConfig config) throws ServletException {
+		
+		// Initialize the InitConfig variable
+		InitConfig = config;
+		
+	}
+
+	// process "Get" requests from clients
+	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
+		
+		// Call the doPost() Method
+		doPost(Request, Response);
+		
+	}
+
+	// process "Post" requests from clients
+	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
 		
 		// attempt database connection and create Statements
 		try {
 			// The config.getInitParameter() Parameters are variables 
 			// in the web.xml file which are declared as "init-param" element  
 			// These web.xml variables are used to connect to the database 
-			Class.forName(config.getInitParameter("DriverName"));
-			connection = DriverManager.getConnection(
-				config.getInitParameter("DatabaseURL"), 
-				config.getInitParameter("DatabaseUser"), 
-				config.getInitParameter("DatabasePassword"));
+			Class.forName(InitConfig.getInitParameter("DriverName"));
+			SQLConnection = DriverManager.getConnection(
+				InitConfig.getInitParameter("DatabaseURL"), 
+				InitConfig.getInitParameter("DatabaseUser"), 
+				InitConfig.getInitParameter("DatabasePassword"));
 
 			// create Statement to query database
-			statement = connection.createStatement();
+			SQLStatement = SQLConnection.createStatement();
 			
 		} // end try
 		// for any exception throw an UnavailableException to
 		// indicate that the servlet is not currently available
 		catch (Exception exception) {
 			exception.printStackTrace();
+			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
 			throw new UnavailableException(exception.getMessage());
+			
 		} // end catch
-	} // end method init
-
-	// process "Get" requests from clients
-	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
-	}
-
-	// process "Post" requests from clients
-	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
+		
+		writeServletResponse(Request, Response);
 	}
 	
 	// Create the Servlet Response
-	public void writeServletResponse(boolean writeToFile, HttpServletRequest Request, HttpServletResponse Response) throws IOException {
+	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
 		
 		// Returns null if no session already exists 
 		HttpSession CurrentSession =  Request.getSession(false);
@@ -80,44 +95,18 @@ public class UserProfileServlet extends HttpServlet {
 		
 			try {
 			// If the user does not have a session redirect them back to the Session Writer Servlet
-			Response.sendRedirect("/BrowserValidationServlet");
+			Response.sendRedirect("/UserSessionValidator");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
 		}
-		
-		// Create the Printwriter to print the HTML Page Response
-		// The response is sent to the client through the PrintWriter object
-		// obtained from the HttpServletResponse object.
-		// NOTE: If the response is binary data, such as an image, method
-		// getOutputStream is used to obtain a reference to a
-		// ServletOutputStream object.
-
-		// set up response to client
-		Response.setContentType("text/html");
-		PrintWriter out = Response.getWriter();
-		
-/*		
-		ENMFileWriter MainFileWriter = null;
-		if (writeToFile == true) {
-			// Write To File
-			MainFileWriter = new ENMFileWriter(null, "", "Registration Handler Page.html");
-			
-			// Delete the Previous File
-			MainFileWriter.deleteFile();
-																		
-		} else {
-			// Write To Servlet
-			MainFileWriter = new ENMFileWriter(Response.getWriter(), "", "");
-		}
-*/
 
 		/* START Servlet Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
 		// Write the HTML Successful Response
-		writeHTMLSuccessResponse(Request, Response, CurrentSession, out);
+		printUserProfile(Request, Response, CurrentSession);
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
@@ -129,8 +118,8 @@ public class UserProfileServlet extends HttpServlet {
 	public void destroy() {
 		// attempt to close statements and database connection
 		try {
-			statement.close();
-			connection.close();
+			SQLStatement.close();
+			SQLConnection.close();
 		} // end try
 		// handle database exceptions by returning error to client
 		catch (SQLException sqlException) {
@@ -140,8 +129,25 @@ public class UserProfileServlet extends HttpServlet {
 	
 	
 	// Returns a Successful HTML Response
-	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response, HttpSession CurrentSession, PrintWriter out){
+	private void printUserProfile(HttpServletRequest Request, HttpServletResponse Response, HttpSession CurrentSession){
 
+		// Create the PrintWriter to print the HTML Page Response
+		// The response is sent to the client through the PrintWriter object
+		// obtained from the HttpServletResponse object.
+		// NOTE: If the response is binary data, such as an image, method
+		// getOutputStream is used to obtain a reference to a
+		// ServletOutputStream object.
+		
+		// set up response to client
+		Response.setContentType("text/html");
+		PrintWriter out = null;
+		try {
+			out = Response.getWriter();
+		} catch (IOException e) {
+			System.out.println("INTERNAL ERRROR: printUserProfile()");
+			e.printStackTrace();
+		}
+		
 		// START IF STATEMENT
 		// Proceed ONLY if the user has a session
 		if(CurrentSession != null){
@@ -157,7 +163,7 @@ public class UserProfileServlet extends HttpServlet {
 		String AccountSQLQuery = "SELECT * FROM RLFDB_Accounts WHERE Account_ID="+SessionAccountID+";";
 
 		// Get the SQLQueryOutput
-		ResultSet AccountSQLQueryOutput = statement.executeQuery(AccountSQLQuery);
+		ResultSet AccountSQLQueryOutput = SQLStatement.executeQuery(AccountSQLQuery);
 		
 		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
 		if(AccountSQLQueryOutput.next()){
@@ -177,8 +183,9 @@ public class UserProfileServlet extends HttpServlet {
 			sqlException.printStackTrace();		
 			
 			// Respond with an error message
-			String ErrorMessage = "Database error occurred. Try again later.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);
+			
 		}
 
 /* START HTML RESPONSE */
@@ -213,8 +220,8 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("<!-- START DYNAMIC HTML -->");
 		out.println("<li><a href='/UserProfileServlet'>"+SessionUsername+"</a></li>");
 		out.println("<!-- END DYNAMIC HTML -->");
-		out.println("<li><a href='/EventHostServlet'>Create Event</a></li>");
-		out.println("<li><a href='/EventGuestServlet'>Join Event</a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
 		out.println("<li><a href='#'></a></li>");
 		out.println("<li><a href='/UserInformationServlet'>Edit Profile</a></li>");
 		out.println("<li><a href='/LogOutServlet'>Log Out</a></li>");
@@ -250,8 +257,7 @@ public class UserProfileServlet extends HttpServlet {
 			
 			}
 		} catch (SQLException e1) {e1.printStackTrace();}
-		
-		
+
 		out.println("<!-- END DYNAMIC HTML -->");
 		out.println("");
 		out.println("</div>");
@@ -264,13 +270,11 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("");
 		out.println("<!-- START DYNAMIC HTML -->");
 		
-		
-		
 		// SQL Query
 		String ProfileImageSQLQuery = "SELECT * FROM RLFDB_Images WHERE ACCOUNT_ID = '"+SessionAccountID+"' AND Primary_Image= '1';";
 
 		// Get the SQLQueryOutput
-		ResultSet ProfileImageSQLQueryOutput = statement.executeQuery(ProfileImageSQLQuery);
+		ResultSet ProfileImageSQLQueryOutput = SQLStatement.executeQuery(ProfileImageSQLQuery);
 		
 		// If we DO NOT Have an Empty Result Set, Work with it.
 		if(ProfileImageSQLQueryOutput.next()){
@@ -306,7 +310,7 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("<input type='file' id='UserProfilePictureBrowse' name='UserProfilePictureBrowse' />");
 		out.println("<br/>");
 		out.println("");
-		out.println("<input type='submit' id='UploadUserProfilePictureButton' name='UploadUserProfilePictureButton' value = 'Upload Profile Picture Button' />");
+		out.println("<input type='submit' id='UploadUserProfilePictureButton' name='UploadUserProfilePictureButton' value = 'Upload Profile Picture' />");
 		out.println("");
 		out.println("</form>");
 		out.println("");
@@ -344,12 +348,15 @@ public class UserProfileServlet extends HttpServlet {
 		out.close();
 		
 	}else {
+		
+		// Close the ResultSet
+		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		
 			// Write the HTML Error Response	
-			String ErrorMessage = "Unable to retrieve profile! Please Try again.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+			String NoProfileErrorMessage = "Unable to retrieve your profile! Please Try again.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", NoProfileErrorMessage);
 			
-			// Close the ResultSet
-			try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			
 		}
 		
 		} // end try
@@ -359,39 +366,12 @@ public class UserProfileServlet extends HttpServlet {
 			sqlException.printStackTrace();		
 			
 			// Respond with an error message
-			String ErrorMessage = "Unknown error occurred. Try again later.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);
 			
 		} // end catch
 	}
 	
 } // END IF	STATEMENT
 	
-	// Returns an Error Message HTML Response
-	private void writeHTMLErrorResponse(HttpServletRequest Request, HttpServletResponse Response, PrintWriter out, String ErrorMessage){
-		
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Internal Error!</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<!-- START DYNAMIC HTML -->");
-		out.println("<p>"+ErrorMessage+"</p>");
-		out.println("<!-- END DYNAMIC HTML -->");
-		out.println("</body>");
-		out.println("</html>");
-
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-		
-	}
-	
-} // end class SurveyServlet
+}

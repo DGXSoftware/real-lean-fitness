@@ -10,7 +10,6 @@ package dgx.software.com.ServletPackage;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -30,43 +29,27 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import dgx.software.com.UtilityPackage.GlobalMethods;
+
  
 @SuppressWarnings("serial")
 public class ImageFileUploadServlet extends HttpServlet {
 	
 	// Declare Database Connection Variables
-	private Connection connection;
-	private Statement statement;
+	private Connection SQLConnection;
+	private Statement SQLStatement;
+	private ServletConfig InitConfig;
 	
 	// Declare the temporary Directory Variables
-	private static final String TMP_DIR_PATH = "C:\\DMGX's\\Programming Projects\\Java\\Tomcat Server\\webapps\\RLF\\User Files\\Temporary User Files";
+	private static final String TMP_DIR_PATH = "C:\\RealLeanFitness\\User Files\\Temporary User Files";
 	private File tmpDir = null;
 
 	//NOTE : init method only executes once during the life cycle of the Servlet
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		
-		// Attempt database connection and create a Statement
-		try {
-			// The config.getInitParameter() Parameters are variables 
-			// in the web.xml file which are declared as "init-param" element  
-			// These web.xml variables are used to connect to the database 
-			Class.forName(config.getInitParameter("DriverName"));
-			connection = DriverManager.getConnection(
-				config.getInitParameter("DatabaseURL"), 
-				config.getInitParameter("DatabaseUser"), 
-				config.getInitParameter("DatabasePassword"));
-
-			// create Statement to query database
-			statement = connection.createStatement();
-			
-		}
-		// for any exception throw an UnavailableException to
-		// indicate that the servlet is not currently available
-		catch (Exception exception) {
-			exception.printStackTrace();
-			throw new UnavailableException(exception.getMessage());
-		}
+		// Initialize the InitConfig variable
+		InitConfig = config;
 		
 		// Initialize the Temporary File Folder
 		tmpDir = new File(TMP_DIR_PATH);
@@ -86,16 +69,44 @@ public class ImageFileUploadServlet extends HttpServlet {
 	
 	// process "Get" requests from clients
 	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
+		
+		// Call the doPost() Method
+		doPost(Request, Response);
 	}
 
 	// process "Post" requests from clients
 	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
+		
+		// attempt database connection and create Statements
+		try {
+			// The config.getInitParameter() Parameters are variables 
+			// in the web.xml file which are declared as "init-param" element  
+			// These web.xml variables are used to connect to the database 
+			Class.forName(InitConfig.getInitParameter("DriverName"));
+			SQLConnection = DriverManager.getConnection(
+				InitConfig.getInitParameter("DatabaseURL"), 
+				InitConfig.getInitParameter("DatabaseUser"), 
+				InitConfig.getInitParameter("DatabasePassword"));
+
+			// create Statement to query database
+			SQLStatement = SQLConnection.createStatement();
+			
+		} // end try
+		// for any exception throw an UnavailableException to
+		// indicate that the servlet is not currently available
+		catch (Exception exception) {
+			exception.printStackTrace();
+			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
+			throw new UnavailableException(exception.getMessage());
+			
+		} // end catch
+		
+		writeServletResponse(Request, Response);
 	}
  
 	// Handle the Post requests for the Servlet
-	public void writeServletResponse(boolean writeToFile, HttpServletRequest Request, HttpServletResponse Response) throws IOException {
+	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
 		
 		// Returns null if no session already exists 
 		HttpSession CurrentSession =  Request.getSession(false);
@@ -105,7 +116,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 		
 			try {
 				// If the user does not have a session redirect them back to the Session Writer Servlet
-				Response.sendRedirect("/BrowserValidationServlet");
+				Response.sendRedirect("/UserSessionValidator");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -117,11 +128,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String DESTINATION_DIR_PATH ="/User Files";
 		File destinationDir = null;
-		
-		// Create the Print Writer to print the HTML Page Response
-		Response.setContentType("text/html");
-		PrintWriter out = Response.getWriter();
-		
+
 		try{
 			
 		DiskFileItemFactory  fileItemFactory = new DiskFileItemFactory ();
@@ -166,6 +173,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 					
 					//Write file to the ultimate location.
 					File file = new File(destinationDir,createMD5Hash(item.getName()));
+					//System.out.println("File Uploaded to Directory = " + file);
 					item.write(file);
 		
 					String Account_ID = SessionAccountID;
@@ -192,119 +200,37 @@ public class ImageFileUploadServlet extends HttpServlet {
 					// Mark all the current pictures from the RLFDB_Images Table as NOT Primary
 					//String UpdateSQLQuery = "UPDATE RLFDB_Images SET Primary_Image='0' WHERE Primary_Image='1';";
 					String UpdateSQLQuery = "UPDATE RLFDB_Images SET Primary_Image='0' WHERE Account_ID ='"+SessionAccountID+"' AND Primary_Image='1';";
-					statement.executeUpdate(UpdateSQLQuery);
+					SQLStatement.executeUpdate(UpdateSQLQuery);
 					
 					// Insert the Entry for the new Image as Primary
-					statement.executeUpdate(InsertSQLQuery);
+					SQLStatement.executeUpdate(InsertSQLQuery);
 					
 				}
 			}
-			
+
 			// Write the HTML Successful Response
-			writeHTMLSuccessResponse(Request, Response, out, items);
-		
+			String SuccessfulFileUploadMessage = "Image uploaded successfully!";
+			SuccessfulFileUploadMessage = "";
+			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", SuccessfulFileUploadMessage);
+			
 		}catch(FileUploadException EX) {
 			EX.printStackTrace();
 			log("Error encountered while parsing the request.",EX);
-			// Write the HTML Error Response	
-			String ErrorMessage = "Error encountered while parsing the request.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+			
+			// Write the HTML Error Response
+			String RequestParseErrorMessage = "Error encountered while parsing the request.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/UserProfileServlet", RequestParseErrorMessage);
+			
 		}catch(Exception EX) {
 			EX.printStackTrace();
 			log("Error encountered while uploading file.",EX);
-			// Write the HTML Error Response	
-			String ErrorMessage = "Error encountered while uploading file.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+
+			// Write the HTML Error Response
+			String FileUploadErrorMessage = "Error encountered while uploading file.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/UserProfileServlet", FileUploadErrorMessage);
+			
 		}
  
-	}
-	
-	
-	// Returns a Successful HTML Response
-	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response, PrintWriter out, List <?> items){
-		
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Image File Upload Servlet</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("alert('File uploaded successfully!');");
-		out.println("</script>");
-		
-		
-		/*
-		// Declare and Initialize the Iterator to review all the items
-		Iterator <?> itr = items.iterator();
-		
-		while(itr.hasNext()) {
-			
-		FileItem item = (FileItem) itr.next();
-		
-		//Handle Form Fields.	 
-		if(item.isFormField()) {
-			
-			out.println("<p>");
-			out.println("Form Field Name = "+item.getFieldName()+", Form Field Value = "+item.getString());
-			out.println("</p>");
-			
-		} else {
-		
-		out.println("<p>");
-		//Handle Uploaded files.
-		out.println("Field Name = "+item.getFieldName()+
-			", File Name = "+item.getName()+
-			", Content type = "+item.getContentType()+
-			", File Size = "+item.getSize());
-			}
-		out.println("</p>");
-		}
-		*/
-		
-		out.println("<meta http-equiv='REFRESH' content='0;url=/UserProfileServlet'/>");
-		out.println("</body>");
-		out.println("</html>");
-		
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-	}
- 
-	// Returns an Error Message HTML Response
-	private void writeHTMLErrorResponse(HttpServletRequest Request, HttpServletResponse Response,PrintWriter out, String ErrorMessage){
-		
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Internal Error!</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("<!-- START DYNAMIC HTML -->");
-		out.println("alert('"+ErrorMessage+"');");
-		out.println("<!-- END DYNAMIC HTML -->");
-		out.println("</script>");
-		out.println("<meta http-equiv='REFRESH' content='0;url=/UserProfileServlet'/>");
-		out.println("</body>");
-		out.println("</html>");
-
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-		
 	}
 
 	// Creates an MD5 Hash from a String

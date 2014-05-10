@@ -1,4 +1,4 @@
-package dgx;
+
 
 public class MainDGX {
 

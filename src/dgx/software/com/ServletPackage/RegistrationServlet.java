@@ -7,7 +7,6 @@ PROPERTIES: Back-End Work
 
 package dgx.software.com.ServletPackage;
 
-import java.io.PrintWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -24,39 +24,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dgx.software.com.UtilityPackage.BrowserValidator;
+import dgx.software.com.UtilityPackage.GlobalMethods;
 
 @SuppressWarnings("serial")
 public class RegistrationServlet extends HttpServlet {
 	
-	private Connection connection;
-	private Statement statement;
+	private Connection SQLConnection;
+	private Statement SQLStatement;
+	private ServletConfig InitConfig;
 
 	// set up database connection and create SQL statement
 	public void init(ServletConfig config) throws ServletException {
 		
-		// attempt database connection and create Statements
-		try {
-			// The config.getInitParameter() Parameters are variables 
-			// in the web.xml file which are declared as "init-param" element  
-			// These web.xml variables are used to connect to the database 
-			Class.forName(config.getInitParameter("DriverName"));
-			connection = DriverManager.getConnection(
-				config.getInitParameter("DatabaseURL"), 
-				config.getInitParameter("DatabaseUser"), 
-				config.getInitParameter("DatabasePassword"));
-
-			// create Statement to query database
-			statement = connection.createStatement();
-			
-		} // end try
-		// for any exception throw an UnavailableException to
-		// indicate that the servlet is not currently available
-		catch (Exception exception) {
-			exception.printStackTrace();
-			throw new UnavailableException(exception.getMessage());
-		} // end catch
-	} // end method init
+		// Initialize the InitConfig variable
+		InitConfig = config;
+		
+	}
 
 	// process "Get" requests from clients
 	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
@@ -68,50 +51,38 @@ public class RegistrationServlet extends HttpServlet {
 	// process "Post" requests from clients
 	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
 		
-		// Figure out if Cookies are Enabled
-		boolean CookiesEnabled = BrowserValidator.areCookiesEnabled(Request, Response);
+		// attempt database connection and create Statements
+		try {
+			// The config.getInitParameter() Parameters are variables 
+			// in the web.xml file which are declared as "init-param" element  
+			// These web.xml variables are used to connect to the database 
+			Class.forName(InitConfig.getInitParameter("DriverName"));
+			SQLConnection = DriverManager.getConnection(
+				InitConfig.getInitParameter("DatabaseURL"), 
+				InitConfig.getInitParameter("DatabaseUser"), 
+				InitConfig.getInitParameter("DatabasePassword"));
+
+			// create Statement to query database
+			SQLStatement = SQLConnection.createStatement();
+			
+		} // end try
+		// for any exception throw an UnavailableException to
+		// indicate that the servlet is not currently available
+		catch (Exception exception) {
+			exception.printStackTrace();
+			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
+			throw new UnavailableException(exception.getMessage());
+			
+		} // end catch
 		
-		// If Cookies are Disabled forward the user to "/JSP/JSPErrorPages/CookiesDisabled.jsp"
-		if(CookiesEnabled == false){
-			final String DisabledCookiesURL = "/JSP/JSPErrorPages/CookiesDisabled.jsp";
-			Response.sendRedirect(DisabledCookiesURL);
-		} else {
-		
-		// If Cookies are Enabled proceed accordingly
 		// process "Post" requests from clients
-		writeServletResponse(false, Request, Response);
-		
-		}
+		writeServletResponse(Request, Response);
+        
 	}
 	
 	// Create the Servlet Response
-	public void writeServletResponse(boolean writeToFile, HttpServletRequest Request, HttpServletResponse Response) throws IOException {
-	
-		// Create the Printwriter to print the HTML Page Response
-		// The response is sent to the client through the PrintWriter object
-		// obtained from the HttpServletResponse object.
-		// NOTE: If the response is binary data, such as an image, method
-		// getOutputStream is used to obtain a reference to a
-		// ServletOutputStream object.
-
-		// set up response to client
-		Response.setContentType("text/html");
-		PrintWriter out = Response.getWriter();
-		
-/*		
-		ENMFileWriter MainFileWriter = null;
-		if (writeToFile == true) {
-			// Write To File
-			MainFileWriter = new ENMFileWriter(null, "", "Registration Handler Page.html");
-			
-			// Delete the Previous File
-			MainFileWriter.deleteFile();
-																		
-		} else {
-			// Write To Servlet
-			MainFileWriter = new ENMFileWriter(Response.getWriter(), "", "");
-		}
-*/
+	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
 
 		/* START Servlet Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -158,7 +129,7 @@ public class RegistrationServlet extends HttpServlet {
 					"";
 			
 			// Create the Account
-			statement.executeUpdate(AccountSQLQuery);
+			SQLStatement.executeUpdate(AccountSQLQuery);
 		
 			// Records the assigned Account ID for the Currently created Username.
 			String AccountID = "";
@@ -167,16 +138,14 @@ public class RegistrationServlet extends HttpServlet {
 			String AccountIDSQLQuery = "SELECT Account_ID FROM RLFDB_Accounts WHERE Username ='"+Username+"';";
 			
 			// Get the AccountIDSQLQuery ResultSet
-			ResultSet UsernameSQLQueryOutput = statement.executeQuery(AccountIDSQLQuery);
+			ResultSet UsernameSQLQueryOutput = SQLStatement.executeQuery(AccountIDSQLQuery);
 			
 			// If we DO NOT Have an Empty Result Set, Work with it.
 			if(UsernameSQLQueryOutput.next()){
 			
 			// Set the assigned Account ID for the Currently created Username.
 			AccountID = UsernameSQLQueryOutput.getString("Account_ID");
-			
-			// Close the ResultSet
-			UsernameSQLQueryOutput.close();
+
 			}
 			
 			// Create an Entry for the new account that was created in the RLFDB_User_Information Table.
@@ -205,11 +174,15 @@ public class RegistrationServlet extends HttpServlet {
 					"";
 			
 			// Create the UserInformation Entry
-			statement.executeUpdate(UserInformationSQLQuery);
+			SQLStatement.executeUpdate(UserInformationSQLQuery);
 			
-			// Write the Successful HTML Response
-			writeHTMLSuccessResponse(Request, Response, out);
+			// Close the ResultSet
+			try {UsernameSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
+			// Write the HTML Successful Response
+			String RegistrationSuccessMessage = "Account created successfully!";
+			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", RegistrationSuccessMessage);
+
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
 			
@@ -219,8 +192,8 @@ public class RegistrationServlet extends HttpServlet {
 			sqlException.printStackTrace();		
 			
 			// Respond with an error message
-			String ErrorMessage = "Database error occurred. Try again later.";
-			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
+			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);
 			
 		} // end catch
 	
@@ -230,8 +203,8 @@ public class RegistrationServlet extends HttpServlet {
 	public void destroy() {
 		// attempt to close statements and database connection
 		try {
-			statement.close();
-			connection.close();
+			SQLStatement.close();
+			SQLConnection.close();
 		} // end try
 		// handle database exceptions by returning error to client
 		catch (SQLException sqlException) {
@@ -239,63 +212,4 @@ public class RegistrationServlet extends HttpServlet {
 		} // end catch
 	} // end method destroy
 	
-	
-	// Returns a Successful HTML Response
-	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response,PrintWriter out){
-		
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Registration Servlet</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("alert('Account created successfully!');");
-		out.println("</script>");
-		out.println("<meta http-equiv='REFRESH' content='0;url=/'/>");
-		out.println("</body>");
-		out.println("</html>");
-
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-	}
-	
-	// Returns an Error Message HTML Response
-	private void writeHTMLErrorResponse(HttpServletRequest Request, HttpServletResponse Response, PrintWriter out, String ErrorMessage){
-		
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Internal Error!</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("<!-- START DYNAMIC HTML -->");
-		out.println("alert('"+ErrorMessage+"');");
-		out.println("<!-- END DYNAMIC HTML -->");
-		out.println("</script>");
-		out.println("<meta http-equiv='REFRESH' content='0;url=/'/>");
-		out.println("</body>");
-		out.println("</html>");
-
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-		
-	}
-	
-} // end class SurveyServlet
+}

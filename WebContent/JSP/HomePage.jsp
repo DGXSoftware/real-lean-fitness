@@ -12,16 +12,12 @@ GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 <%@ page import = "javax.servlet.http.HttpServletRequest" %>
 <%@ page import = "javax.servlet.http.HttpServletResponse" %>
 <%@ page import = "javax.servlet.http.HttpSession" %>
-<%@ page import = "dgx.software.com.UtilityPackage.BrowserValidator" %>
+<%@ page import = "dgx.software.com.UtilityPackage.UserSessionValidator" %>
 
 <%
 
-// Verify that the user has Cookies enabled before allowing them to proceed
-// DISABLED; Throws a "Cookies Disabled" Message wrongfully on first user attempt.
-// BrowserValidator.Test4Cookies(request, response);
-
 // Handle the User Session (Create or Follow up on existing Sessions)
-BrowserValidator.HandleUserSession(request, response);
+UserSessionValidator.HandleUserSession(request, response);
 
 %>
 
@@ -35,7 +31,7 @@ BrowserValidator.HandleUserSession(request, response);
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>RLF - Homepage</title>
+		<title>Real Lean Fitness - Homepage</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>

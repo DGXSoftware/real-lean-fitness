@@ -1,11 +1,4 @@
-/* 
-GOAL: Logs into the Database to Insert/Create Events.
-
-PROPERTIES: Back-End Work
-1. User SQL Database Access (SQL)
-*/
-
-package dgx.software.com.ServletPackage;
+package test;
 
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -13,10 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -26,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
-public class EventCreateServlet extends HttpServlet {
+public class AGenericServlet extends HttpServlet {
 	
 	private Connection connection;
 	private Statement statement;
@@ -69,7 +58,7 @@ public class EventCreateServlet extends HttpServlet {
 	
 	// Create the Servlet Response
 	public void writeServletResponse(boolean writeToFile, HttpServletRequest Request, HttpServletResponse Response) throws IOException {
-	
+		
 		// Returns null if no session already exists 
 		HttpSession CurrentSession =  Request.getSession(false);
 		
@@ -117,88 +106,19 @@ public class EventCreateServlet extends HttpServlet {
 		// attempt to process a vote and display current results
 		try {
 			
-			// Variables for Account session information
-			String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
-			String SessionUsername = (String) CurrentSession.getAttribute("Username");
-			
-			// Variables for Event information
-			String Account_ID = SessionAccountID;
-			String Host_Username = SessionUsername;
-			String Event_Name = Request.getParameter("EventCreateName");
-			String Event_Category  = Request.getParameter("EventCreateCategory");
-			String Event_Sub_Category = Request.getParameter("EventCreateSubCategory");
-			String Event_Description = Request.getParameter("EventCreateDescription");
-			String Event_Address = Request.getParameter("EventCreateAddress");
-			String Event_Country = Request.getParameter("EventCreateCountry");
-			String Event_Start_Date_And_Time = Request.getParameter("EventCreateStartDateAndTime");
-			String Event_End_Date_And_Time = Request.getParameter("EventCreateEndDateAndTime");
-			String Event_TimeZone = Request.getParameter("EventCreateTimeZone");
-			
-			// Convert the Event time into the format used by MySQL
-			String DateCurrentFormat = "MM/dd/yyyy @ hh:mm aa";
-			String DateDesiredFormat = "yyyy-MM-dd HH:mm:ss";
-			Event_Start_Date_And_Time = convertTimeFormat(Event_Start_Date_And_Time,DateCurrentFormat,DateDesiredFormat);
-			Event_End_Date_And_Time = convertTimeFormat(Event_End_Date_And_Time,DateCurrentFormat,DateDesiredFormat);
-			
-			// Variables for Event creation Date
-			DateFormat DateFormat = new SimpleDateFormat("yyyy/MM/dd");
-			DateFormat TimeFormat = new SimpleDateFormat("HH:mm:ss");
-			Date CurrentDate = new Date();
-			String Event_Creation_Date = DateFormat.format(CurrentDate);
-			String Event_Creation_Time = TimeFormat.format(CurrentDate);
-			
-			// Create an Entry for the RLFDB_Host_Events Table.
-			String AccountSQLQuery = "INSERT INTO RLFDB_Host_Events (" +
-					"Account_ID," +
-					"Host_Username," +
-					"Event_Name," +
-					"Event_Category ," +
-					"Event_Sub_Category," +
-					"Event_Description," +
-					"Event_Address," +
-					"Event_Country," +
-					"Event_Start_Date_And_Time," +
-					"Event_End_Date_And_Time," +
-					"Event_TimeZone," +
-					"Date_Submitted," +
-					"Time_Submitted" +
-					")" +
-					"VALUES(" +
-					"\""+Account_ID+"\"," +
-					"\""+Host_Username+"\"," +
-					"\""+Event_Name+"\"," +
-					"\""+Event_Category+"\"," +
-					"\""+Event_Sub_Category+"\"," +
-					"\""+Event_Description+"\"," +
-					"\""+Event_Address+"\"," +
-					"\""+Event_Country+"\"," +
-					"\""+Event_Start_Date_And_Time+"\"," +
-					"\""+Event_End_Date_And_Time+"\"," +
-					"\""+Event_TimeZone+"\"," +
-					"\""+Event_Creation_Date+"\"," +
-					"\""+Event_Creation_Time+"\"" +
-					");" +
-					"";
-			
-			System.out.println("We Executed the following...");
-			System.out.println(AccountSQLQuery);
-
-			// Create the Account
-			statement.executeUpdate(AccountSQLQuery);
-		
-			// Write the Successful HTML Response
-			writeHTMLSuccessResponse(Request, Response, out);
+			// Write the HTML Successful Response
+			writeHTMLSuccessResponse(Request, Response, CurrentSession, out);
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
 			
 		} // end try
 		// if database exception occurs, return error page
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();		
+		catch (Exception EX) {
+			EX.printStackTrace();		
 			
 			// Respond with an error message
-			String ErrorMessage = "Database error occurred. Try again later.";
+			String ErrorMessage = "Error occurred. Try again later.";
 			writeHTMLErrorResponse(Request, Response, out, ErrorMessage);
 			
 		} // end catch
@@ -220,39 +140,119 @@ public class EventCreateServlet extends HttpServlet {
 	
 	
 	// Returns a Successful HTML Response
-	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response,PrintWriter out){
+	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response, HttpSession CurrentSession, PrintWriter out){
+
+		// START IF STATEMENT
+		// Proceed ONLY if the user has a session
+		if(CurrentSession != null){
 		
 /* START HTML RESPONSE */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
 		out.println("<?xml version = '1.0'?>");
 		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
+		out.println("");
+		out.println("<!-- The xmlns attribute is required in XHTML but it is invalid in HTML. -->");
+		out.println("<!-- the namespace 'xmlns=http://www.w3.org/1999/xhtml' is default, and will be added to the <html> tag in XHTML even if you do not include it. -->");
 		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
+		out.println("");
 		out.println("<head>");
-		out.println("<title>Event Create Servlet</title>");
+		out.println("");
+		out.println("<!-- Set the Title for the Website Page -->");
+		out.println("<title>RLF - Homepage</title>");
+		out.println("");
+		out.println("<!-- Set the Favicon for the Website page -->");
+		out.println("<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>");
+		out.println("");
+		out.println("<!-- Set the Character Encoding for the Website page -->");
+		out.println("<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />");
+		out.println("");
+		out.println("<!-- Include the Stylesheet Files -->");
+		out.println("<link rel='stylesheet' type='text/css' href='/CSS/ENM Style.css' />");
+		out.println("");
+		out.println("<!-- Include the JavaScript Files -->");
+		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>");
+		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Registration Page Validation.js' > </script>");
+		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>");
+		out.println("");
 		out.println("</head>");
+		out.println("");
 		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("alert('Event created successfully!');");
-		out.println("</script>");
-		out.println("<meta http-equiv='REFRESH' content='0;url=/BrowserValidationServlet'/>");
+		out.println("<div id='container'>");
+		out.println("<div id='main'>");
+		out.println("<div id='header'></div>");
+		out.println("<div id='nav'>");
+		out.println("<ul>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("</ul>");
+		out.println("</div>");
+		out.println("<div id='content'>");
+		out.println("<div id='left'>");
+		out.println("<div class='post'>");
+		out.println("<h1>Left Form</h1>");
+		out.println("");
+		out.println("<p align='left'>&#160;</p>");
+		out.println("");
+		out.println("");
+		out.println("<!-- Create the Registration Form  -->");
+		out.println("<form action='/RegistrationServlet' method='GET' id='RegistrationForm' name='RegistrationForm' onsubmit='return validateRegistrationFormInput()'></form>");
+		out.println(" ");
+		out.println("");
+		out.println("</div>");
+		out.println("");
+		out.println("</div>");
+		out.println("");
+		out.println("<div id='right'>");
+		out.println("");
+		out.println("<h1>Right Form</h1>");
+		out.println("");
+		out.println("<p align='left'>&#160;</p>");
+		out.println("");
+		out.println("<!-- Create the Login Form  -->");
+		out.println("<form action='/LoginServlet' method='GET' id='LoginForm' name='LoginForm' onsubmit='return validateLoginFormInput()'></form>");
+		out.println("");
+		out.println("");
+		out.println("</div>");
+		out.println("");
+		out.println("<div class='clear'></div>");
+		out.println("</div>");
+		out.println("</div>");
+		out.println("");
+		out.println("<div id='footer'>");
+		out.println("<ul>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("<li><a href='#'></a></li>");
+		out.println("</ul>");
+		out.println("<span>Copyright © 2012</span>");
+		out.println("</div>");
+		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
-
+		
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 /* END HTML RESPONSE */
-		
+
 		// Close the stream to complete the page
 		out.close();
-	}
+		
+	} // END IF STATEMENT
+}	
 	
 	// Returns an Error Message HTML Response
-	private void writeHTMLErrorResponse(HttpServletRequest Request, HttpServletResponse Response, PrintWriter out, String ErrorMessage){
+	private void writeHTMLErrorResponse(HttpServletRequest Request, HttpServletResponse Response,PrintWriter out, String ErrorMessage){
 		
 /* START HTML RESPONSE */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
-		
 		out.println("<?xml version = '1.0'?>");
 		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
 		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
@@ -274,36 +274,6 @@ public class EventCreateServlet extends HttpServlet {
 		
 		// Close the stream to complete the page
 		out.close();
-		
-	}
-	
-	// Converts any Date and Time from one format to another
-	public String convertTimeFormat(String DateToConvert, String DateCurrentFormat, String DateDesiredFormat){
-		
-		// Declare and Initialize the Date and Time along with the formats
-		String GivenDate = DateToConvert;
-		DateFormat CurrentFormat = new SimpleDateFormat(DateCurrentFormat);
-		DateFormat DesiredFormat = new SimpleDateFormat(DateDesiredFormat);
-		
-		// Declare an Empty Date object
-		Date DateObject = null;
-
-		// Record the date with the current format on the DateObject
-		try{
-			DateObject = CurrentFormat.parse(GivenDate);
-		}catch ( ParseException e ){ e.printStackTrace();}
-		
-		// Try to convert the DateObject's Current Format into the Desired Format
-		if( DateObject != null ){
-		    String formattedDate = DesiredFormat.format(DateObject);
-		    return formattedDate;
-		}
-		// If the conversion failed return null and send out an error alert
-		else{
-			System.err.println("Method convertTimeFormat() Failed to convert the Date and Time!");
-			System.err.println("From \"" + GivenDate + "\" with format \"" + DateCurrentFormat + "\" To format \"" + DateDesiredFormat + "\"");
-			return null;
-		}
 		
 	}
 	

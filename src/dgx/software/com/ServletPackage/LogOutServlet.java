@@ -6,14 +6,16 @@ PROPERTIES: Back-End Work
 
 package dgx.software.com.ServletPackage;
 
-import java.io.PrintWriter;
 import java.io.IOException;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dgx.software.com.UtilityPackage.GlobalMethods;
 
 @SuppressWarnings("serial")
 public class LogOutServlet extends HttpServlet {
@@ -25,16 +27,18 @@ public class LogOutServlet extends HttpServlet {
 
 	// process "Get" requests from clients
 	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
+		
+		// Call the doPost() Method
+		doPost(Request, Response);
 	}
 
 	// process "Post" requests from clients
 	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		writeServletResponse(false, Request, Response);
+		writeServletResponse(Request, Response);
 	}
 	
 	// Create the Servlet Response
-	public void writeServletResponse(boolean writeToFile, HttpServletRequest Request, HttpServletResponse Response) throws IOException {
+	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
 
 		// Returns null if no session already exists 
 		HttpSession CurrentSession =  Request.getSession(false);
@@ -50,10 +54,6 @@ public class LogOutServlet extends HttpServlet {
 			}
 			
 		}
-		
-		// Set up response to client
-		Response.setContentType("text/html");
-		PrintWriter out = Response.getWriter();
 
 		/* START Servlet Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -65,7 +65,10 @@ public class LogOutServlet extends HttpServlet {
 			CurrentSession.invalidate();
 			
 			// Write the HTML Successful Response
-			writeHTMLSuccessResponse(Request, Response, out);
+			String LogOutMessage = "You have successfully logged out!";
+			LogOutMessage = "";
+			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", LogOutMessage);
+			
 		
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -78,34 +81,5 @@ public class LogOutServlet extends HttpServlet {
 		} // end catch
 	
 	}
-	
-	// Returns a Successful HTML Response
-	private void writeHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response, PrintWriter out){
 
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-
-		
-		out.println("<?xml version = '1.0'?>");
-		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
-		out.println("<html xmlns='http://www.w3.org/1999/xhtml'>");
-		out.println("<head>");
-		out.println("<title>Log Out Servlet</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<script type='text/javascript'>");
-		out.println("alert('You have successfully logged out!');");
-		out.println("</script>");
-		out.println("<meta http-equiv='REFRESH' content='0;url=/'/>");
-		out.println("</body>");
-		out.println("</html>");
-		
-		
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
-		
-		// Close the stream to complete the page
-		out.close();
-	}
-	
 }

@@ -1,8 +1,8 @@
 <web-app xmlns= "http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">                                       
 
 <!-- General description of your Web application -->
-<display-name>RLF</display-name>                                     
-<description>Description Coming Soon...</description>                                 
+<display-name>Real Lean Fitness</display-name>                                     
+<description>World's BEST Fitness program.</description>                                 
 
     <!-- Start of Servlet definitions -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -26,72 +26,12 @@
 
 <!-- START BrowserValidationServlet Definition -->
 <servlet>
-    <servlet-name>BrowserValidationServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.BrowserValidationServlet</servlet-class>
+    <servlet-name>UserSessionValidator</servlet-name>
+    <!-- <description>Connects to a database from a servlet.</description>  -->
+	<servlet-class>dgx.software.com.UtilityPackage.UserSessionValidator</servlet-class>
 </servlet>
-<servlet-mapping><servlet-name>BrowserValidationServlet</servlet-name><url-pattern>/BrowserValidationServlet</url-pattern></servlet-mapping>
+<servlet-mapping><servlet-name>UserSessionValidator</servlet-name><url-pattern>/UserSessionValidator</url-pattern></servlet-mapping>
 <!-- END BrowserValidationServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START EventCreateServlet Definition -->
-<servlet>
-    <servlet-name>EventCreateServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.EventCreateServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>EventCreateServlet</servlet-name><url-pattern>/EventCreateServlet</url-pattern></servlet-mapping>
-<!-- END EventCreateServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START EventGuestServlet Definition -->
-<servlet>
-    <servlet-name>EventGuestServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.EventGuestServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>EventGuestServlet</servlet-name><url-pattern>/EventGuestServlet</url-pattern></servlet-mapping>
-<!-- END EventGuestServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START EventHostServlet Definition -->
-<servlet>
-    <servlet-name>EventHostServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.EventHostServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>EventHostServlet</servlet-name><url-pattern>/EventHostServlet</url-pattern></servlet-mapping>
-<!-- END EventHostServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START HomePageServlet Definition -->
-<!--
-<servlet>
-    <servlet-name>HomePageServlet</servlet-name>
-    <description>Connects to a database from a servlet.</description>
-	<servlet-class>dgx.software.com.ServletPackage.HomePageServlet</servlet-class>
-</servlet>
-<servlet-mapping><servlet-name>HomePageServlet</servlet-name><url-pattern>/HomePageServlet</url-pattern></servlet-mapping>
--->
-<!-- END HomePageServlet Definition -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
