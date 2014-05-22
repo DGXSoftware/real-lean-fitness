@@ -255,7 +255,7 @@ public class UserInformationServlet extends HttpServlet {
 		out.println("<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />");
 		out.println("");
 		out.println("<!-- Include the Stylesheet Files -->");
-		out.println("<link rel='stylesheet' type='text/css' href='/CSS/ENM Style.css' />");
+		out.println("<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />");
 		out.println("");
 		out.println("<!-- Include the JavaScript Files -->");
 		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/User Information Page Validation.js' > </script>");

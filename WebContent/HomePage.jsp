@@ -16,9 +16,32 @@ GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 
 <%
 
-// Handle the User Session (Create or Follow up on existing Sessions)
-UserSessionValidator.HandleUserSession(request, response);
+// Returns null if no session already exists 
+HttpSession CurrentSession =  request.getSession(false);
 
+// Check if we have an existing Session, If we do proceed to the If Block
+if (!(CurrentSession == null)) {
+	
+	try {
+		
+		// Retrieve the SessionAccountID
+		String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+
+		// If the user is logged in, Redirect accordingly
+		if(SessionAccountID != null){
+			
+			// Redirect accordingly
+			response.sendRedirect("/UserProfileServlet");
+			
+		}
+		
+	}
+	
+	// If an exception occurs, return the error stack trace
+	catch (Exception EX) {EX.printStackTrace();}
+
+}
+		
 %>
 
 		<?xml version = '1.0'?>
@@ -31,7 +54,7 @@ UserSessionValidator.HandleUserSession(request, response);
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>Real Lean Fitness - Homepage</title>
+		<title>Real Lean Fitness</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -40,12 +63,89 @@ UserSessionValidator.HandleUserSession(request, response);
 		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
 		
 		<!-- Include the Stylesheet Files -->
-		<link rel='stylesheet' type='text/css' href='/CSS/ENM Style.css' />
+		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
 		
 		<!-- Include the JavaScript Files -->
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Registration Page Validation.js' > </script>
-		<script language='javascript' type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/Registration Page Validation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>
+		
+		<!-- Include the jQuery Files -->
+		<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
+		<!--
+		EXTERNAL jQuery Import
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		-->
+
+<script>
+
+function checkIfEnteredPressedForLogin(event){
+	
+	    // If Entered was pressed Submit the Login Form
+	    if (event.which == 13 || event.keyCode == 13) {
+	    	submitLoginRequest();
+	            //code to execute here
+	            return false;
+	        }
+
+}
+
+// Submits the Login Rquest
+function submitLoginRequest() {
+
+	// If the Login User Input was not validated successfully, stop further processing (Do not Submit) 
+	if(validateLoginFormInput() === false){
+		return false;
+	}
+
+// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
+// IF this method returns false, stop further execution and don't submit.
+//if (validateUserInput("MyFormFeedback") === false){ return false; }
+
+
+        var jqxhr = $.ajax({
+            type:       "POST",
+            url:        "/LoginServlet",
+            cache:      false,
+            data:       $("form").serialize(),
+                
+            // Before load, notify the user that the request
+            // may take awhile 
+            beforeSend: function() {
+
+            // DO NOTHING FOR NOW
+            
+                        },
+                            
+            // If user remains on page for the results,
+            // show alert with results
+            success:    function(data, status) {
+
+            // Redirect to the appropriate page upon successful authentication (login)
+            window.location = "/UserProfileServlet";
+
+                     },
+                     
+            // If there is an error and the user hasn't yet closed the
+            // browser, display the message. Otherwise it will come in
+            // the email
+            error:      function(xhr, textStatus, thrownError) {
+
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
+            // $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b> " + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+
+           // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
+           $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b> " + xhr.responseText + "</b></font></div>");
+
+            // Stop further processing
+            return false;
+                        }
+                });
+
+    }
+
+
+</script>
 		
 		</head>
 		
@@ -76,7 +176,7 @@ UserSessionValidator.HandleUserSession(request, response);
 		 
 		<!-- Username VARCHAR(32) NOT NULL -->
 		<p> Username: </p> <input type='text' id='RegistrationUsername' name='RegistrationUsername' title='Username' size='32' />
-		<br />
+		<br/>
 		 
 		<!-- Password VARCHAR(32) -->
 		<p> Password: </p> <input type='password' id='RegistrationPassword' name='RegistrationPassword' title='Password' size='32' />
@@ -102,9 +202,9 @@ UserSessionValidator.HandleUserSession(request, response);
 		<p> Date of Birth: </p>
 		 
 		                <!-- Create the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu -->
-		                <SELECT id ='RegistrationBirthDay' name = 'RegistrationBirthDay'></SELECT> <b id='RegistrationBirthDivisor'>/</b>
-		                <SELECT id ='RegistrationBirthMonth' name = 'RegistrationBirthMonth'></SELECT> <b id='RegistrationBirthDivisor'>/</b>
-		                <SELECT id ='RegistrationBirthYear' name = 'RegistrationBirthYear'></SELECT>
+		                <select id ='RegistrationBirthDay' name = 'RegistrationBirthDay'></select> <b id='RegistrationBirthDivisor'>/</b>
+		                <select id ='RegistrationBirthMonth' name = 'RegistrationBirthMonth'></select> <b id='RegistrationBirthDivisor'>/</b>
+		                <select id ='RegistrationBirthYear' name = 'RegistrationBirthYear'></select>
 		 
 		                <!-- Call the (populateDateMenu) to populate the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu-->
 		                <script type='text/javascript'>populateDateMenu('RegistrationBirthDay', 'RegistrationBirthMonth', 'RegistrationBirthYear');</script> 
@@ -113,6 +213,7 @@ UserSessionValidator.HandleUserSession(request, response);
 		<br />
 		<br />
 		 
+		<!-- Register Button -->
 		<input type='submit' id='RegistrationButton' name='RegistrationButton' value = 'Register' />
 		 
 		</form>
@@ -129,10 +230,13 @@ UserSessionValidator.HandleUserSession(request, response);
 		<p align='left'>&#160;</p>
 		
 		<!-- Create the Login Form  -->
-		<form action='/LoginServlet' method='get' id='LoginForm' name='LoginForm' onsubmit='return validateLoginFormInput()'>
-		 
+		<form method='get' id='LoginForm' name='LoginForm'>
+		
+		<!-- Login For mFeedback Div -->
+		<div id="LoginFormFeedbackDiv" name="LoginFormFeedbackDiv"></div>
+		
 		<!-- Retrieve the Username -->
-		<p> Username: </p> <input type='text' id='LoginUsername' name='LoginUsername' size='32' />
+		<p> Username: </p> <input type='text' id='LoginUsername' name='LoginUsername' size='32' onkeypress="return checkIfEnteredPressedForLogin(event);" />
 		<script type='text/javascript'>
 		// Set the initial focus on the LoginUsername Element
 		document.getElementById('LoginUsername').focus();
@@ -141,7 +245,7 @@ UserSessionValidator.HandleUserSession(request, response);
 		<br />
 		 
 		<!-- Retrieve the Password -->
-		<p> Password: </p> <input type='password' id='LoginPassword' name='LoginPassword' size='32' />
+		<p> Password: </p> <input type='password' id='LoginPassword' name='LoginPassword' size='32' onkeypress="return checkIfEnteredPressedForLogin(event);" />
 		 
 		<br />
 		 
@@ -154,14 +258,14 @@ UserSessionValidator.HandleUserSession(request, response);
 		<br />
 		<br />
 		 
-		 
-		<input type='submit' id='LoginButton' name='LoginButton' value = 'Login' />
+		<!-- Login Button -->
+        <input type='button' id='LoginButton' name='LoginButton' value='Login' onClick="submitLoginRequest();" /> 
 		 
 		</form>
 		
 		
 		</div>
-		
+	
 		<div class='clear'></div>
 		</div>
 		</div>

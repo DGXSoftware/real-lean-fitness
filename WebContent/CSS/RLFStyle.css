@@ -16,7 +16,7 @@ body {
 }
 #main {
 	width: 800px;
-	background-image:url(../Images/Background.gif);
+	background-image:url(/Images/Background.gif);
 	
 }
 /******************** HEADER ********************/
@@ -24,7 +24,7 @@ body {
 	width:750px;
 	height:137px;
 	margin-left:25px;
-	background-image:url(../Images/DGSoftware_Header.jpg);
+	background-image:url(/Images/DGSoftware_Header.jpg);
 	display:block;
 }
 #nav {

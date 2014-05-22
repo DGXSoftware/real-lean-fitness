@@ -92,10 +92,10 @@ public class UserProfileServlet extends HttpServlet {
 		
 		// Check if we have an existing Session
 		if (CurrentSession == null) {
-		
+			
 			try {
 			// If the user does not have a session redirect them back to the Session Writer Servlet
-			Response.sendRedirect("/UserSessionValidator");
+			Response.sendRedirect("/");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -127,7 +127,7 @@ public class UserProfileServlet extends HttpServlet {
 		} // end catch
 	} // end method destroy
 	
-	
+
 	// Returns a Successful HTML Response
 	private void printUserProfile(HttpServletRequest Request, HttpServletResponse Response, HttpSession CurrentSession){
 
@@ -188,8 +188,8 @@ public class UserProfileServlet extends HttpServlet {
 			
 		}
 
-/* START HTML RESPONSE */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+// START HTML RESPONSE //
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ //
 
 		out.println("<?xml version = '1.0'?>");
 		out.println("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>");
@@ -207,7 +207,7 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />");
 		out.println("");
 		out.println("<!-- Include the Stylesheet Files -->");
-		out.println("<link rel='stylesheet' type='text/css' href='/CSS/ENM Style.css' />");
+		out.println("<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />");
 		out.println("");
 		out.println("</head>");
 		out.println("");
@@ -338,8 +338,8 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("</html>");
 
 
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END HTML RESPONSE */
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ //
+// END HTML RESPONSE //
 		
 		// Close the ResultSet
 		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
@@ -372,6 +372,7 @@ public class UserProfileServlet extends HttpServlet {
 		} // end catch
 	}
 	
-} // END IF	STATEMENT
+}
+
 	
 }

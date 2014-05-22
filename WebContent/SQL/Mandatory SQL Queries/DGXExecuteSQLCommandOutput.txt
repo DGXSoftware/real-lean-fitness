@@ -70,4 +70,3 @@ FOREIGN KEY (Account_ID) REFERENCES RLFDB_Accounts (Account_ID) ON DELETE CASCAD
 SQL QUERY OUTPUT 
 ---------------------------------- 
  
- 

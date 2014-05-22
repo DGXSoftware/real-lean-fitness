@@ -1,2 +1,0 @@
-http://jqueryui.com/demos/datepicker/
-http://trentrichardson.com/examples/timepicker/

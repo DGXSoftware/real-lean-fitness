@@ -35,13 +35,13 @@ mysql  --port=10000 --host=localhost -u root -p
 /* ---------------------------------------------------------------------------------------------------------------- */
 
 /* Create an User and Password */
-CREATE USER 'DGXSoftware'@'localhost' IDENTIFIED BY 'DGXPassword';
+CREATE USER 'RLFSoftware'@'localhost' IDENTIFIED BY 'RLFPassword';
 
 /* Grant the user access to use the database and login */
 /* NOTE: The asterisks in this command refer to the database and table (respectively) that 
 they can access—this specific command allows to the user to read, edit, execute and perform 
 all tasks across all the databases and tables.  */
-GRANT ALL PRIVILEGES ON *.* TO 'DGXSoftware'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'RLFSoftware'@'localhost';
 
 /* Once you have finalized the permissions that you want to set up for your new users, 
 always be sure to reload all the privileges.  */
@@ -51,7 +51,7 @@ FLUSH PRIVILEGES;
 SELECT User,Host,Password from MySQL.USER;
 
 /* Delete an User */
-DROP USER 'DGXSoftware'@'localhost';
+DROP USER 'RLFSoftware'@'localhost';
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
@@ -65,11 +65,11 @@ mysql --port=10000 --host=localhost -u root -p
 "C:\Program Files\MySQL\MySQL Server 5.5\bin\mysql" --port=10000 --host=localhost -u root -p
 
 /* Log in as User */
-mysql -u DGXSoftware -p
-/* :: Login as DGXSoftware WITH the Environment Variables path, port and host :: */
-mysql --port=10000 --host=localhost -u DGXSoftware -p
-/* :: OR Login as DGXSoftware WITHOUT using the Environment Variables path :: */
-"C:\Program Files\MySQL\MySQL Server 5.5\bin\mysql" --port=10000 --host=localhost -u DGXSoftware -p
+mysql -u RLFSoftware -p
+/* :: Login as RLFSoftware WITH the Environment Variables path, port and host :: */
+mysql --port=10000 --host=localhost -u RLFSoftware -p
+/* :: OR Login as RLFSoftware WITHOUT using the Environment Variables path :: */
+"C:\Program Files\MySQL\MySQL Server 5.5\bin\mysql" --port=10000 --host=localhost -u RLFSoftware -p
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 

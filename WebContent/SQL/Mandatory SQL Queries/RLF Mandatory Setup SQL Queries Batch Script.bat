@@ -88,8 +88,8 @@ ECHO SQL QUERY OUTPUT >> DGXExecuteSQLCommandOutput.txt
 ECHO ---------------------------------- >> DGXExecuteSQLCommandOutput.txt
 ECHO. >> DGXExecuteSQLCommandOutput.txt
 
-:: LOGIN AS DGXSoftware, EXECUTE THE DGXExecuteTemporarySQLCommand FILE, AND SAVE THE OUTPUT ON THE DGXExecuteSQLCommandOutput FILE ::
-mysql --port=10000 --host=localhost -u DGXSoftware -p < DGXExecuteTemporarySQLCommand.txt >> DGXExecuteSQLCommandOutput.txt
+:: LOGIN AS RLFSoftware, EXECUTE THE DGXExecuteTemporarySQLCommand FILE, AND SAVE THE OUTPUT ON THE DGXExecuteSQLCommandOutput FILE ::
+mysql --port=10000 --host=localhost -u RLFSoftware -p < DGXExecuteTemporarySQLCommand.txt >> DGXExecuteSQLCommandOutput.txt
 
 ECHO. >> DGXExecuteSQLCommandOutput.txt
 :: END THE SQL QUERY OUTPUT SECTION ; Adds the Output of the DGXExecuteTemporarySQLCommand File to the DGXExecuteSQLCommandOutput File ::

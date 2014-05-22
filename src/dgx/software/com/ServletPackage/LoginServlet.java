@@ -138,13 +138,18 @@ public class LoginServlet extends HttpServlet {
 			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", "");
 			
 			}else {
-			// (Account NOT Found) Write the HTML Error Response	
+			// (Account NOT Found) Write the HTML Error Response
+			/*
 			String LoginErrorMessage = "Your login information was not correct, please try again.";
 			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", LoginErrorMessage);
+			*/
 			
 			// Close the ResultSet
 			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse()"
+			// (Account NOT Found) Write the HTML Error Response
+			throw new RuntimeException("Your login information was not correct. Please try again.");
 		}
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
