@@ -148,21 +148,16 @@
 <!-- START Custom Error Pages -->
   <error-page>
       <error-code>500</error-code>
-      <location>/JSP/Error/RLFDefaultErrorPage.jsp</location>
+      <location>/JSP/Error/500ErrorPage.jsp</location>
   </error-page>
 
   <error-page>
-      <error-code>405</error-code>
-      <location>/JSP/Error/RLFDefaultErrorPage.jsp</location>
-  </error-page>
-  
-  <error-page>
       <error-code>404</error-code>
-      <location>/JSP/Error/RLFDefaultErrorPage.jsp</location>
+      <location>/JSP/Error/404ErrorPage.jsp</location>
   </error-page>
 <!-- END Custom Error Pages -->
 
-<!-- START TEST -->
+<!-- START TEST SERVLETS -->
   <servlet>
     <servlet-name>ThrowErrorServlet</servlet-name>
     <servlet-class>dgx.software.com.TestPackage.ThrowErrorServlet</servlet-class>
@@ -172,7 +167,7 @@
   <servlet-name>ThrowErrorServlet</servlet-name>
   <url-pattern>/ThrowErrorServlet</url-pattern>
   </servlet-mapping>
-<!-- END TEST -->
+<!-- END TEST SERVLETS -->
 
 </web-app>
 

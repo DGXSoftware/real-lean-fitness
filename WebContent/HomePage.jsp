@@ -160,7 +160,7 @@ function submitLoginRequest() {
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<li><a href='/JSP/Mail/ContactUs.jsp'>Contact Us</a></li>
 		</ul>
 		</div>
 		<div id='content'>
