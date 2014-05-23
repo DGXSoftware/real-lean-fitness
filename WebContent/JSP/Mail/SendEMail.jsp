@@ -20,24 +20,34 @@ MyMailJavaBean.setEMailReceiver(request.getParameter( "Recipient" ));
 // Set the E-Mail Body
 String ContactMeFormUserInput = 
 "<h3>" +
-"<p><b>Sender Name: </b>" + 
-request.getParameter( "SenderName" ) + 
-"</p><p><b>Sender E-Mail: </b>" + 
+"<p>" +
+"<b>Sender First Name: </b>" + 
+request.getParameter( "SenderFirstName" ) +
+"</p>" +
+"<p>" +
+"<b>Sender Last Name: </b>" + 
+request.getParameter( "SenderLastName" ) +
+"</p>" +
+"<p>" +
+"<b>Sender E-Mail: </b>" + 
 request.getParameter( "SenderEMail" ) + 
-"</p><p><b>SenderPhoneNumber: </b>" + 
-request.getParameter( "SenderPhoneNumber" ) + 
-"</p><p><b>SenderAvailability: </b>" + 
-request.getParameter( "SenderAvailability" ) + 
-"</p><p><b>SenderMessage: </b>" + 
-request.getParameter( "SenderMessage" ) + 
-"</p><br/><br/><p> - Real Lean Fitness Mailing System</p>" + 
+"</p>" +
+"<p>" +
+"<b>SenderMessage: </b>" + 
+request.getParameter( "SenderMessage" ) +
+"</p>" +
+"<br/><br/>" +
+"<p> ~ Real Lean Fitness Mailing System</p>" +
 "</h3>";
 
-//Set the E-Mail Body
+//Set the E-Mail Header Subject
+MyMailJavaBean.setEMailSubject(request.getParameter( "SenderSubject" ));
+
+//Set the E-Mail Body Message
 MyMailJavaBean.setEMailBody(ContactMeFormUserInput);
 
 // Set the File Attachment
-MyMailJavaBean.setAttachment(request.getParameter( "SenderFileAttachment" ));
+//MyMailJavaBean.setAttachment(request.getParameter( "SenderFileAttachment" ));
 
 %>
 

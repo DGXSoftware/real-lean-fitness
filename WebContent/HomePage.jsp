@@ -247,7 +247,7 @@ function submitLoginRequest() {
 		<!-- Retrieve the Password -->
 		<p> Password: </p> <input type='password' id='LoginPassword' name='LoginPassword' size='32' onkeypress="return checkIfEnteredPressedForLogin(event);" />
 		 
-		<br />
+		<p>&#160;</p>
 		 
 		<!-- Retrieve the Remember Me Choice -->
 		<input type='checkbox' id='LoginRememberMe' name='LoginRememberMe' /> <b> Keep me logged in: </b>
@@ -279,7 +279,7 @@ function submitLoginRequest() {
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		</ul>
-		<span>Copyright © 2012</span>
+		<span>Copyright © 2014</span>
 		</div>
 		</div>
 		</body>

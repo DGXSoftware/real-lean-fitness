@@ -3,10 +3,11 @@ package dgx.software.com.MailPackage;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.File;
 import java.util.*;
+/* (ATTACHMENTS DISABLED)
+import java.io.File;
 import javax.activation.*;
-
+*/
 public class MailJavaBean {
 
 	// Sender GMail Account
@@ -28,23 +29,30 @@ public class MailJavaBean {
 	// E-Mail Body
 	String EMailBody = "No Message attached by sender.";
 	
-	// E-Mail Attachment Path
-	File FileAttachmentPath = new File("");
+	// E-Mail Attachment Path (ATTACHMENTS DISABLED)
+	//File FileAttachmentPath = new File("");
 	
-	//
+	// Set the E-Mail Recipient
 	public void setEMailReceiver(String EMailRecipient){
 		EMailReceiver = EMailRecipient;
 	}
 	
-	// Set the E-Mail Sender Message
+	// Set the E-Mail Subject
+	public void setEMailSubject(String SenderSubject){
+		EMailSubject = SenderSubject;
+	}
+	
+	// Set the E-Mail Message
 	public void setEMailBody(String SenderMessage){
 		EMailBody = SenderMessage;
 	}
 	
-	// Set E-Mail File Attachment
+	// Set E-Mail File Attachment (ATTACHMENTS DISABLED)
+	/*
 	public void setAttachment(String FileAttachment){
 		FileAttachmentPath = new File(FileAttachment);
 	}
+	*/
 	
 	public void sendEMail() {
 		
@@ -70,7 +78,8 @@ public class MailJavaBean {
 			MessageBodyPart.setContent(EMailBody, "text/html");
 			MyMimeMultipart.addBodyPart(MessageBodyPart);
 			
-			// If the file FileAttachment exists Add it to the E-Mail as an Attachment
+			// If the file FileAttachment exists Add it to the E-Mail as an Attachment (ATTACHMENTS DISABLED)
+			/*
 			if(FileAttachmentPath.exists()){
 
 			// Create, Configure and add an EMail Attachment BodyPart to the MimeMultipart Object
@@ -81,6 +90,7 @@ public class MailJavaBean {
 			MyMimeMultipart.addBodyPart(EMailAttachmentBodyPart);
 
 		}
+		*/
 			
 			// Create a SMTPAuthenticator Object to Validate the Sender Account Information
 			Authenticator MySMTPAuthenticator = new SMTPAuthenticator();
