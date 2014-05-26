@@ -77,8 +77,83 @@ if (!(CurrentSession == null)) {
 		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		-->
 
+
 <script>
 
+//Handle User Submit for Registration once the user presses Enter on a Registration Field
+function checkIfEnteredPressedForRegistration(event){
+	
+	    // If Entered was pressed Submit the Registration Form
+	    if (event.which == 13 || event.keyCode == 13) {
+	    	submitRegistrationRequest();
+	            //code to execute here
+	            return false;
+	        }
+
+}
+
+// Submits the Registration Request
+function submitRegistrationRequest() {
+
+	// If the Registration User Input was not validated successfully, stop further processing (Do not Submit) 
+	if(validateRegistrationFormInput() === false){
+		return false;
+	}
+
+// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
+// IF this method returns false, stop further execution and don't submit.
+//if (validateUserInput("MyFormFeedback") === false){ return false; }
+
+
+        var jqxhr = $.ajax({
+            type:       "POST",
+            url:        "/RegistrationServlet",
+            cache:      false,
+            data:       $("form").serialize(),
+                
+            // Before load, notify the user that the request
+            // may take awhile 
+            beforeSend: function() {
+
+            // DO NOTHING FOR NOW
+            
+                        },
+                            
+            // If user remains on page for the results,
+            // show alert with results
+            success:    function(data, status) {
+
+            // Redirect to the appropriate page upon successful Registration
+            alert("Account created successfully!");
+            window.location = "/";
+
+                     },
+                     
+            // If there is an error and the user hasn't yet closed the
+            // browser, display the message. Otherwise it will come in
+            // the email
+            error:      function(xhr, textStatus, thrownError) {
+
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
+            // $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+
+           // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
+           $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
+
+            // Stop further processing
+            return false;
+                        }
+                });
+
+    }
+
+
+</script>
+
+
+<script>
+
+//Handle User Submit for Login once the user presses Enter on a Login Field
 function checkIfEnteredPressedForLogin(event){
 	
 	    // If Entered was pressed Submit the Login Form
@@ -90,7 +165,7 @@ function checkIfEnteredPressedForLogin(event){
 
 }
 
-// Submits the Login Rquest
+// Submits the Login Request
 function submitLoginRequest() {
 
 	// If the Login User Input was not validated successfully, stop further processing (Do not Submit) 
@@ -121,7 +196,7 @@ function submitLoginRequest() {
             // show alert with results
             success:    function(data, status) {
 
-            // Redirect to the appropriate page upon successful authentication (login)
+            // Redirect to the appropriate page upon successful Login authentication
             window.location = "/UserProfileServlet";
 
                      },
@@ -132,10 +207,10 @@ function submitLoginRequest() {
             error:      function(xhr, textStatus, thrownError) {
 
             // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
-            // $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b> " + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+            // $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
 
            // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
-           $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b> " + xhr.responseText + "</b></font></div>");
+           $('#LoginFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
 
             // Stop further processing
             return false;
@@ -172,7 +247,10 @@ function submitLoginRequest() {
 		
 		
 		 <!-- Create the Registration Form  -->
-		<form action='/RegistrationServlet' method='get' id='RegistrationForm' name='RegistrationForm' onsubmit='return validateRegistrationFormInput()'>
+		<form id='RegistrationForm' name='RegistrationForm' method='post'>
+		 
+		<!-- Registration For Feedback Div -->
+		<div id="RegistrationFormFeedbackDiv" name="RegistrationFormFeedbackDiv"></div>
 		 
 		<!-- Username VARCHAR(32) NOT NULL -->
 		<p> Username: </p> <input type='text' id='RegistrationUsername' name='RegistrationUsername' title='Username' size='32' />
@@ -213,9 +291,10 @@ function submitLoginRequest() {
 		<br />
 		<br />
 		 
-		<!-- Register Button -->
-		<input type='submit' id='RegistrationButton' name='RegistrationButton' value = 'Register' />
-		 
+		<!-- Registration Button -->
+		<input type='button' id='RegistrationButton' name='RegistrationButton' value='Register' onClick="submitRegistrationRequest();" />
+
+		
 		</form>
 		 
 		
@@ -230,9 +309,9 @@ function submitLoginRequest() {
 		<p align='left'>&#160;</p>
 		
 		<!-- Create the Login Form  -->
-		<form method='get' id='LoginForm' name='LoginForm'>
+		<form id='LoginForm' name='LoginForm' method='post'>
 		
-		<!-- Login For mFeedback Div -->
+		<!-- Login For Feedback Div -->
 		<div id="LoginFormFeedbackDiv" name="LoginFormFeedbackDiv"></div>
 		
 		<!-- Retrieve the Username -->

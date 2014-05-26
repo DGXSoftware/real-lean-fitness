@@ -21,10 +21,12 @@ Date_Of_Birth DATE,
 Account_Creation_Date DATE, 
 Account_Creation_Time TIME, 
 Account_Creation_TimeZone VARCHAR(32), 
+IsActivated CHAR(1), 
  
 PRIMARY KEY (Account_ID), 
 UNIQUE (Account_ID), 
-UNIQUE (Username) 
+UNIQUE (Username), 
+UNIQUE (EMail) 
  
 )ENGINE=INNODB; 
  
@@ -69,4 +71,5 @@ FOREIGN KEY (Account_ID) REFERENCES RLFDB_Accounts (Account_ID) ON DELETE CASCAD
 ---------------------------------- 
 SQL QUERY OUTPUT 
 ---------------------------------- 
+ 
  

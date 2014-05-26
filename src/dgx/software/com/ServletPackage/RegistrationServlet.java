@@ -19,12 +19,13 @@ import java.util.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dgx.software.com.UtilityPackage.GlobalMethods;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
+//import dgx.software.com.UtilityPackage.GlobalMethods;
 
 @SuppressWarnings("serial")
 public class RegistrationServlet extends HttpServlet {
@@ -68,11 +69,14 @@ public class RegistrationServlet extends HttpServlet {
 		} // end try
 		// for any exception throw an UnavailableException to
 		// indicate that the servlet is not currently available
-		catch (Exception exception) {
-			exception.printStackTrace();
+		catch (Exception EX) {
+			
+			// Print the Stack Trace
+			EX.printStackTrace();
+			
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
-			throw new UnavailableException(exception.getMessage());
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
 		
@@ -104,6 +108,7 @@ public class RegistrationServlet extends HttpServlet {
 			String Account_Creation_Date = DateFormat.format(CurrentDate);
 			String Account_Creation_Time = TimeFormat.format(CurrentDate);
 			String Account_Creation_TimeZone = "EST";
+			char IsActivated = 'N';
 		
 			// Create an Entry for the new account that was created in the RLFDB_Accounts Table.
 			String AccountSQLQuery = "INSERT INTO RLFDB_Accounts (" +
@@ -114,7 +119,8 @@ public class RegistrationServlet extends HttpServlet {
 					"Date_Of_Birth," +
 					"Account_Creation_Date," +
 					"Account_Creation_Time," +
-					"Account_Creation_TimeZone" +
+					"Account_Creation_TimeZone," +
+					"IsActivated" +
 					")" +
 					"VALUES (" +
 					"\""+Username+"\"," +
@@ -124,7 +130,8 @@ public class RegistrationServlet extends HttpServlet {
 					"\""+Date_Of_Birth+"\"," +
 					"\""+Account_Creation_Date+"\"," +
 					"\""+Account_Creation_Time+"\"," +
-					"\""+Account_Creation_TimeZone+"\"" +
+					"\""+Account_Creation_TimeZone+"\"," +
+					"\""+IsActivated+"\"" +
 					");" +
 					"";
 			
@@ -180,22 +187,43 @@ public class RegistrationServlet extends HttpServlet {
 			try {UsernameSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// Write the HTML Successful Response
-			String RegistrationSuccessMessage = "Account created successfully!";
-			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", RegistrationSuccessMessage);
+			// DISABLED;  Handled By AJAX Call
+			// String RegistrationSuccessMessage = "Account created successfully!";
+			//GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", RegistrationSuccessMessage);
 
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
 			
 		} // end try
+		catch (MySQLIntegrityConstraintViolationException SQLEX) {
+
+			// Print the Stack Trace
+			SQLEX.printStackTrace();		
+			
+			// Respond with an error message
+			throw new RuntimeException(SQLEX.getMessage());
+			
+		}
 		// if database exception occurs, return error page
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();		
+		catch (SQLException SQLEX) {
+
+			// Print the Stack Trace
+			SQLEX.printStackTrace();
 			
 			// Respond with an error message
 			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);
 			
-		} // end catch
+			// If It's a "Duplicate" Error Message get the proper error message
+			if(SQLEX.getMessage().contains("Duplicate")){
+				if(SQLEX.getMessage().contains("Username")){UnknownErrorMessage = "This Username is already taken. Please choose another one.";}
+			    if(SQLEX.getMessage().contains("EMail")){UnknownErrorMessage = "This E-Mail address is already in use. Please supply a different E-Mail address.";}
+			}
+			
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+			throw new RuntimeException(UnknownErrorMessage);
+			
+		}
+		
 	
 	}
 

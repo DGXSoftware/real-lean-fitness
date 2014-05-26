@@ -96,10 +96,12 @@ Date_Of_Birth DATE,
 Account_Creation_Date DATE,
 Account_Creation_Time TIME,
 Account_Creation_TimeZone VARCHAR(32),
+IsActivated CHAR(1),
 
 PRIMARY KEY (Account_ID),
 UNIQUE (Account_ID),
-UNIQUE (Username)
+UNIQUE (Username),
+UNIQUE (EMail)
 
 )ENGINE=INNODB;
 
@@ -144,5 +146,16 @@ UNIQUE (Account_ID),
 FOREIGN KEY (Account_ID) REFERENCES RLFDB_Accounts (Account_ID) ON DELETE CASCADE
 
 )ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+Table Reset
+/* ---------------------------------------------------------------------------------------------------------------- */
+DROP TABLE RLFDB_User_Information;
+DROP TABLE RLFDB_Images;
+DROP TABLE RLFDB_Accounts;
+DROP DATABASE RLFDB;
+
+CREATE DATABASE RLFDB;
+USE RLFDB;
 
 /* ================================================================================================================ */

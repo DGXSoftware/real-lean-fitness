@@ -18,21 +18,21 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dgx.software.com.UtilityPackage.GlobalMethods;
+//import dgx.software.com.UtilityPackage.GlobalMethods;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
 	
+	// SQL Connection Objects
 	private Connection SQLConnection;
 	private Statement SQLStatement;
 	private ServletConfig InitConfig;
-
+	
 	// Initialization Method
 	public void init(ServletConfig config) throws ServletException {
 		
@@ -67,11 +67,15 @@ public class LoginServlet extends HttpServlet {
 		} // end try
 		// for any exception throw an UnavailableException to
 		// indicate that the servlet is not currently available
-		catch (Exception exception) {
-			exception.printStackTrace();
+		catch (Exception EX) {
+            
+			// Print the Stack Trace
+			EX.printStackTrace();
+			
+			// (Database is Unavailable) Write the Error Response
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
-			throw new UnavailableException(exception.getMessage());
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
 		
@@ -135,21 +139,18 @@ public class LoginServlet extends HttpServlet {
 			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// Write the HTML Successful Response
-			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", "");
+			// DISABLED;  Handled By AJAX Call
+			// GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", "");
 			
 			}else {
-			// (Account NOT Found) Write the HTML Error Response
-			/*
-			String LoginErrorMessage = "Your login information was not correct, please try again.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", LoginErrorMessage);
-			*/
 			
 			// Close the ResultSet
 			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse()"
-			// (Account NOT Found) Write the HTML Error Response
-			throw new RuntimeException("Your login information was not correct. Please try again.");
+			// (Account NOT Found) Write the Error Response
+			String LoginErrorMessage = "Your login information was not correct, please try again.";
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", LoginErrorMessage);"
+			throw new RuntimeException(LoginErrorMessage);
 		}
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -157,14 +158,17 @@ public class LoginServlet extends HttpServlet {
 			
 		} // end try
 		// if database exception occurs, return error page
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();		
+		catch (SQLException SQLEX) {
+			
+			// Print the Stack Trace
+			SQLEX.printStackTrace();		
 			
 			// Respond with an error message
 			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+			throw new RuntimeException(UnknownErrorMessage);
 			
-		} // end catch
+		}
 	
 	}
 

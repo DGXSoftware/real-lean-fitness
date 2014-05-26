@@ -22,10 +22,12 @@ ECHO Date_Of_Birth DATE, >> DGXExecuteTemporarySQLCommand.txt
 ECHO Account_Creation_Date DATE, >> DGXExecuteTemporarySQLCommand.txt
 ECHO Account_Creation_Time TIME, >> DGXExecuteTemporarySQLCommand.txt
 ECHO Account_Creation_TimeZone VARCHAR(32), >> DGXExecuteTemporarySQLCommand.txt
+ECHO IsActivated CHAR(1), >> DGXExecuteTemporarySQLCommand.txt
 ECHO. >> DGXExecuteTemporarySQLCommand.txt
 ECHO PRIMARY KEY (Account_ID), >> DGXExecuteTemporarySQLCommand.txt
 ECHO UNIQUE (Account_ID), >> DGXExecuteTemporarySQLCommand.txt
-ECHO UNIQUE (Username) >> DGXExecuteTemporarySQLCommand.txt
+ECHO UNIQUE (Username), >> DGXExecuteTemporarySQLCommand.txt
+ECHO UNIQUE (EMail) >> DGXExecuteTemporarySQLCommand.txt
 ECHO. >> DGXExecuteTemporarySQLCommand.txt
 ECHO )ENGINE=INNODB; >> DGXExecuteTemporarySQLCommand.txt
 ECHO. >> DGXExecuteTemporarySQLCommand.txt
