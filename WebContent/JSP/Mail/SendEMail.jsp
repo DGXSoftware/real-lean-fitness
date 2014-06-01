@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <!-- Create a MailJavaBean Object -->
-<jsp:useBean id = "MyMailJavaBean" scope = "page" class = "dgx.software.com.MailPackage.MailJavaBean" />
+<jsp:useBean id="MyMailJavaBean" scope="page" class="dgx.software.com.JavaBeanPackage.MailJavaBean" />
 
 <html xmlns = "http://www.w3.org/1999/xhtml">
 
@@ -18,22 +18,22 @@
 MyMailJavaBean.setEMailReceiver(request.getParameter( "Recipient" ));
 
 // Set the E-Mail Body
-String ContactMeFormUserInput = 
+String ContactMeFormUserInput =
 "<h3>" +
 "<p>" +
-"<b>Sender First Name: </b>" + 
+"<b>Sender First Name: </b>" +
 request.getParameter( "SenderFirstName" ) +
 "</p>" +
 "<p>" +
-"<b>Sender Last Name: </b>" + 
+"<b>Sender Last Name: </b>" +
 request.getParameter( "SenderLastName" ) +
 "</p>" +
 "<p>" +
-"<b>Sender E-Mail: </b>" + 
-request.getParameter( "SenderEMail" ) + 
+"<b>Sender E-Mail: </b>" +
+request.getParameter( "SenderEMail" ) +
 "</p>" +
 "<p>" +
-"<b>SenderMessage: </b>" + 
+"<b>SenderMessage: </b>" +
 request.getParameter( "SenderMessage" ) +
 "</p>" +
 "<br/><br/>" +

@@ -13,7 +13,7 @@
 <servlet>
     <servlet-name>AGenericServlet</servlet-name>
     <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.AGenericServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.AGenericServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -39,7 +39,7 @@
 <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.LoginServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.LoginServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -54,7 +54,7 @@
 <servlet>
     <servlet-name>RegistrationServlet</servlet-name>
 	<!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.RegistrationServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.RegistrationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -69,7 +69,7 @@
 <servlet>
     <servlet-name>UserProfileServlet</servlet-name>
 	<!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.UserProfileServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.UserProfileServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
 	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -84,7 +84,7 @@
 <servlet>
     <servlet-name>UserInformationServlet</servlet-name>
     <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.UserInformationServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.UserInformationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
 	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -99,7 +99,7 @@
 <servlet>
     <servlet-name>ImageFileUploadServlet</servlet-name>
     <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.ImageFileUploadServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.ImageFileUploadServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
 	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
@@ -124,7 +124,7 @@
 <servlet>
     <servlet-name>LogOutServlet</servlet-name>
     <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ServletPackage.LogOutServlet</servlet-class>
+	<servlet-class>dgx.software.com.ActionPackage.LogOutServlet</servlet-class>
 </servlet>
 <servlet-mapping><servlet-name>LogOutServlet</servlet-name><url-pattern>/LogOutServlet</url-pattern></servlet-mapping>
 <!-- END LogOutServlet Definition -->
@@ -156,6 +156,38 @@
       <location>/JSP/Error/404ErrorPage.jsp</location>
   </error-page>
 <!-- END Custom Error Pages -->
+
+<!-- START Context Parameters and Listener for JavaBean Database Connection -->
+  <context-param>  
+    <description>This is the DB DriverName.</description>  
+    <param-name>DriverName</param-name>  
+    <param-value>com.mysql.jdbc.Driver</param-value>  
+  </context-param>
+  
+  <context-param>
+    <description>This is the DB DatabaseURL.</description>  
+    <param-name>DatabaseURL</param-name>  
+    <param-value>jdbc:mysql://localhost:10000/RLFDB</param-value>  
+  </context-param>
+  
+  <context-param>
+    <description>This is the DB DatabaseUser.</description>  
+    <param-name>DatabaseUser</param-name>  
+    <param-value>RLFSoftware</param-value>  
+  </context-param>
+  
+  <context-param>  
+    <description>This is the DB DatabasePassword.</description>  
+    <param-name>DatabasePassword</param-name>  
+    <param-value>RLFPassword</param-value>  
+  </context-param>
+
+<!-- START Listener -->
+  <listener>
+      <listener-class>dgx.software.com.UtilityPackage.ApplicationManagerListener</listener-class>
+  </listener>
+<!-- END Listener -->
+<!-- END Context Parameters and Listener for JavaBean Database Connection -->
 
 <!-- START TEST SERVLETS -->
   <servlet>

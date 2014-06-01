@@ -9,7 +9,7 @@
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>Error 404: Page Not Found</title>
+		<title>RLF Default JSP></title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -38,18 +38,26 @@
 				<div class="post">
 					<p align="left"></p>
 
+<p>&#160;</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<div id="online_title">RLF Default JSP</div>
+<p>&#160;</p>
 
-<!-- Alert the user that the Web Server is Offline, and allow them to send me an E-Mail -->
-<p>&#160;</p>
-<p>&#160;</p>
-<p>&#160;</p>
-<div id="offline_title">Error 404: Page Not Found</div>
-<p>&#160;</p>
-			
-<div id="BackButton">
-<br/>
-<font color="GREEN" size="+2"><b> <a href="javascript:history.back()">Back</a> </b></font>
-</div>
+
+<!-- Create a MailJavaBean Object -->
+<jsp:useBean id="MyMailJavaBean" scope="page" class="dgx.software.com.JavaBeanPackage.PayPalJavaBean" />
+
+<%
+
+//Set the E-Mail Body Message
+MyMailJavaBean.printContextParameters();
+
+%>
+
+
+
+
 <p>&#160;</p>
 <p>&#160;</p>
 <p>&#160;</p>

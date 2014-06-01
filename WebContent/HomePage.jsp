@@ -122,10 +122,10 @@ function submitRegistrationRequest() {
             // If user remains on page for the results,
             // show alert with results
             success:    function(data, status) {
-
+            	
             // Redirect to the appropriate page upon successful Registration
-            alert("Account created successfully!");
-            window.location = "/";
+            //alert("Account created successfully!");
+            window.location = "/JSP/PayPal/PayPalRegistrationSubmit.jsp" + "?" + "RegistrationUsername=" + document.getElementById("RegistrationUsername").value;
 
                      },
                      
@@ -271,8 +271,8 @@ function submitLoginRequest() {
 		<!-- Gender VARCHAR(32) -->
 		<!-- Insert mutually exclusive Radio Buttons -->
 		<p> Gender: </p>
-		<input type='radio' name='RegistrationGender' value='Female' />Female<br />
-		<input type='radio' name='RegistrationGender' value='Male' />Male<br />
+		<input type='radio' id='RegistrationGender' name='RegistrationGender' value='Female' />Female<br />
+		<input type='radio' id='RegistrationGender'name='RegistrationGender' value='Male' />Male<br />
 		 
 		<br />
 		 
@@ -364,3 +364,27 @@ function submitLoginRequest() {
 		</body>
 		</html>
 
+<!-- START TEST STUFF  -->
+<%
+// Get a Random Number From 1 to 10000
+int Min = 1;
+int Max = 10000;
+int Range = (Max - Min) + 1;     
+int RandomNumber = (int)(Math.random() * Range) + Min;
+%>
+<script>
+      // Use JQuery to execute JavaScript code as soon as the page loads
+      $(document).ready(function(){
+    	  
+        // REGISTRATION TEST STUFF
+        document.getElementById("RegistrationUsername").value = "<%= RandomNumber %>";
+        document.getElementById("RegistrationPassword").value = "<%= RandomNumber %>";
+        document.getElementById("RegistrationEMail").value = "<%= RandomNumber %>";
+        document.getElementById("RegistrationEMailConfirmation").value = "<%= RandomNumber %>";
+        document.getElementById("RegistrationGender").checked = true;
+        document.getElementById("RegistrationBirthDay").selectedIndex = 3;
+        document.getElementById("RegistrationBirthMonth").selectedIndex = 3;
+        document.getElementById("RegistrationBirthYear").selectedIndex = 3;
+      });
+</script>
+<!-- END TEST STUFF  -->
