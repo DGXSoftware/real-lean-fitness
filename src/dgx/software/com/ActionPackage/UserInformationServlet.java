@@ -33,13 +33,15 @@ import dgx.software.com.UtilityPackage.GlobalMethods;
 @SuppressWarnings("serial")
 public class UserInformationServlet extends HttpServlet {
 	
+	// Declare Response Variables
 	private Connection SQLConnection;
 	private Statement SQLStatement;
 	private ServletConfig InitConfig;
+	private HttpSession CurrentSession;
 
 	// set up database connection and create SQL statement
 	public void init(ServletConfig config) throws ServletException {
-		
+		System.out.println("0");
 		// Initialize the InitConfig variable
 		InitConfig = config;
 		
@@ -47,57 +49,61 @@ public class UserInformationServlet extends HttpServlet {
 
 	// process "Get" requests from clients
 	protected void doGet(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		
+		System.out.println("1");
 		// Call the doPost() Method
 		doPost(Request, Response);
 	}
 
 	// process "Post" requests from clients
 	protected void doPost(HttpServletRequest Request, HttpServletResponse Response) throws ServletException, IOException {
-		
-		// attempt database connection and create Statements
-		try {
-			// The config.getInitParameter() Parameters are variables 
-			// in the web.xml file which are declared as "init-param" element  
-			// These web.xml variables are used to connect to the database 
-			Class.forName(InitConfig.getInitParameter("DriverName"));
-			SQLConnection = DriverManager.getConnection(
-				InitConfig.getInitParameter("DatabaseURL"), 
-				InitConfig.getInitParameter("DatabaseUser"), 
-				InitConfig.getInitParameter("DatabasePassword"));
-
-			// create Statement to query database
-			SQLStatement = SQLConnection.createStatement();
-			
-		} // end try
-		// for any exception throw an UnavailableException to
-		// indicate that the servlet is not currently available
-		catch (Exception exception) {
-			exception.printStackTrace();
-			throw new UnavailableException(exception.getMessage());
-		} // end catch
-		
-		writeServletResponse(Request, Response);
-	}
-	
-	// Create the Servlet Response
-	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
-
+		System.out.println("2");
 		// Returns null if no session already exists 
-		HttpSession CurrentSession =  Request.getSession(false);
+		CurrentSession = Request.getSession(false);
 		
 		// Check if we have an existing Session
-		if (CurrentSession == null) {
-		
+		if (CurrentSession != null) {
+			System.out.println("3");
+			// Attempt database connection and create SQL Statements
 			try {
+				// The config.getInitParameter() Parameters are variables 
+				// in the web.xml file which are declared as "init-param" element  
+				// These web.xml variables are used to connect to the database 
+				Class.forName(InitConfig.getInitParameter("DriverName"));
+				SQLConnection = DriverManager.getConnection(
+					InitConfig.getInitParameter("DatabaseURL"), 
+					InitConfig.getInitParameter("DatabaseUser"), 
+					InitConfig.getInitParameter("DatabasePassword"));
+
+				// create Statement to query database
+				SQLStatement = SQLConnection.createStatement();
+				
+			} // end try
+			// for any exception throw an UnavailableException to
+			// indicate that the servlet is not currently available
+			catch (Exception exception) {
+				exception.printStackTrace();
+				throw new UnavailableException(exception.getMessage());
+			} // end catch
+			System.out.println("4");
+			// Respond to the Request
+			writeServletResponse(Request, Response);
+				
+		}else{
+			System.out.println("5");
+			try {
+				
 				// If the user does not have a session redirect them back to the Session Writer Servlet
-				Response.sendRedirect("/UserSessionValidator");
+				Response.sendRedirect("/");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
 		}
 		
+	}
+	
+	// Create the Servlet Response
+	public void writeServletResponse(HttpServletRequest Request, HttpServletResponse Response) throws IOException {
 
 		/* START Servlet Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -285,7 +291,7 @@ public class UserInformationServlet extends HttpServlet {
 		out.println("");
 		out.println("<p align='left'>&#160;</p>");
 		out.println("");
-		out.println("<form action='' method='GET' id='UserInformationForm' name='UserInformationForm'>");
+		out.println("<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>");
 		out.println("");
 		out.println("<!-- START DYNAMIC HTML -->");
 	
@@ -364,7 +370,7 @@ public class UserInformationServlet extends HttpServlet {
 		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
 		// Write the HTML Error Response	
-		String NoProfileErrorMessage = "Unable to retrieve your profile! Please Try again.";
+		String NoProfileErrorMessage = "Unable to retrieve your profile information! Please Try again.";
 		GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", NoProfileErrorMessage);
 		
 		}

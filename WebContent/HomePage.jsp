@@ -1,3 +1,5 @@
+<% response.addHeader("Cache-Control","no-cache"); %> 
+
 <!--
 GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 -->
@@ -16,32 +18,20 @@ GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 
 <%
 
+// Assume we don't have a Session Account ID
+String SessionAccountID = "";
+
 // Returns null if no session already exists 
 HttpSession CurrentSession =  request.getSession(false);
 
-// Check if we have an existing Session, If we do proceed to the If Block
-if (!(CurrentSession == null)) {
-	
-	try {
-		
-		// Retrieve the SessionAccountID
-		String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+// If we have a session attempt to retrieve the SessionAccountID
+if (CurrentSession != null) {SessionAccountID = (String) CurrentSession.getAttribute("AccountID");}
 
-		// If the user is logged in, Redirect accordingly
-		if(SessionAccountID != null){
-			
-			// Redirect accordingly
-			response.sendRedirect("/UserProfileServlet");
-			
-		}
-		
-	}
-	
-	// If an exception occurs, return the error stack trace
-	catch (Exception EX) {EX.printStackTrace();}
+// If attempts to retrieve the SessionAccountID returned null, make it an Empty String Object for operations
+if (SessionAccountID == null) {SessionAccountID = "";}
 
-}
-		
+// Display the main body if the user is not logged in, else forward the users to their profile page
+if(SessionAccountID.equals("")){
 %>
 
 		<?xml version = '1.0'?>
@@ -366,9 +356,9 @@ function submitLoginRequest() {
 
 <!-- START TEST STUFF  -->
 <%
-// Get a Random Number From 1 to 10000
+// Get a Random Number From 1 to 100,000
 int Min = 1;
-int Max = 10000;
+int Max = 100000;
 int Range = (Max - Min) + 1;     
 int RandomNumber = (int)(Math.random() * Range) + Min;
 %>
@@ -388,3 +378,12 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
       });
 </script>
 <!-- END TEST STUFF  -->
+
+<%
+}else{
+
+	// The current user has a session, therefore redirect them to their profile
+	response.sendRedirect("/UserProfileServlet");
+
+}
+%>

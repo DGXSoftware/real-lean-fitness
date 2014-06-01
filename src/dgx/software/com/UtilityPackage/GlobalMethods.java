@@ -14,7 +14,7 @@ public class GlobalMethods {
 		DESCRIPTION: Handle successful forwarding responses.
 		PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response)
 		RETURN:      VOID
-		SIDE-EFFECT: If provided a "SuccessMessage" It will allert before forwarding.
+		SIDE-EFFECT: If provided a "SuccessMessage" It will alert before forwarding.
 		*************************************************************************************************/
 		// Returns a Successful HTML Response and forward appropriately.
 		public static void writeForwardHTMLSuccessResponse(HttpServletRequest Request, HttpServletResponse Response, String ForwardAddress, String SuccessMessage){

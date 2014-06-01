@@ -353,10 +353,9 @@ public class UserProfileServlet extends HttpServlet {
 		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
 			// Write the HTML Error Response	
-			String NoProfileErrorMessage = "Unable to retrieve your profile! Please Try again.";
+			String NoProfileErrorMessage = "Unable to retrieve your profile homepage! Please Try again.";
 			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", NoProfileErrorMessage);
-			
-			
+					
 		}
 		
 		} // end try
