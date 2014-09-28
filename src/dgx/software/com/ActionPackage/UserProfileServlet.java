@@ -331,7 +331,7 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("<li><a href='#'></a></li>");
 		out.println("<li><a href='#'></a></li>");
 		out.println("</ul>");
-		out.println("<span>Copyright © 2012</span>");
+		out.println("<span>Copyright © 2014</span>");
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</body>");

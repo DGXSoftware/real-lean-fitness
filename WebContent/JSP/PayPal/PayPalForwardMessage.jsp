@@ -141,7 +141,7 @@ $(document).ready(function () {
 			<div class="clear"></div>
 		</div>
 	</div>
-	<div id="footer"><span>Copyright © 2011</span></div>
+	<div id="footer"><span>Copyright © 2014</span></div>
 </div>
 </body>
 </html>

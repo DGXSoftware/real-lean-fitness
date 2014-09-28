@@ -17,12 +17,15 @@
 	<!-- Include the Stylesheet Files -->
 	<link rel='stylesheet' type='text/css' href='/CSS/Mail/ContactUs.css' />
 	
+	<!-- Include the jQuery Files -->
+	<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
+	
 	<!-- Include the Contact Me JavaScript File -->
 	<script type='text/javascript' src='/JavaScript/Mail/ContactUs.js' > </script>
 		
 </head>
 
-<body onLoad="getRandomCaptcha();">
+<body onload="getRandomCaptcha();">
 <div id="container">
 	<div id="main">
 		<div id="header"></div>
@@ -96,11 +99,20 @@
 <br />
 <br />
  
- <CENTER><input type = "submit" id="MyContactMeSubmitButton" name="MyContactMeSubmitButton" value = "Submit Form" /></CENTER>
+ <center><input type = "submit" id="MyContactMeSubmitButton" name="MyContactMeSubmitButton" value = "Submit Form" /></center>
  
- </FORM>
+ </form>
  
- 
+<script>
+// TEMPORARY TEST VALUES
+$( document ).ready(function() {
+	document.getElementById("SenderFirstName").value='TEST FIRST NAME';
+	document.getElementById("SenderLastName").value='TEST LAST NAME';
+	document.getElementById("SenderEMail").value='RealLeanFitness@GMail.com';
+	document.getElementById("SenderSubject").value='TEST SUBJECT';
+	document.getElementById("SenderMessage").value='TEST SENDER MESSAGE';
+});
+</script>
  
  </div>
 					

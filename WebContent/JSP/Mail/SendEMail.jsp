@@ -54,15 +54,8 @@ MyMailJavaBean.setEMailBody(ContactMeFormUserInput);
 
 <%
 // Send the E-Mail
-MyMailJavaBean.sendEMail();
+MyMailJavaBean.sendEMail(response);
 %>
-
-<!-- Alert the User that the E-Mail was submitted. -->
-<script language="javascript" type="text/javascript"> alert("Your E-Mail was submitted.\n\n ~ Thank You."); </script>
-
-<!-- Redirect the user after sending the E-Mail -->
-<meta http-equiv="REFRESH" content="0; url=/" />
-
 
 </body>
 

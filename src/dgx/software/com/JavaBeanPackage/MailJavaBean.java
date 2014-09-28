@@ -3,6 +3,10 @@ package dgx.software.com.JavaBeanPackage;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 /* (ATTACHMENTS DISABLED)
 import java.io.File;
@@ -54,7 +58,7 @@ public class MailJavaBean {
 	}
 	*/
 	
-	public void sendEMail() {
+	public void sendEMail(HttpServletResponse response) throws IOException {
 		
 		// Set the E-Mail Properties
 		Properties EMailProperties = new Properties();
@@ -108,7 +112,49 @@ public class MailJavaBean {
 			// Send the E-Mail with the Complete Sender Message
 			Transport.send(CompleteSenderMessage);
 			
-		} catch (Exception EX) { EX.printStackTrace();}
+			// Send a successful HTML Forward response
+			sendSuccessForward(response);
+			
+		} catch (Exception EX) {
+			
+			// Print the Stack Trace
+			EX.printStackTrace();
+			
+			// Send an Error HTML Forward response
+			sendErrorForward(response);
+		}
+	}
+	
+	// Send a successful HTML Forward response
+	private void sendSuccessForward(HttpServletResponse response) throws IOException {
+		
+		// Send a successful HTML Forward response
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<body>");
+		out.println("<!-- Alert the User that the E-Mail was submitted. -->");
+		out.println("<script language='javascript' type='text/javascript'> alert('Your E-Mail was submitted successfully.\\n\\n ~ Thank You.'); </script>");
+		out.println("<!-- Redirect the user after sending the E-Mail -->");
+		out.println("<meta http-equiv='REFRESH' content='0; url=/' />");
+		out.println("</body>");
+		out.println("</html>");
+		
+	}
+	
+	// Send an Error HTML Forward response
+	private void sendErrorForward(HttpServletResponse response) throws IOException {
+		
+		// Send a successful HTML Forward response
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<body>");
+		out.println("<!-- Alert the User that the E-Mail was submitted. -->");
+		out.println("<script language='javascript' type='text/javascript'> alert('Your E-Mail failed to send.\\n\\n ~ Please try again!'); </script>");
+		out.println("<!-- Redirect the user after sending the E-Mail -->");
+		out.println("<meta http-equiv='REFRESH' content='0; url=/' />");
+		out.println("</body>");
+		out.println("</html>");
+		
 	}
 
 	private class SMTPAuthenticator extends javax.mail.Authenticator {
