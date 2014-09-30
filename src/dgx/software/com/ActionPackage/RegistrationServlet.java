@@ -110,6 +110,8 @@ public class RegistrationServlet extends HttpServlet {
 			String Account_Creation_Date = DateFormat.format(CurrentDate);
 			String Account_Creation_Time = TimeFormat.format(CurrentDate);
 			String Account_Creation_TimeZone = "EST";
+			
+			// Default Values
 			char IsActivated = 'N';
 		
 			// Create an Entry for the new account that was created in the RLF_Accounts Table.
