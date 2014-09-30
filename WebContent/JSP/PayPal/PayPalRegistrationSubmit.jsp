@@ -1,3 +1,11 @@
+<!--
+GOAL: Generates the RLF PayPal button along with the PayPalSuccessURL and PayPalCancelURL.
+Then it automatically submits the form to forward the user to the PayPal payment site.
+
+TO DO: E-Mail the user the link they would use if they'd like to activate their account
+some other time.
+-->
+
 <!DOCTYPE html>
 
 <html>
@@ -57,7 +65,7 @@ if(AccountIDToActivate.equals("")){
 	String PayPalSuccessURL = "http://www.RealLeanFitness.com/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
 	String PayPalCancelURL = "http://www.RealLeanFitness.com/PayPalForwardMessage.jsp?CancelMessage=" + CancelMessage;
 	
-	// Set Test Versions (DELETE IN PRODUCTION)
+	// TEST: Set Test Versions (DELETE IN PRODUCTION)
 	PayPalSuccessURL = "/JSP/PayPal/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
 	PayPalCancelURL = "/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage=" + CancelMessage;
 	

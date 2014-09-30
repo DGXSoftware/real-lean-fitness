@@ -1,3 +1,8 @@
+<!--
+GOAL: Simulates how a Successful/Cancellation Paypal Payment transaction would react 
+and respond back to test how this project would react.
+-->
+
 <!DOCTYPE html>
 
 <html>

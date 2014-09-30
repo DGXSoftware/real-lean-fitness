@@ -1,8 +1,13 @@
-<% response.addHeader("Cache-Control","no-cache"); %> 
-
 <!--
 GOAL: Act as the main Homepage. Also allows for account Login and Registration.
+
+TO DO: When you press Register and are forwarded to the PayPal Payment site 
+your account is created in a deactivated state. Create a Fixed DIV that let's users
+who are not activated that they should activate their account by clicking here.
+This will forward them to the PayPal payment site.
 -->
+
+<% response.addHeader("Cache-Control","no-cache"); %> 
 
 <%-- JSP Imports --%>
 <%@ page import = "java.io.PrintWriter" %>
@@ -57,7 +62,7 @@ if(SessionAccountID.equals("")){
 		
 		<!-- Include the JavaScript Files -->
 		<script type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>
-		<script type='text/javascript' src='/JavaScript/Validation/Registration Page Validation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/RegistrationPageValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>
 		
 		<!-- Include the jQuery Files -->
@@ -67,6 +72,12 @@ if(SessionAccountID.equals("")){
 		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		-->
 
+<style>
+
+#RegistrationErrorFeedbackDiv { font-weight:bold; color:blue; font-size:125%; }
+#SubRegistrationErrorFeedbackDiv { font-weight:bold; color:red; font-size:85%; list-style-position:inside;}
+
+</style>
 
 <script>
 
@@ -85,14 +96,20 @@ function checkIfEnteredPressedForRegistration(event){
 // Submits the Registration Request
 function submitRegistrationRequest() {
 
+	// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
+	// IF this method returns false, stop further execution and don't submit.
+	if (validateFormOnSubmit("RegistrationFormFeedbackDiv") === false){ return false; }
+	
+	/* RETIRED */
+	/*
 	// If the Registration User Input was not validated successfully, stop further processing (Do not Submit) 
 	if(validateRegistrationFormInput() === false){
 		return false;
 	}
+	*/
 
 // Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
 // IF this method returns false, stop further execution and don't submit.
-//if (validateUserInput("MyFormFeedback") === false){ return false; }
 
 
         var jqxhr = $.ajax({
@@ -101,17 +118,19 @@ function submitRegistrationRequest() {
             cache:      false,
             data:       $("form").serialize(),
                 
-            // Before load, notify the user that the request
-            // may take awhile 
+            // Before load, notify the user that the request may take a while 
             beforeSend: function() {
 
-            // DO NOTHING FOR NOW
-            
+                // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
+                $('#RegistrationFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
+                
                         },
                             
-            // If user remains on page for the results,
-            // show alert with results
+            // If user remains on page for the results, show alert with results
             success:    function(data, status) {
+            
+            // Use AJAX to Inject the Success HTML to the appropriate DIV
+            $('#RegistrationFormFeedbackDiv').html("<div id='SuccessResults'><font color='green' size='+2'><b> "+data+" </b></font></div>");
             	
             // Redirect to the appropriate page upon successful Registration
             //alert("Account created successfully!");
@@ -119,19 +138,28 @@ function submitRegistrationRequest() {
 
                      },
                      
-            // If there is an error and the user hasn't yet closed the
-            // browser, display the message. Otherwise it will come in
-            // the email
+           // If there is an error and the user hasn't yet closed the
+           // browser, display the message. Otherwise it will come in the email
             error:      function(xhr, textStatus, thrownError) {
 
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
+            // $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b> " + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+                
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
+            $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b> " + xhr.responseText + "</b></font></div>");
+            	
+            /* RETIRED */ 
+            /*
             // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
             // $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
 
            // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
-           $('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
-
+           //$('#RegistrationFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
+           */
+           
             // Stop further processing
             return false;
+            
                         }
                 });
 
@@ -165,7 +193,6 @@ function submitLoginRequest() {
 
 // Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
 // IF this method returns false, stop further execution and don't submit.
-//if (validateUserInput("MyFormFeedback") === false){ return false; }
 
 
         var jqxhr = $.ajax({
@@ -239,31 +266,110 @@ function submitLoginRequest() {
 		 <!-- Create the Registration Form  -->
 		<form id='RegistrationForm' name='RegistrationForm' method='post'>
 		 
+		<div id="RegistrationFormFeedbackDiv"></div>
+		
+		<!-- RETIRED -->
 		<!-- Registration For Feedback Div -->
-		<div id="RegistrationFormFeedbackDiv" name="RegistrationFormFeedbackDiv"></div>
-		 
+		<!-- <div id="RegistrationFormFeedbackDiv" name="RegistrationFormFeedbackDiv"></div> -->
+		
+		<label for="RegistrationFirstName">
+		<p> First Name: </p>
+        <input type="text" id="RegistrationFirstName" name="RegistrationFirstName" onKeyUp="validateNameField('RegistrationFirstName','RegistrationFirstNameIcon','');" 
+        title='Registration First Name' size='32' />
+        <img id="RegistrationFirstNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+
+		<label for="RegistrationLastName">
+		<p> Last Name: </p>
+        <input type="text" id="RegistrationLastName" name="RegistrationLastName" onKeyUp="validateNameField('RegistrationLastName','RegistrationLastNameIcon','');" 
+        title='Registration Last Name' size='32' />
+        <img id="RegistrationLastNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+		
+		<br/>
+		
 		<!-- Username VARCHAR(32) NOT NULL -->
+		<label for="RegistrationUsername">
+		<p> Username: </p>
+		<input type="text" id="RegistrationUsername" name="RegistrationUsername" onKeyUp="validateUsername('RegistrationUsername','RegistrationUsernameIcon','');" 
+		title='Registration Username' size='32' />
+		<img id="RegistrationUsernameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+		</label>
+		 
+		<!-- RETIRED -->
+		<!-- Username VARCHAR(32) NOT NULL -->
+		<!--
 		<p> Username: </p> <input type='text' id='RegistrationUsername' name='RegistrationUsername' title='Username' size='32' />
 		<br/>
+		 -->
+		 
+		<br/>
+        <label for="RegistrationPassword">
+        <p> Password: </p>
+        <input type="password" id="RegistrationPassword" name="RegistrationPassword" onKeyUp="validatePassword('RegistrationPassword','RegistrationPasswordIcon','');" 
+        title='Registration Password' size='32' />
+        <img id="RegistrationPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
 		 
 		<!-- Password VARCHAR(32) -->
+		<!-- RETIRED -->
+		<!-- 
 		<p> Password: </p> <input type='password' id='RegistrationPassword' name='RegistrationPassword' title='Password' size='32' />
 		<br />
+		-->
+		 
+		 <br/>
+		 
+		 <!-- EMail VARCHAR(64) -->
+         <label for="RegistrationEMail">
+         <p> E-Mail: </p>
+         <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="validateEmail('RegistrationEMail','RegistrationEMailIcon',''); validateConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail');" 
+         title='Registration E-Mail' size='48' />
+         <img id="RegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+         </label>
 		 
 		<!-- EMail VARCHAR(64) -->
+		<!-- RETIRED -->
+		<!-- 
 		<p> E-Mail: </p> <input type='text' id='RegistrationEMail' name='RegistrationEMail' title='E-Mail' size='48' />
 		<br />
-		 
-		<p> Confirm E-Mail: </p> <input type='text' id='RegistrationEMailConfirmation' name='RegistrationEMailConfirmation' title='Confirm E-Mail' size='48' />
+		-->
+		
+		 <!-- EMail VARCHAR(64) -->
+         <label for="ConfirmationRegistrationEMail">
+         <p> Confirm E-Mail: </p>
+         <input type="text" id="ConfirmationRegistrationEMail" name="ConfirmationRegistrationEMail" onKeyUp="validateConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail');" 
+         title='Registration E-Mail' size='48' />
+         <img id="ConfirmationRegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+         </label>
+        
+		<!-- EMail VARCHAR(64) -->
+		<!-- RETIRED -->
+		<!-- 
+		<p> Confirm E-Mail: </p> <input type='text' id='RegistrationEMailConfirmation' name='RegistrationEMailConfirmation' title='Confirm Registration E-Mail' size='48' />
+		-->
 		<br />
-		<br />
+		
+		 <!-- Gender VARCHAR(32) -->
+		 <label for="RegistrationGender">
+		 <p> Gender: </p>
+		 <select id="RegistrationGender" name="RegistrationGender">
+         <option value="" disabled selected style="display:none">I am...</option>
+         <option value="Female">Female</option>
+         <option value="Male">Male</option>
+         <option value="Other">Other</option>
+         </select>
+         </label>
 		 
 		<!-- Gender VARCHAR(32) -->
 		<!-- Insert mutually exclusive Radio Buttons -->
+		<!--
 		<p> Gender: </p>
 		<input type='radio' id='RegistrationGender' name='RegistrationGender' value='Female' />Female<br />
 		<input type='radio' id='RegistrationGender'name='RegistrationGender' value='Male' />Male<br />
-		 
+		<input type='radio' id='RegistrationGender'name='RegistrationGender' value='Other' />Other<br />
+		-->
+		
 		<br />
 		 
 		<!-- Date_Of_Birth DATE -->
@@ -367,14 +473,17 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
       $(document).ready(function(){
     	  
         // REGISTRATION TEST STUFF
-        document.getElementById("RegistrationUsername").value = "<%= RandomNumber %>";
-        document.getElementById("RegistrationPassword").value = "<%= RandomNumber %>";
-        document.getElementById("RegistrationEMail").value = "<%= RandomNumber %>";
-        document.getElementById("RegistrationEMailConfirmation").value = "<%= RandomNumber %>";
+        document.getElementById("RegistrationFirstName").value = "TestFirstName";
+        document.getElementById("RegistrationLastName").value = "TestLastName";
+        document.getElementById("RegistrationUsername").value = "TestUsername_" + "<%= RandomNumber %>";
+        document.getElementById("RegistrationPassword").value = "TestUsername_" + "<%= RandomNumber %>";
+        document.getElementById("RegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
+        document.getElementById("ConfirmationRegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("RegistrationGender").checked = true;
         document.getElementById("RegistrationBirthDay").selectedIndex = 3;
         document.getElementById("RegistrationBirthMonth").selectedIndex = 3;
         document.getElementById("RegistrationBirthYear").selectedIndex = 3;
+        
       });
 </script>
 <!-- END TEST STUFF  -->

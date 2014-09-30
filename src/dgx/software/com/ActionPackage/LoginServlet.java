@@ -98,7 +98,7 @@ public class LoginServlet extends HttpServlet {
 			String LoginPassword = Request.getParameter("LoginPassword");
 
 			// SQL Query
-			String SQLQuery = "SELECT Account_ID, Username, IsActivated FROM RLFDB_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
+			String SQLQuery = "SELECT Account_ID, Username, IsActivated FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
 
 			// Get the SQLQueryOutput
 			ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);

@@ -26,14 +26,14 @@ public class SQLQueryPractice {
 /*************************** START SELECT QUERY ****************************/    	
 /*    	
     	// Execute a Select SQL Query
-		String SelectSQLQuery = "SELECT * FROM RLFDB_Host_Events;";
+		String SelectSQLQuery = "SELECT * FROM RLF_Host_Events;";
 		executeSelectSQLQuery(SelectSQLQuery);
 */
     	
 
 /*
     	// Execute a Select SQL Query
-		String CustomSQLQuery = "SELECT * FROM RLFDB_Host_Events;";
+		String CustomSQLQuery = "SELECT * FROM RLF_Host_Events;";
 		executeCustomSQLQuery(CustomSQLQuery);
 */
 		
@@ -44,7 +44,7 @@ public class SQLQueryPractice {
 /*	
 		for(int i = 11571 ; i < 12571; i++){
 		
-		String UpdateSQLQuery = "INSERT INTO RLFDB_Host_Events ("+
+		String UpdateSQLQuery = "INSERT INTO RLF_Host_Events ("+
 					"Account_ID," +
 					"Host_Username," +
 					"Event_Name," +
@@ -290,7 +290,7 @@ public class SQLQueryPractice {
 
 class MyEventNode{
 	
-	//Table RLFDB_Guest_Events
+	//Table RLF_Guest_Events
 	int Event_ID = -1;
 	int Account_ID = -1;
 	String Host_Username = "";

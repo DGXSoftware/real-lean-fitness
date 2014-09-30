@@ -182,7 +182,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 					String Primary_Image = "1";
 
 					// SQL Query
-					String InsertSQLQuery = "INSERT INTO RLFDB_Images (" +
+					String InsertSQLQuery = "INSERT INTO RLF_Images (" +
 					"Account_ID," +
 					"Image_Location," +
 					"Image_Caption," +
@@ -197,9 +197,9 @@ public class ImageFileUploadServlet extends HttpServlet {
 					"";
 					
 					
-					// Mark all the current pictures from the RLFDB_Images Table as NOT Primary
-					//String UpdateSQLQuery = "UPDATE RLFDB_Images SET Primary_Image='0' WHERE Primary_Image='1';";
-					String UpdateSQLQuery = "UPDATE RLFDB_Images SET Primary_Image='0' WHERE Account_ID ='"+SessionAccountID+"' AND Primary_Image='1';";
+					// Mark all the current pictures from the RLF_Images Table as NOT Primary
+					//String UpdateSQLQuery = "UPDATE RLF_Images SET Primary_Image='0' WHERE Primary_Image='1';";
+					String UpdateSQLQuery = "UPDATE RLF_Images SET Primary_Image='0' WHERE Account_ID ='"+SessionAccountID+"' AND Primary_Image='1';";
 					SQLStatement.executeUpdate(UpdateSQLQuery);
 					
 					// Insert the Entry for the new Image as Primary

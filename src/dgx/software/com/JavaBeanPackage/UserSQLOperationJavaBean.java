@@ -79,16 +79,16 @@ public class UserSQLOperationJavaBean {
     	/*
     	<!-- Activates the Account -->
     	<!-- 
-    	SELECT Account_ID, Username, IsActivated FROM RLFDB_Accounts WHERE Username = '1995';
-    	UPDATE RLFDB_Accounts SET IsActivated='Y' WHERE Username='1995';
-    	SELECT Account_ID, Username, IsActivated FROM RLFDB_Accounts WHERE Username = '1995';
+    	SELECT Account_ID, Username, IsActivated FROM RLF_Accounts WHERE Username = '1995';
+    	UPDATE RLF_Accounts SET IsActivated='Y' WHERE Username='1995';
+    	SELECT Account_ID, Username, IsActivated FROM RLF_Accounts WHERE Username = '1995';
     	-->
     	*/
 
 		/* START JavaBean Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
-    	// SQLQuery = "UPDATE RLFDB_Accounts SET IsActivated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
+    	// SQLQuery = "UPDATE RLF_Accounts SET IsActivated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
 		
     	
 		// Assume that the Account ID was NOT Activated
@@ -97,13 +97,13 @@ public class UserSQLOperationJavaBean {
 			// Process the accoutn activation
 			try {
 
-				String ActivationSQLQuery = "UPDATE RLFDB_Accounts SET IsActivated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
+				String ActivationSQLQuery = "UPDATE RLF_Accounts SET IsActivated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
 
 				// Execute the Activation
 				SQLStatement.executeUpdate(ActivationSQLQuery);
 				
 				// SQL Query
-				String SQLQuery = "SELECT Account_ID, Username, EMail, IsActivated FROM RLFDB_Accounts WHERE Account_ID = '"+Account_ID_To_Activate+"';";
+				String SQLQuery = "SELECT Account_ID, Username, EMail, IsActivated FROM RLF_Accounts WHERE Account_ID = '"+Account_ID_To_Activate+"';";
 				
 				// Get the SQLQueryOutput
 				ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);

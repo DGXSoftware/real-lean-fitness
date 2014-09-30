@@ -96,6 +96,8 @@ public class RegistrationServlet extends HttpServlet {
 
 			// Variables for Account basic information
 			String Username = Request.getParameter("RegistrationUsername");
+			String FirstName = Request.getParameter("RegistrationFirstName");
+			String LastName = Request.getParameter("RegistrationLastName");
 			String Password = Request.getParameter("RegistrationPassword");
 			String EMail = Request.getParameter("RegistrationEMail");
 			String Gender = Request.getParameter("RegistrationGender");
@@ -110,9 +112,11 @@ public class RegistrationServlet extends HttpServlet {
 			String Account_Creation_TimeZone = "EST";
 			char IsActivated = 'N';
 		
-			// Create an Entry for the new account that was created in the RLFDB_Accounts Table.
-			String AccountSQLQuery = "INSERT INTO RLFDB_Accounts (" +
+			// Create an Entry for the new account that was created in the RLF_Accounts Table.
+			String AccountSQLQuery = "INSERT INTO RLF_Accounts (" +
 					"Username," +
+					"FirstName," +
+					"LastName," +
 					"Password," +
 					"EMail," +
 					"Gender," +
@@ -124,6 +128,8 @@ public class RegistrationServlet extends HttpServlet {
 					")" +
 					"VALUES (" +
 					"\""+Username+"\"," +
+					"\""+FirstName+"\"," +
+					"\""+LastName+"\"," +
 					"MD5(\""+Password+"\")," +
 					"\""+EMail+"\"," +
 					"\""+Gender+"\"," +
@@ -142,7 +148,7 @@ public class RegistrationServlet extends HttpServlet {
 			String AccountID = "";
 			
 			// Select the Account_ID From the Currently created Username.
-			String AccountIDSQLQuery = "SELECT Account_ID FROM RLFDB_Accounts WHERE Username ='"+Username+"';";
+			String AccountIDSQLQuery = "SELECT Account_ID FROM RLF_Accounts WHERE Username ='"+Username+"';";
 			
 			// Get the AccountIDSQLQuery ResultSet
 			ResultSet UsernameSQLQueryOutput = SQLStatement.executeQuery(AccountIDSQLQuery);
@@ -155,8 +161,8 @@ public class RegistrationServlet extends HttpServlet {
 
 			}
 			
-			// Create an Entry for the new account that was created in the RLFDB_User_Information Table.
-			String UserInformationSQLQuery = "INSERT INTO RLFDB_User_Information (" +
+			// Create an Entry for the new account that was created in the RLF_User_Information Table.
+			String UserInformationSQLQuery = "INSERT INTO RLF_User_Information (" +
 					"Account_ID," +
 					"First_Name," +
 					"Middle_Name," +

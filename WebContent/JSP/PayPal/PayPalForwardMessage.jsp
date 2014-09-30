@@ -1,4 +1,7 @@
-
+<!--
+GOAL: Temporarily displays information to the user about their PayPal payment.
+After a few seconds it will forward their request to the Homepage.
+-->
 		<?xml version = '1.0'?>
 		<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 		

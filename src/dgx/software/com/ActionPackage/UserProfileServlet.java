@@ -160,7 +160,7 @@ public class UserProfileServlet extends HttpServlet {
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 			
 		// SQL Query
-		String AccountSQLQuery = "SELECT * FROM RLFDB_Accounts WHERE Account_ID="+SessionAccountID+";";
+		String AccountSQLQuery = "SELECT * FROM RLF_Accounts WHERE Account_ID="+SessionAccountID+";";
 
 		// Get the SQLQueryOutput
 		ResultSet AccountSQLQueryOutput = SQLStatement.executeQuery(AccountSQLQuery);
@@ -271,7 +271,7 @@ public class UserProfileServlet extends HttpServlet {
 		out.println("<!-- START DYNAMIC HTML -->");
 		
 		// SQL Query
-		String ProfileImageSQLQuery = "SELECT * FROM RLFDB_Images WHERE ACCOUNT_ID = '"+SessionAccountID+"' AND Primary_Image= '1';";
+		String ProfileImageSQLQuery = "SELECT * FROM RLF_Images WHERE ACCOUNT_ID = '"+SessionAccountID+"' AND Primary_Image= '1';";
 
 		// Get the SQLQueryOutput
 		ResultSet ProfileImageSQLQueryOutput = SQLStatement.executeQuery(ProfileImageSQLQuery);

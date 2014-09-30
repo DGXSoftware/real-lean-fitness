@@ -1,3 +1,9 @@
+<!--
+GOAL: When you press Register and are forwarded to the PayPal Payment site 
+your account is created in a deactivated state. Upon a successful Payment confirmation
+from PayPal this page will activate your account via the internal Account ID.
+-->
+
 <!DOCTYPE html>
 
 <html>
