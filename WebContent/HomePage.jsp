@@ -61,7 +61,7 @@ if(SessionAccountID.equals("")){
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
 		
 		<!-- Include the JavaScript Files -->
-		<script type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/LoginPageValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Validation/RegistrationPageValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>
 		

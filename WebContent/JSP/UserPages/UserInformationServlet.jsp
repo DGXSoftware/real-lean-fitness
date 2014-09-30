@@ -17,7 +17,7 @@
 <link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
 
 <!-- Include the JavaScript Files -->
-<script language='javascript' type='text/javascript' src='/JavaScript/Validation/User Information Page Validation.js' > </script>
+<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
 
 </head>
 

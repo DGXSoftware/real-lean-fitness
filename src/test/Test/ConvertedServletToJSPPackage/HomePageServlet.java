@@ -124,7 +124,7 @@ public class HomePageServlet extends HttpServlet {
 		out.println("<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />");
 		out.println("");
 		out.println("<!-- Include the JavaScript Files -->");
-		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Login Page Validation.js' > </script>");
+		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/LoginPageValidation.js' > </script>");
 		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/Registration Page Validation.js' > </script>");
 		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>");
 		out.println("");
