@@ -104,15 +104,21 @@ public class RegistrationServlet extends HttpServlet {
 			String Date_Of_Birth = Request.getParameter("RegistrationBirthYear") + "-" + Request.getParameter("RegistrationBirthMonth") + "-" + Request.getParameter("RegistrationBirthDay");
 
 			// Variables for Account creation Date
+			/*
 			Date CurrentDate = new Date();
 			DateFormat DateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			DateFormat TimeFormat = new SimpleDateFormat("HH:mm:ss");
 			String Account_Creation_Date = DateFormat.format(CurrentDate);
 			String Account_Creation_Time = TimeFormat.format(CurrentDate);
 			String Account_Creation_TimeZone = "EST";
+			*/
+			
+			// Variables for Account creation Date
+			String Account_Created_On = "NOW()";
 			
 			// Default Values
 			char IsActivated = 'N';
+			char InNewsLetter = 'Y';
 		
 			// Create an Entry for the new account that was created in the RLF_Accounts Table.
 			String AccountSQLQuery = "INSERT INTO RLF_Accounts (" +
@@ -123,10 +129,9 @@ public class RegistrationServlet extends HttpServlet {
 					"EMail," +
 					"Gender," +
 					"Date_Of_Birth," +
-					"Account_Creation_Date," +
-					"Account_Creation_Time," +
-					"Account_Creation_TimeZone," +
-					"IsActivated" +
+					"Account_Created_On," +
+					"IsActivated," +
+					"InNewsLetter" +
 					")" +
 					"VALUES (" +
 					"\""+Username+"\"," +
@@ -136,13 +141,14 @@ public class RegistrationServlet extends HttpServlet {
 					"\""+EMail+"\"," +
 					"\""+Gender+"\"," +
 					"\""+Date_Of_Birth+"\"," +
-					"\""+Account_Creation_Date+"\"," +
-					"\""+Account_Creation_Time+"\"," +
-					"\""+Account_Creation_TimeZone+"\"," +
-					"\""+IsActivated+"\"" +
+					""+Account_Created_On+"," +
+					"\""+IsActivated+"\"," +
+					"\""+InNewsLetter+"\"" +
 					");" +
 					"";
-			
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			System.out.println(AccountSQLQuery);
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
 			// Create the Account
 			SQLStatement.executeUpdate(AccountSQLQuery);
 		

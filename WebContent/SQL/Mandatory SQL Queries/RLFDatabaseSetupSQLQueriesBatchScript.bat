@@ -29,10 +29,9 @@ ECHO Password VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO EMail VARCHAR(255), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Gender VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Date_Of_Birth DATE, >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO Account_Creation_Date DATE, >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO Account_Creation_Time TIME, >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO Account_Creation_TimeZone VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO Account_Created_On DATETIME, >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO IsActivated CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO InNewsLetter CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO PRIMARY KEY (Account_ID), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO UNIQUE (Account_ID), >> TEMP\DGXExecuteTemporarySQLCommand.txt
