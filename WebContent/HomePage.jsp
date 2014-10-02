@@ -263,8 +263,8 @@ function submitLoginRequest() {
 		<p align='left'>&#160;</p>
 		
 		
-		 <!-- Create the Registration Form  -->
-		<form id='RegistrationForm' name='RegistrationForm' method='post'>
+<!-- Create the Registration Form  -->
+<form id='RegistrationForm' name='RegistrationForm' method='post'>
 		 
 		<div id="RegistrationFormFeedbackDiv"></div>
 		
@@ -348,17 +348,18 @@ function submitLoginRequest() {
 		<!-- 
 		<p> Confirm E-Mail: </p> <input type='text' id='RegistrationEMailConfirmation' name='RegistrationEMailConfirmation' title='Confirm Registration E-Mail' size='48' />
 		-->
-		<br />
-		
+		 <br />
+
 		 <!-- Gender VARCHAR(32) -->
 		 <label for="RegistrationGender">
 		 <p> Gender: </p>
-		 <select id="RegistrationGender" name="RegistrationGender">
+		 <select id="RegistrationGender" name="RegistrationGender" onChange="validateDropDownField('RegistrationGender','RegistrationGenderIcon','');" >
          <option value="" disabled selected style="display:none">I am...</option>
          <option value="Female">Female</option>
          <option value="Male">Male</option>
          <option value="Other">Other</option>
          </select>
+         <img id="RegistrationGenderIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
          </label>
 		 
 		<!-- Gender VARCHAR(32) -->
@@ -391,7 +392,7 @@ function submitLoginRequest() {
 		<input type='button' id='RegistrationButton' name='RegistrationButton' value='Register' onClick="submitRegistrationRequest();" />
 
 		
-		</form>
+</form>
 		 
 		
 		</div>
@@ -475,18 +476,32 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         // REGISTRATION TEST STUFF
         document.getElementById("RegistrationFirstName").value = "TestFirstName";
         document.getElementById("RegistrationLastName").value = "TestLastName";
-        document.getElementById("RegistrationUsername").value = "TestUsername_" + "<%= RandomNumber %>";
-        document.getElementById("RegistrationPassword").value = "TestUsername_" + "<%= RandomNumber %>";
+        document.getElementById("RegistrationUsername").value = "TestUsername" + "<%= RandomNumber %>";
+        document.getElementById("RegistrationPassword").value = "TestUsername" + "<%= RandomNumber %>";
         document.getElementById("RegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("ConfirmationRegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("RegistrationGender").checked = true;
-        document.getElementById("RegistrationBirthDay").selectedIndex = 3;
-        document.getElementById("RegistrationBirthMonth").selectedIndex = 3;
-        document.getElementById("RegistrationBirthYear").selectedIndex = 3;
+        document.getElementById("RegistrationBirthDay").selectedIndex = "4";
+        document.getElementById("RegistrationBirthMonth").selectedIndex = "4";
+        document.getElementById("RegistrationBirthYear").selectedIndex = "4";
+        document.getElementById("RegistrationGender").selectedIndex = "2";
         
       });
 </script>
 <!-- END TEST STUFF  -->
+
+<!-- This scripts are unrelated to page loading  -->
+<script>
+      // Use JQuery to execute JavaScript code as soon as the page loads
+      $(document).ready(function(){
+    	  
+        // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
+        $('#RegistrationGender').on('change', function() {
+        	$("#RegistrationGender option[value='']").remove();
+        });
+        
+      });
+</script>
 
 <%
 }else{

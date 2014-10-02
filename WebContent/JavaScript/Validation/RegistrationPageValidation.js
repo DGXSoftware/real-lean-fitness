@@ -24,6 +24,7 @@ function validateFormOnSubmit(CurrentFeedbackDivID) {
 	if(validateUsername('RegistrationUsername','RegistrationUsernameIcon',CurrentFeedbackDivID) === false){ ValidationSucceeded = false; ArrayOfValidationFailures.push(document.getElementById(RegistrationErrorFeedbackDivName).innerHTML); }
 	if(validateEmail('RegistrationEMail','RegistrationEMailIcon',CurrentFeedbackDivID) === false){ ValidationSucceeded = false; ArrayOfValidationFailures.push(document.getElementById(RegistrationErrorFeedbackDivName).innerHTML); }
 	if(validateConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon',CurrentFeedbackDivID,'RegistrationEMail') === false){ ValidationSucceeded = false; ArrayOfValidationFailures.push(document.getElementById(RegistrationErrorFeedbackDivName).innerHTML); }
+	if(validateDropDownField('RegistrationGender','RegistrationGenderIcon',CurrentFeedbackDivID) === false){ ValidationSucceeded = false; ArrayOfValidationFailures.push(document.getElementById(RegistrationErrorFeedbackDivName).innerHTML); }
 	
 	if(ValidationSucceeded === false){
     if (AlertOnBadInput == true){
@@ -400,4 +401,53 @@ function validateConfirmation(CurrentTextFieldID, CurrentTextFieldIconID, Curren
 	//Return Invalid
 	}
 	
+}
+
+//Validate a Drop-Down Field
+function validateDropDownField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID){
+
+	// If the Current Field is Empty, set it back to Its default state, and stop further processing
+	if (validateEmptyField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID) === true){ return false;}
+	
+	// Get the Field and Field Icon Obbjects
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldIconObject = document.getElementById(CurrentTextFieldIconID);
+	
+	// Get the Field Name
+	// Also, find each occurance of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beatiful World" 
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+	// If a Form Feedback Div Name is provided set it so that this method alerts about Invalid input in the Feedback Div.
+	var AlertOnBadInput = null;
+	if (CurrentFeedbackDivID === ''){
+	AlertOnBadInput = false;
+	}else {
+	AlertOnBadInput = true;
+	}
+	
+	// Validate the Current Field
+	if(CurrentTextFieldObject.options[CurrentTextFieldObject.selectedIndex].value !== ""){
+	// Return Valid
+	CurrentTextFieldIconObject.src = "/Images/Icons/Valid/Valid(16x16).png";
+	CurrentTextFieldIconObject.style.visibility = "visible";
+	if (AlertOnBadInput == true){
+	$('#'+CurrentFeedbackDivID+'').empty();
+	CurrentTextFieldObject.style.background = "white";
+	}
+	return true;
+	//Return Valid
+	}else {
+	//Return Invalid
+	 CurrentTextFieldIconObject.src = "/Images/Icons/Invalid/Invalid(16x16).png";
+	 CurrentTextFieldIconObject.style.visibility = "visible";
+	 if (AlertOnBadInput == true){
+	 $('#'+CurrentFeedbackDivID+'').html("<div id='RegistrationErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
+     CurrentTextFieldObject.style.background = "yellow"; 
+	 }
+	 return false;
+	//Return Invalid
+	}
+	
+
 }

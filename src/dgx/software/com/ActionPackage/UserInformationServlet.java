@@ -212,6 +212,8 @@ public class UserInformationServlet extends HttpServlet {
 		// Variables for Account session information
 		String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
+		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
+		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
 			
 		// SQL Query
 		String AccountSQLQuery = "SELECT * FROM RLFDB_User_Information WHERE Account_ID="+SessionAccountID+";";
@@ -266,16 +268,50 @@ public class UserInformationServlet extends HttpServlet {
 		out.println("<!-- Include the JavaScript Files -->");
 		out.println("<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>");
 		out.println("");
+		out.println("<style>");
+		out.println("");
+		out.println(".FixedMessage {");
+		out.println("top: auto;");
+		out.println("left: auto;");
+		out.println("max-height: 100%;");
+		out.println("width: 100%;");
+		out.println("overflow-y: auto;");
+		out.println("color: black;");
+		out.println("background-color: white;");
+		out.println("border: solid 1px red;");
+		out.println("padding: 2px 5px;");
+		out.println("margin: auto;");
+		out.println("text-align: center;");
+		out.println("position: relative;");
+		out.println("}");
+		out.println("");
+		out.println("</style>");
+		out.println("");
 		out.println("</head>");
 		out.println("");
 		out.println("<body>");
+		out.println("");
+
+	    // If SessionIsActivated is 'N' for No, then show the message below.
+	    if(SessionIsActivated.equals("N")){
+	    
+	    // If the user is Not activated, point them to the Account Activation Site
+	    String AccountActivationURL = "/JSP/PayPal/PayPalRegistrationSubmit.jsp" + "?" + "RegistrationUsername=" + SessionUsername;
+
+	    out.println("<div class='FixedMessage'>");
+	    out.println("<p>This account is not activated. Please <a href='"+AccountActivationURL+"'>Click here</a> to activate your account.</p>");
+	    out.println("</div>");
+	    
+	    }
+		
+		out.println("");
 		out.println("<div id='container'>");
 		out.println("<div id='main'>");
 		out.println("<div id='header'></div>");
 		out.println("<div id='nav'>");
 		out.println("<ul>");
 		out.println("<!-- START DYNAMIC HTML -->");
-		out.println("<li><a href='/UserProfileServlet'>"+SessionUsername+"</a></li>");
+		out.println("<li><a href='/UserProfileServlet'>"+SessionFirstName+"</a></li>");
 		out.println("<!-- END DYNAMIC HTML -->");
 		out.println("<li><a href='#'></a></li>");
 		out.println("<li><a href='#'></a></li>");

@@ -146,9 +146,7 @@ public class RegistrationServlet extends HttpServlet {
 					"\""+InNewsLetter+"\"" +
 					");" +
 					"";
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
-			System.out.println(AccountSQLQuery);
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			
 			// Create the Account
 			SQLStatement.executeUpdate(AccountSQLQuery);
 		
