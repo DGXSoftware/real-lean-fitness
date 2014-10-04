@@ -9,21 +9,6 @@
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
-<!-- START AGenericServlet Definition -->
-<servlet>
-    <servlet-name>AGenericServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ActionPackage.AGenericServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>AGenericServlet</servlet-name><url-pattern>/AGenericServlet</url-pattern></servlet-mapping>
-<!-- END AGenericServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
 <!-- START BrowserValidationServlet Definition -->
 <servlet>
     <servlet-name>UserSessionValidator</servlet-name>
@@ -64,34 +49,6 @@
 <!-- END RegistrationServlet Definition -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START UserProfileServlet Definition -->
-<servlet>
-    <servlet-name>UserProfileServlet</servlet-name>
-	<!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ActionPackage.UserProfileServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>UserProfileServlet</servlet-name><url-pattern>/UserProfileServlet</url-pattern></servlet-mapping>
-<!-- END UserProfileServlet Definition -->
-
-<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-
-<!-- START UserInformationServlet Definition -->
-<servlet>
-    <servlet-name>UserInformationServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
-	<servlet-class>dgx.software.com.ActionPackage.UserInformationServlet</servlet-class>
-	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
-	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
-</servlet>
-<servlet-mapping><servlet-name>UserInformationServlet</servlet-name><url-pattern>/UserInformationServlet</url-pattern></servlet-mapping>
-<!-- END UserInformationServlet Definition -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 

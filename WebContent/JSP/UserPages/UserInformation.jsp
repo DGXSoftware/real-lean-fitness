@@ -1,5 +1,5 @@
 <!--
-GOAL: User Profile Homepage.
+GOAL: Allows the user to edit their Information.
 
 PROPERTIES: Front-End Work / Back-End Work
 1. User Page Display (HTML/CSS)
@@ -47,65 +47,116 @@ if (SessionAccountID == null) {SessionAccountID = "";}
 if(!(SessionAccountID.equals(""))){
 	
 	
-	/* *********************************************************************************** */
-	/* START JSP DATABASE CONNECTION */
-	/* *********************************************************************************** */
+/* *********************************************************************************** */
+/* START JSP DATABASE CONNECTION */
+/* *********************************************************************************** */
+
+	Class.forName(application.getInitParameter("DriverName"));
+
+	final Connection SQLConnection = DriverManager.getConnection(
+			application.getInitParameter("DatabaseURL"), 
+			application.getInitParameter("DatabaseUser"), 
+			application.getInitParameter("DatabasePassword"));
+
+	final Statement SQLStatement = SQLConnection.createStatement();
 	
-		Class.forName(application.getInitParameter("DriverName"));
+/* *********************************************************************************** */
+/* END JSP DATABASE CONNECTION */
+/* *********************************************************************************** */
 
-		final Connection SQLConnection = DriverManager.getConnection(
-				application.getInitParameter("DatabaseURL"), 
-				application.getInitParameter("DatabaseUser"), 
-				application.getInitParameter("DatabasePassword"));
-
-		final Statement SQLStatement = SQLConnection.createStatement();
-		
-	/* *********************************************************************************** */
-	/* END JSP DATABASE CONNECTION */
-	/* *********************************************************************************** */	
-
-	// attempt to process a vote and display current results
-	try {
-		
-	// Variables for Account session information
-	//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
-	String SessionUsername = (String) CurrentSession.getAttribute("Username");
-	String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
-	String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
-		
-	// SQL Query
-	String AccountSQLQuery = "SELECT * FROM RLF_Accounts WHERE Account_ID="+SessionAccountID+";";
-
-	// Get the SQLQueryOutput
-	ResultSet AccountSQLQueryOutput = SQLStatement.executeQuery(AccountSQLQuery);
 	
-	// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
-	if(AccountSQLQueryOutput.next()){
+	// Retrieve the SaveInformationButton Value
+	String SaveInformationButton = request.getParameter("SaveInformationButton");
 
-	// Reset the Pointer changed by the if statement above
-	AccountSQLQueryOutput.beforeFirst();
+	// Check if the Servlet was accessed through the button press of SaveInformationButton
+	// If the Servlet was accessed through the Button, Update the Values
+    if(SaveInformationButton != null){
+    	
+    	// Retrieve the Query String Data
+		String First_Name = request.getParameter("First_Name");
+		String Middle_Name = request.getParameter("Middle_Name");
+		String Last_Name = request.getParameter("Last_Name");
+		String Location_Address = request.getParameter("Location_Address");
+		String Location_City = request.getParameter("Location_City");
+		String Location_State = request.getParameter("Location_State");
+		String Location_ZipCode = request.getParameter("Location_ZipCode");
+		String Location_Country = request.getParameter("Location_Country");
+		
+		// Set Empty Spaces to Null Strings
+		if(First_Name == null)First_Name = "";
+		if(Middle_Name == null)Middle_Name = "";
+		if(Last_Name == null)Last_Name = "";
+		if(Location_Address == null)Location_Address = "";
+		if(Location_City == null)Location_City = "";
+		if(Location_State == null)Location_State = "";
+		if(Location_ZipCode == null)Location_ZipCode = "";
+		if(Location_Country == null)Location_Country = "";
+		
+		// Create the UpdateUserInformationQuery
+		String UpdateUserInformationQuery = "UPDATE RLF_User_Information SET " +
+		"First_Name=\""+First_Name+"\"," +
+		"Middle_Name=\""+Middle_Name+"\"," +
+		"Last_Name=\""+Last_Name+"\"," +
+		"Location_Address=\""+Location_Address+"\"," +
+		"Location_City=\""+Location_City+"\"," +
+		"Location_State=\""+Location_State+"\"," +
+		"Location_ZipCode=\""+Location_ZipCode+"\"," +
+		"Location_Country=\""+Location_Country+"\" " +
+		"WHERE Account_ID=\""+SessionAccountID+"\"" +
+		";" +
+		"";
+    	
+		// Write the HTML Notification Response
+		String ProfileUpdateMessage = "Profile information successfully updated!";
+		GlobalMethods.writeHTMLNotificationResponse(request, response, "/JSP/UserPages/UserInformation.jsp", ProfileUpdateMessage);
+		
+		// Update the User Information
+		SQLStatement.executeUpdate(UpdateUserInformationQuery);
 	
-	// Records the ResultSetMetaData
-	ResultSetMetaData SQLQueryOutputMetaData = null;
-	
-	try {
+    }
+
+		// attempt to process a vote and display current results
+		try {
 		
-		// Get the ResultSetMetaData
-	    SQLQueryOutputMetaData = AccountSQLQueryOutput.getMetaData();
+		// Variables for Account session information
+		//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+		String SessionUsername = (String) CurrentSession.getAttribute("Username");
+		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
+		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+			
+		// SQL Query
+		String AccountSQLQuery = "SELECT * FROM RLF_User_Information WHERE Account_ID="+SessionAccountID+";";
 		
-	} catch (SQLException sqlException) {
-		sqlException.printStackTrace();		
+		// Get the SQLQueryOutput
+		ResultSet AccountSQLQueryOutput = SQLStatement.executeQuery(AccountSQLQuery);
 		
-		// Respond with an error message
-		String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-		GlobalMethods.writeForwardHTMLErrorResponse(request, response, "/", UnknownErrorMessage);
+		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
+		if(AccountSQLQueryOutput.next()){
+
+		// Reset the Pointer changed by the if statement above
+		AccountSQLQueryOutput.beforeFirst();
 		
-	}
+		// Records the ResultSetMetaData
+		ResultSetMetaData SQLQueryOutputMetaData = null;
+		
+		try {
+			
+			// Get the ResultSetMetaData
+		    SQLQueryOutputMetaData = AccountSQLQueryOutput.getMetaData();
+			
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();		
+			
+			// Respond with an error message
+			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+			GlobalMethods.writeForwardHTMLErrorResponse(request, response, "/", UnknownErrorMessage);
+			
+		}
 	
 %>
 
 
-<!-- START HTML RESPONSE  -->
+<!-- START HTML RESPONSE -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 		<?xml version = '1.0'?>
@@ -125,6 +176,9 @@ if(!(SessionAccountID.equals(""))){
 		
 		<!-- Include the Stylesheet Files -->
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
+		
+		<!-- Include the JavaScript Files -->
+		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
 		
 		<style>
 		
@@ -149,7 +203,7 @@ if(!(SessionAccountID.equals(""))){
 		
 		<body>
 		
-        <%
+       <%
 	    // If SessionIsActivated is 'N' for No, then show the message below.
 	    if(SessionIsActivated.equals("N")){
 	    
@@ -157,7 +211,7 @@ if(!(SessionAccountID.equals(""))){
 	    String AccountActivationURL = "/JSP/PayPal/PayPalRegistrationSubmit.jsp" + "?" + "RegistrationUsername=" + SessionUsername;
         %>
 	    <div class='FixedMessage'>
-	    <p>This account is not activated. Please <a href='"+AccountActivationURL+"'>Click here</a> to activate your account.</p>
+	    <p>This account is not activated. Please <a href='<%= AccountActivationURL %>'>Click here</a> to activate your account.</p>
 	    </div>
 	    <%
 	    }
@@ -181,91 +235,54 @@ if(!(SessionAccountID.equals(""))){
 		<div id='content'>
 		<div id='left'>
 		<div class='post'>
-		<h1>Profile Information</h1>
+		<h1>Edit Profile Information</h1>
 		
 		<p align='left'>&#160;</p>
 		
-		<!-- START DYNAMIC USER INFORMATION HTML -->
+		<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>
 		
-		<%
-		try {	
-			
+		<!-- START DYNAMIC HTML -->
+	    <%
+		try {
+		
 			// Go over the Rows
 			while (AccountSQLQueryOutput.next()) {
 				
 			// Go over the Columns
-			for(int i = 1 ; i < SQLQueryOutputMetaData.getColumnCount() + 1 ; i++){
+			// NOTE : i = 2 because we want to skip the first item (Account_ID)
+			for(int i = 2 ; i < SQLQueryOutputMetaData.getColumnCount() + 1 ; i++){
 				
 				String ColumnName = SQLQueryOutputMetaData.getColumnName(i);
+				String DisplayCoumnName = ColumnName.replaceAll("_", " ");
 				String CurrentValue = AccountSQLQueryOutput.getString(i);
 				
 				// If the current value is empty set it as N/A
-				if(CurrentValue.equals("")){CurrentValue = "N/A";};
-		 %>		
-				<p><b><%= ColumnName %> = </b><span><%= CurrentValue %></span></p>
-		 <%	
+				//if(CurrentValue.equals("")){CurrentValue = "N/A";};
+			%>	
+				<p> <%= DisplayCoumnName %>: </p> <input type='text' id='<%= ColumnName %>' name='<%= ColumnName %>' title='<%= DisplayCoumnName %>' size='32' value='<%= CurrentValue %>' />
+			<%	
+				
 			}
 			
 			}
 		} catch (SQLException e1) {e1.printStackTrace();}
-		 %>
-		<!-- END DYNAMIC USER INFORMATION HTML -->
-		
-		</div>
-		
-		</div>
-		
-		
-		<div id='right'>
-		<h1 class='Center_Text'>Profile Picture</h1>
-		
-		<!-- START DYNAMIC IMAGE UPLOAD HTML -->
-		<%
-		// SQL Query
-		String ProfileImageSQLQuery = "SELECT * FROM RLF_Images WHERE ACCOUNT_ID = '"+SessionAccountID+"' AND Primary_Image= '1';";
-
-		// Get the SQLQueryOutput
-		ResultSet ProfileImageSQLQueryOutput = SQLStatement.executeQuery(ProfileImageSQLQuery);
-		
-		// If we DO NOT Have an Empty Result Set, Work with it.
-		if(ProfileImageSQLQueryOutput.next()){
-		
-		// Set the User Image retrieved from the Database
-		String UserProfileImageLocation = ProfileImageSQLQueryOutput.getString("Image_Location");
 		%>
-				<img border='0' src='<%= UserProfileImageLocation %>' class='Center_Image' id='UserProfilePrimaryPicture' name='UserProfilePrimaryPicture' alt='Profile Picture' width='230' height='230' />
-		<%
-		// Close the ResultSet
-		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
-			
 		
-		}else{
+		<!-- END DYNAMIC HTML -->
 		
-		// Set the Default Profile Image
-		String DefaultProfileImageLocation = "/Images/Default Profile Picture.jpg";
-		%>
-		<img border='0' src='<%= DefaultProfileImageLocation %>' class='Center_Image' id='UserProfilePrimaryPicture' name='UserProfilePrimaryPicture' alt='Profile Picture' width='230' height='230' />
-		<%
-		// Close the ResultSet
-		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
-			
-		}
-		%>
-
-		<!-- END DYNAMIC IMAGE UPLOAD HTML -->
-		
-		<form action='/ImageFileUploadServlet' enctype='multipart/form-data' method='post'> 
-		
-		<br/>
-		<input type='file' id='UserProfilePictureBrowse' name='UserProfilePictureBrowse' />
-		<br/>
-		
-		<input type='submit' id='UploadUserProfilePictureButton' name='UploadUserProfilePictureButton' value = 'Upload Profile Picture' />
-		
+		<br />
+		<br />
+		<br />
+		 
+		<input type='submit' id='SaveInformationButton' name='SaveInformationButton' value = 'Save Information' />
+		 
 		</form>
 		
 		</div>
-
+		
+		</div>
+		
+		
 		<div class='clear'></div>
 		</div>
 		</div>
@@ -287,7 +304,7 @@ if(!(SessionAccountID.equals(""))){
 
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-<!-- END HTML RESPONSE  -->
+<!-- END HTML RESPONSE -->
 
 <%
 
