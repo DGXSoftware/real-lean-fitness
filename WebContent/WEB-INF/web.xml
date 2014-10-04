@@ -134,6 +134,8 @@
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
     <!-- END Of Servlet definitions -->
 
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 <!-- START of Welcome File definition -->
 <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -144,6 +146,8 @@
     <welcome-file>default.jsp</welcome-file>
 </welcome-file-list>
 <!-- END of Welcome File definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 <!-- START Custom Error Pages -->
   <error-page>
@@ -156,6 +160,8 @@
       <location>/JSP/Error/404ErrorPage.jsp</location>
   </error-page>
 <!-- END Custom Error Pages -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 <!-- START Context Parameters and Listener for JavaBean Database Connection -->
   <context-param>  
@@ -189,7 +195,9 @@
 <!-- END Listener -->
 <!-- END Context Parameters and Listener for JavaBean Database Connection -->
 
-<!-- START TEST SERVLETS -->
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START TEST ERROR SERVLETS -->
   <servlet>
     <servlet-name>ThrowErrorServlet</servlet-name>
     <servlet-class>dgx.software.com.TestPackage.ThrowErrorServlet</servlet-class>
@@ -199,10 +207,20 @@
   <servlet-name>ThrowErrorServlet</servlet-name>
   <url-pattern>/ThrowErrorServlet</url-pattern>
   </servlet-mapping>
-<!-- END TEST SERVLETS -->
+<!-- END TEST ERROR SERVLETS -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 
 </web-app>
 
 <!-- NOTES -->
 <!-- Servlet Mapping specifies the Servlet Name (Doesn't have to be the name of the Servlet.class file) and URL Pattern to help the server determine which requests are sent to the servlet -->
+<!-- To Obtain The Dtabase Values for a JSP Database COnnection follow the example below:
 
+System.out.println(application.getInitParameter("DriverName"));
+System.out.println(application.getInitParameter("DatabaseURL"));
+System.out.println(application.getInitParameter("DatabaseUser"));
+System.out.println(application.getInitParameter("DatabasePassword"));
+
+ -->

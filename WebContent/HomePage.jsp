@@ -1,10 +1,5 @@
 <!--
 GOAL: Act as the main Homepage. Also allows for account Login and Registration.
-
-TO DO: When you press Register and are forwarded to the PayPal Payment site 
-your account is created in a deactivated state. Create a Fixed DIV that let's users
-who are not activated that they should activate their account by clicking here.
-This will forward them to the PayPal payment site.
 -->
 
 <% response.addHeader("Cache-Control","no-cache"); %> 
@@ -214,7 +209,7 @@ function submitLoginRequest() {
             success:    function(data, status) {
 
             // Redirect to the appropriate page upon successful Login authentication
-            window.location = "/UserProfileServlet";
+            window.location = "/JSP/UserPages/UserProfile.jsp";
 
                      },
                      
@@ -486,6 +481,10 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationBirthYear").selectedIndex = "4";
         document.getElementById("RegistrationGender").selectedIndex = "2";
         
+        // LOGIN TEST STUFF
+        document.getElementById("LoginUsername").value = "TestUsername97050";
+        document.getElementById("LoginPassword").value = "TestUsername97050";
+
       });
 </script>
 <!-- END TEST STUFF  -->
@@ -507,7 +506,7 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
 }else{
 
 	// The current user has a session, therefore redirect them to their profile
-	response.sendRedirect("/UserProfileServlet");
+	response.sendRedirect("/JSP/UserPages/UserProfile.jsp");
 
 }
 %>
