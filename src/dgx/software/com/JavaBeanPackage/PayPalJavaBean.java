@@ -147,7 +147,7 @@ public class PayPalJavaBean {
 				
 				// Write the HTML Successful Response
 				// DISABLED;  Handled By AJAX Call
-				// GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", "");
+				// GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, GlobalTools.GTV_UserProfile, "");
 				
 				}else {
 				

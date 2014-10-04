@@ -1,4 +1,4 @@
-package test.Test.org.json;
+package test.org.json;
 
 /**
  * The JSONException is thrown by the JSON.org classes when things are amiss.

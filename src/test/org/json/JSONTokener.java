@@ -1,4 +1,4 @@
-package test.Test.org.json;
+package test.org.json;
 
 import java.io.BufferedReader;
 import java.io.IOException;

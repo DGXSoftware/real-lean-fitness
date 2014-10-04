@@ -144,7 +144,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// Write the HTML Successful Response
 			// DISABLED;  Handled By AJAX Call
-			// GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", "");
+			// GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, GlobalTools.GTV_UserProfile, "");
 			
 			}else {
 			

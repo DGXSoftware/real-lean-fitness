@@ -71,7 +71,7 @@ public class UserSessionValidator extends HttpServlet {
 			if(SessionAccountID != null){
 				
 				// Redirect accordingly
-				Response.sendRedirect("/UserProfileServlet");
+				Response.sendRedirect(GlobalTools.GTV_UserProfile);
 				
 			}
 			

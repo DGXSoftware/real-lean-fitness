@@ -1,4 +1,4 @@
-package test.Test.org.json;
+package test.org.json;
 
 //SOURCE: https://developers.google.com/maps/documentation/javascript/places
 
