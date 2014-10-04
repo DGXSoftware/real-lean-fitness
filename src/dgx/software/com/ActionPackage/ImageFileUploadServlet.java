@@ -29,7 +29,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import dgx.software.com.UtilityPackage.GlobalMethods;
+import dgx.software.com.UtilityPackage.GlobalTools;
 
  
 @SuppressWarnings("serial")
@@ -97,7 +97,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 		catch (Exception exception) {
 			exception.printStackTrace();
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
+			GlobalTools.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
 			throw new UnavailableException(exception.getMessage());
 			
 		} // end catch
@@ -211,7 +211,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 			// Write the HTML Successful Response
 			String SuccessfulFileUploadMessage = "Image uploaded successfully!";
 			SuccessfulFileUploadMessage = "";
-			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", SuccessfulFileUploadMessage);
+			GlobalTools.writeForwardHTMLSuccessResponse(Request, Response, GlobalTools.GTV_UserProfile, SuccessfulFileUploadMessage);
 			
 		}catch(FileUploadException EX) {
 			EX.printStackTrace();
@@ -219,7 +219,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 			
 			// Write the HTML Error Response
 			String RequestParseErrorMessage = "Error encountered while parsing the request.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", RequestParseErrorMessage);
+			GlobalTools.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_UserProfile, RequestParseErrorMessage);
 			
 		}catch(Exception EX) {
 			EX.printStackTrace();
@@ -227,7 +227,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 
 			// Write the HTML Error Response
 			String FileUploadErrorMessage = "Error encountered while uploading file.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", FileUploadErrorMessage);
+			GlobalTools.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_UserProfile, FileUploadErrorMessage);
 			
 		}
  

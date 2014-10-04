@@ -9,29 +9,16 @@ PROPERTIES: Front-End Work / Back-End Work
 -->
 
 <%-- JSP Imports --%>
-<%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "java.io.IOException" %>
 <%@ page import = "java.sql.Connection" %>
 <%@ page import = "java.sql.DriverManager" %>
 <%@ page import = "java.sql.ResultSetMetaData" %>
 <%@ page import = "java.sql.Statement" %>
 <%@ page import = "java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
-
-<%@ page import = "javax.servlet.ServletConfig" %>
-<%@ page import = "javax.servlet.ServletException" %>
-<%@ page import = "javax.servlet.UnavailableException" %>
-<%@ page import = "javax.servlet.http.HttpServlet" %>
-<%@ page import = "javax.servlet.http.HttpServletRequest" %>
-<%@ page import = "javax.servlet.http.HttpServletResponse" %>
-<%@ page import = "javax.servlet.http.HttpSession" %>
-
-<%@ page import = "dgx.software.com.UtilityPackage.GlobalMethods" %>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
-
-// Assume we don't have a Session Account ID
+	// Assume we don't have a Session Account ID
 String SessionAccountID = "";
 
 // Returns null if no session already exists 
@@ -54,9 +41,9 @@ if(!(SessionAccountID.equals(""))){
 	Class.forName(application.getInitParameter("DriverName"));
 
 	final Connection SQLConnection = DriverManager.getConnection(
-			application.getInitParameter("DatabaseURL"), 
-			application.getInitParameter("DatabaseUser"), 
-			application.getInitParameter("DatabasePassword"));
+	application.getInitParameter("DatabaseURL"), 
+	application.getInitParameter("DatabaseUser"), 
+	application.getInitParameter("DatabasePassword"));
 
 	final Statement SQLStatement = SQLConnection.createStatement();
 	
@@ -108,7 +95,7 @@ if(!(SessionAccountID.equals(""))){
     	
 		// Write the HTML Notification Response
 		String ProfileUpdateMessage = "Profile information successfully updated!";
-		GlobalMethods.writeHTMLNotificationResponse(request, response, "/JSP/UserPages/UserInformation.jsp", ProfileUpdateMessage);
+		GlobalTools.writeHTMLNotificationResponse(request, response, GlobalTools.GTV_UserInformation, ProfileUpdateMessage);
 		
 		// Update the User Information
 		SQLStatement.executeUpdate(UpdateUserInformationQuery);
@@ -123,7 +110,7 @@ if(!(SessionAccountID.equals(""))){
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
-			
+	
 		// SQL Query
 		String AccountSQLQuery = "SELECT * FROM RLF_User_Information WHERE Account_ID="+SessionAccountID+";";
 		
@@ -140,19 +127,18 @@ if(!(SessionAccountID.equals(""))){
 		ResultSetMetaData SQLQueryOutputMetaData = null;
 		
 		try {
-			
-			// Get the ResultSetMetaData
-		    SQLQueryOutputMetaData = AccountSQLQueryOutput.getMetaData();
-			
-		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();		
-			
-			// Respond with an error message
-			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(request, response, "/", UnknownErrorMessage);
-			
-		}
 	
+	// Get the ResultSetMetaData
+		    SQLQueryOutputMetaData = AccountSQLQueryOutput.getMetaData();
+	
+		} catch (SQLException sqlException) {
+	sqlException.printStackTrace();		
+	
+	// Respond with an error message
+	String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, UnknownErrorMessage);
+	
+		}
 %>
 
 
@@ -204,18 +190,18 @@ if(!(SessionAccountID.equals(""))){
 		<body>
 		
        <%
-	    // If SessionIsActivated is 'N' for No, then show the message below.
-	    if(SessionIsActivated.equals("N")){
-	    
-	    // If the user is Not activated, point them to the Account Activation Site
-	    String AccountActivationURL = "/JSP/PayPal/PayPalRegistrationSubmit.jsp" + "?" + "RegistrationUsername=" + SessionUsername;
-        %>
+		       	// If SessionIsActivated is 'N' for No, then show the message below.
+		       	    if(SessionIsActivated.equals("N")){
+		       	    
+		       	    // If the user is Not activated, point them to the Account Activation Site
+		       	    String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
+		       %>
 	    <div class='FixedMessage'>
-	    <p>This account is not activated. Please <a href='<%= AccountActivationURL %>'>Click here</a> to activate your account.</p>
+	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
 	    </div>
 	    <%
-	    }
-		%>
+	    	}
+	    %>
 		
 		<div id='container'>
 		<div id='main'>
@@ -223,12 +209,12 @@ if(!(SessionAccountID.equals(""))){
 		<div id='nav'>
 		<ul>
 		<!-- START DYNAMIC HTML -->
-		<li><a href='/JSP/UserPages/UserProfile.jsp'><%= SessionFirstName %></a></li>
+		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
 		<!-- END DYNAMIC HTML -->
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='/JSP/UserPages/UserInformation.jsp'>Edit Profile</a></li>
+		<li><a href='<%= GlobalTools.GTV_UserInformation %>'>Edit Profile</a></li>
 		<li><a href='/LogOutServlet'>Log Out</a></li>
 		</ul>
 		</div>
@@ -243,30 +229,29 @@ if(!(SessionAccountID.equals(""))){
 		
 		<!-- START DYNAMIC HTML -->
 	    <%
-		try {
-		
-			// Go over the Rows
-			while (AccountSQLQueryOutput.next()) {
+	    	try {
+	    		
+	    	// Go over the Rows
+	    	while (AccountSQLQueryOutput.next()) {
+	    		
+	    	// Go over the Columns
+	    	// NOTE : i = 2 because we want to skip the first item (Account_ID)
+	    	for(int i = 2 ; i < SQLQueryOutputMetaData.getColumnCount() + 1 ; i++){
+	    		
+	    		String ColumnName = SQLQueryOutputMetaData.getColumnName(i);
+	    		String DisplayCoumnName = ColumnName.replaceAll("_", " ");
+	    		String CurrentValue = AccountSQLQueryOutput.getString(i);
+	    		
+	    		// If the current value is empty set it as N/A
+	    		//if(CurrentValue.equals("")){CurrentValue = "N/A";};
+	    %>	
+				<p> <%=DisplayCoumnName%>: </p> <input type='text' id='<%=ColumnName%>' name='<%=ColumnName%>' title='<%=DisplayCoumnName%>' size='32' value='<%=CurrentValue%>' />
+			<%
+				}
 				
-			// Go over the Columns
-			// NOTE : i = 2 because we want to skip the first item (Account_ID)
-			for(int i = 2 ; i < SQLQueryOutputMetaData.getColumnCount() + 1 ; i++){
-				
-				String ColumnName = SQLQueryOutputMetaData.getColumnName(i);
-				String DisplayCoumnName = ColumnName.replaceAll("_", " ");
-				String CurrentValue = AccountSQLQueryOutput.getString(i);
-				
-				// If the current value is empty set it as N/A
-				//if(CurrentValue.equals("")){CurrentValue = "N/A";};
-			%>	
-				<p> <%= DisplayCoumnName %>: </p> <input type='text' id='<%= ColumnName %>' name='<%= ColumnName %>' title='<%= DisplayCoumnName %>' size='32' value='<%= CurrentValue %>' />
-			<%	
-				
-			}
-			
-			}
-		} catch (SQLException e1) {e1.printStackTrace();}
-		%>
+				}
+					} catch (SQLException e1) {e1.printStackTrace();}
+			%>
 		
 		<!-- END DYNAMIC HTML -->
 		
@@ -307,8 +292,7 @@ if(!(SessionAccountID.equals(""))){
 <!-- END HTML RESPONSE -->
 
 <%
-
-		// Close the ResultSet
+	// Close the ResultSet
 		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
 	}else {
@@ -316,31 +300,30 @@ if(!(SessionAccountID.equals(""))){
 		// Close the ResultSet
 		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
-			// Write the HTML Error Response	
-			String NoProfileErrorMessage = "Unable to retrieve your profile homepage! Please Try again.";
-			GlobalMethods.writeForwardHTMLErrorResponse(request, response, "/", NoProfileErrorMessage);
-					
+	// Write the HTML Error Response	
+	String NoProfileErrorMessage = "Unable to retrieve your profile homepage! Please Try again.";
+	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, NoProfileErrorMessage);
+			
 		}
 		
 		} // end try
 		
 		// if an exception occurs, return the error page
 		catch (Exception sqlException) {
-			sqlException.printStackTrace();		
-			
-			// Respond with an error message
-			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-			GlobalMethods.writeForwardHTMLErrorResponse(request, response, "/", UnknownErrorMessage);
-			
+	sqlException.printStackTrace();		
+	
+	// Respond with an error message
+	String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
+	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, UnknownErrorMessage);
+	
 		} // end catch
-
 %>
 
 <%
 }else{
 
 	// The current user does NOT have a session, therefore redirect them to the Homepage
-	response.sendRedirect("/");
+	response.sendRedirect(GlobalTools.GTV_Homepage);
 
 }
 %>

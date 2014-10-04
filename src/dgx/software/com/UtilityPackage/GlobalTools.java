@@ -7,8 +7,35 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GlobalMethods {
+public class GlobalTools {
 
+/**************************************************************************************************/
+/* START GLOBAL VARIABLES */	
+/**************************************************************************************************/
+    
+	// <%= GlobalTools.GTV_Homepage %>
+	public static final String GTV_Homepage = "/";
+	
+	// <%= GlobalTools.GTV_UserProfile %>
+	public static final String GTV_UserProfile = "/JSP/UserPages/UserProfile.jsp";
+	
+	// <%= GlobalTools.GTV_UserInformation %>
+	public static final String GTV_UserInformation = "/JSP/UserPages/UserInformation.jsp";
+	
+	// <%= GlobalTools.GTV_ContactUs %>
+	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";
+	
+	// <%= GlobalTools.GTV_PayPalRegistrationSubmit %>
+	public static final String GTV_PayPalRegistrationSubmit = "/JSP/PayPal/PayPalRegistrationSubmit.jsp";
+	
+	
+/**************************************************************************************************/
+/* END GLOBAL VARIABLES */	
+/**************************************************************************************************/
+		
+			
+	
+	
 		/*************************************************************************************************
 		NAME:        writeForwardHTMLSuccessResponse
 		DESCRIPTION: Handle successful forwarding responses.

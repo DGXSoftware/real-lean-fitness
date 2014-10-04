@@ -2,19 +2,11 @@
 GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 -->
 
+<!-- Disable Cache -->
 <% response.addHeader("Cache-Control","no-cache"); %> 
 
 <%-- JSP Imports --%>
-<%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "java.io.IOException" %>
-<%@ page import = "javax.servlet.ServletConfig" %>
-<%@ page import = "javax.servlet.ServletException" %>
-<%@ page import = "javax.servlet.http.Cookie" %>
-<%@ page import = "javax.servlet.http.HttpServlet" %>
-<%@ page import = "javax.servlet.http.HttpServletRequest" %>
-<%@ page import = "javax.servlet.http.HttpServletResponse" %>
-<%@ page import = "javax.servlet.http.HttpSession" %>
-<%@ page import = "dgx.software.com.UtilityPackage.UserSessionValidator" %>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
 
@@ -129,7 +121,7 @@ function submitRegistrationRequest() {
             	
             // Redirect to the appropriate page upon successful Registration
             //alert("Account created successfully!");
-            window.location = "/JSP/PayPal/PayPalRegistrationSubmit.jsp" + "?" + "RegistrationUsername=" + document.getElementById("RegistrationUsername").value;
+            window.location = "<%= GlobalTools.GTV_PayPalRegistrationSubmit %>" + "?" + "RegistrationUsername=" + document.getElementById("RegistrationUsername").value;
 
                      },
                      
@@ -209,7 +201,7 @@ function submitLoginRequest() {
             success:    function(data, status) {
 
             // Redirect to the appropriate page upon successful Login authentication
-            window.location = "/JSP/UserPages/UserProfile.jsp";
+            window.location = "<%= GlobalTools.GTV_UserProfile %>";
 
                      },
                      
@@ -247,7 +239,7 @@ function submitLoginRequest() {
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='/JSP/Mail/ContactUs.jsp'>Contact Us</a></li>
+		<li><a href='<%= GlobalTools.GTV_ContactUs %>'>Contact Us</a></li>
 		</ul>
 		</div>
 		<div id='content'>
@@ -506,7 +498,7 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
 }else{
 
 	// The current user has a session, therefore redirect them to their profile
-	response.sendRedirect("/JSP/UserPages/UserProfile.jsp");
+	response.sendRedirect(GlobalTools.GTV_UserProfile);
 
 }
 %>

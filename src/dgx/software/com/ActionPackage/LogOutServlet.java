@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dgx.software.com.UtilityPackage.GlobalMethods;
+import dgx.software.com.UtilityPackage.GlobalTools;
 
 @SuppressWarnings("serial")
 public class LogOutServlet extends HttpServlet {
@@ -67,7 +67,7 @@ public class LogOutServlet extends HttpServlet {
 			// Write the HTML Successful Response
 			String LogOutMessage = "You have successfully logged out!";
 			LogOutMessage = "";
-			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", LogOutMessage);
+			GlobalTools.writeForwardHTMLSuccessResponse(Request, Response, "/", LogOutMessage);
 			
 		
 			
