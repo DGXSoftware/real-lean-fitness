@@ -211,7 +211,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 			// Write the HTML Successful Response
 			String SuccessfulFileUploadMessage = "Image uploaded successfully!";
 			SuccessfulFileUploadMessage = "";
-			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/UserProfileServlet", SuccessfulFileUploadMessage);
+			GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", SuccessfulFileUploadMessage);
 			
 		}catch(FileUploadException EX) {
 			EX.printStackTrace();
@@ -219,7 +219,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 			
 			// Write the HTML Error Response
 			String RequestParseErrorMessage = "Error encountered while parsing the request.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/UserProfileServlet", RequestParseErrorMessage);
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", RequestParseErrorMessage);
 			
 		}catch(Exception EX) {
 			EX.printStackTrace();
@@ -227,7 +227,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 
 			// Write the HTML Error Response
 			String FileUploadErrorMessage = "Error encountered while uploading file.";
-			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/UserProfileServlet", FileUploadErrorMessage);
+			GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/JSP/UserPages/UserProfile.jsp", FileUploadErrorMessage);
 			
 		}
  

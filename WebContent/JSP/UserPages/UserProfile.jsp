@@ -47,22 +47,22 @@ if (SessionAccountID == null) {SessionAccountID = "";}
 if(!(SessionAccountID.equals(""))){
 	
 	
-	/* *********************************************************************************** */
-	/* START JSP DATABASE CONNECTION */
-	/* *********************************************************************************** */
-	
-		Class.forName(application.getInitParameter("DriverName"));
+/* *********************************************************************************** */
+/* START JSP DATABASE CONNECTION */
+/* *********************************************************************************** */
 
-		final Connection SQLConnection = DriverManager.getConnection(
-				application.getInitParameter("DatabaseURL"), 
-				application.getInitParameter("DatabaseUser"), 
-				application.getInitParameter("DatabasePassword"));
+	Class.forName(application.getInitParameter("DriverName"));
 
-		final Statement SQLStatement = SQLConnection.createStatement();
+	final Connection SQLConnection = DriverManager.getConnection(
+			application.getInitParameter("DatabaseURL"), 
+			application.getInitParameter("DatabaseUser"), 
+			application.getInitParameter("DatabasePassword"));
+
+	final Statement SQLStatement = SQLConnection.createStatement();
 		
-	/* *********************************************************************************** */
-	/* END JSP DATABASE CONNECTION */
-	/* *********************************************************************************** */	
+/* *********************************************************************************** */
+/* END JSP DATABASE CONNECTION */
+/* *********************************************************************************** */	
 
 	// attempt to process a vote and display current results
 	try {
