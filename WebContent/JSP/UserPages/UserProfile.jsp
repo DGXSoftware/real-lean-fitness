@@ -143,7 +143,7 @@ if(!(SessionAccountID.equals(""))){
 		        	    String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
 		        %>
 	    <div class='FixedMessage'>
-	    <p>This account is not activated. Please <a href='"+AccountActivationURL+"'>Click here</a> to activate your account.</p>
+	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
 	    </div>
 	    <%
 	    	}
