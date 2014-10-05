@@ -8,6 +8,9 @@ PROPERTIES: Front-End Work / Back-End Work
 */
 -->
 
+<!-- Disable Cache -->
+<% response.addHeader("Cache-Control","no-cache"); %> 
+
 <%-- JSP Imports --%>
 <%@ page import = "java.sql.Connection" %>
 <%@ page import = "java.sql.DriverManager" %>
@@ -18,21 +21,8 @@ PROPERTIES: Front-End Work / Back-End Work
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
-	// Assume we don't have a Session Account ID
-String SessionAccountID = "";
-
-// Returns null if no session already exists 
-HttpSession CurrentSession =  request.getSession(false);
-
-// If we have a session attempt to retrieve the SessionAccountID
-if (CurrentSession != null) {SessionAccountID = (String) CurrentSession.getAttribute("AccountID");}
-
-// If attempts to retrieve the SessionAccountID returned null, make it an Empty String Object for operations
-if (SessionAccountID == null) {SessionAccountID = "";}
-
 // Display the main body if the user is not logged in, else forward the users to the Homepage
-if(!(SessionAccountID.equals(""))){
-	
+if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	
 /* *********************************************************************************** */
 /* START JSP DATABASE CONNECTION */
@@ -51,66 +41,76 @@ if(!(SessionAccountID.equals(""))){
 /* END JSP DATABASE CONNECTION */
 /* *********************************************************************************** */
 
-	
-	// Retrieve the SaveInformationButton Value
-	String SaveInformationButton = request.getParameter("SaveInformationButton");
-
-	// Check if the Servlet was accessed through the button press of SaveInformationButton
-	// If the Servlet was accessed through the Button, Update the Values
-    if(SaveInformationButton != null){
-    	
-    	// Retrieve the Query String Data
-		String First_Name = request.getParameter("First_Name");
-		String Middle_Name = request.getParameter("Middle_Name");
-		String Last_Name = request.getParameter("Last_Name");
-		String Location_Address = request.getParameter("Location_Address");
-		String Location_City = request.getParameter("Location_City");
-		String Location_State = request.getParameter("Location_State");
-		String Location_ZipCode = request.getParameter("Location_ZipCode");
-		String Location_Country = request.getParameter("Location_Country");
-		
-		// Set Empty Spaces to Null Strings
-		if(First_Name == null)First_Name = "";
-		if(Middle_Name == null)Middle_Name = "";
-		if(Last_Name == null)Last_Name = "";
-		if(Location_Address == null)Location_Address = "";
-		if(Location_City == null)Location_City = "";
-		if(Location_State == null)Location_State = "";
-		if(Location_ZipCode == null)Location_ZipCode = "";
-		if(Location_Country == null)Location_Country = "";
-		
-		// Create the UpdateUserInformationQuery
-		String UpdateUserInformationQuery = "UPDATE RLF_User_Information SET " +
-		"First_Name=\""+First_Name+"\"," +
-		"Middle_Name=\""+Middle_Name+"\"," +
-		"Last_Name=\""+Last_Name+"\"," +
-		"Location_Address=\""+Location_Address+"\"," +
-		"Location_City=\""+Location_City+"\"," +
-		"Location_State=\""+Location_State+"\"," +
-		"Location_ZipCode=\""+Location_ZipCode+"\"," +
-		"Location_Country=\""+Location_Country+"\" " +
-		"WHERE Account_ID=\""+SessionAccountID+"\"" +
-		";" +
-		"";
-    	
-		// Write the HTML Notification Response
-		String ProfileUpdateMessage = "Profile information successfully updated!";
-		GlobalTools.writeHTMLNotificationResponse(request, response, GlobalTools.GTV_UserInformation, ProfileUpdateMessage);
-		
-		// Update the User Information
-		SQLStatement.executeUpdate(UpdateUserInformationQuery);
-	
-    }
-
 		// attempt to process a vote and display current results
 		try {
+			
+		// Returns null if no session already exists 
+		HttpSession CurrentSession =  request.getSession(false);
 		
 		// Variables for Account session information
-		//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+		String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
 	
+/* *********************************************************************************** */
+/* START RETRIEVAL OF SAVED INFORMATION */
+/* *********************************************************************************** */
+		
+		// Retrieve the SaveInformationButton Value
+		String SaveInformationButton = request.getParameter("SaveInformationButton");
+
+		// Check if the Servlet was accessed through the button press of SaveInformationButton
+		// If the Servlet was accessed through the Button, Update the Values
+	    if(SaveInformationButton != null){
+	    	
+	    	// Retrieve the Query String Data
+			String First_Name = request.getParameter("First_Name");
+			String Middle_Name = request.getParameter("Middle_Name");
+			String Last_Name = request.getParameter("Last_Name");
+			String Location_Address = request.getParameter("Location_Address");
+			String Location_City = request.getParameter("Location_City");
+			String Location_State = request.getParameter("Location_State");
+			String Location_ZipCode = request.getParameter("Location_ZipCode");
+			String Location_Country = request.getParameter("Location_Country");
+			
+			// Set Empty Spaces to Null Strings
+			if(First_Name == null)First_Name = "";
+			if(Middle_Name == null)Middle_Name = "";
+			if(Last_Name == null)Last_Name = "";
+			if(Location_Address == null)Location_Address = "";
+			if(Location_City == null)Location_City = "";
+			if(Location_State == null)Location_State = "";
+			if(Location_ZipCode == null)Location_ZipCode = "";
+			if(Location_Country == null)Location_Country = "";
+			
+			// Create the UpdateUserInformationQuery
+			String UpdateUserInformationQuery = "UPDATE RLF_User_Information SET " +
+			"First_Name=\""+First_Name+"\"," +
+			"Middle_Name=\""+Middle_Name+"\"," +
+			"Last_Name=\""+Last_Name+"\"," +
+			"Location_Address=\""+Location_Address+"\"," +
+			"Location_City=\""+Location_City+"\"," +
+			"Location_State=\""+Location_State+"\"," +
+			"Location_ZipCode=\""+Location_ZipCode+"\"," +
+			"Location_Country=\""+Location_Country+"\" " +
+			"WHERE Account_ID=\""+SessionAccountID+"\"" +
+			";" +
+			"";
+	    	
+			// Write the HTML Notification Response
+			String ProfileUpdateMessage = "Profile information successfully updated!";
+			GlobalTools.writeHTMLNotificationResponse(request, response, GlobalTools.GTV_UserInformation, ProfileUpdateMessage);
+			
+			// Update the User Information
+			SQLStatement.executeUpdate(UpdateUserInformationQuery);
+		
+	    }
+
+/* *********************************************************************************** */
+/* END RETRIEVAL OF SAVED INFORMATION */
+/* *********************************************************************************** */
+		
 		// SQL Query
 		String AccountSQLQuery = "SELECT * FROM RLF_User_Information WHERE Account_ID="+SessionAccountID+";";
 		
@@ -189,13 +189,13 @@ if(!(SessionAccountID.equals(""))){
 		
 		<body>
 		
-       <%
-		       	// If SessionIsActivated is 'N' for No, then show the message below.
-		       	    if(SessionIsActivated.equals("N")){
-		       	    
-		       	    // If the user is Not activated, point them to the Account Activation Site
-		       	    String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
-		       %>
+        <%
+		// If SessionIsActivated is 'N' for No, then show the message below.
+		if(SessionIsActivated.equals("N")){
+		
+		// If the user is Not activated, point them to the Account Activation Site
+		String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
+		%>
 	    <div class='FixedMessage'>
 	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
 	    </div>
@@ -208,13 +208,11 @@ if(!(SessionAccountID.equals(""))){
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<!-- START DYNAMIC HTML -->
 		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
-		<!-- END DYNAMIC HTML -->
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='<%= GlobalTools.GTV_UserInformation %>'>Edit Profile</a></li>
+		<li><a href='<%= GlobalTools.GTV_UserSettings %>'>Settings</a></li>
 		<li><a href='/LogOutServlet'>Log Out</a></li>
 		</ul>
 		</div>

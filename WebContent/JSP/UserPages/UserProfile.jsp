@@ -8,6 +8,9 @@ PROPERTIES: Front-End Work / Back-End Work
 */
 -->
 
+<!-- Disable Cache -->
+<% response.addHeader("Cache-Control","no-cache"); %> 
+
 <%-- JSP Imports --%>
 <%@ page import = "java.sql.Connection" %>
 <%@ page import = "java.sql.DriverManager" %>
@@ -18,20 +21,8 @@ PROPERTIES: Front-End Work / Back-End Work
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
-	// Assume we don't have a Session Account ID
-String SessionAccountID = "";
-
-// Returns null if no session already exists 
-HttpSession CurrentSession =  request.getSession(false);
-
-// If we have a session attempt to retrieve the SessionAccountID
-if (CurrentSession != null) {SessionAccountID = (String) CurrentSession.getAttribute("AccountID");}
-
-// If attempts to retrieve the SessionAccountID returned null, make it an Empty String Object for operations
-if (SessionAccountID == null) {SessionAccountID = "";}
-
 // Display the main body if the user is not logged in, else forward the users to the Homepage
-if(!(SessionAccountID.equals(""))){
+if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	
 	
 /* *********************************************************************************** */
@@ -53,9 +44,12 @@ if(!(SessionAccountID.equals(""))){
 
 	// attempt to process a vote and display current results
 	try {
+	
+	// Returns null if no session already exists 
+	HttpSession CurrentSession =  request.getSession(false);
 		
 	// Variables for Account session information
-	//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+	String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
 	String SessionUsername = (String) CurrentSession.getAttribute("Username");
 	String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 	String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
@@ -136,12 +130,12 @@ if(!(SessionAccountID.equals(""))){
 		<body>
 		
         <%
-		        	// If SessionIsActivated is 'N' for No, then show the message below.
-		        	    if(SessionIsActivated.equals("N")){
-		        	    
-		        	    // If the user is Not activated, point them to the Account Activation Site
-		        	    String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
-		        %>
+		// If SessionIsActivated is 'N' for No, then show the message below.
+		if(SessionIsActivated.equals("N")){
+		
+		// If the user is Not activated, point them to the Account Activation Site
+		String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
+		%>
 	    <div class='FixedMessage'>
 	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
 	    </div>
@@ -154,13 +148,11 @@ if(!(SessionAccountID.equals(""))){
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<!-- START DYNAMIC HTML -->
 		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
-		<!-- END DYNAMIC HTML -->
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='<%= GlobalTools.GTV_UserInformation %>'>Edit Profile</a></li>
+		<li><a href='<%= GlobalTools.GTV_UserSettings %>'>Settings</a></li>
 		<li><a href='/LogOutServlet'>Log Out</a></li>
 		</ul>
 		</div>
@@ -207,7 +199,7 @@ if(!(SessionAccountID.equals(""))){
 		
 		<!-- START DYNAMIC IMAGE UPLOAD HTML -->
 		<%
-			// SQL Query
+			    // SQL Query
 				String ProfileImageSQLQuery = "SELECT * FROM RLF_Images WHERE ACCOUNT_ID = '"+SessionAccountID+"' AND Primary_Image= '1';";
 
 				// Get the SQLQueryOutput
@@ -221,7 +213,7 @@ if(!(SessionAccountID.equals(""))){
 		%>
 				<img border='0' src='<%=UserProfileImageLocation%>' class='Center_Image' id='UserProfilePrimaryPicture' name='UserProfilePrimaryPicture' alt='Profile Picture' width='230' height='230' />
 		<%
-			// Close the ResultSet
+			    // Close the ResultSet
 				try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 				
@@ -232,7 +224,7 @@ if(!(SessionAccountID.equals(""))){
 		%>
 		<img border='0' src='<%=DefaultProfileImageLocation%>' class='Center_Image' id='UserProfilePrimaryPicture' name='UserProfilePrimaryPicture' alt='Profile Picture' width='230' height='230' />
 		<%
-			// Close the ResultSet
+			    // Close the ResultSet
 				try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 				}

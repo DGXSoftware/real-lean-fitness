@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class GlobalTools {
 
@@ -18,16 +19,19 @@ public class GlobalTools {
 	
 	// <%= GlobalTools.GTV_UserProfile %>
 	public static final String GTV_UserProfile = "/JSP/UserPages/UserProfile.jsp";
+	// <%= GlobalTools.GTV_UserSettings %>
+	public static final String GTV_UserSettings = "/JSP/UserPages/UserSettings.jsp";
 	
+	// <%= GlobalTools.GTV_UserAccount %>
+	public static final String GTV_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
 	// <%= GlobalTools.GTV_UserInformation %>
-	public static final String GTV_UserInformation = "/JSP/UserPages/UserInformation.jsp";
+	public static final String GTV_UserInformation = "/JSP/UserPages/Settings/UserInformation.jsp";
 	
 	// <%= GlobalTools.GTV_ContactUs %>
 	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";
 	
 	// <%= GlobalTools.GTV_PayPalRegistrationSubmit %>
 	public static final String GTV_PayPalRegistrationSubmit = "/JSP/PayPal/PayPalRegistrationSubmit.jsp";
-	
 	// <%= GlobalTools.GTV_PayPalForwardMessage %>
 	public static final String GTV_PayPalForwardMessage = "/JSP/PayPal/PayPalForwardMessage.jsp";
 	
@@ -36,8 +40,38 @@ public class GlobalTools {
 /* END GLOBAL VARIABLES */	
 /**************************************************************************************************/
 		
-			
-	
+	/*************************************************************************************************
+	NAME:        isUserCurrentlyLoggedIn
+	DESCRIPTION: Lets you know if the current user is logged in by reading the active session.
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response)
+	RETURN:      VOID
+	SIDE-EFFECT: If provided a "SuccessMessage" It will alert before forwarding.
+	*************************************************************************************************/
+	// Returns a Successful HTML Response and forward appropriately.
+	public static boolean isUserCurrentlyLoggedIn(HttpServletRequest Request, HttpServletResponse Response){
+
+	// Assume we don't have a Session Account ID
+	String SessionAccountID = "";
+
+	// Returns null if no session already exists 
+	HttpSession CurrentSession =  Request.getSession(false);
+
+	// If we have a session attempt to retrieve the SessionAccountID
+	if (CurrentSession != null) {SessionAccountID = (String) CurrentSession.getAttribute("AccountID");}
+
+	// If attempts to retrieve the SessionAccountID returned null, make it an Empty String Object for operations
+	if (SessionAccountID == null) {SessionAccountID = "";}
+
+	// Check weather or not the user is logged Currently logged in
+	if(SessionAccountID.equals("")){
+	// User is NOT Currently Logged In
+	return false;
+	}else{
+	// User is Currently Logged In
+	return true;
+	}
+
+	}
 	
 		/*************************************************************************************************
 		NAME:        writeForwardHTMLSuccessResponse

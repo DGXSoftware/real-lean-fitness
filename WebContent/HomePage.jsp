@@ -9,21 +9,8 @@ GOAL: Act as the main Homepage. Also allows for account Login and Registration.
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
-
-// Assume we don't have a Session Account ID
-String SessionAccountID = "";
-
-// Returns null if no session already exists 
-HttpSession CurrentSession =  request.getSession(false);
-
-// If we have a session attempt to retrieve the SessionAccountID
-if (CurrentSession != null) {SessionAccountID = (String) CurrentSession.getAttribute("AccountID");}
-
-// If attempts to retrieve the SessionAccountID returned null, make it an Empty String Object for operations
-if (SessionAccountID == null) {SessionAccountID = "";}
-
 // Display the main body if the user is not logged in, else forward the users to their profile page
-if(SessionAccountID.equals("")){
+if(!(GlobalTools.isUserCurrentlyLoggedIn(request,response))){
 %>
 
 		<?xml version = '1.0'?>
@@ -474,8 +461,8 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationGender").selectedIndex = "2";
         
         // LOGIN TEST STUFF
-        document.getElementById("LoginUsername").value = "TestUsername97050";
-        document.getElementById("LoginPassword").value = "TestUsername97050";
+        document.getElementById("LoginUsername").value = "TestUsername9437";
+        document.getElementById("LoginPassword").value = "TestUsername9437";
 
       });
 </script>
