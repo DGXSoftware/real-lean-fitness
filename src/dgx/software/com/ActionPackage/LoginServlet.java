@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// (Database is Unavailable) Write the Error Response
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);"
 			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
@@ -153,7 +153,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// (Account NOT Found) Write the Error Response
 			String LoginErrorMessage = "Your login information was not correct, please try again.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", LoginErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, LoginErrorMessage);"
 			throw new RuntimeException(LoginErrorMessage);
 		}
 			
@@ -169,7 +169,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// Respond with an error message
 			String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnknownErrorMessage);"
 			throw new RuntimeException(UnknownErrorMessage);
 			
 		}

@@ -59,7 +59,7 @@ public class UserSQLOperationJavaBean {
 			
 			// (Database is Unavailable) Write the Error Response
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);"
 			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
@@ -140,7 +140,7 @@ public class UserSQLOperationJavaBean {
 				}else{
 					// This user is already Activated. Inform them so, and Forward back to the Homepage.
 					//String CancelMessage = "User " + RegistrationUsername + " is already Activated.";
-					//Response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+					//Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 					// Mark a Bas activation
 					AccountIDWasActivated = true;
 					return AccountIDWasActivated;
@@ -153,7 +153,7 @@ public class UserSQLOperationJavaBean {
 				
 				// This user does NOT exist. Inform them so, and Forward back to the Homepage.
 				//String CancelMessage = "This User does not exist.";
-				//Response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+				//Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 			}
 						
 			} // end try
@@ -165,7 +165,7 @@ public class UserSQLOperationJavaBean {
 				
 				// Respond with an error message
 				//String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-				// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+				// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnknownErrorMessage);"
 				//throw new RuntimeException(UnknownErrorMessage);
 				AccountIDWasActivated = false;
 				return AccountIDWasActivated;

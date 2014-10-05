@@ -97,7 +97,7 @@ public class ImageFileUploadServlet extends HttpServlet {
 		catch (Exception exception) {
 			exception.printStackTrace();
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			GlobalTools.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);
+			GlobalTools.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);
 			throw new UnavailableException(exception.getMessage());
 			
 		} // end catch

@@ -10,6 +10,8 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dgx.software.com.UtilityPackage.GlobalTools;
+
 public class PayPalJavaBean {
 
 	// Declare the SQL Connection Objects
@@ -59,7 +61,7 @@ public class PayPalJavaBean {
 			
 			// (Database is Unavailable) Write the Error Response
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);"
 			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
@@ -111,7 +113,7 @@ public class PayPalJavaBean {
 				if(!IsActivated.equals("N")){
 					// This user is already Activated. Inform them so, and Forward back to the Homepage.
 					String CancelMessage = "User " + RegistrationUsername + " is already Activated.";
-					Response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+					Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 				}else {
 					
 					//System.out.println("User " + RegistrationUsername + " is NOT Activated. Proceed with activation steps."); 
@@ -120,7 +122,7 @@ public class PayPalJavaBean {
 					String getScheme = Request.getScheme().toString(); // http
 					String getServerName = Request.getServerName().toString(); // localhost
 					String getServerPort = ":" + Request.getServerPort(); // 8080
-					String PayPalSubmitPage = "/JSP/PayPal/PayPalRegistrationSubmit.jsp";
+					String PayPalSubmitPage = GlobalTools.GTV_PayPalRegistrationSubmit;
 					String PayPalSubmitPageQueryString = "?RegistrationUsername=" + RegistrationUsername;
 
 					// If we are NOT on a Test Environment with "localhost" as Server Name
@@ -156,7 +158,7 @@ public class PayPalJavaBean {
 				
 				// This user does NOT exist. Inform them so, and Forward back to the Homepage.
 				String CancelMessage = "User " + RegistrationUsername + " does not exist.";
-				Response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+				Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 			}
 						
 			} // end try
@@ -168,7 +170,7 @@ public class PayPalJavaBean {
 				
 				// Respond with an error message
 				String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-				// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+				// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnknownErrorMessage);"
 				throw new RuntimeException(UnknownErrorMessage);
 				
 			}

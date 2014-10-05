@@ -1,3 +1,6 @@
+<%-- JSP Imports --%>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
 <?xml version = "1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -36,7 +39,7 @@
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
-				<li><a href="/">Home</a></li>
+				<li><a href="<%= GlobalTools.GTV_Homepage %>">Home</a></li>
 			</ul>
 		</div>
 		<div id="content">

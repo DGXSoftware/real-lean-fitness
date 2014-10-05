@@ -2,6 +2,10 @@
 GOAL: Temporarily displays information to the user about their PayPal payment.
 After a few seconds it will forward their request to the Homepage.
 -->
+
+<%-- JSP Imports --%>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
 		<?xml version = '1.0'?>
 		<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 		
@@ -115,7 +119,7 @@ $(document).ready(function () {
         var iTimeRemaining = $("#CountdownSeconds").html();
         iTimeRemaining = eval(iTimeRemaining);
         if (iTimeRemaining == 0) {
-            location.href = "/";
+            location.href = "<%= GlobalTools.GTV_Homepage %>";
         } else {
             $("#CountdownSeconds").html(iTimeRemaining - 1);
         }

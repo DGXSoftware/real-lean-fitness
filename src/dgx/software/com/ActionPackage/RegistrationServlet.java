@@ -75,7 +75,7 @@ public class RegistrationServlet extends HttpServlet {
 			EX.printStackTrace();
 			
 			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnavailableErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);"
 			throw new RuntimeException(UnavailableErrorMessage);
 			
 		} // end catch
@@ -201,7 +201,7 @@ public class RegistrationServlet extends HttpServlet {
 			// Write the HTML Successful Response
 			// DISABLED;  Handled By AJAX Call
 			// String RegistrationSuccessMessage = "Account created successfully!";
-			//GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, "/", RegistrationSuccessMessage);
+			//GlobalMethods.writeForwardHTMLSuccessResponse(Request, Response, GlobalTools.GTV_Homepage, RegistrationSuccessMessage);
 
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
@@ -231,7 +231,7 @@ public class RegistrationServlet extends HttpServlet {
 			    if(SQLEX.getMessage().contains("EMail")){UnknownErrorMessage = "This E-Mail address is already in use. Please supply a different E-Mail address.";}
 			}
 			
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, "/", UnknownErrorMessage);"
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnknownErrorMessage);"
 			throw new RuntimeException(UnknownErrorMessage);
 			
 		}

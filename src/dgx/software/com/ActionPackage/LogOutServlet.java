@@ -48,7 +48,7 @@ public class LogOutServlet extends HttpServlet {
 		
 			try {
 				// If the user does not have a session redirect them back to the Session Writer Servlet
-				Response.sendRedirect("/");
+				Response.sendRedirect(GlobalTools.GTV_Homepage);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -67,7 +67,7 @@ public class LogOutServlet extends HttpServlet {
 			// Write the HTML Successful Response
 			String LogOutMessage = "You have successfully logged out!";
 			LogOutMessage = "";
-			GlobalTools.writeForwardHTMLSuccessResponse(Request, Response, "/", LogOutMessage);
+			GlobalTools.writeForwardHTMLSuccessResponse(Request, Response, GlobalTools.GTV_Homepage, LogOutMessage);
 			
 		
 			

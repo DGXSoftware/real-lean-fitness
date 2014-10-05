@@ -6,6 +6,10 @@ TO DO: E-Mail the user the link they would use if they'd like to activate their 
 some other time.
 -->
 
+<%-- JSP Imports --%>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -55,19 +59,19 @@ String AccountIDToActivate = MyPayPalJavaBean.getUserAccountIDAndEMailUserActiva
 
 if(AccountIDToActivate.equals("")){
 	String CancelMessage = "User " + request.getParameter("RegistrationUsername") + " was not found in the database.";
-	response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 }else{
 
 	// Set the Cancel Message
 	String CancelMessage = "Transaction Canceled. Returning to homepage.";
 	
 	// Define the PayPalSuccessURL and PayPalCancelURL
-	String PayPalSuccessURL = "http://www.RealLeanFitness.com/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
-	String PayPalCancelURL = "http://www.RealLeanFitness.com/PayPalForwardMessage.jsp?CancelMessage=" + CancelMessage;
+	String PayPalSuccessURL = "http://www.RealLeanFitness.com/JSP/PayPal/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
+	String PayPalCancelURL = "http://www.RealLeanFitness.com/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage=" + CancelMessage;
 	
 	// TEST: Set Test Versions (DELETE IN PRODUCTION)
 	PayPalSuccessURL = "/JSP/PayPal/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
-	PayPalCancelURL = "/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage=" + CancelMessage;
+	PayPalCancelURL = GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage=" + CancelMessage;
 	
 %>
 
@@ -100,7 +104,7 @@ if(AccountIDToActivate.equals("")){
 }else{
 	// Return the user to the Homepage because the "RegistrationUsername" was not provided in the query string
 	String CancelMessage = "Invalid activation URL.";
-	response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 }
 
 %>

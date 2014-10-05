@@ -4,6 +4,9 @@ your account is created in a deactivated state. Upon a successful Payment confir
 from PayPal this page will activate your account via the internal Account ID.
 -->
 
+<%-- JSP Imports --%>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -54,19 +57,19 @@ boolean AccountWasActivated = MyUserSQLDBJavaBean.activateAccount(request, respo
 // Proceed with successful activation
 if(AccountWasActivated == true){
 	String SuccessfulMessage = "Your account has been successfully activated!";
-	response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?SuccessMessage="+SuccessfulMessage+"");
+	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?SuccessMessage="+SuccessfulMessage+"");
 }
 //Proceed with bad activation
 else{
-	String CancelMessage = "Your account failed to activate. Please contact us for a manual activation by <a href='/JSP/Mail/ContactUs.jsp'>CLICKING HERE</a>";
-	response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"&SkipCountdown=true");
+	String CancelMessage = "Your account failed to activate. Please contact us for a manual activation by <a href='"+ GlobalTools.GTV_ContactUs +"'>CLICKING HERE</a>";
+	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"&SkipCountdown=true");
 }
 
 
 }else{
 	// Return the user to the Homepage because the "RegistrationUsername" was not provided in the query string
 	String CancelMessage = "Invalid activation URL.";
-	response.sendRedirect("/JSP/PayPal/PayPalForwardMessage.jsp?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
 }
 
 %>
