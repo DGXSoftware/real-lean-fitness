@@ -23,8 +23,11 @@ public class ApplicationManagerListener implements ServletContextListener {
             String value = servletContext.getInitParameter(key);
             properties.setProperty(key, value);
         }
+        
+        // Initialize the following Methods for the following Beans
         dgx.software.com.JavaBeanPackage.PayPalJavaBean.setServletContextProperties(properties);
         dgx.software.com.JavaBeanPackage.UserSQLOperationJavaBean.setServletContextProperties(properties);
+        dgx.software.com.UtilityPackage.GlobalTools.setServletContextProperties(properties);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

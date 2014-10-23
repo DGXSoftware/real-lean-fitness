@@ -133,9 +133,6 @@ CREATE TABLE RLF_User_Information (
 
 Account_ID INT NOT NULL,
 
-First_Name VARCHAR(32),
-Middle_Name VARCHAR(32),
-Last_Name VARCHAR(32),
 Location_Address VARCHAR(32),
 Location_City VARCHAR(32),
 Location_State VARCHAR(32),

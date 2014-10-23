@@ -49,7 +49,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>User Profile Servlet</title>
+		<title>Settings</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -63,43 +63,15 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<!-- Include the JavaScript Files -->
 		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
 		
-		<style>
-		
-		.FixedMessage {
-		top: auto;
-		left: auto;
-		max-height: 100%;
-		width: 100%;
-		overflow-y: auto;
-		color: black;
-		background-color: white;
-		border: solid 1px red;
-		padding: 2px 5px;
-		margin: auto;
-		text-align: center;
-		position: relative;
-		}
-		
-		</style>
-		
 		</head>
 		
 		<body>
-		
+
         <%
-		// If SessionIsActivated is 'N' for No, then show the message below.
-		if(SessionIsActivated.equals("N")){
-		
-		// If the user is Not activated, point them to the Account Activation Site
-		String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
-		%>
-	    <div class='FixedMessage'>
-	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
-	    </div>
-	    <%
-	    	}
+        // Display a Fixed DIV that reminds non activated users how to activate.
+        GlobalTools.displayActivationMessage(out, SessionUsername, SessionIsActivated);
 	    %>
-		
+
 		<div id='container'>
 		<div id='main'>
 		<div id='header'></div>
@@ -122,8 +94,9 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>
 		 
-		<p><b><a href="<%= GlobalTools.GTV_UserAccount %>">Change Account Settings</a></b><span> - Change account settings such as Password, E-Mail, etc.</span></p>
-		<p><b><a href="<%= GlobalTools.GTV_UserInformation %>">Edit Personal Information</a></b><span>Edit your Personal information</span></p>
+		<p><b><a href="<%= GlobalTools.GTV_Settings_UserAccount %>">Change Account Settings</a></b><span> - Change account settings such as Password, E-Mail, etc.</span></p>
+		<p><b><a href="<%= GlobalTools.GTV_Settings_UserInformation %>">Edit Personal Information</a></b><span>Edit your Personal information.</span></p>
+        <p><b><a href="">Change Password</a></b><span>Change your current password for a new one.</span></p>
 
 		</form>
 		

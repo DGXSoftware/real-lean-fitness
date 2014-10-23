@@ -69,9 +69,6 @@ ECHO CREATE TABLE RLF_User_Information ( >> TEMP\DGXExecuteTemporarySQLCommand.t
 ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Account_ID INT NOT NULL, >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO First_Name VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO Middle_Name VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO Last_Name VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Location_Address VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Location_City VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Location_State VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt

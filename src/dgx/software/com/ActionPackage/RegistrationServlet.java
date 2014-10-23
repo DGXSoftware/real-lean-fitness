@@ -170,9 +170,6 @@ public class RegistrationServlet extends HttpServlet {
 			// Create an Entry for the new account that was created in the RLF_User_Information Table.
 			String UserInformationSQLQuery = "INSERT INTO RLF_User_Information (" +
 					"Account_ID," +
-					"First_Name," +
-					"Middle_Name," +
-					"Last_Name," +
 					"Location_Address," +
 					"Location_City," +
 					"Location_State," +
@@ -181,9 +178,6 @@ public class RegistrationServlet extends HttpServlet {
 					")" +
 					"VALUES(" +
 					"\""+AccountID+"\"," +
-					"\"\"," +
-					"\"\"," +
-					"\"\"," +
 					"\"\"," +
 					"\"\"," +
 					"\"\"," +

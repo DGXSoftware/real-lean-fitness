@@ -32,7 +32,7 @@ if(!(GlobalTools.isUserCurrentlyLoggedIn(request,response))){
 		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
 		
 		<!-- Include the Stylesheet Files -->
-		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
+		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
 		
 		<!-- Include the JavaScript Files -->
 		<script type='text/javascript' src='/JavaScript/Validation/LoginPageValidation.js' > </script>
@@ -461,8 +461,8 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationGender").selectedIndex = "2";
         
         // LOGIN TEST STUFF
-        document.getElementById("LoginUsername").value = "TestUsername9437";
-        document.getElementById("LoginPassword").value = "TestUsername9437";
+        //document.getElementById("LoginUsername").value = "TestUsername9437";
+        //document.getElementById("LoginPassword").value = "TestUsername9437";
 
       });
 </script>
@@ -480,6 +480,10 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         
       });
 </script>
+
+
+<!-- This scripts are unrelated to page loading  -->
+<script src="/JavaScript/LocalStorage/RLFHomePageLocalStorage.js"></script>
 
 <%
 }else{

@@ -2,11 +2,20 @@ package dgx.software.com.UtilityPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 public class GlobalTools {
 
@@ -19,19 +28,22 @@ public class GlobalTools {
 	
 	// <%= GlobalTools.GTV_UserProfile %>
 	public static final String GTV_UserProfile = "/JSP/UserPages/UserProfile.jsp";
+	
 	// <%= GlobalTools.GTV_UserSettings %>
 	public static final String GTV_UserSettings = "/JSP/UserPages/UserSettings.jsp";
 	
 	// <%= GlobalTools.GTV_UserAccount %>
-	public static final String GTV_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
+	public static final String GTV_Settings_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
+	
 	// <%= GlobalTools.GTV_UserInformation %>
-	public static final String GTV_UserInformation = "/JSP/UserPages/Settings/UserInformation.jsp";
+	public static final String GTV_Settings_UserInformation = "/JSP/UserPages/Settings/UserInformation.jsp";
 	
 	// <%= GlobalTools.GTV_ContactUs %>
 	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";
 	
 	// <%= GlobalTools.GTV_PayPalRegistrationSubmit %>
 	public static final String GTV_PayPalRegistrationSubmit = "/JSP/PayPal/PayPalRegistrationSubmit.jsp";
+	
 	// <%= GlobalTools.GTV_PayPalForwardMessage %>
 	public static final String GTV_PayPalForwardMessage = "/JSP/PayPal/PayPalForwardMessage.jsp";
 	
@@ -39,7 +51,62 @@ public class GlobalTools {
 /**************************************************************************************************/
 /* END GLOBAL VARIABLES */	
 /**************************************************************************************************/
-		
+	
+	// Declare the SQL Connection Objects
+	private static Connection SQLConnection;
+	private static Statement SQLStatement;
+	
+	// Declare the Database Connection Variables
+	private static String DriverName = null;
+    private static String DatabaseURL = null;
+    private static String DatabaseUser = null;
+    private static String DatabasePassword = null;
+    
+    // Declare the servletContextProperties
+    private static java.util.Properties _servletContextProperties = new java.util.Properties();
+    
+    // NOTE: (This is being treated like an Init method)
+    // Set the servletContextProperties
+    public static void setServletContextProperties(java.util.Properties servletContextProperties) {
+    	
+    	// Set the servletContextProperties
+        _servletContextProperties = servletContextProperties;
+        
+        // Get the web.xml attributes from the servletContextProperties
+        DriverName = _servletContextProperties.getProperty("DriverName");
+        DatabaseURL = _servletContextProperties.getProperty("DatabaseURL");
+        DatabaseUser = _servletContextProperties.getProperty("DatabaseUser");
+        DatabasePassword = _servletContextProperties.getProperty("DatabasePassword");
+        
+		// attempt database connection and create Statements
+		try {
+			// The config.getInitParameter() Parameters are variables 
+			// in the web.xml file which are declared as "init-param" element  
+			// These web.xml variables are used to connect to the database 
+			Class.forName(DriverName);
+			SQLConnection = DriverManager.getConnection(DatabaseURL,DatabaseUser,DatabasePassword);
+
+			// create Statement to query database
+			SQLStatement = SQLConnection.createStatement();
+			
+		} // end try
+		// for any exception throw an UnavailableException to
+		// indicate that the servlet is not currently available
+		catch (Exception EX) {
+            
+			// Print the Stack Trace
+			EX.printStackTrace();
+			
+			// (Database is Unavailable) Write the Error Response
+			String UnavailableErrorMessage = "The Database is Unavailable. Please Try again later.";
+			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, UnavailableErrorMessage);"
+			throw new RuntimeException(UnavailableErrorMessage);
+			
+		} // end catch
+        
+    }
+	
+	
 	/*************************************************************************************************
 	NAME:        isUserCurrentlyLoggedIn
 	DESCRIPTION: Lets you know if the current user is logged in by reading the active session.
@@ -71,6 +138,137 @@ public class GlobalTools {
 	return true;
 	}
 
+	}
+	
+	/*************************************************************************************************
+	NAME:        displayActivationMessage
+	DESCRIPTION: Displays a Fixed DIV that reminds non activated users how to activate.
+	PARAMETERS:  (JspWriter out, String SessionUsername, String SessionIsActivated)
+	RETURN:      VOID
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	// Returns a Successful HTML Response and forward appropriately.
+	public static void displayActivationMessage(JspWriter out, String SessionUsername, String SessionIsActivated) throws IOException{
+		
+		// START HTML Response
+		out.println("");
+		out.println("<style>");
+		out.println("");
+		out.println(".ActivationFixedMessage {");
+		out.println("top: auto;");
+		out.println("left: auto;");
+		out.println("max-height: 100%;");
+		out.println("width: 100%;");
+		out.println("overflow-y: auto;");
+		out.println("color: black;");
+		out.println("background-color: white;");
+		out.println("border: solid 1px red;");
+		out.println("padding: 2px 5px;");
+		out.println("margin: auto;");
+		out.println("text-align: center;");
+		out.println("position: relative;");
+		out.println("}");
+		out.println("");
+		out.println("</style>");
+		out.println("");
+        
+		// If SessionIsActivated is 'N' for No, then show the message below.
+		if(SessionIsActivated.equals("N")){
+		
+		// If the user is Not activated, point them to the Account Activation Site
+		String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
+		
+		out.println("<div class='ActivationFixedMessage'>");
+		out.println("<p>This account is not activated. Please <a href='" + AccountActivationURL + "'>Click here</a> to activate your account.</p>");
+		out.println("</div>");
+	    
+	    }
+		// END HTML Response
+
+		// Close the stream to complete the page
+		//out.close();
+		
+	}	
+	
+	/*************************************************************************************************
+	NAME:        getTableColumnAndValuePairViaSelectSQLQuery
+	DESCRIPTION: Gets all the Column Names and Values from a specific Table using
+	a desired AccountID. It allows you to choose the columns via an Array.
+	Once the 2D ArrayList<ArrayList<String>> is retrieved the data is retrieved as following
+	Index 0 = Column Names
+	Index 1 = Values
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String SessionAccountID, String [] Table_Column_Ignore)
+	RETURN:      ArrayList<ArrayList<String>>
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static ArrayList<ArrayList<String>> getTableColumnAndValuePairViaSelectSQLQuery(HttpServletRequest Request, HttpServletResponse Response, String TableName, String SessionAccountID, String [] Table_Column_Add) throws SQLException {
+		
+		// Temporary ArrayList Variables
+		ArrayList<ArrayList<String>> Temporary_ColumnValuePair = new ArrayList<ArrayList<String>>();
+		ArrayList <String> Temporary_Column_List = new ArrayList<String>();
+		ArrayList <String> Temporary_Values_List = new ArrayList<String>();
+
+		// Generate the SQL Select Query
+		String ColumnsToSelect = "";
+		for(int i = 0; i < Table_Column_Add.length; i++){
+			ColumnsToSelect = ColumnsToSelect.concat(Table_Column_Add[i]);
+			if(i < (Table_Column_Add.length -1)){ ColumnsToSelect = ColumnsToSelect.concat(" ,"); }
+		}
+		String SelectSQLQuery = "SELECT "+ColumnsToSelect+" FROM "+TableName+" WHERE Account_ID="+SessionAccountID+";";
+		
+		// Get the SQLQueryOutput
+		ResultSet SQLQueryResultSetOutput = SQLStatement.executeQuery(SelectSQLQuery);
+		
+		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
+		if(SQLQueryResultSetOutput.next()){
+		
+		// Reset the Pointer changed by the if statement above
+			SQLQueryResultSetOutput.beforeFirst();
+		
+		// Records the ResultSetMetaData
+		ResultSetMetaData SQLQueryOutputMetaData = null;
+		
+		try {
+	
+	        // Get the ResultSetMetaData
+		    SQLQueryOutputMetaData = SQLQueryResultSetOutput.getMetaData();
+	
+		} catch (SQLException sqlException) {
+	        sqlException.printStackTrace();		
+
+		}
+		
+    	try {
+        
+    	// Go over the Rows
+    	while (SQLQueryResultSetOutput.next()) {
+
+    	// Go over the Columns
+    	// NOTE : i = 2 because we want to skip the first item (Account_ID)
+    	for(int i = 1 ; i < SQLQueryOutputMetaData.getColumnCount() + 1; i++){
+    		
+    		// Get the Current SQL Result Values
+    		String CurrentColumnName = SQLQueryOutputMetaData.getColumnName(i);
+    		String CurrentValue = SQLQueryResultSetOutput.getString(i);
+            
+    		// Add the current Column and Value
+    		Temporary_Column_List.add(CurrentColumnName);
+    		Temporary_Values_List.add(CurrentValue);
+    		
+		}
+			
+		}
+			} catch (SQLException SQLEX) {
+					SQLEX.printStackTrace();
+				}
+			}
+
+		// Add the Columns and Values List to the ColumnValue Pair List
+		Temporary_ColumnValuePair.add(Temporary_Column_List);
+		Temporary_ColumnValuePair.add(Temporary_Values_List);
+		
+		return Temporary_ColumnValuePair;
+		
 	}
 	
 		/*************************************************************************************************
@@ -230,10 +428,7 @@ public class GlobalTools {
 		
 		// Returns a Successful HTML Response and forward appropriately.
 		public static void writeForwardHTMLSuccessResponse(ServletConfig config){
-			
-			
-			
+	
 		}
-
 		
 }

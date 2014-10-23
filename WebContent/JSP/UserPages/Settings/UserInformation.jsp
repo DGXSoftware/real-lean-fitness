@@ -18,6 +18,7 @@ PROPERTIES: Front-End Work / Back-End Work
 <%@ page import = "java.sql.Statement" %>
 <%@ page import = "java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
+<%@ page import = "java.util.ArrayList" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
@@ -57,50 +58,45 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 /* START RETRIEVAL OF SAVED INFORMATION */
 /* *********************************************************************************** */
 		
+        // Define the Table and Columns for this Page
+    	String RLF_User_Information_Table = "RLF_User_Information";
+    	String [] RLF_User_Information_Table_Columns = {"Location_Address","Location_City","Location_State","Location_ZipCode","Location_Country"};
+        
 		// Retrieve the SaveInformationButton Value
 		String SaveInformationButton = request.getParameter("SaveInformationButton");
-
+        
 		// Check if the Servlet was accessed through the button press of SaveInformationButton
 		// If the Servlet was accessed through the Button, Update the Values
 	    if(SaveInformationButton != null){
 	    	
-	    	// Retrieve the Query String Data
-			String First_Name = request.getParameter("First_Name");
-			String Middle_Name = request.getParameter("Middle_Name");
-			String Last_Name = request.getParameter("Last_Name");
-			String Location_Address = request.getParameter("Location_Address");
-			String Location_City = request.getParameter("Location_City");
-			String Location_State = request.getParameter("Location_State");
-			String Location_ZipCode = request.getParameter("Location_ZipCode");
-			String Location_Country = request.getParameter("Location_Country");
-			
-			// Set Empty Spaces to Null Strings
-			if(First_Name == null)First_Name = "";
-			if(Middle_Name == null)Middle_Name = "";
-			if(Last_Name == null)Last_Name = "";
-			if(Location_Address == null)Location_Address = "";
-			if(Location_City == null)Location_City = "";
-			if(Location_State == null)Location_State = "";
-			if(Location_ZipCode == null)Location_ZipCode = "";
-			if(Location_Country == null)Location_Country = "";
-			
-			// Create the UpdateUserInformationQuery
-			String UpdateUserInformationQuery = "UPDATE RLF_User_Information SET " +
-			"First_Name=\""+First_Name+"\"," +
-			"Middle_Name=\""+Middle_Name+"\"," +
-			"Last_Name=\""+Last_Name+"\"," +
-			"Location_Address=\""+Location_Address+"\"," +
-			"Location_City=\""+Location_City+"\"," +
-			"Location_State=\""+Location_State+"\"," +
-			"Location_ZipCode=\""+Location_ZipCode+"\"," +
-			"Location_Country=\""+Location_Country+"\" " +
-			"WHERE Account_ID=\""+SessionAccountID+"\"" +
-			";" +
-			"";
+	    	//Execute a Select SQL Query To get the RLF_Accounts_Table_Columns
+	    	ArrayList <String> RLF_User_Information_Table_Values = new ArrayList<String>();
+	    	String UpdateUserInformationQuery = "UPDATE "+RLF_User_Information_Table+" SET";
 	    	
+	    	for(int i = 0 ; i < RLF_User_Information_Table_Columns.length; i++){
+
+	    		// Retrieve the Query String Data and Save it
+	    		RLF_User_Information_Table_Values.add(request.getParameter(RLF_User_Information_Table_Columns[i]));
+	    		
+	    		// Set Empty Value for Null Strings
+	    		if(RLF_User_Information_Table_Values.get(i) == null){RLF_User_Information_Table_Values.set(i, "");}
+	    	
+	    		UpdateUserInformationQuery = UpdateUserInformationQuery.concat(" "+RLF_User_Information_Table_Columns[i]+"=\""+RLF_User_Information_Table_Values.get(i)+"\"");
+				
+	    		// Add a Comma to all Query "SET" Field/Values except for the last one
+				if(i < (RLF_User_Information_Table_Columns.length-1) ){
+					UpdateUserInformationQuery = UpdateUserInformationQuery.concat(",");
+				}
+
+	    	}
+
+			UpdateUserInformationQuery = UpdateUserInformationQuery.concat(" WHERE Account_ID=\""+SessionAccountID+"\"");
+			UpdateUserInformationQuery = UpdateUserInformationQuery.concat(";");
+			UpdateUserInformationQuery = UpdateUserInformationQuery.concat("");
+
 			// Write the HTML Notification Response
 			String ProfileUpdateMessage = "Profile information successfully updated!";
-			GlobalTools.writeHTMLNotificationResponse(request, response, GlobalTools.GTV_UserInformation, ProfileUpdateMessage);
+			GlobalTools.writeHTMLNotificationResponse(request, response, GlobalTools.GTV_Settings_UserInformation, ProfileUpdateMessage);
 			
 			// Update the User Information
 			SQLStatement.executeUpdate(UpdateUserInformationQuery);
@@ -110,35 +106,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 /* *********************************************************************************** */
 /* END RETRIEVAL OF SAVED INFORMATION */
 /* *********************************************************************************** */
-		
-		// SQL Query
-		String AccountSQLQuery = "SELECT * FROM RLF_User_Information WHERE Account_ID="+SessionAccountID+";";
-		
-		// Get the SQLQueryOutput
-		ResultSet AccountSQLQueryOutput = SQLStatement.executeQuery(AccountSQLQuery);
-		
-		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
-		if(AccountSQLQueryOutput.next()){
 
-		// Reset the Pointer changed by the if statement above
-		AccountSQLQueryOutput.beforeFirst();
-		
-		// Records the ResultSetMetaData
-		ResultSetMetaData SQLQueryOutputMetaData = null;
-		
-		try {
-	
-	// Get the ResultSetMetaData
-		    SQLQueryOutputMetaData = AccountSQLQueryOutput.getMetaData();
-	
-		} catch (SQLException sqlException) {
-	sqlException.printStackTrace();		
-	
-	// Respond with an error message
-	String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, UnknownErrorMessage);
-	
-		}
 %>
 
 
@@ -152,7 +120,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>User Profile Servlet</title>
+		<title>Information</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -164,43 +132,15 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
 		
 		<!-- Include the JavaScript Files -->
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
-		
-		<style>
-		
-		.FixedMessage {
-		top: auto;
-		left: auto;
-		max-height: 100%;
-		width: 100%;
-		overflow-y: auto;
-		color: black;
-		background-color: white;
-		border: solid 1px red;
-		padding: 2px 5px;
-		margin: auto;
-		text-align: center;
-		position: relative;
-		}
-		
-		</style>
+		<script type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
 		
 		</head>
 		
 		<body>
 		
         <%
-		// If SessionIsActivated is 'N' for No, then show the message below.
-		if(SessionIsActivated.equals("N")){
-		
-		// If the user is Not activated, point them to the Account Activation Site
-		String AccountActivationURL = GlobalTools.GTV_PayPalRegistrationSubmit + "?" + "RegistrationUsername=" + SessionUsername;
-		%>
-	    <div class='FixedMessage'>
-	    <p>This account is not activated. Please <a href='<%=AccountActivationURL%>'>Click here</a> to activate your account.</p>
-	    </div>
-	    <%
-	    	}
+        // Display a Fixed DIV that reminds non activated users how to activate.
+        GlobalTools.displayActivationMessage(out, SessionUsername, SessionIsActivated);
 	    %>
 		
 		<div id='container'>
@@ -227,30 +167,24 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<!-- START DYNAMIC HTML -->
 	    <%
-	    	try {
-	    		
-	    	// Go over the Rows
-	    	while (AccountSQLQueryOutput.next()) {
-	    		
-	    	// Go over the Columns
-	    	// NOTE : i = 2 because we want to skip the first item (Account_ID)
-	    	for(int i = 2 ; i < SQLQueryOutputMetaData.getColumnCount() + 1 ; i++){
-	    		
-	    		String ColumnName = SQLQueryOutputMetaData.getColumnName(i);
-	    		String DisplayCoumnName = ColumnName.replaceAll("_", " ");
-	    		String CurrentValue = AccountSQLQueryOutput.getString(i);
-	    		
-	    		// If the current value is empty set it as N/A
-	    		//if(CurrentValue.equals("")){CurrentValue = "N/A";};
+			
+	    // String SpacedCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
+	    
+	    // Get the "RLF_User_Information" Table Data and generate the dynamic Fields
+	    ArrayList<ArrayList<String>> UserInformationFieldValuePair = GlobalTools.getTableColumnAndValuePairViaSelectSQLQuery(request, response, RLF_User_Information_Table, SessionAccountID, RLF_User_Information_Table_Columns);
+
+	    for(int i = 0 ; i < UserInformationFieldValuePair.get(0).size(); i++){
+	    
+    		// Get the Current SQL Result Values
+    		String CurrentColumnName = UserInformationFieldValuePair.get(0).get(i);
+    		String UserDisplayCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
+    		String CurrentValue = UserInformationFieldValuePair.get(1).get(i);
+	    	
 	    %>	
-				<p> <%=DisplayCoumnName%>: </p> <input type='text' id='<%=ColumnName%>' name='<%=ColumnName%>' title='<%=DisplayCoumnName%>' size='32' value='<%=CurrentValue%>' />
-			<%
-				}
-				
-				}
-					} catch (SQLException e1) {e1.printStackTrace();}
-			%>
-		
+				<p> <%=UserDisplayCurrentColumnName%>: </p> <input type='text' id='<%=CurrentColumnName%>' name='<%=CurrentColumnName%>' title='<%=UserDisplayCurrentColumnName%>' size='32' value='<%=CurrentValue%>' />
+		<%
+		}
+		%>
 		<!-- END DYNAMIC HTML -->
 		
 		<br />
@@ -290,31 +224,9 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 <!-- END HTML RESPONSE -->
 
 <%
-	// Close the ResultSet
-		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
-		
-	}else {
-		
-		// Close the ResultSet
-		try {AccountSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
-		
-	// Write the HTML Error Response	
-	String NoProfileErrorMessage = "Unable to retrieve your profile homepage! Please Try again.";
-	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, NoProfileErrorMessage);
-			
-		}
-		
-		} // end try
-		
-		// if an exception occurs, return the error page
-		catch (Exception sqlException) {
+	}catch (Exception sqlException) {
 	sqlException.printStackTrace();		
-	
-	// Respond with an error message
-	String UnknownErrorMessage = "Unknown Database error occurred. Please Try again later.";
-	GlobalTools.writeForwardHTMLErrorResponse(request, response, GlobalTools.GTV_Homepage, UnknownErrorMessage);
-	
-		} // end catch
+	}
 %>
 
 <%
