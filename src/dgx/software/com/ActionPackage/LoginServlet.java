@@ -98,7 +98,7 @@ public class LoginServlet extends HttpServlet {
 			String LoginPassword = Request.getParameter("LoginPassword");
 
 			// SQL Query
-			String SQLQuery = "SELECT Account_ID, Username, FirstName, IsActivated FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
+			String SQLQuery = "SELECT Account_ID, Username, First_Name, Is_Activated FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
 
 			// Get the SQLQueryOutput
 			ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);
@@ -112,8 +112,8 @@ public class LoginServlet extends HttpServlet {
 			// NOTE: Before Adding new variables make sure the SQLQuery retrieves it
 			String AccountID = SQLQueryOutput.getString("Account_ID");
 			String Username = SQLQueryOutput.getString("Username");
-			String FirstName = SQLQueryOutput.getString("FirstName");
-			String IsActivated = SQLQueryOutput.getString("IsActivated");
+			String FirstName = SQLQueryOutput.getString("First_Name");
+			String IsActivated = SQLQueryOutput.getString("Is_Activated");
 			
 			// Returns null if no session already exists 
 			HttpSession CurrentSession =  Request.getSession(false);

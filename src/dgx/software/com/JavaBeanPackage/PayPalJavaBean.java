@@ -92,7 +92,7 @@ public class PayPalJavaBean {
 				String RegistrationUsername = Username;
 				
 				// SQL Query
-				String SQLQuery = "SELECT Account_ID, EMail, IsActivated FROM RLF_Accounts WHERE Username = '"+RegistrationUsername+"';";
+				String SQLQuery = "SELECT Account_ID, EMail, Is_Activated FROM RLF_Accounts WHERE Username = '"+RegistrationUsername+"';";
 
 				// Get the SQLQueryOutput
 				ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);
@@ -105,7 +105,7 @@ public class PayPalJavaBean {
 				// Set the User information Variables
 				String AccountID = SQLQueryOutput.getString("Account_ID");
 				String EMail = SQLQueryOutput.getString("EMail");
-				String IsActivated = SQLQueryOutput.getString("IsActivated");
+				String IsActivated = SQLQueryOutput.getString("Is_Activated");
 
 				// Check if the User is already activated.
 				// If the user is anything, but NOT Activated (IsActivated == N) then redirect them out of here

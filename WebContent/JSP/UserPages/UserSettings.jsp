@@ -94,9 +94,9 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>
 		 
-		<p><b><a href="<%= GlobalTools.GTV_Settings_UserAccount %>">Change Account Settings</a></b><span> - Change account settings such as Password, E-Mail, etc.</span></p>
-		<p><b><a href="<%= GlobalTools.GTV_Settings_UserInformation %>">Edit Personal Information</a></b><span>Edit your Personal information.</span></p>
-        <p><b><a href="">Change Password</a></b><span>Change your current password for a new one.</span></p>
+		<p><b><a href="<%= GlobalTools.GTV_Settings_UserAccount %>">Change Account Settings</a></b><span> - Edit your account settings.</span></p>
+		<p><b><a href="<%= GlobalTools.GTV_Settings_UserInformation %>">Edit Personal Information</a></b><span> - Edit your Personal information.</span></p>
+        <p><b><a href="/">Change Password</a></b><span> - Change your current password for a new one.</span></p>
 
 		</form>
 		

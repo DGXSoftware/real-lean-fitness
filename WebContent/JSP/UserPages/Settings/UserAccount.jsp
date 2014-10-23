@@ -59,8 +59,8 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 /* *********************************************************************************** */
 		
         // Define the Table and Columns for this Page
-    	String SaveToAccountsTable = "RLF_Accounts";
-    	String [] RLF_Accounts_Table_Columns = {"FirstName","LastName"};
+    	String RLF_Accounts_Table = "RLF_Accounts";
+    	String [] RLF_Accounts_Table_Columns = {"First_Name","Last_Name"};
 
 		// Retrieve the SaveInformationButton Value
 		String SaveInformationButton = request.getParameter("SaveInformationButton");
@@ -71,7 +71,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	    	
 	    	//Execute a Select SQL Query To get the RLF_Accounts_Table_Columns
 	    	ArrayList <String> RLF_Accounts_Table_Values = new ArrayList<String>();
-	    	String UpdateUserAccountQuery = "UPDATE "+SaveToAccountsTable+" SET";
+	    	String UpdateUserAccountQuery = "UPDATE "+RLF_Accounts_Table+" SET";
 	    	
 	    	for(int i = 0 ; i < RLF_Accounts_Table_Columns.length; i++){
 
@@ -171,9 +171,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	    // String SpacedCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
 	    
 	    // Get the "RLF_Accounts" Table Data and generate the dynamic Fields
-	    String GetFromUserAccountsTable = "RLF_Accounts";
-	    String [] GetFromUserAccountsTable_Column_Add = {"FirstName","LastName"};
-	    ArrayList<ArrayList<String>> UserAccountsFieldValuePair = GlobalTools.getTableColumnAndValuePairViaSelectSQLQuery(request, response, GetFromUserAccountsTable, SessionAccountID, GetFromUserAccountsTable_Column_Add);
+	    ArrayList<ArrayList<String>> UserAccountsFieldValuePair = GlobalTools.getTableColumnAndValuePairViaSelectSQLQuery(request, response, RLF_Accounts_Table, SessionAccountID, RLF_Accounts_Table_Columns);
 
 	    for(int i = 0 ; i < UserAccountsFieldValuePair.get(0).size(); i++){
 	    

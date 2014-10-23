@@ -97,13 +97,13 @@ public class UserSQLOperationJavaBean {
 			// Process the accoutn activation
 			try {
 
-				String ActivationSQLQuery = "UPDATE RLF_Accounts SET IsActivated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
+				String ActivationSQLQuery = "UPDATE RLF_Accounts SET Is_Activated='Y' WHERE Account_ID='"+Account_ID_To_Activate+"';";
 
 				// Execute the Activation
 				SQLStatement.executeUpdate(ActivationSQLQuery);
 				
 				// SQL Query
-				String SQLQuery = "SELECT Account_ID, Username, EMail, IsActivated FROM RLF_Accounts WHERE Account_ID = '"+Account_ID_To_Activate+"';";
+				String SQLQuery = "SELECT Account_ID, Username, EMail, Is_Activated FROM RLF_Accounts WHERE Account_ID = '"+Account_ID_To_Activate+"';";
 				
 				// Get the SQLQueryOutput
 				ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);
@@ -117,7 +117,7 @@ public class UserSQLOperationJavaBean {
 				//String AccountID = SQLQueryOutput.getString("Account_ID");
 				String RegistrationUsername = SQLQueryOutput.getString("Username");
 				String EMail = SQLQueryOutput.getString("EMail");
-				String IsActivated = SQLQueryOutput.getString("IsActivated");
+				String IsActivated = SQLQueryOutput.getString("Is_Activated");
 
 				// Check if the User is already activated.
 				// If the user is anything, but NOT Activated (IsActivated == N) then redirect them out of here
