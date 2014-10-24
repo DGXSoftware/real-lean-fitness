@@ -15,7 +15,7 @@ String IndexAction = (String) request.getParameter("do");
 
 // If the "do" parameter is not null perform the appropriate action
 if(IndexAction != null){
-	if(IndexAction.equals("ContactUs")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
+	if(IndexAction.equals("contactus")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
 	if(IndexAction.equals("Google")){response.sendRedirect("https://www.google.com/");}
 }
 
