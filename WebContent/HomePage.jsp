@@ -35,6 +35,7 @@ if(!(GlobalTools.isUserCurrentlyLoggedIn(request,response))){
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
 		
 		<!-- Include the JavaScript Files -->
+		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Validation/LoginPageValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Validation/RegistrationPageValidation.js' > </script>
 		<script type='text/javascript' src='/JavaScript/Drop-Down Menu Population.js' > </script>
@@ -239,24 +240,23 @@ function submitLoginRequest() {
 		
 <!-- Create the Registration Form  -->
 <form id='RegistrationForm' name='RegistrationForm' method='post'>
-		 
+		
+		<!-- Summary Feedback DIV -->
 		<div id="RegistrationFormFeedbackDiv"></div>
-		
-		<!-- RETIRED -->
-		<!-- Registration For Feedback Div -->
-		<!-- <div id="RegistrationFormFeedbackDiv" name="RegistrationFormFeedbackDiv"></div> -->
-		
+
+        <!-- First_Name VARCHAR(32) -->
 		<label for="RegistrationFirstName">
 		<p> First Name: </p>
-        <input type="text" id="RegistrationFirstName" name="RegistrationFirstName" onKeyUp="validateNameField('RegistrationFirstName','RegistrationFirstNameIcon','');" 
-        title='Registration First Name' size='32' />
+        <input type="text" id="RegistrationFirstName" name="RegistrationFirstName" onKeyUp="isValidNameField('RegistrationFirstName','RegistrationFirstNameIcon','',false);" 
+        title='Registration First Name' size='32' maxlength='32' />
         <img id="RegistrationFirstNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
 
+        <!-- Last_Name VARCHAR(32) -->
 		<label for="RegistrationLastName">
 		<p> Last Name: </p>
-        <input type="text" id="RegistrationLastName" name="RegistrationLastName" onKeyUp="validateNameField('RegistrationLastName','RegistrationLastNameIcon','');" 
-        title='Registration Last Name' size='32' />
+        <input type="text" id="RegistrationLastName" name="RegistrationLastName" onKeyUp="isValidNameField('RegistrationLastName','RegistrationLastNameIcon','',false);" 
+        title='Registration Last Name' size='32' maxlength='32' />
         <img id="RegistrationLastNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
 		
@@ -265,98 +265,70 @@ function submitLoginRequest() {
 		<!-- Username VARCHAR(32) NOT NULL -->
 		<label for="RegistrationUsername">
 		<p> Username: </p>
-		<input type="text" id="RegistrationUsername" name="RegistrationUsername" onKeyUp="validateUsername('RegistrationUsername','RegistrationUsernameIcon','');" 
-		title='Registration Username' size='32' />
+		<input type="text" id="RegistrationUsername" name="RegistrationUsername" onKeyUp="isValidUsername('RegistrationUsername','RegistrationUsernameIcon','',false);" 
+		title='Registration Username' size='32' maxlength='32' />
 		<img id="RegistrationUsernameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
 		</label>
-		 
-		<!-- RETIRED -->
-		<!-- Username VARCHAR(32) NOT NULL -->
-		<!--
-		<p> Username: </p> <input type='text' id='RegistrationUsername' name='RegistrationUsername' title='Username' size='32' />
+
 		<br/>
-		 -->
-		 
-		<br/>
+		
+		<!-- Password VARCHAR(32) -->
         <label for="RegistrationPassword">
         <p> Password: </p>
-        <input type="password" id="RegistrationPassword" name="RegistrationPassword" onKeyUp="validatePassword('RegistrationPassword','RegistrationPasswordIcon','');" 
-        title='Registration Password' size='32' />
+        <input type="password" id="RegistrationPassword" name="RegistrationPassword" onKeyUp="isValidPassword('RegistrationPassword','RegistrationPasswordIcon','',false);" 
+        title='Registration Password' size='32' maxlength='32' />
         <img id="RegistrationPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
-		 
-		<!-- Password VARCHAR(32) -->
-		<!-- RETIRED -->
-		<!-- 
-		<p> Password: </p> <input type='password' id='RegistrationPassword' name='RegistrationPassword' title='Password' size='32' />
-		<br />
-		-->
-		 
-		 <br/>
-		 
-		 <!-- EMail VARCHAR(64) -->
-         <label for="RegistrationEMail">
-         <p> E-Mail: </p>
-         <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="validateEmail('RegistrationEMail','RegistrationEMailIcon',''); validateConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail');" 
-         title='Registration E-Mail' size='48' />
-         <img id="RegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
-         </label>
-		 
-		<!-- EMail VARCHAR(64) -->
-		<!-- RETIRED -->
-		<!-- 
-		<p> E-Mail: </p> <input type='text' id='RegistrationEMail' name='RegistrationEMail' title='E-Mail' size='48' />
-		<br />
-		-->
 		
-		 <!-- EMail VARCHAR(64) -->
-         <label for="ConfirmationRegistrationEMail">
-         <p> Confirm E-Mail: </p>
-         <input type="text" id="ConfirmationRegistrationEMail" name="ConfirmationRegistrationEMail" onKeyUp="validateConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail');" 
-         title='Registration E-Mail' size='48' />
-         <img id="ConfirmationRegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
-         </label>
-        
-		<!-- EMail VARCHAR(64) -->
-		<!-- RETIRED -->
-		<!-- 
-		<p> Confirm E-Mail: </p> <input type='text' id='RegistrationEMailConfirmation' name='RegistrationEMailConfirmation' title='Confirm Registration E-Mail' size='48' />
-		-->
-		 <br />
+		<br/>
+		 
+		<!-- EMail VARCHAR(255) -->
+        <label for="RegistrationEMail">
+        <p> E-Mail: </p>
+        <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="isValidEmail('RegistrationEMail','RegistrationEMailIcon','',false); isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
+        title='Registration E-Mail' size='48' maxlength='255' />
+        <img id="RegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+		 
 
-		 <!-- Gender VARCHAR(32) -->
-		 <label for="RegistrationGender">
-		 <p> Gender: </p>
-		 <select id="RegistrationGender" name="RegistrationGender" onChange="validateDropDownField('RegistrationGender','RegistrationGenderIcon','');" >
-         <option value="" disabled selected style="display:none">I am...</option>
-         <option value="Female">Female</option>
-         <option value="Male">Male</option>
-         <option value="Other">Other</option>
-         </select>
-         <img id="RegistrationGenderIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
-         </label>
-		 
-		<!-- Gender VARCHAR(32) -->
-		<!-- Insert mutually exclusive Radio Buttons -->
-		<!--
-		<p> Gender: </p>
-		<input type='radio' id='RegistrationGender' name='RegistrationGender' value='Female' />Female<br />
-		<input type='radio' id='RegistrationGender'name='RegistrationGender' value='Male' />Male<br />
-		<input type='radio' id='RegistrationGender'name='RegistrationGender' value='Other' />Other<br />
-		-->
-		
+		<!-- EMail VARCHAR(255) -->
+        <label for="ConfirmationRegistrationEMail">
+        <p> Confirm E-Mail: </p>
+        <input type="text" id="ConfirmationRegistrationEMail" name="ConfirmationRegistrationEMail" onKeyUp="isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
+        title='Registration E-Mail' size='48' maxlength='255' />
+        <img id="ConfirmationRegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+        
 		<br />
+
+		<!-- Gender VARCHAR(32) -->
+		<label for="RegistrationGender">
+		<p> Gender: </p>
+		<select id="RegistrationGender" name="RegistrationGender" onChange="isValidDropDownField('RegistrationGender','RegistrationGenderIcon','',false);" >
+        <option value="" disabled selected style="display:none">I am...</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+        </select>
+        <img id="RegistrationGenderIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
 		 
+		<br />
+		
 		<!-- Date_Of_Birth DATE -->
+		<label for="RegistrationBirthDateOfBirth">
 		<p> Date of Birth: </p>
+	    <select id ='RegistrationBirthDay' name='RegistrationBirthDay' onChange="isValidDropDownField('RegistrationBirthDay','RegistrationBirthDayIcon','',false);"></select> <b id='RegistrationBirthDivisor'>/</b>
+		<select id ='RegistrationBirthMonth' name = 'RegistrationBirthMonth' onChange="isValidDropDownField('RegistrationBirthMonth','RegistrationBirthMonthIcon','',false);"></select> <b id='RegistrationBirthDivisor'>/</b>
+		<select id ='RegistrationBirthYear' name = 'RegistrationBirthYear' onChange="isValidDropDownField('RegistrationBirthYear','RegistrationBirthYearIcon','',false);"></select>
 		 
-		                <!-- Create the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu -->
-		                <select id ='RegistrationBirthDay' name = 'RegistrationBirthDay'></select> <b id='RegistrationBirthDivisor'>/</b>
-		                <select id ='RegistrationBirthMonth' name = 'RegistrationBirthMonth'></select> <b id='RegistrationBirthDivisor'>/</b>
-		                <select id ='RegistrationBirthYear' name = 'RegistrationBirthYear'></select>
-		 
-		                <!-- Call the (populateDateMenu) to populate the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu-->
-		                <script type='text/javascript'>populateDateMenu('RegistrationBirthDay', 'RegistrationBirthMonth', 'RegistrationBirthYear');</script> 
+		<img id="RegistrationBirthDayIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <img id="RegistrationBirthMonthIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <img id="RegistrationBirthYearIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+		
+		<!-- Call the (populateDateMenu) to populate the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu-->
+		<script type='text/javascript'>populateDateMenu('RegistrationBirthDay', 'RegistrationBirthMonth', 'RegistrationBirthYear');</script> 
 		 
 		<br />
 		<br />
@@ -446,7 +418,7 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
 <script>
       // Use JQuery to execute JavaScript code as soon as the page loads
       $(document).ready(function(){
-    	  
+    	
         // REGISTRATION TEST STUFF
         document.getElementById("RegistrationFirstName").value = "TestFirstName";
         document.getElementById("RegistrationLastName").value = "TestLastName";
@@ -454,11 +426,10 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationPassword").value = "TestUsername" + "<%= RandomNumber %>";
         document.getElementById("RegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("ConfirmationRegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
-        document.getElementById("RegistrationGender").checked = true;
+        document.getElementById("RegistrationGender").selectedIndex = "2";
         document.getElementById("RegistrationBirthDay").selectedIndex = "4";
         document.getElementById("RegistrationBirthMonth").selectedIndex = "4";
         document.getElementById("RegistrationBirthYear").selectedIndex = "4";
-        document.getElementById("RegistrationGender").selectedIndex = "2";
         
         // LOGIN TEST STUFF
         //document.getElementById("LoginUsername").value = "TestUsername9437";
@@ -476,6 +447,21 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
         $('#RegistrationGender').on('change', function() {
         	$("#RegistrationGender option[value='']").remove();
+        });
+        
+        // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
+        $('#RegistrationBirthDay').on('change', function() {
+        	$("#RegistrationBirthDay option[value='']").remove();
+        });
+        
+        // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
+        $('#RegistrationBirthMonth').on('change', function() {
+        	$("#RegistrationBirthMonth option[value='']").remove();
+        });
+        
+        // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
+        $('#RegistrationBirthYear').on('change', function() {
+        	$("#RegistrationBirthYear option[value='']").remove();
         });
         
       });
