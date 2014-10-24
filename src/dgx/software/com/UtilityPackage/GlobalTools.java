@@ -32,11 +32,17 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_UserSettings %>
 	public static final String GTV_UserSettings = "/JSP/UserPages/UserSettings.jsp";
 	
-	// <%= GlobalTools.GTV_UserAccount %>
+	// <%= GlobalTools.GTV_Settings_UserAccount %>
 	public static final String GTV_Settings_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
 	
-	// <%= GlobalTools.GTV_UserInformation %>
+	// <%= GlobalTools.GTV_Settings_UserInformation %>
 	public static final String GTV_Settings_UserInformation = "/JSP/UserPages/Settings/UserInformation.jsp";
+	
+	// <%= GlobalTools.GTV_Settings_PasswordChange %>
+	public static final String GTV_Settings_PasswordChange = "/JSP/UserPages/Settings/PasswordChange.jsp";
+	
+	// <%= GlobalTools.GTV_Settings_ForgotPasswordChange %>
+	public static final String GTV_Settings_ForgotPasswordChange = "/JSP/UserPages/Settings/ForgotPasswordChange.jsp";
 	
 	// <%= GlobalTools.GTV_ContactUs %>
 	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";

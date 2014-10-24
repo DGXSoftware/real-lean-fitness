@@ -16,7 +16,15 @@ String IndexAction = (String) request.getParameter("do");
 // If the "do" parameter is not null perform the appropriate action
 if(IndexAction != null){
 	if(IndexAction.equals("contactus")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
-	if(IndexAction.equals("Google")){response.sendRedirect("https://www.google.com/");}
+	if(IndexAction.equals("google")){response.sendRedirect("https://www.google.com/");}
+	
+	if(IndexAction.equals("fpwdc")){
+		String User = (String) request.getParameter("usr");
+		String Key = (String) request.getParameter("key");
+		if(User != null && Key != null){
+		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+IndexAction+"&usr="+User+"&key="+Key);
+		}
+	}
 }
 
 %>
