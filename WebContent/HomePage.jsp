@@ -285,7 +285,7 @@ function submitLoginRequest() {
 		<!-- EMail VARCHAR(255) -->
         <label for="RegistrationEMail">
         <p> E-Mail: </p>
-        <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="isValidEmail('RegistrationEMail','RegistrationEMailIcon','',false); isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
+        <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="isValidEMail('RegistrationEMail','RegistrationEMailIcon','',false); isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
         title='Registration E-Mail' size='48' maxlength='255' />
         <img id="RegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>

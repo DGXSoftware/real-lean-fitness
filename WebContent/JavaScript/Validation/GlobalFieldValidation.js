@@ -74,7 +74,7 @@ function isValidNameField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFee
 	}
 
 	// Define Illegal Characters
-	// Only Allow Letters and Spaces
+	// Only Allow Letters
 	// NOTE: Adding quotes to the Regex below will mess things up!
 	var IllegalCharacters = new RegExp("^[A-Za-z]+$");
     
@@ -263,7 +263,7 @@ function isValidPassword(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeed
 
 }
 
-//NAME: isValidEmail
+//NAME: isValidEMail
 //DESCRIPTION: Tests if the value of a field is a Valid EMail (Validates using the "RFC822" E-Mail rules)
 //PARAMETERS: CurrentTextFieldID = ID attribute value for the field
 //          CurrentTextFieldIconID = ID attribute value for the field icon
@@ -271,7 +271,7 @@ function isValidPassword(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeed
 //          IsEmptyPermitted = Decide if this is a required field (true = Optional Field, false = Required Field)
 //RETURN: true = Field is Valid
 //false = Field is NOT Valid
-function isValidEmail(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted) {
+function isValidEMail(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted) {
 	
 	// If the Current Field is Empty, set it back to Its default state, and stop further processing
 	if(IsEmptyPermitted == false){
@@ -344,7 +344,7 @@ return false;
 
 }
 
-//NAME: isValidEmail
+//NAME: isValidConfirmation
 //DESCRIPTION: Tests if the value of a field is a Valid EMail (Validates using the "RFC822" E-Mail rules)
 //PARAMETERS: CurrentTextFieldID = ID attribute value for the field
 //            CurrentTextFieldIconID = ID attribute value for the field icon
@@ -446,12 +446,14 @@ function isValidDropDownField(CurrentTextFieldID, CurrentTextFieldIconID, Curren
 	}
 	return true;
 	//Return Valid
+	}else if(IsEmptyPermitted == true) {
+	return true;	
 	}else {
 	//Return Invalid
 	 CurrentTextFieldIconObject.src = "/Images/Icons/Invalid/Invalid(16x16).png";
 	 CurrentTextFieldIconObject.style.visibility = "visible";
 	 if (AlertOnBadInput == true){
-	 $('#'+CurrentFeedbackDivID+'').html("<div id='RegistrationErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
+	 $('#'+CurrentFeedbackDivID+'').html("<div id='ErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
      CurrentTextFieldObject.style.background = "yellow"; 
 	 }
 	 return false;
@@ -460,3 +462,165 @@ function isValidDropDownField(CurrentTextFieldID, CurrentTextFieldIconID, Curren
 	
 
 }
+
+
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+
+
+//isValidNameFieldAlert
+function isValidNameFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+    
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidNameField(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+
+    	// Only Allow Letters (SIZE: ? - ?)
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'Your ' + CurrentTextFieldName;
+    	if (IsEmptyPermitted == false) {msg += ' cannot be empty and';}
+    	msg += ' must only contain Letters.';
+    	//msg += '\nIt must also be between ? - ? characters long.';
+    	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldID.focus();
+    	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidUsernameAlert
+function isValidUsernameAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidUsername(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+    	
+    	// Only Allow Letters, Numbers and Underscores (SIZE: 4 - 32)
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'Your ' + CurrentTextFieldName;
+    	if (IsEmptyPermitted == false) {msg += ' cannot be empty and';}
+    	msg += ' must only contain Letters, Numbers and Underscores.';
+    	msg += '\nIt must also be between 4 - 32 characters long.';
+    	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldID.focus();
+    	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidPasswordAlert
+function isValidPasswordAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidPassword(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+    	
+    	// Only Allow Letters, Numbers and Underscores (SIZE: 6 - 32)
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'Your ' + CurrentTextFieldName;
+    	if (IsEmptyPermitted == false) {msg += ' cannot be empty and';}
+    	msg += ' must only contain Letters, Numbers and Underscores.';
+    	msg += '\nIt must also be between 6 - 32 characters long.';
+    	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldID.focus();
+    	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidEMailAlert
+function isValidEMailAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidEMail(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+    	
+    	// Only Allow "RFC822" compliant E-Mails.
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'Your ' + CurrentTextFieldName;
+    	if (IsEmptyPermitted == false) {msg += ' cannot be empty and';}
+    	msg += ' must meet the "RFC822" E-Mail rules.';
+    	//msg += '\nIt must also be between ? - ? characters long.';
+    	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldID.focus();
+    	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidDropDownFieldAlert
+function isValidDropDownFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidDropDownField(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+    	
+    	// Only Allow a valid selection.
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'A ' + CurrentTextFieldName + ' must be chosen.';
+    	//msg += '\nIt must also be between ? - ? characters long.';
+    	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A default ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldID.focus();
+    	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+/********************************************************************************************************************************************/
+
