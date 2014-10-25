@@ -2,7 +2,7 @@
 
 <!-- General description of your Web application -->
 <display-name>Real Lean Fitness</display-name>                                     
-<description>World's BEST Fitness program.</description>                                 
+<description>The World's BEST Fitness program!</description>                                 
 
     <!-- Start of Servlet definitions -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -12,7 +12,6 @@
 <!-- START BrowserValidationServlet Definition -->
 <servlet>
     <servlet-name>UserSessionValidator</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description>  -->
 	<servlet-class>dgx.software.com.UtilityPackage.UserSessionValidator</servlet-class>
 </servlet>
 <servlet-mapping><servlet-name>UserSessionValidator</servlet-name><url-pattern>/UserSessionValidator</url-pattern></servlet-mapping>
@@ -23,7 +22,6 @@
 <!-- START LoginServlet Definition -->
 <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
 	<servlet-class>dgx.software.com.ActionPackage.LoginServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
@@ -38,7 +36,6 @@
 <!-- START RegistrationServlet Definition -->
 <servlet>
     <servlet-name>RegistrationServlet</servlet-name>
-	<!-- <description>Connects to a database from a servlet.</description> -->
 	<servlet-class>dgx.software.com.ActionPackage.RegistrationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
@@ -55,7 +52,6 @@
 <!-- START ImageFileUploadServlet Definition -->
 <servlet>
     <servlet-name>ImageFileUploadServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
 	<servlet-class>dgx.software.com.ActionPackage.ImageFileUploadServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
 	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
@@ -77,10 +73,23 @@
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
+<!-- START LoginServlet Definition -->
+<servlet>
+    <servlet-name>PasswordChangeServlet</servlet-name>
+	<servlet-class>dgx.software.com.ActionPackage.PasswordChangeServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>PasswordChangeServlet</servlet-name><url-pattern>/PasswordChangeServlet</url-pattern></servlet-mapping>
+<!-- END LoginServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 <!-- START LogOutServlet Definition -->
 <servlet>
     <servlet-name>LogOutServlet</servlet-name>
-    <!-- <description>Connects to a database from a servlet.</description> -->
 	<servlet-class>dgx.software.com.ActionPackage.LogOutServlet</servlet-class>
 </servlet>
 <servlet-mapping><servlet-name>LogOutServlet</servlet-name><url-pattern>/LogOutServlet</url-pattern></servlet-mapping>

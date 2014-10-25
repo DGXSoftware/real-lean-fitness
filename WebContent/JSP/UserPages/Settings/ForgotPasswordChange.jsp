@@ -2,6 +2,28 @@
 GOAL: Sample Template of Most Pages
 -->
 
+<%-- JSP Imports --%>
+<%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
+<%
+// Display the main body if the user is not logged in, else forward the users to the Homepage
+if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
+	
+		// attempt to process a vote and display current results
+		try {
+		
+		// Returns null if no session already exists 
+		HttpSession CurrentSession =  request.getSession(false);
+			
+		// Variables for Account session information
+		//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+		String SessionUsername = (String) CurrentSession.getAttribute("Username");
+		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
+		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+	
+%>
+
+
 <!-- START HTML RESPONSE -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
@@ -35,12 +57,12 @@ GOAL: Sample Template of Most Pages
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
+		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<li><a href='<%= GlobalTools.GTV_UserSettings %>'>Settings</a></li>
+		<li><a href='/LogOutServlet'>Log Out</a></li>
 		</ul>
 		</div>
 		<div id='content'>
@@ -110,3 +132,19 @@ GOAL: Sample Template of Most Pages
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 <!-- END HTML RESPONSE -->
+
+<%
+		}
+		// if an exception occurs, return the error page
+		catch (Exception EX) { EX.printStackTrace();		
+		}
+%>
+
+<%
+}else{
+
+	// The current user does NOT have a session, therefore redirect them to the Homepage
+	response.sendRedirect(GlobalTools.GTV_Homepage);
+
+}
+%>

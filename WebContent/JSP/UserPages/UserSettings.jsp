@@ -61,7 +61,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
 		
 		<!-- Include the JavaScript Files -->
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
+		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
 		
 		</head>
 		
@@ -96,7 +96,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		 
 		<p><b><a href="<%= GlobalTools.GTV_Settings_UserAccount %>">Change Account Settings</a></b><span> - Edit your account settings.</span></p>
 		<p><b><a href="<%= GlobalTools.GTV_Settings_UserInformation %>">Edit Personal Information</a></b><span> - Edit your Personal information.</span></p>
-        <p><b><a href="/">Change Password</a></b><span> - Change your current password for a new one.</span></p>
+        <p><b><a href="<%= GlobalTools.GTV_Settings_PasswordChange %>">Change Password</a></b><span> - Change your current password for a new one.</span></p>
 
 		</form>
 		

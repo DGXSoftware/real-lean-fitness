@@ -344,65 +344,6 @@ return false;
 
 }
 
-//NAME: isValidConfirmation
-//DESCRIPTION: Tests if the value of a field is a Valid EMail (Validates using the "RFC822" E-Mail rules)
-//PARAMETERS: CurrentTextFieldID = ID attribute value for the field
-//            CurrentTextFieldIconID = ID attribute value for the field icon
-//            CurrentFeedbackDivID = ID attribute value for the Summary Feedback DIV
-//            CurrentTextFieldToConfirmID = ID attribute value for the Field that has to be confirmed
-//            IsEmptyPermitted = Decide if this is a required field (true = Optional Field, false = Required Field)
-//RETURN: true = Field is Valid
-//false = Field is NOT Valid
-function isValidConfirmation(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, CurrentTextFieldToConfirmID, IsEmptyPermitted) {
-	
-	// If the Current Field is Empty, set it back to Its default state, and stop further processing
-	if(IsEmptyPermitted == false){
-		if (isEmptyField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID) === true){ return false;}
-	}
-	
-	// Get the Field and Field Icon Objects
-	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
-	var CurrentTextFieldIconObject = document.getElementById(CurrentTextFieldIconID);
-    var CurrentTextFieldToConfirmObject = document.getElementById(CurrentTextFieldToConfirmID);
-	
-	// Get the Field Name
-	// Also, find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
-	// Example; The text "HelloBeautifulWorld" will become "Hello Beautiful World" 
-	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
-    
-	// If a Form Feedback Div Name is provided set it so that this method alerts about Invalid input in the Feedback Div.
-	var AlertOnBadInput = null;
-	if (CurrentFeedbackDivID === ''){
-	AlertOnBadInput = false;
-	}else {
-	AlertOnBadInput = true;
-	}
-	
-	// Validate the Current Field
-	if(CurrentTextFieldObject.value === CurrentTextFieldToConfirmObject.value){
-	// Return Valid
-	CurrentTextFieldIconObject.src = "/Images/Icons/Valid/Valid(16x16).png";
-	CurrentTextFieldIconObject.style.visibility = "visible";
-	if (AlertOnBadInput == true){
-	$('#'+CurrentFeedbackDivID+'').empty();
-	CurrentTextFieldObject.style.background = "white";
-	}
-	return true;
-	//Return Valid
-	}else {
-	//Return Invalid
-	 CurrentTextFieldIconObject.src = "/Images/Icons/Invalid/Invalid(16x16).png";
-	 CurrentTextFieldIconObject.style.visibility = "visible";
-	 if (AlertOnBadInput == true){
-	 $('#'+CurrentFeedbackDivID+'').html("<div id='RegistrationErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
-     CurrentTextFieldObject.style.background = "yellow"; 
-	 }
-	 return false;
-	//Return Invalid
-	}
-	
-}
-
 //NAME: isValidDropDownField
 //DESCRIPTION: Tests if the value of a field is a Valid Drop-Down Selection
 //PARAMETERS: CurrentTextFieldID = ID attribute value for the field
@@ -463,6 +404,64 @@ function isValidDropDownField(CurrentTextFieldID, CurrentTextFieldIconID, Curren
 
 }
 
+//NAME: isValidConfirmation
+//DESCRIPTION: Tests if the value of a field is a Valid EMail (Validates using the "RFC822" E-Mail rules)
+//PARAMETERS: CurrentTextFieldID = ID attribute value for the field
+//          CurrentTextFieldIconID = ID attribute value for the field icon
+//          CurrentFeedbackDivID = ID attribute value for the Summary Feedback DIV
+//          CurrentTextFieldToConfirmID = ID attribute value for the Field that has to be confirmed
+//          IsEmptyPermitted = Decide if this is a required field (true = Optional Field, false = Required Field)
+//RETURN: true = Field is Valid
+//false = Field is NOT Valid
+function isValidConfirmation(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, CurrentTextFieldToConfirmID, IsEmptyPermitted) {
+	
+	// If the Current Field is Empty, set it back to Its default state, and stop further processing
+	if(IsEmptyPermitted == false){
+		if (isEmptyField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID) === true){ return false;}
+	}
+	
+	// Get the Field and Field Icon Objects
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldIconObject = document.getElementById(CurrentTextFieldIconID);
+  var CurrentTextFieldToConfirmObject = document.getElementById(CurrentTextFieldToConfirmID);
+	
+	// Get the Field Name
+	// Also, find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeautifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+  
+	// If a Form Feedback Div Name is provided set it so that this method alerts about Invalid input in the Feedback Div.
+	var AlertOnBadInput = null;
+	if (CurrentFeedbackDivID === ''){
+	AlertOnBadInput = false;
+	}else {
+	AlertOnBadInput = true;
+	}
+	
+	// Validate the Current Field
+	if(CurrentTextFieldObject.value === CurrentTextFieldToConfirmObject.value){
+	// Return Valid
+	CurrentTextFieldIconObject.src = "/Images/Icons/Valid/Valid(16x16).png";
+	CurrentTextFieldIconObject.style.visibility = "visible";
+	if (AlertOnBadInput == true){
+	$('#'+CurrentFeedbackDivID+'').empty();
+	CurrentTextFieldObject.style.background = "white";
+	}
+	return true;
+	//Return Valid
+	}else {
+	//Return Invalid
+	 CurrentTextFieldIconObject.src = "/Images/Icons/Invalid/Invalid(16x16).png";
+	 CurrentTextFieldIconObject.style.visibility = "visible";
+	 if (AlertOnBadInput == true){
+	 $('#'+CurrentFeedbackDivID+'').html("<div id='RegistrationErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
+   CurrentTextFieldObject.style.background = "yellow"; 
+	 }
+	 return false;
+	//Return Invalid
+	}
+	
+}
 
 /********************************************************************************************************************************************/
 /********************************************************************************************************************************************/
@@ -487,7 +486,7 @@ function isValidDropDownField(CurrentTextFieldID, CurrentTextFieldIconID, Curren
 /********************************************************************************************************************************************/
 
 
-//isValidNameFieldAlert
+// isValidNameFieldAlert
 function isValidNameFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
     
 	// Get the Current Field ID and use it to get the Field's display name
@@ -506,7 +505,7 @@ function isValidNameFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, Curre
     	//msg += '\nIt must also be between ? - ? characters long.';
     	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
     	alert(msg);
-    	CurrentTextFieldID.focus();
+    	CurrentTextFieldObject.focus();
     	
     	return false;
     }else{
@@ -533,7 +532,7 @@ function isValidUsernameAlert(CurrentTextFieldID, CurrentTextFieldIconID, Curren
     	msg += '\nIt must also be between 4 - 32 characters long.';
     	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
     	alert(msg);
-    	CurrentTextFieldID.focus();
+    	CurrentTextFieldObject.focus();
     	
     	return false;
     }else{
@@ -560,7 +559,7 @@ function isValidPasswordAlert(CurrentTextFieldID, CurrentTextFieldIconID, Curren
     	msg += '\nIt must also be between 6 - 32 characters long.';
     	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
     	alert(msg);
-    	CurrentTextFieldID.focus();
+    	CurrentTextFieldObject.focus();
     	
     	return false;
     }else{
@@ -587,7 +586,7 @@ function isValidEMailAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFe
     	//msg += '\nIt must also be between ? - ? characters long.';
     	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
     	alert(msg);
-    	CurrentTextFieldID.focus();
+    	CurrentTextFieldObject.focus();
     	
     	return false;
     }else{
@@ -612,8 +611,32 @@ function isValidDropDownFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, C
     	//msg += '\nIt must also be between ? - ? characters long.';
     	if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A default ' + CurrentTextFieldName + ' is also permitted.';}
     	alert(msg);
-    	CurrentTextFieldID.focus();
+    	CurrentTextFieldObject.focus();
     	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidConfirmationAlert
+function isValidConfirmationAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, CurrentTextFieldToConfirmID, IsEmptyPermitted){
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	var CurrentTextFieldToConfirmObject = document.getElementById(CurrentTextFieldToConfirmID);
+	var CurrentTextFieldToConfirmName = CurrentTextFieldToConfirmObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidConfirmation(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,CurrentTextFieldToConfirmID,IsEmptyPermitted)){
+    	
+    	// Only Allow Letters, Numbers and Underscores (SIZE: 4 - 32)
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'It does not match ' + CurrentTextFieldToConfirmName + ': [ ' + CurrentTextFieldToConfirmObject.value + ' ]\n\n';
+    	alert(msg);
+    	CurrentTextFieldToConfirmObject.focus();	
     	return false;
     }else{
     	return true;
