@@ -59,7 +59,7 @@ String AccountIDToActivate = MyPayPalJavaBean.getUserAccountIDAndEMailUserActiva
 
 if(AccountIDToActivate.equals("")){
 	String CancelMessage = "User " + request.getParameter("RegistrationUsername") + " was not found in the database.";
-	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 }else{
 
 	// Set the Cancel Message
@@ -71,7 +71,7 @@ if(AccountIDToActivate.equals("")){
 	
 	// TEST: Set Test Versions (DELETE IN PRODUCTION)
 	PayPalSuccessURL = "/JSP/PayPal/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;
-	PayPalCancelURL = GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage=" + CancelMessage;
+	PayPalCancelURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage=" + CancelMessage;
 	
 %>
 
@@ -104,7 +104,7 @@ if(AccountIDToActivate.equals("")){
 }else{
 	// Return the user to the Homepage because the "RegistrationUsername" was not provided in the query string
 	String CancelMessage = "Invalid activation URL.";
-	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 }
 
 %>

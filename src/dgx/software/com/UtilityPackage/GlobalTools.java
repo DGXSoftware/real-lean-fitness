@@ -49,9 +49,9 @@ public class GlobalTools {
 	
 	// <%= GlobalTools.GTV_PayPalRegistrationSubmit %>
 	public static final String GTV_PayPalRegistrationSubmit = "/JSP/PayPal/PayPalRegistrationSubmit.jsp";
-	
-	// <%= GlobalTools.GTV_PayPalForwardMessage %>
-	public static final String GTV_PayPalForwardMessage = "/JSP/PayPal/PayPalForwardMessage.jsp";
+    
+	// <%= GlobalTools.GTV_CountdownForwardMessage %>
+	public static final String GTV_CountdownForwardMessage = "/JSP/Tools/CountdownForwardMessage.jsp";
 	
 	
 /**************************************************************************************************/

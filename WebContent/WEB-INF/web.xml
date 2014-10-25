@@ -73,7 +73,7 @@
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
-<!-- START LoginServlet Definition -->
+<!-- START PasswordChangeServlet Definition -->
 <servlet>
     <servlet-name>PasswordChangeServlet</servlet-name>
 	<servlet-class>dgx.software.com.ActionPackage.PasswordChangeServlet</servlet-class>
@@ -83,7 +83,21 @@
 	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>PasswordChangeServlet</servlet-name><url-pattern>/PasswordChangeServlet</url-pattern></servlet-mapping>
-<!-- END LoginServlet Definition -->
+<!-- END PasswordChangeServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START ForgotPasswordChangeServlet Definition -->
+<servlet>
+    <servlet-name>ForgotPasswordChangeServlet</servlet-name>
+	<servlet-class>dgx.software.com.ActionPackage.ForgotPasswordChangeServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>ForgotPasswordChangeServlet</servlet-name><url-pattern>/ForgotPasswordChangeServlet</url-pattern></servlet-mapping>
+<!-- END ForgotPasswordChangeServlet Definition -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 

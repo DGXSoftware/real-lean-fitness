@@ -91,7 +91,7 @@ function submitPasswordChange() {
             beforeSend: function() {
 
             // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
-            $('#RegistrationFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
+            $('#PasswordChangeFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
             
                         },
                             
@@ -103,7 +103,7 @@ function submitPasswordChange() {
             // Since the Password Change was successful
             // Return the user Home via a Successful Countdown Forward Message
             String SuccessMessage = "You password was successfully changed!";
-            String SuccessURL = GlobalTools.GTV_PayPalForwardMessage + "?SuccessMessage="+SuccessMessage+"";
+            String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
             %>
                 
             // Forward to the Success URL
@@ -189,8 +189,8 @@ function submitPasswordChange() {
 		<br />
 		<br />
         
-        <!-- Pass the Username with the Form Submit -->
-        <input type="hidden" name="SessionUsername" value="<%= SessionUsername %>" />
+        <!-- Pass the Target Username with the Form Submit -->
+        <input type="hidden" name="TargetUsername" value="<%= SessionUsername %>" />
         
         <!-- Change Password Button -->
 		<input type='button' id='ChangePasswordButton' name='ChangePasswordButton' value='Change Password' onClick="submitPasswordChange();" />

@@ -113,7 +113,7 @@ public class PayPalJavaBean {
 				if(!IsActivated.equals("N")){
 					// This user is already Activated. Inform them so, and Forward back to the Homepage.
 					String CancelMessage = "User " + RegistrationUsername + " is already Activated.";
-					Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+					Response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 				}else {
 					
 					//System.out.println("User " + RegistrationUsername + " is NOT Activated. Proceed with activation steps."); 
@@ -158,7 +158,7 @@ public class PayPalJavaBean {
 				
 				// This user does NOT exist. Inform them so, and Forward back to the Homepage.
 				String CancelMessage = "User " + RegistrationUsername + " does not exist.";
-				Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+				Response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 			}
 						
 			} // end try

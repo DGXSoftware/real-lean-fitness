@@ -1,31 +1,58 @@
 <!--
-GOAL: Sample Template of Most Pages
+GOAL: Allows the user to change their password.
+
+PROPERTIES: Front-End Work / Back-End Work
+1. User Page Display (HTML/CSS)
+2. User Page Interactions (HTML/JavaScript)
+3. User SQL Database Access (SQL)
+*/
 -->
 
+<!-- Disable Cache -->
+<% response.addHeader("Cache-Control","no-cache"); %> 
+
 <%-- JSP Imports --%>
+<%@ page import = "java.sql.Connection" %>
+<%@ page import = "java.sql.DriverManager" %>
+<%@ page import = "java.sql.ResultSetMetaData" %>
+<%@ page import = "java.sql.Statement" %>
+<%@ page import = "java.sql.ResultSet" %>
+<%@ page import = "java.sql.SQLException" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+
+		<%
+		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+		String IndexAction = (String) request.getParameter("do");
+		String User = (String) request.getParameter("usr");
+		String Key = (String) request.getParameter("key");
+		
+		boolean IsValidKey = false;
+		if(!Key.equals("")){ IsValidKey = true;}
+		
+		%>
 
 <%
 // Display the main body if the user is not logged in, else forward the users to the Homepage
-if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
+if(IndexAction != null && User != null && Key != null){
 	
 		// attempt to process a vote and display current results
 		try {
 		
 		// Returns null if no session already exists 
-		HttpSession CurrentSession =  request.getSession(false);
+		//HttpSession CurrentSession =  request.getSession(false);
 			
 		// Variables for Account session information
 		//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
-		String SessionUsername = (String) CurrentSession.getAttribute("Username");
-		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
-		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+		//String SessionUsername = (String) CurrentSession.getAttribute("Username");
+		//String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
+		//String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
 	
 %>
 
 
 <!-- START HTML RESPONSE -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 
 		<?xml version = '1.0'?>
 		<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
@@ -34,7 +61,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>Forgot Password Change</title>
+		<title>Forgot Password</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -43,10 +70,77 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
 		
 		<!-- Include the Stylesheet Files -->
-		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
+		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
 		
 		<!-- Include the JavaScript Files -->
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/UserInformationPageValidation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
+		
+		<!-- Include the jQuery Files -->
+		<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
+		<!--
+		EXTERNAL jQuery Import
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		-->
+		
+<script>
+
+// Submits the Login Request
+function submitPasswordChange() {
+
+// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
+// IF this method returns false, stop further execution and don't submit.
+
+
+        var jqxhr = $.ajax({
+            type:       "POST",
+            url:        "/ForgotPasswordChangeServlet",
+            cache:      false,
+            data:       $("form").serialize(),
+                
+            // Before load, notify the user that the request
+            // may take awhile 
+            beforeSend: function() {
+
+            // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
+            $('#PasswordChangeFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
+            
+                        },
+                            
+            // If user remains on page for the results,
+            // show alert with results
+            success:    function(data, status) {
+
+            <%
+            // Since the Password Change was successful
+            // Return the user Home via a Successful Countdown Forward Message
+            String SuccessMessage = "You password was successfully changed!";
+            String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
+            %>
+                
+            // Forward to the Success URL
+            window.location = "<%= SuccessURL %>";
+            
+                     },
+                     
+            // If there is an error and the user hasn't yet closed the
+            // browser, display the message. Otherwise it will come in
+            // the email
+            error:      function(xhr, textStatus, thrownError) {
+
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
+            // $('#PasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+
+            // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
+            $('#PasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
+
+            // Stop further processing
+            return false;
+                        }
+                });
+
+    }
+
+</script>
 		
 		</head>
 		
@@ -57,59 +151,74 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='<%= GlobalTools.GTV_UserSettings %>'>Settings</a></li>
-		<li><a href='/LogOutServlet'>Log Out</a></li>
+		<li><a href='#'></a></li>
+		<li><a href='#'></a></li>
+		<li><a href='#'></a></li>
 		</ul>
 		</div>
 		<div id='content'>
 		<div id='left'>
 		<div class='post'>
-		<h1>Edit Settings</h1>
+		<h1>Change Password</h1>
 		
 		<p align='left'>&#160;</p>
 		
-		<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>
-		 
-		<p><b>LEFT SIDE</b></p>
+		<form id='PasswordChangeForm' name='PasswordChangeForm' method='post'>
 		
-		<%
-		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
-		String IndexAction = (String) request.getParameter("do");
-		String User = (String) request.getParameter("usr");
-		String Key = (String) request.getParameter("key");
+		<!-- Login For Feedback Div -->
+		<div id="PasswordChangeFormFeedbackDiv" name="PasswordChangeFormFeedbackDiv"></div>
 		
-		%>
-		
-		<p><b><a href="">Do</a></b><span> - <%= IndexAction %>.</span></p>
-		<p><b><a href="">User</a></b><span> - <%= User %></span></p>
-        <p><b><a href="">Key</a></b><span> - <%= Key %></span></p>
-		
-		</form>
-		
-		</div>
-		
-		</div>
-		
-		
-		<div id='right'>
-		<h1 class='Center_Text'>Profile Picture</h1>
-		<p><b>RIGHT SIDE</b></p>
-		
-        <!-- Last_Name VARCHAR(32) -->
-		<label for="RegistrationLastName">
-		<p> Last Name: </p>
-        <input type="text" id="RegistrationLastName" name="RegistrationLastName" onKeyUp="isValidNameField('RegistrationLastName','RegistrationLastNameIcon','',false);" 
-        title='Registration Last Name' size='32' maxlength='32' />
-        <img id="RegistrationLastNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+		<!-- Password VARCHAR(32) -->
+        <label for="OldPassword">
+        <p> Old Password: </p>
+        <input type="text" id="OldPassword" name="OldPassword" onKeyUp="isValidPassword('OldPassword','OldPasswordIcon','',false); isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
+        title='Old Password' size='32' maxlength='32' />
+        <img id="OldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
+		 
+		<!-- Password VARCHAR(32) -->
+        <label for="ConfirmationOldPassword">
+        <p> Confirm Old Password: </p>
+        <input type="text" id="ConfirmationOldPassword" name="ConfirmationOldPassword" onKeyUp="isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
+        title='Confirm Old Password' size='32' maxlength='32' />
+        <img id="ConfirmationOldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+        
+        <!-- Password VARCHAR(32) -->
+        <label for="NewPassword">
+        <p> New Password: </p>
+        <input type="text" id="NewPassword" name="NewPassword" onKeyUp="isValidPassword('NewPassword','NewPasswordIcon','',false);" 
+        title='New Password' size='32' maxlength='32' />
+        <img id="NewPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+        
+        
+        <br />
+		<br />
+		<br />
+        
+        <!-- Pass the Username with the Form Submit -->
+        <input type="hidden" name="TargetUsername" value="<%= User %>" />
+        
+        <!-- Change Password Button -->
+		<input type='button' id='ChangePasswordButton' name='ChangePasswordButton' value='Change Password' onClick="submitPasswordChange();" />
+        
+		</form>
+	    
+	    </div>
 		
 		</div>
-		
-		
+	    
+	    <!-- DISABLED -->
+	    <!--
+		<div id='right'>
+		<h1 class='Center_Text'>Username Change</h1>
+		</div>
+	    -->
+	    
 		<div class='clear'></div>
 		</div>
 		</div>

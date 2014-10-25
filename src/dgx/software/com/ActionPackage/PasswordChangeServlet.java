@@ -94,7 +94,7 @@ public class PasswordChangeServlet extends HttpServlet {
 		try {
 
 			// Variables for Account basic information
-			String SessionUsername = Request.getParameter("SessionUsername");
+			String TargetUsername = Request.getParameter("TargetUsername");
 			String OldPassword = Request.getParameter("OldPassword");
 			String ConfirmationOldPassword = Request.getParameter("ConfirmationOldPassword");
 			String NewPassword = Request.getParameter("NewPassword");
@@ -105,7 +105,7 @@ public class PasswordChangeServlet extends HttpServlet {
 			}
 			
 			// SQL Query
-			String SQLQuery = "UPDATE RLF_Accounts SET Password=MD5('"+NewPassword+"') WHERE Username='"+SessionUsername+"' AND Password=MD5('"+OldPassword+"');";
+			String SQLQuery = "UPDATE RLF_Accounts SET Password=MD5('"+NewPassword+"') WHERE Username='"+TargetUsername+"' AND Password=MD5('"+OldPassword+"');";
 			
 			// Execute the Update SQL Query
 			// 1 = Update Successful

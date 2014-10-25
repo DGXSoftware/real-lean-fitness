@@ -140,7 +140,7 @@ public class UserSQLOperationJavaBean {
 				}else{
 					// This user is already Activated. Inform them so, and Forward back to the Homepage.
 					//String CancelMessage = "User " + RegistrationUsername + " is already Activated.";
-					//Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+					//Response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 					// Mark a Bas activation
 					AccountIDWasActivated = true;
 					return AccountIDWasActivated;
@@ -153,7 +153,7 @@ public class UserSQLOperationJavaBean {
 				
 				// This user does NOT exist. Inform them so, and Forward back to the Homepage.
 				//String CancelMessage = "This User does not exist.";
-				//Response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+				//Response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 			}
 						
 			} // end try

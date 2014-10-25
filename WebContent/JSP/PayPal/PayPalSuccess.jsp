@@ -57,19 +57,19 @@ boolean AccountWasActivated = MyUserSQLDBJavaBean.activateAccount(request, respo
 // Proceed with successful activation
 if(AccountWasActivated == true){
 	String SuccessfulMessage = "Your account has been successfully activated!";
-	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?SuccessMessage="+SuccessfulMessage+"");
+	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessfulMessage+"");
 }
 //Proceed with bad activation
 else{
 	String CancelMessage = "Your account failed to activate. Please contact us for a manual activation by <a href='"+ GlobalTools.GTV_ContactUs +"'>CLICKING HERE</a>";
-	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"&SkipCountdown=true");
+	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"&SkipCountdown=true");
 }
 
 
 }else{
 	// Return the user to the Homepage because the "RegistrationUsername" was not provided in the query string
 	String CancelMessage = "Invalid activation URL.";
-	response.sendRedirect(GlobalTools.GTV_PayPalForwardMessage + "?CancelMessage="+CancelMessage+"");
+	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"");
 }
 
 %>

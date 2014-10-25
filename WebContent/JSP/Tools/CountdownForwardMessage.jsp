@@ -1,6 +1,6 @@
 <!--
-GOAL: Temporarily displays information to the user about their PayPal payment.
-After a few seconds it will forward their request to the Homepage.
+GOAL: Temporarily displays a custom Good or Bad Message to the user.
+Then after a few seconds it will forward their request to the Homepage.
 -->
 
 <%-- JSP Imports --%>
