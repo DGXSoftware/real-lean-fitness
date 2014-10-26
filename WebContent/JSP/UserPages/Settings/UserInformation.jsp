@@ -167,11 +167,9 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<!-- START DYNAMIC HTML -->
 	    <%
-			
-	    // String SpacedCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
-	    
+        
 	    // Get the "RLF_User_Information" Table Data and generate the dynamic Fields
-	    ArrayList<ArrayList<String>> UserInformationFieldValuePair = GlobalTools.getTableColumnAndValuePairViaSelectSQLQuery(request, response, RLF_User_Information_Table, SessionAccountID, RLF_User_Information_Table_Columns);
+	    ArrayList<ArrayList<String>> UserInformationFieldValuePair = GlobalTools.getTableColumnAndValuePairViaAccountID(request, response, RLF_User_Information_Table, SessionAccountID, RLF_User_Information_Table_Columns);
 
 	    for(int i = 0 ; i < UserInformationFieldValuePair.get(0).size(); i++){
 	    

@@ -258,4 +258,71 @@ public class MailTemplate {
 		
 	}
 	
+	
+	public static String GoogleEMail(){
+		
+		String GoogleEMail = "";
+		
+		GoogleEMail =
+				"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>" +
+						"<html xmlns='http://www.w3.org/1999/xhtml' xmlns='http://www.w3.org/1999/xhtml' style='text-align: center; margin: 0 auto;'>" +
+						"  <head>" +
+						"    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
+						"    <link rel='stylesheet' type='text/css' href='http://www.DGXSoftware.com/RLF/JSP/Mail/CSS/MailStyle.css' />" +
+						"    <title>Real Lean Fitness</title>" +
+						"  </head>" +
+						"  <body style='text-align: left; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 13px; color: #000000; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/background.png'); background-color: #FFFFFF; margin: 0; padding: 0;' bgcolor='#FFFFFF'>&#13;" +
+						"    <div style='text-align: left; width: 581px; margin: 0 auto;' align='left'>&#13;" +
+						"    	        <div style='text-align: left; width: 581px; height: 90px; clear: both; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/header.png'); margin: 0 auto;' align='left'>&#13;" +
+						"				    &#13;" +
+						"                	&#13;" +
+						"					<h1 style='padding-top: 50px; text-align: center; color: #FFFFFF; margin: 0 auto;' align='center'>Real Lean Fitness</h1>&#13;" +
+						"                </div>&#13;" +
+						"    &#13;" +
+						"                </div>&#13;" +
+						"&#13;" +
+						"                <div style='text-align: left; width: 581px; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/content_back_shadow.png'); background-repeat: repeat-y; margin: 0 auto;' align='left'>&#13;" +
+						"                	<div style='text-align: left; float: left; width: 547px; clear: both; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/gradient_rectangle_back.png'); background-repeat: repeat-x; background-color: #4586F1; margin: 0 auto 0 14px;' align='left'>&#13;" +
+						"&#13;" +
+						"                        <div style='text-align: left; display: block; width: 527px; clear: both; margin: 0 auto;' align='left'>&#13;" +
+						"                        <div style='text-align: left; height: 54px; width: 527px; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/menu_background.png'); margin: 0 auto;' align='left'>&#13;" +
+						"                            <ul style='text-align: center; height: 40px; list-style-type: none; margin: 0 auto; padding: 0px;'></ul></div>&#13;" +
+						"                        <div style='text-align: left; width: 497px; display: block; float: left; min-height: 400px; clear: both; background-color: #FFFFFF; margin: 0; padding: 0 15px;' align='left'>&#13;" +
+						"						&#13;" +
+						"                       		<h1 style='text-align: left; color: #093175; font-size: 24px; margin: 7px 0; padding: 0;' align='left'>Password Change:</h1>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>To reset your password, please visit the following page:</p>&#13;" +
+						"							<a href='www.RealLeanFitness.com?do=fpwdc&amp;usr=1000000000&amp;key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=fpwdc&amp;usr=1000000000&amp;key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db</a>&#13;" +
+						"							 &#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
+						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>When you visit that page, you will be able to change your password. Upon a successful password change a confirmation E-Mail will be sent to you.</p>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
+						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>Your username is: MegamanX</p>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>To edit your profile, go to this page:</p>&#13;" +
+						"							<a href='www.RealLeanFitness.com?do=editprofile' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=editprofile</a>&#13;" +
+						"						    <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>Thanks for helping us maintain the security of your account.</p>&#13;" +
+						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
+						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>~ The RealLeanFitness Support Team</p>&#13;" +
+						"							<a href='www.RealLeanFitness.com?do=contactsupport' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=contactsupport</a>&#13;" +
+						"						&#13;" +
+						"                        </div>&#13;" +
+						"&#13;" +
+						"                        </div>&#13;" +
+						"                </div>&#13;" +
+						"                <div style='text-align: left; clear: both; margin: 0 auto;' align='left'></div>&#13;" +
+						"                <div style='text-align: right; width: 581px; height: 60px; font-size: 11px; color: #C5DDFA; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/footer.png'); background-repeat: no-repeat; margin: 0 auto;' align='right'>&#13;" +
+						"                	<p style='text-align: center; padding-top: 20px; margin: 0 auto;' align='center'><a href='www.RealLeanFitness.com' style='text-align: left; font-size: 11px; color: #C5DDFA; text-decoration: none; margin: 0 auto;'>Real Lean Fitness</a> by <a href='www.DGXSoftware.com' style='text-align: left; font-size: 11px; color: #C5DDFA; text-decoration: none; margin: 0 auto;'>DGXSoftware</a></p>&#13;" +
+						"                </div>&#13;" +
+						"      &#13;" +
+						"     </div>&#13;" +
+						"  &#13;" +
+						"</body>" +
+						"</html>";
+		
+		
+		return GoogleEMail;
+	}
+	
+	
 }

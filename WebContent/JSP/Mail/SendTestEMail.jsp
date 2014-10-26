@@ -23,7 +23,8 @@
 // NOTE: Can be sent to Multiple Recipients via a Semicolon ";" delimiter
 //MyMailJavaBean.setEMailReceiver(request.getParameter( "Recipient" ));
 //MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com");
-MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com;dmastagx@hotmail.com;rosariojairo@gmail.com");
+//MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com;dmastagx@hotmail.com;rosariojairo@gmail.com");
+MyMailJavaBean.setEMailReceiver("dmastagx@hotmail.com");
 
 //Set the E-Mail Header Subject
 //MyMailJavaBean.setEMailSubject(request.getParameter( "SenderSubject" ));
@@ -51,10 +52,11 @@ String CustomBodyHTML =
 		"						";;
 
 String RLFHTMLEMail = "";
-RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailStart());
-//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailCSS());
-RLFHTMLEMail = RLFHTMLEMail.concat(CustomBodyHTML);
-RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailEnd());
+//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailStart());
+//RLFHTMLEMail = RLFHTMLEMail.concat(CustomBodyHTML);
+//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailEnd());
+
+RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 
 System.out.println(RLFHTMLEMail);
 

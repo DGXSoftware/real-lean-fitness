@@ -200,7 +200,7 @@ public class GlobalTools {
 	}	
 	
 	/*************************************************************************************************
-	NAME:        getTableColumnAndValuePairViaSelectSQLQuery
+	NAME:        getTableColumnAndValuePairViaAccountID
 	DESCRIPTION: Gets all the Column Names and Values from a specific Table using
 	a desired AccountID. It allows you to choose the columns via an Array.
 	Once the 2D ArrayList<ArrayList<String>> is retrieved the data is retrieved as following
@@ -210,7 +210,7 @@ public class GlobalTools {
 	RETURN:      ArrayList<ArrayList<String>>
 	SIDE-EFFECT: NONE.
 	*************************************************************************************************/
-	public static ArrayList<ArrayList<String>> getTableColumnAndValuePairViaSelectSQLQuery(HttpServletRequest Request, HttpServletResponse Response, String TableName, String SessionAccountID, String [] Table_Column_Add) throws SQLException {
+	public static ArrayList<ArrayList<String>> getTableColumnAndValuePairViaAccountID(HttpServletRequest Request, HttpServletResponse Response, String TableName, String SessionAccountID, String [] Table_Column_Add) throws SQLException {
 		
 		// Temporary ArrayList Variables
 		ArrayList<ArrayList<String>> Temporary_ColumnValuePair = new ArrayList<ArrayList<String>>();
@@ -218,12 +218,95 @@ public class GlobalTools {
 		ArrayList <String> Temporary_Values_List = new ArrayList<String>();
 
 		// Generate the SQL Select Query
+		// NOTE: Where clause strings are not case sensitive
 		String ColumnsToSelect = "";
 		for(int i = 0; i < Table_Column_Add.length; i++){
 			ColumnsToSelect = ColumnsToSelect.concat(Table_Column_Add[i]);
 			if(i < (Table_Column_Add.length -1)){ ColumnsToSelect = ColumnsToSelect.concat(" ,"); }
 		}
 		String SelectSQLQuery = "SELECT "+ColumnsToSelect+" FROM "+TableName+" WHERE Account_ID="+SessionAccountID+";";
+		
+		// Get the SQLQueryOutput
+		ResultSet SQLQueryResultSetOutput = SQLStatement.executeQuery(SelectSQLQuery);
+		
+		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
+		if(SQLQueryResultSetOutput.next()){
+		
+		// Reset the Pointer changed by the if statement above
+			SQLQueryResultSetOutput.beforeFirst();
+		
+		// Records the ResultSetMetaData
+		ResultSetMetaData SQLQueryOutputMetaData = null;
+		
+		try {
+	
+	        // Get the ResultSetMetaData
+		    SQLQueryOutputMetaData = SQLQueryResultSetOutput.getMetaData();
+	
+		} catch (SQLException sqlException) {
+	        sqlException.printStackTrace();		
+
+		}
+		
+    	try {
+        
+    	// Go over the Rows
+    	while (SQLQueryResultSetOutput.next()) {
+
+    	// Go over the Columns
+    	// NOTE : i = 2 because we want to skip the first item (Account_ID)
+    	for(int i = 1 ; i < SQLQueryOutputMetaData.getColumnCount() + 1; i++){
+    		
+    		// Get the Current SQL Result Values
+    		String CurrentColumnName = SQLQueryOutputMetaData.getColumnName(i);
+    		String CurrentValue = SQLQueryResultSetOutput.getString(i);
+            
+    		// Add the current Column and Value
+    		Temporary_Column_List.add(CurrentColumnName);
+    		Temporary_Values_List.add(CurrentValue);
+    		
+		}
+			
+		}
+			} catch (SQLException SQLEX) {
+					SQLEX.printStackTrace();
+				}
+			}
+
+		// Add the Columns and Values List to the ColumnValue Pair List
+		Temporary_ColumnValuePair.add(Temporary_Column_List);
+		Temporary_ColumnValuePair.add(Temporary_Values_List);
+		
+		return Temporary_ColumnValuePair;
+		
+	}
+	
+	/*************************************************************************************************
+	NAME:        getTableColumnAndValuePairViaEMail
+	DESCRIPTION: Gets all the Column Names and Values from a specific Table using
+	a desired EMail. It allows you to choose the columns via an Array.
+	Once the 2D ArrayList<ArrayList<String>> is retrieved the data is retrieved as following
+	Index 0 = Column Names
+	Index 1 = Values
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String SessionAccountID, String [] Table_Column_Ignore)
+	RETURN:      ArrayList<ArrayList<String>>
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static ArrayList<ArrayList<String>> getTableColumnAndValuePairViaEMail(HttpServletRequest Request, HttpServletResponse Response, String TableName, String UserEMail, String [] Table_Column_Add) throws SQLException {
+		
+		// Temporary ArrayList Variables
+		ArrayList<ArrayList<String>> Temporary_ColumnValuePair = new ArrayList<ArrayList<String>>();
+		ArrayList <String> Temporary_Column_List = new ArrayList<String>();
+		ArrayList <String> Temporary_Values_List = new ArrayList<String>();
+
+		// Generate the SQL Select Query
+		// NOTE: Where clause strings are not case sensitive
+		String ColumnsToSelect = "";
+		for(int i = 0; i < Table_Column_Add.length; i++){
+			ColumnsToSelect = ColumnsToSelect.concat(Table_Column_Add[i]);
+			if(i < (Table_Column_Add.length -1)){ ColumnsToSelect = ColumnsToSelect.concat(" ,"); }
+		}
+		String SelectSQLQuery = "SELECT "+ColumnsToSelect+" FROM "+TableName+" WHERE EMail='"+UserEMail+"';";
 		
 		// Get the SQLQueryOutput
 		ResultSet SQLQueryResultSetOutput = SQLStatement.executeQuery(SelectSQLQuery);
