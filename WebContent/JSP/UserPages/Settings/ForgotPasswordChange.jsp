@@ -21,7 +21,7 @@ PROPERTIES: Front-End Work / Back-End Work
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 		<%
-		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
 		String Action = (String) request.getParameter("do");
 		String User = (String) request.getParameter("usr");
 		String Key = (String) request.getParameter("key");

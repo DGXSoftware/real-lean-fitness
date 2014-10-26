@@ -15,7 +15,8 @@ String Action = (String) request.getParameter("do");
 
 // If the "do" parameter is not null perform the appropriate action
 if(Action != null){
-	if(Action.equals("contactus")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
+	if(Action.equals("editprofile")){response.sendRedirect(GlobalTools.GTV_UserSettings);}
+	if(Action.equals("contactsupport")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
 	if(Action.equals("google")){response.sendRedirect("https://www.google.com/");}
 	
 	if(Action.equals("fpwdc")){

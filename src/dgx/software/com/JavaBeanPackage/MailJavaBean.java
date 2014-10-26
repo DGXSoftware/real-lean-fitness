@@ -24,7 +24,9 @@ public class MailJavaBean {
 	// Gmail SMTP port as: 465 or 587
 	String SenderPort = "465";
 
-	// E-Mail Receiver
+	// E-Mail Receiver (Default value overwritten by the setEMailReceiver() method)
+	// NOTE: Can be sent to Multiple Recipients via a Semicolon ";" delimiter
+	// EX: MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com;dmastagx@hotmail.com;rosariojairo@gmail.com");
 	String EMailReceiver = "RLFMailService@GMail.com";
 	
 	// E-Mail Subject
@@ -79,7 +81,8 @@ public class MailJavaBean {
 			
 			// Create, Configure and add a Message BodyPart to the MimeMultipart Object
 			MimeBodyPart MessageBodyPart = new MimeBodyPart();
-			MessageBodyPart.setContent(EMailBody, "text/html");
+			//MessageBodyPart.setContent(EMailBody, "text/html");
+			MessageBodyPart.setContent(EMailBody, "text/html; charset=utf-8");
 			MyMimeMultipart.addBodyPart(MessageBodyPart);
 			
 			// If the file FileAttachment exists Add it to the E-Mail as an Attachment (ATTACHMENTS DISABLED)
@@ -107,8 +110,14 @@ public class MailJavaBean {
 			CompleteSenderMessage.setContent(MyMimeMultipart);
 			CompleteSenderMessage.setSubject(EMailSubject);
 			CompleteSenderMessage.setFrom(new InternetAddress(SenderEMail));
-			CompleteSenderMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(EMailReceiver));
 			
+			// Add all the EMailReceiver Recipients (Delimited by a Semicolon ";")
+			String [] EMailReceiverArray = EMailReceiver.split(";");
+			for(int i = 0 ; i < EMailReceiverArray.length; i++){
+				System.out.println("Send To = " + EMailReceiverArray[i]);
+				CompleteSenderMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(EMailReceiverArray[i]));
+			}
+
 			// Send the E-Mail with the Complete Sender Message
 			Transport.send(CompleteSenderMessage);
 			
