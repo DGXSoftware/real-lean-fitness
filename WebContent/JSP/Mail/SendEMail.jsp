@@ -17,6 +17,9 @@
 // Set the E-Mail Receiver
 MyMailJavaBean.setEMailReceiver(request.getParameter( "Recipient" ));
 
+//Set the E-Mail Header Subject
+MyMailJavaBean.setEMailSubject(request.getParameter( "SenderSubject" ));
+
 // Set the E-Mail Body
 String ContactMeFormUserInput =
 "<h3>" +
@@ -39,9 +42,6 @@ request.getParameter( "SenderMessage" ) +
 "<br/><br/>" +
 "<p> ~ Real Lean Fitness Mailing System</p>" +
 "</h3>";
-
-//Set the E-Mail Header Subject
-MyMailJavaBean.setEMailSubject(request.getParameter( "SenderSubject" ));
 
 //Set the E-Mail Body Message
 MyMailJavaBean.setEMailBody(ContactMeFormUserInput);

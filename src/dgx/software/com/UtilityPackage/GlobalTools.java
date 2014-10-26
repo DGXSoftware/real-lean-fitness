@@ -44,6 +44,9 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_Settings_ForgotPasswordChange %>
 	public static final String GTV_Settings_ForgotPasswordChange = "/JSP/UserPages/Settings/ForgotPasswordChange.jsp";
 	
+	// <%= GlobalTools.GTV_Settings_RequestForgotPasswordChange %>
+	public static final String GTV_Settings_RequestForgotPasswordChange = "/JSP/Mail/RequestForgotPasswordChange.jsp";
+	
 	// <%= GlobalTools.GTV_ContactUs %>
 	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";
 	

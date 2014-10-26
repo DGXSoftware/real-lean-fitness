@@ -11,18 +11,18 @@
 
 <%
 // Get the "do" Parameter
-String IndexAction = (String) request.getParameter("do");
+String Action = (String) request.getParameter("do");
 
 // If the "do" parameter is not null perform the appropriate action
-if(IndexAction != null){
-	if(IndexAction.equals("contactus")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
-	if(IndexAction.equals("google")){response.sendRedirect("https://www.google.com/");}
+if(Action != null){
+	if(Action.equals("contactus")){response.sendRedirect(GlobalTools.GTV_ContactUs);}
+	if(Action.equals("google")){response.sendRedirect("https://www.google.com/");}
 	
-	if(IndexAction.equals("fpwdc")){
+	if(Action.equals("fpwdc")){
 		String User = (String) request.getParameter("usr");
 		String Key = (String) request.getParameter("key");
 		if(User != null && Key != null){
-		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+IndexAction+"&usr="+User+"&key="+Key);
+		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+Action+"&usr="+User+"&key="+Key);
 		}
 	}
 }

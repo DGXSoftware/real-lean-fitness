@@ -285,18 +285,18 @@ function submitLoginRequest() {
 		<!-- EMail VARCHAR(255) -->
         <label for="RegistrationEMail">
         <p> E-Mail: </p>
-        <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="isValidEMail('RegistrationEMail','RegistrationEMailIcon','',false); isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
+        <input type="text" id="RegistrationEMail" name="RegistrationEMail" onKeyUp="isValidEMail('RegistrationEMail','RegistrationEMailIcon','',false); isValidConfirmation('RegistrationEMailConfirmation','RegistrationEMailConfirmationIcon','','RegistrationEMail',false);" 
         title='Registration E-Mail' size='48' maxlength='255' />
         <img id="RegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
 		 
 
 		<!-- EMail VARCHAR(255) -->
-        <label for="ConfirmationRegistrationEMail">
+        <label for="RegistrationEMailConfirmation">
         <p> Confirm E-Mail: </p>
-        <input type="text" id="ConfirmationRegistrationEMail" name="ConfirmationRegistrationEMail" onKeyUp="isValidConfirmation('ConfirmationRegistrationEMail','ConfirmationRegistrationEMailIcon','','RegistrationEMail',false);" 
+        <input type="text" id="RegistrationEMailConfirmation" name="RegistrationEMailConfirmation" onKeyUp="isValidConfirmation('RegistrationEMailConfirmation','RegistrationEMailConfirmationIcon','','RegistrationEMail',false);" 
         title='Registration E-Mail' size='48' maxlength='255' />
-        <img id="ConfirmationRegistrationEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <img id="RegistrationEMailConfirmationIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
         
 		<br />
@@ -375,7 +375,7 @@ function submitLoginRequest() {
 		<input type='checkbox' id='LoginRememberMe' name='LoginRememberMe' /> <b> Keep me logged in: </b>
 		
 		<!-- Redirects the user to the Account Retrieval Page -->
-		<a href='#' style='margin-left:5px;'>Can't access your account ?</a>
+		<a href='<%= GlobalTools.GTV_Settings_RequestForgotPasswordChange %>' style='margin-left:5px;'>Can't access your account ?</a>
 		 
 		<br />
 		<br />
@@ -425,7 +425,7 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationUsername").value = "TestUsername" + "<%= RandomNumber %>";
         document.getElementById("RegistrationPassword").value = "TestUsername" + "<%= RandomNumber %>";
         document.getElementById("RegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
-        document.getElementById("ConfirmationRegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
+        document.getElementById("RegistrationEMailConfirmation").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("RegistrationGender").selectedIndex = "2";
         document.getElementById("RegistrationBirthDay").selectedIndex = "4";
         document.getElementById("RegistrationBirthMonth").selectedIndex = "4";

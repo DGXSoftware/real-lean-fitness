@@ -22,9 +22,21 @@ PROPERTIES: Front-End Work / Back-End Work
 
 		<%
 		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
-		String IndexAction = (String) request.getParameter("do");
+		String Action = (String) request.getParameter("do");
 		String User = (String) request.getParameter("usr");
 		String Key = (String) request.getParameter("key");
+		
+		// Set Null query string values to Empty Strings to avoid Null Pointer Exceptions
+		if(Action == null){ Action = ""; }
+		if(User == null){ User = ""; }
+		if(Key == null){ Key = ""; }
+		
+		// Decrypt the Query String and validate that all values are valid
+		boolean IsValidAction = false;
+		if(!Action.equals("")){ IsValidAction = true;}
+	
+		boolean IsValidUser = false;
+		if(!User.equals("")){ IsValidUser = true;}
 		
 		boolean IsValidKey = false;
 		if(!Key.equals("")){ IsValidKey = true;}
@@ -33,7 +45,7 @@ PROPERTIES: Front-End Work / Back-End Work
 
 <%
 // Display the main body if the user is not logged in, else forward the users to the Homepage
-if(IndexAction != null && User != null && Key != null){
+if(IsValidAction == true && IsValidUser == true && IsValidKey == true){
 	
 		// attempt to process a vote and display current results
 		try {
@@ -85,12 +97,17 @@ if(IndexAction != null && User != null && Key != null){
 <script>
 
 // Submits the Login Request
-function submitPasswordChange() {
+function submitForgotPasswordChange() {
 
-// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
-// IF this method returns false, stop further execution and don't submit.
+    // Validate the User Input before Submitting. Set it so it Alerts about the specific User
+    // Input that is invalid. IF this method returns false, stop further execution and don't submit.
 
-
+    //If the New Password is not valid Alert so, and stop further processing
+    if(!isValidPasswordAlert('NewPassword','NewPasswordIcon','',false)){ return false; }
+    
+    //If the New Password Confirmation is not valid Alert so, and stop further processing
+    if(!isValidConfirmationAlert('NewPasswordConfirmation','NewPasswordConfirmationIcon','','NewPassword',false)){ return false; }
+    
         var jqxhr = $.ajax({
             type:       "POST",
             url:        "/ForgotPasswordChangeServlet",
@@ -102,7 +119,7 @@ function submitPasswordChange() {
             beforeSend: function() {
 
             // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
-            $('#PasswordChangeFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
+            $('#ForgotPasswordChangeFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
             
                         },
                             
@@ -128,10 +145,10 @@ function submitPasswordChange() {
             error:      function(xhr, textStatus, thrownError) {
 
             // Use AJAX to Inject the Error HTML to the appropriate DIV (DETAILED VERSION)
-            // $('#PasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
+            // $('#ForgotPasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='+1'><b>" + thrownError + " - </b> Error " + xhr.status + ":" + xhr.responseText + "</font></div>");
 
             // Use AJAX to Inject the Error HTML to the appropriate DIV (SHORT VERSION)
-            $('#PasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
+            $('#ForgotPasswordChangeFormFeedbackDiv').html("<div id='ErrorResults'><font color='red' size='1'><b>" + xhr.responseText + "</b></font></div>");
 
             // Stop further processing
             return false;
@@ -166,45 +183,36 @@ function submitPasswordChange() {
 		
 		<p align='left'>&#160;</p>
 		
-		<form id='PasswordChangeForm' name='PasswordChangeForm' method='post'>
+		<form id='ForgotPasswordChangeForm' name='ForgotPasswordChangeForm' method='post'>
 		
 		<!-- Login For Feedback Div -->
-		<div id="PasswordChangeFormFeedbackDiv" name="PasswordChangeFormFeedbackDiv"></div>
+		<div id="ForgotPasswordChangeFormFeedbackDiv" name="ForgotPasswordChangeFormFeedbackDiv"></div>
 		
 		<!-- Password VARCHAR(32) -->
-        <label for="OldPassword">
-        <p> Old Password: </p>
-        <input type="text" id="OldPassword" name="OldPassword" onKeyUp="isValidPassword('OldPassword','OldPasswordIcon','',false); isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
-        title='Old Password' size='32' maxlength='32' />
-        <img id="OldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
-        </label>
-		 
-		<!-- Password VARCHAR(32) -->
-        <label for="ConfirmationOldPassword">
-        <p> Confirm Old Password: </p>
-        <input type="text" id="ConfirmationOldPassword" name="ConfirmationOldPassword" onKeyUp="isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
-        title='Confirm Old Password' size='32' maxlength='32' />
-        <img id="ConfirmationOldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
-        </label>
-        
-        <!-- Password VARCHAR(32) -->
         <label for="NewPassword">
         <p> New Password: </p>
-        <input type="text" id="NewPassword" name="NewPassword" onKeyUp="isValidPassword('NewPassword','NewPasswordIcon','',false);" 
+        <input type="text" id="NewPassword" name="NewPassword" onKeyUp="isValidPassword('NewPassword','NewPasswordIcon','',false); isValidConfirmation('NewPasswordConfirmation','NewPasswordConfirmationIcon','','NewPassword',false);" 
         title='New Password' size='32' maxlength='32' />
         <img id="NewPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
-        
+		 
+		<!-- Password VARCHAR(32) -->
+        <label for="NewPasswordConfirmation">
+        <p> Confirm New Password: </p>
+        <input type="text" id="NewPasswordConfirmation" name="NewPasswordConfirmation" onKeyUp="isValidConfirmation('NewPasswordConfirmation','NewPasswordConfirmationIcon','','NewPassword',false);" 
+        title='Confirm New Password' size='32' maxlength='32' />
+        <img id="NewPasswordConfirmationIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
         
         <br />
 		<br />
 		<br />
         
-        <!-- Pass the Username with the Form Submit -->
+        <!-- Pass the Target Username with the Form Submit -->
         <input type="hidden" name="TargetUsername" value="<%= User %>" />
         
         <!-- Change Password Button -->
-		<input type='button' id='ChangePasswordButton' name='ChangePasswordButton' value='Change Password' onClick="submitPasswordChange();" />
+		<input type='button' id='ForgotChangePasswordButton' name='ForgotChangePasswordButton' value='Change Password' onClick="submitForgotPasswordChange();" />
         
 		</form>
 	    
@@ -252,8 +260,14 @@ function submitPasswordChange() {
 <%
 }else{
 
-	// The current user does NOT have a session, therefore redirect them to the Homepage
-	response.sendRedirect(GlobalTools.GTV_Homepage);
+	
+    // Since the Query String crednetials were invalid or expired
+    // Return the user Home via a Cancel Countdown Forward Message
+    String CancelMessage = "Invalid or expired password key. Please retry your request.";
+    String CancelURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"";
+
+    // Forward the User back to the Homepage
+	response.sendRedirect(CancelURL);
 
 }
 %>

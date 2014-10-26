@@ -634,7 +634,7 @@ function isValidConfirmationAlert(CurrentTextFieldID, CurrentTextFieldIconID, Cu
     	
     	// Only Allow Letters, Numbers and Underscores (SIZE: 4 - 32)
     	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
-    	msg += 'It does not match ' + CurrentTextFieldToConfirmName + ': [ ' + CurrentTextFieldToConfirmObject.value + ' ]\n\n';
+    	msg += 'It does not match the ' + CurrentTextFieldToConfirmName + ': [ ' + CurrentTextFieldToConfirmObject.value + ' ]\n\n';
     	alert(msg);
     	CurrentTextFieldToConfirmObject.focus();	
     	return false;

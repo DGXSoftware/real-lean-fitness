@@ -76,10 +76,18 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 // Submits the Login Request
 function submitPasswordChange() {
 
-// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
-// IF this method returns false, stop further execution and don't submit.
+    // Validate the User Input before Submitting. Set it so it Alerts about the specific User
+    // Input that is invalid. IF this method returns false, stop further execution and don't submit.
 
-
+    //If the Old Password is not valid Alert so, and stop further processing
+    if(!isValidPasswordAlert('OldPassword','OldPasswordIcon','',false)){ return false; }
+    
+    //If the Old Password Confirmation is not valid Alert so, and stop further processing
+    if(!isValidConfirmationAlert('OldPasswordConfirmation','OldPasswordConfirmationIcon','','OldPassword',false)){ return false; }
+    
+    //If the New Password is not valid Alert so, and stop further processing
+    if(!isValidPasswordAlert('NewPassword','NewPasswordIcon','',false)){ return false; }
+    
         var jqxhr = $.ajax({
             type:       "POST",
             url:        "/PasswordChangeServlet",
@@ -163,17 +171,17 @@ function submitPasswordChange() {
 		<!-- Password VARCHAR(32) -->
         <label for="OldPassword">
         <p> Old Password: </p>
-        <input type="text" id="OldPassword" name="OldPassword" onKeyUp="isValidPassword('OldPassword','OldPasswordIcon','',false); isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
+        <input type="text" id="OldPassword" name="OldPassword" onKeyUp="isValidPassword('OldPassword','OldPasswordIcon','',false); isValidConfirmation('OldPasswordConfirmation','OldPasswordConfirmationIcon','','OldPassword',false);" 
         title='Old Password' size='32' maxlength='32' />
         <img id="OldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
 		 
 		<!-- Password VARCHAR(32) -->
-        <label for="ConfirmationOldPassword">
+        <label for="OldPasswordConfirmation">
         <p> Confirm Old Password: </p>
-        <input type="text" id="ConfirmationOldPassword" name="ConfirmationOldPassword" onKeyUp="isValidConfirmation('ConfirmationOldPassword','ConfirmationOldPasswordIcon','','OldPassword',false);" 
+        <input type="text" id="OldPasswordConfirmation" name="OldPasswordConfirmation" onKeyUp="isValidConfirmation('OldPasswordConfirmation','OldPasswordConfirmationIcon','','OldPassword',false);" 
         title='Confirm Old Password' size='32' maxlength='32' />
-        <img id="ConfirmationOldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <img id="OldPasswordConfirmationIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
         </label>
         
         <!-- Password VARCHAR(32) -->

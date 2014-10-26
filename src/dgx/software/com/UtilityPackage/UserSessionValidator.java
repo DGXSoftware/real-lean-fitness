@@ -1,3 +1,4 @@
+/*
 package dgx.software.com.UtilityPackage;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class UserSessionValidator extends HttpServlet {
 		HandleUserSession(Request,Response);
 		
 	}
-	
+*/	
   /*************************************************************************************************
   NAME:        HandleUserSession
   DESCRIPTION: Verify if the user has an active session and then proceed accordingly.
@@ -44,7 +45,7 @@ public class UserSessionValidator extends HttpServlet {
   RETURN:      VOID
   SIDE-EFFECT: None
   *************************************************************************************************/
-  // Test if Cookies are enabled and redirect to the DisabledCookiesURL if Cookies are Disabled
+/*  // Test if Cookies are enabled and redirect to the DisabledCookiesURL if Cookies are Disabled
   public static void HandleUserSession(HttpServletRequest Request, HttpServletResponse Response) {
         
 		// Returns null if no session already exists 
@@ -85,3 +86,4 @@ public class UserSessionValidator extends HttpServlet {
   }
 	
 }
+*/
