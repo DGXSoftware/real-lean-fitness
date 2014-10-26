@@ -13,8 +13,15 @@
 
 <h1>DGX Main!</h1>
 
-<meta http-equiv="REFRESH" content="0;url=http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db"/>
+<%
+String Image_Location = "http://" + request.getServerName() +":"+ request.getServerPort() + request.getContextPath();
+System.out.println(Image_Location);
+%>
 
+<!--
+<meta http-equiv="REFRESH" content="0;url=http://localhost:8080?do=fpwdc&usr=104776&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db"/>
+-->
+  
 <%
 /*
 String OriginalText = "Real Lean Fitness!!!";

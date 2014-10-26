@@ -136,11 +136,15 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			
 			// Send an E-Mail to the user with the PasswordChangeURL
 			
-			// EXAMPLE: http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+			// Get the Hostname
+			// EXAMPLE: 
+			// http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
 			// www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+			String Image_Location = "http://" + Request.getServerName() +":"+ Request.getServerPort() + Request.getContextPath();
+         
+			// Generate the Full Password Change URL
 			String PasswordChangeURL = "";
-			
-			PasswordChangeURL = PasswordChangeURL.concat("http://localhost:8080?");
+			PasswordChangeURL = PasswordChangeURL.concat(Image_Location + "?");
 			PasswordChangeURL = PasswordChangeURL.concat(ActionField + "=");
 			PasswordChangeURL = PasswordChangeURL.concat(ActionValue + "&");
 			PasswordChangeURL = PasswordChangeURL.concat(UserField + "=");
