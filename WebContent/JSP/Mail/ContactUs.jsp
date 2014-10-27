@@ -18,7 +18,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
 		
 	<!-- Include the Stylesheet Files -->
-	<link rel='stylesheet' type='text/css' href='/JSP/Mail/CSS/ContactUs.css' />
+	<link rel='stylesheet' type='text/css' href='/CSS/ContactUs.css' />
 	
 	<!-- Include the jQuery Files -->
 	<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>

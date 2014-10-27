@@ -2,55 +2,57 @@ package dgx.software.com.UtilityPackage;
 
 public class MailTemplate {
 
-	public static String EMailStart(){
+	// Generates a Complete HTML E-Mail
+	public static String getCompleteHTMLEMail(String CustomHTMLBody, String EMailToUnsubscribe){
+		
+		String CompleteHTMLEMail = "";
+		
+		// Call the Opening and CLosing Methods to Generate a Complete HTML E-Mail
+	    CompleteHTMLEMail = CompleteHTMLEMail.concat(getHTMLEMailOpening());
+	    CompleteHTMLEMail = CompleteHTMLEMail.concat(CustomHTMLBody);
+	    CompleteHTMLEMail = CompleteHTMLEMail.concat(getHTMLEMailClosing(EMailToUnsubscribe));
+		
+		return CompleteHTMLEMail;
+	}
+	
+	// Returns the Fixed HTML Opening of the E-Mail HTML (Fixed until the Custom part starts)
+	private static String getHTMLEMailOpening(){
 		
 		String EMailStart = "";
-		
 		EMailStart =
-		"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>" +
-		"<html xmlns='http://www.w3.org/1999/xhtml'>" +
-		"<head>" +
-		"<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
-		"" +
-		"<!-- DISABLED: Local CSS -->" +
-		"<!-- <link rel='stylesheet' type='text/css' href='/JSP/Mail/CSS/MailStyle.css' /> -->" +
-		"" +
-		"<!-- DISABLED: Web Hosted CSS -->" +
-		"<!-- <link rel='stylesheet' type='text/css' href='http://www.DGXSoftware.com/RLF/JSP/Mail/CSS/MailStyle.css' /> -->" +
-		"" +
-		"<title>Real Lean Fitness</title>" +
-		"</head>" +
-		"" +
-		MailTemplate.EMailCSS() +
-		"" +
-		"<body>" +
-		"    <div id='page'>" +
-		"    	        <div id='header'>" +
-		"				    <!-- Enable Either an Image Logo or a Text Logo for this Page -->" +
-		"                	<!-- <img src='Images/logo.png' alt='' /> -->" +
-		"					<h1 style='padding-top:50px; text-align:center; color:#FFFFFF;'>Real Lean Fitness</h1>" +
-		"                </div>" +
-		"    " +
-		"                </div>" +
-		"" +
-		"                <div id='content'>" +
-		"                	<div id='container'>" +
-		"" +
-		"                        <div id='main'>" +
-		"                        <div id='menu'>" +
-		"                            <ul>" +
-		"							<!--" +
-		"	                            <li><a href='#'>Contact</a></li>" +
-		"                                <li><a href='#'>About</a></li>" +
-		"                                <li><a href='#'>Services</a></li>" +
-		"                                <li><a href='#'>Gallery</a></li>" +
-		"                                <li><a href='#'>Portfolio</a></li>" +
-		"                                <li><a href='#'>Home</a></li>" +
-		"							-->	" +
-		"                            </ul>" +
-		"                        </div>" +
-		"                        <div id='text'>" +
-		"						";
+				"<!-- ************************************** START FIXED JAVA HTML OPENING ************************************** -->" +
+						"<body marginheight='0' background='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/MegamanHelmetBG.png' topmargin='0' marginwidth='0' bgcolor='#518ae0' offset='0' leftmargin='0'>" +
+						"" +
+						"<!-- START Wrapper Table-->" +
+						"<table cellspacing='0' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;'  width='100%' cellpadding='0'><tr><td valign='top'>" +
+						"" +
+						"<br>" +
+						"<table rules='none' cellspacing='0' border='1' bordercolor='#d6d6d6' frame='border' align='center' style='font-size: 14px; border-color: #d6d6d6 #d6d6d6 #d6d6d6 #d6d6d6; border-collapse: collapse; font-family: Arial, sans-serif; line-height: 20px; color: #666666; border-spacing: 0px; border-width: 1px 1px 1px 1px; border-style: solid solid solid solid; background: #ffffff;' bgcolor='#ffffff' width='600' cellpadding='0'><tr><td>" +
+						"<!-- START MAIN CONTENT. ADD MODULES BELOW -->" +
+						"" +
+						"<!-- START Module #1 -->" +
+						"<br>" +
+						"<table cellspacing='0' align='center' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+						"<tr>" +
+						"" +
+						"" +
+						"<td align='center' valign='top' bgcolor='#333'>" +
+						"" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/MegamanXAttack.gif' alt='' width='540' height='200' vspace='10' />" +
+						"" +
+						"</td>" +
+						"" +
+						"</tr>" +
+						"</table>" +
+						"<!-- END Module #1 -->" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Module-Divider.gif' height='61' alt='' width='600' />" +
+						"" +
+						"<!-- START Module #2 -->" +
+						"<table cellspacing='0' align='center' style='font-size: 14px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+						"<tr>" +
+						"<td valign='top'>" +
+						"<!-- ************************************** END FIXED JAVA HTML OPENING ************************************** -->" +
+						"<!-- ************************************** START CUSTOM JAVA BODY ************************************** -->";
 
 		
 		return EMailStart;
@@ -58,271 +60,295 @@ public class MailTemplate {
 	}
 	
 	
-	public static String EMailCSS(){
+	// Returns the Fixed HTML Closing of the E-Mail HTML (Fixed until the Custom part ends)
+	private static String getHTMLEMailClosing(String EMailToUnsubscribe){
 		
-		
-		String EMailCSS = "";
-		
-		EMailCSS =
-				"<style>" +
-						"" +
-						"html, body {" +
-						"text-align: center;" +
-						"}" +
-						"p {text-align: left;}" +
-						"" +
-						"body {" +
-						"	margin: 0;" +
-						"	padding: 0;" +
-						"	background: #FFFFFF;" +
-						"	background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/background.png);" +
-						"	text-align: left;" +
-						"	font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;" +
-						"	font-size: 13px;" +
-						"	color: #000000;" +
-						"}" +
-						"*" +
-						"{" +
-						"  margin: 0 auto 0 auto;" +
-						" text-align:left;}" +
-						"" +
-						"p {text-align: left;}" +
-						"" +
-						"#page" +
-						"{" +
-						"  width:581px;" +
-						"}" +
-						"" +
-						"#header" +
-						"{" +
-						"width:581px;" +
-						"height:90px;" +
-						"background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/header.png);" +
-						"clear:both;" +
-						"}" +
-						"" +
-						"#header img" +
-						"{" +
-						"display:block;" +
-						"margin:0 auto 0 auto;" +
-						"padding-top:40px;" +
-						"}" +
-						"" +
-						"#content" +
-						"{" +
-						"background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/content_back_shadow.png);" +
-						"background-repeat:repeat-y;" +
-						"width:581px;" +
-						"}" +
-						"" +
-						"#content #container" +
-						"{" +
-						"float:left;" +
-						"background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/gradient_rectangle_back.png);" +
-						"background-repeat:repeat-x;" +
-						"background-color:#4586F1;" +
-						"width:547px;" +
-						"margin-left:14px;" +
-						"clear:both;" +
-						"}" +
-						"" +
-						"#menu" +
-						"{" +
-						"background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/menu_background.png);" +
-						"height:54px;" +
-						"width:527px;" +
-						"}" +
-						"" +
-						"#menu ul {" +
-						"	padding: 0px;" +
-						"	list-style-type: none;" +
-						"	text-align:center;" +
-						"	height:40px;" +
-						"" +
-						"}" +
-						"#menu ul li , #menu ul li a, #menu ul li a:visited{" +
-						"	display:block;" +
-						"	float:right;" +
-						"	margin: 0px;" +
-						"	text-align:left;" +
-						"	line-height:40px;" +
-						"	color:#FFFFFF;" +
-						"	padding-left:6px;" +
-						"	padding-right:2px;" +
-						"	font-size:14px;" +
-						"	font-weight:bold;" +
-						"	text-decoration:none;" +
-						"	width:77px;" +
-						"}" +
-						"" +
-						"" +
-						"#menu ul li a:hover{" +
-						"color:#65A9ED;" +
-						"}" +
-						"" +
-						"#content #main" +
-						"{" +
-						"display:block;" +
-						"width:527px;" +
-						"clear:both" +
-						"}" +
-						"" +
-						"#content #text" +
-						"{" +
-						"margin:0;" +
-						"padding:0;" +
-						"width:497px;" +
-						"display:block;" +
-						"background-color:#FFFFFF;" +
-						"float:left;" +
-						"min-height:400px;" +
-						"clear:both;" +
-						"padding-left:15px;" +
-						"padding-right:15px;" +
-						"}" +
-						"" +
-						".clear {" +
-						"    clear:both;" +
-						"  }" +
-						"" +
-						"" +
-						"#content #text h1, #content #text h1 a, #content #text h1 a:visited" +
-						"{" +
-						"margin:0;" +
-						"padding:0;" +
-						"color:#093175;" +
-						"font-size:24px;" +
-						"margin-bottom:7px;" +
-						"margin-top:7px;" +
-						"}" +
-						"" +
-						"#content #text p" +
-						"{" +
-						"margin-top:5px;" +
-						"margin-bottom:5px;" +
-						"padding:0;" +
-						"}" +
-						"" +
-						"" +
-						"#footer" +
-						"{" +
-						"background-image:url(http://www.DGXSoftware.com/RLF/JSP/Mail/Images/footer.png);" +
-						"background-repeat:no-repeat;" +
-						"width:581px;" +
-						"height:60px;" +
-						"font-size:11px;" +
-						"color:#C5DDFA;" +
-						"text-align:right;" +
-						"}" +
-						"" +
-						"#footer p" +
-						"{" +
-						"text-align:center;" +
-						"padding-top:20px;" +
-						"}" +
-						"" +
-						"#footer a, #footer a:visited" +
-						"{" +
-						"font-size:11px;" +
-						"color:#C5DDFA;" +
-						"text-decoration:none;" +
-						"}" +
-						"" +
-						"</style>";
-		
-		return EMailCSS;
-		
-	}
-	
-	public static String EMailEnd(){
+		boolean ShowUnsubscribeURL = false;
+		if(EMailToUnsubscribe == null){
+			EMailToUnsubscribe = "";
+			}else{
+				ShowUnsubscribeURL = true;
+			}
+		String NewsletterUnsubscribeURL = GlobalTools.GTV_Settings_NewsletterSubscription + "?" + "EMail=" + EMailToUnsubscribe;
 		
 		String EMailEnd = "";
-		
 		EMailEnd = 
-						"						" +
-						"                        </div>" +
-						"" +
-						"                        </div>" +
-						"                </div>" +
-						"                <div class='clear'></div>" +
-						"                <div id='footer'>" +
-						"                	<p><a href='www.RealLeanFitness.com'>Real Lean Fitness</a> by <a href='www.DGXSoftware.com'>DGXSoftware</a></p>" +
-						"                </div>" +
-						"      " +
-						"     </div>" +
-						"  " +
-						"</body>" +
-						"</html>";
+				"<!-- ****************************************** END CUSTOM JAVA BODY ****************************************** -->" +
+				"<!-- ************************************** START FIXED JAVA HTML CLOSING ************************************** -->" +
+				"</td>" +
+				"</tr>" +
+				"</table>" +
+				"" +
+				"<!-- END Module #2 -->" +
+				"" +
+				"<!-- END MAIN CONTENT -->" +
+				"" +
+				"<!-- START SOCIAL + COMPANY INFO + SUBSCRIPTION -->" +
+				"<br>" +
+				"<br>" +
+				"<table cellspacing='0' style='font-size: 12px; border-bottom: 1px solid #D0D0D0; font-family: Arial, sans-serif; line-height: 20px; color: #666666; border-top: 1px solid #D0D0D0;' bgcolor='#efefef' cellpadding='0'>" +
+				"<tr>" +
+				"" +
+				"<td height='45' valign='middle' width='30'>&nbsp;</td>" +
+				"" +
+				"<td height='45' valign='middle' width='115'>" +
+				"<b style='color: #333333;'>Follow us on:</b>" +
+				"</td>" +
+				"" +
+				"<!-- START Facebook -->" +
+				"<td height='45' valign='middle' width='50'>" +
+				"<a href='https://www.facebook.com/RealLeanFitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+				"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Facebook-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+				"</td>" +
+				"<!-- END Facebook -->" +
+				"" +
+				"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+				"" +
+				"<!-- START Twitter -->" +
+				"<td height='45' valign='middle' width='50'>" +
+				"<a href='https://Twitter.com/RealLeanFitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+				"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Twitter-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+				"</td>" +
+				"<!-- END Twitter -->" +
+				"" +
+				"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+				"" +
+				"<!-- START Instagram -->" +
+				"<td height='45' valign='middle' width='50'>" +
+				"<a href='http://Instagram.com/realleanfitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+				"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Instagram-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+				"</td>" +
+				"<!-- END Instagram -->" +
+				"" +
+				"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+				"" +
+				"<!-- START Google Plus -->" +
+				"<td height='45' valign='middle' width='50'>" +
+				"<a href='https://plus.google.com/106427449538506931543/posts' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+				"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Google-Plus-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+				"</td>" +
+				"<!-- END Google Plus -->" +
+				"" +
+				"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+				"" +
+				"<!-- START Reddit -->" +
+				"<td height='45' valign='middle' width='50'>" +
+				"<a href='https://www.reddit.com' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+				"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Reddit-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+				"</td>" +
+				"<!-- END Reddit -->" +
+				"" +
+				"<td height='45' valign='middle' width='200'>&nbsp;</td>" +
+				"";
+		
+				// If we received a valid E-Mail address, Generate the unsubscribe Section
+		        if(ShowUnsubscribeURL == true){
+		        System.out.println();
+			    EMailEnd = EMailEnd +
+				"<table cellspacing='0' align='center' style='font-size: 14px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+				"<tr>" +
+				"<td valign='top'>" +
+				"<p style='font-size: 9; font-family: Arial, sans-serif; color: #888888;'>This message was sent to dmastagx@hotmail.com. If you don't want to receive these E-Mails from Real Lean Fitness in the future, please <a href='"+NewsletterUnsubscribeURL+"'>unsubscribe</a>.</p>" +
+				"</td>" +
+				"</tr>" +
+				"</table>";
+		        }
+		        
+		EMailEnd = EMailEnd +
+				"" +
+				"</tr>" +
+				"</table>" +
+				"<br>" +
+				"</td>" +
+				"</tr>" +
+				"</table>" +
+				"" +
+				"" +
+				"<table cellspacing='0' align='center' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='560' cellpadding='0'>" +
+				"" +
+				"<tr><td align='center' valign='top'>" +
+				"" +
+				"<!-- START FOOTER CONTENT -->" +
+				"<p>&copy; 2014 <b style='color: #333333;'>www.RealLeanFitness.com</b>. All rights reserved.</p>" +
+				"<!-- END FOOTER CONTENT -->" +
+				"" +
+				"</td></tr></table>" +
+				"" +
+				"<br />" +
+				"" +
+				"</td>" +
+				"</tr>" +
+				"</table>" +
+				"<!-- END Wrapper Table-->" +
+				"</body>" +
+				"</html>" +
+				"<!-- ************************************** END FIXED JAVA HTML CLOSING ************************************** -->";
 		
 		return EMailEnd;
 		
 	}
 	
-	
-	public static String GoogleEMail(){
+/*	
+	public static String FullSampleEMail(){
 		
-		String GoogleEMail = "";
+		String FullSampleEMail = "";
 		
-		GoogleEMail =
-				"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>" +
-						"<html xmlns='http://www.w3.org/1999/xhtml' xmlns='http://www.w3.org/1999/xhtml' style='text-align: center; margin: 0 auto;'>" +
-						"  <head>" +
-						"    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
-						"    <link rel='stylesheet' type='text/css' href='http://www.DGXSoftware.com/RLF/JSP/Mail/CSS/MailStyle.css' />" +
-						"    <title>Real Lean Fitness</title>" +
-						"  </head>" +
-						"  <body style='text-align: left; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 13px; color: #000000; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/background.png'); background-color: #FFFFFF; margin: 0; padding: 0;' bgcolor='#FFFFFF'>&#13;" +
-						"    <div style='text-align: left; width: 581px; margin: 0 auto;' align='left'>&#13;" +
-						"    	        <div style='text-align: left; width: 581px; height: 90px; clear: both; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/header.png'); margin: 0 auto;' align='left'>&#13;" +
-						"				    &#13;" +
-						"                	&#13;" +
-						"					<h1 style='padding-top: 50px; text-align: center; color: #FFFFFF; margin: 0 auto;' align='center'>Real Lean Fitness</h1>&#13;" +
-						"                </div>&#13;" +
-						"    &#13;" +
-						"                </div>&#13;" +
-						"&#13;" +
-						"                <div style='text-align: left; width: 581px; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/content_back_shadow.png'); background-repeat: repeat-y; margin: 0 auto;' align='left'>&#13;" +
-						"                	<div style='text-align: left; float: left; width: 547px; clear: both; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/gradient_rectangle_back.png'); background-repeat: repeat-x; background-color: #4586F1; margin: 0 auto 0 14px;' align='left'>&#13;" +
-						"&#13;" +
-						"                        <div style='text-align: left; display: block; width: 527px; clear: both; margin: 0 auto;' align='left'>&#13;" +
-						"                        <div style='text-align: left; height: 54px; width: 527px; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/menu_background.png'); margin: 0 auto;' align='left'>&#13;" +
-						"                            <ul style='text-align: center; height: 40px; list-style-type: none; margin: 0 auto; padding: 0px;'></ul></div>&#13;" +
-						"                        <div style='text-align: left; width: 497px; display: block; float: left; min-height: 400px; clear: both; background-color: #FFFFFF; margin: 0; padding: 0 15px;' align='left'>&#13;" +
-						"						&#13;" +
-						"                       		<h1 style='text-align: left; color: #093175; font-size: 24px; margin: 7px 0; padding: 0;' align='left'>Password Change:</h1>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>To reset your password, please visit the following page:</p>&#13;" +
-						"							<a href='www.RealLeanFitness.com?do=fpwdc&amp;usr=1000000000&amp;key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=fpwdc&amp;usr=1000000000&amp;key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db</a>&#13;" +
-						"							 &#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
-						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>When you visit that page, you will be able to change your password. Upon a successful password change a confirmation E-Mail will be sent to you.</p>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
-						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>Your username is: MegamanX</p>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>To edit your profile, go to this page:</p>&#13;" +
-						"							<a href='www.RealLeanFitness.com?do=editprofile' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=editprofile</a>&#13;" +
-						"						    <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>Thanks for helping us maintain the security of your account.</p>&#13;" +
-						"							<p style='text-align: left; margin: 5px auto; padding: 0;' align='left'> </p>&#13;" +
-						"                            <p style='text-align: left; margin: 5px auto; padding: 0;' align='left'>~ The RealLeanFitness Support Team</p>&#13;" +
-						"							<a href='www.RealLeanFitness.com?do=contactsupport' style='text-align: left; margin: 0 auto;'>www.RealLeanFitness.com?do=contactsupport</a>&#13;" +
-						"						&#13;" +
-						"                        </div>&#13;" +
-						"&#13;" +
-						"                        </div>&#13;" +
-						"                </div>&#13;" +
-						"                <div style='text-align: left; clear: both; margin: 0 auto;' align='left'></div>&#13;" +
-						"                <div style='text-align: right; width: 581px; height: 60px; font-size: 11px; color: #C5DDFA; background-image: url('http://www.dgxsoftware.com/RLF/JSP/Mail/Images/footer.png'); background-repeat: no-repeat; margin: 0 auto;' align='right'>&#13;" +
-						"                	<p style='text-align: center; padding-top: 20px; margin: 0 auto;' align='center'><a href='www.RealLeanFitness.com' style='text-align: left; font-size: 11px; color: #C5DDFA; text-decoration: none; margin: 0 auto;'>Real Lean Fitness</a> by <a href='www.DGXSoftware.com' style='text-align: left; font-size: 11px; color: #C5DDFA; text-decoration: none; margin: 0 auto;'>DGXSoftware</a></p>&#13;" +
-						"                </div>&#13;" +
-						"      &#13;" +
-						"     </div>&#13;" +
-						"  &#13;" +
+		FullSampleEMail =
+				"<!-- ************************************** START FIXED JAVA HTML OPENING ************************************** -->" +
+						"<body marginheight='0' background='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/MegamanHelmetBG.png' topmargin='0' marginwidth='0' bgcolor='#518ae0' offset='0' leftmargin='0'>" +
+						"" +
+						"<!-- START Wrapper Table-->" +
+						"<table cellspacing='0' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;'  width='100%' cellpadding='0'><tr><td valign='top'>" +
+						"" +
+						"<br>" +
+						"<table rules='none' cellspacing='0' border='1' bordercolor='#d6d6d6' frame='border' align='center' style='font-size: 14px; border-color: #d6d6d6 #d6d6d6 #d6d6d6 #d6d6d6; border-collapse: collapse; font-family: Arial, sans-serif; line-height: 20px; color: #666666; border-spacing: 0px; border-width: 1px 1px 1px 1px; border-style: solid solid solid solid; background: #ffffff;' bgcolor='#ffffff' width='600' cellpadding='0'><tr><td>" +
+						"<!-- START MAIN CONTENT. ADD MODULES BELOW -->" +
+						"" +
+						"<!-- START Module #1 -->" +
+						"<br>" +
+						"<table cellspacing='0' align='center' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+						"<tr>" +
+						"" +
+						"" +
+						"<td align='center' valign='top' bgcolor='#333'>" +
+						"" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/MegamanXAttack.gif' alt='' width='540' height='200' vspace='10' />" +
+						"" +
+						"</td>" +
+						"" +
+						"</tr>" +
+						"</table>" +
+						"<!-- END Module #1 -->" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Module-Divider.gif' height='61' alt='' width='600' />" +
+						"" +
+						"<!-- START Module #2 -->" +
+						"<table cellspacing='0' align='center' style='font-size: 14px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+						"<tr>" +
+						"<td valign='top'>" +
+						"<!-- ************************************** END FIXED JAVA HTML OPENING ************************************** -->" +
+						"<!-- ************************************** START CUSTOM JAVA BODY ************************************** -->" +
+						"<h2 style='font-size: 18px; font-family: Arial, sans-serif; color: #000;'>Password Change:</h2>" +
+						"" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>To reset your password, please visit the following page:</p>" +
+						"<a href='www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db'>www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db</a>" +
+						"<p>&nbsp;</p>" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>When you visit that page, you will be able to change your password. Upon a successful password change an E-Mail confirmation will be sent to you.</p>" +
+						"<p>&nbsp;</p>" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>Your username is: <b>MegamanX</b></p>" +
+						"<p>&nbsp;</p>" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>To edit your profile, go to this page:</p>" +
+						"<a href='www.RealLeanFitness.com?do=editprofile'>www.RealLeanFitness.com?do=editprofile</a>" +
+						"<p>&nbsp;</p>" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>Thanks for helping us maintain the security of your account.</p>" +
+						"<p>&nbsp;</p>" +
+						"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>~ The RealLeanFitness Support Team</p>" +
+						"<a href='www.RealLeanFitness.com?do=contactsupport'>www.RealLeanFitness.com?do=contactsupport</a></p>" +
+						"<!-- ****************************************** END CUSTOM JAVA BODY ****************************************** -->" +
+						"<!-- ************************************** START FIXED JAVA HTML CLOSING ************************************** -->" +
+						"</td>" +
+						"</tr>" +
+						"</table>" +
+						"" +
+						"<!-- END Module #2 -->" +
+						"" +
+						"<!-- END MAIN CONTENT -->" +
+						"" +
+						"<!-- START SOCIAL + COMPANY INFO + SUBSCRIPTION -->" +
+						"<br>" +
+						"<br>" +
+						"<table cellspacing='0' style='font-size: 12px; border-bottom: 1px solid #D0D0D0; font-family: Arial, sans-serif; line-height: 20px; color: #666666; border-top: 1px solid #D0D0D0;' bgcolor='#efefef' cellpadding='0'>" +
+						"<tr>" +
+						"" +
+						"<td height='45' valign='middle' width='30'>&nbsp;</td>" +
+						"" +
+						"<td height='45' valign='middle' width='115'>" +
+						"<b style='color: #333333;'>Follow us on:</b>" +
+						"</td>" +
+						"" +
+						"<!-- START Facebook -->" +
+						"<td height='45' valign='middle' width='50'>" +
+						"<a href='https://www.facebook.com/RealLeanFitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Facebook-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+						"</td>" +
+						"<!-- END Facebook -->" +
+						"" +
+						"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+						"" +
+						"<!-- START Twitter -->" +
+						"<td height='45' valign='middle' width='50'>" +
+						"<a href='https://Twitter.com/RealLeanFitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Twitter-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+						"</td>" +
+						"<!-- END Twitter -->" +
+						"" +
+						"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+						"" +
+						"<!-- START Instagram -->" +
+						"<td height='45' valign='middle' width='50'>" +
+						"<a href='http://Instagram.com/realleanfitness' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Instagram-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+						"</td>" +
+						"<!-- END Instagram -->" +
+						"" +
+						"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+						"" +
+						"<!-- START Google Plus -->" +
+						"<td height='45' valign='middle' width='50'>" +
+						"<a href='https://plus.google.com/106427449538506931543/posts' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Google-Plus-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+						"</td>" +
+						"<!-- END Google Plus -->" +
+						"" +
+						"<td height='45' valign='middle' width='25'>&nbsp;</td>" +
+						"" +
+						"<!-- START Reddit -->" +
+						"<td height='45' valign='middle' width='50'>" +
+						"<a href='https://www.reddit.com' title='' style='color: #3a3a3a; text-decoration: none;'>" +
+						"<img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Reddit-Logo.png' border='0' height='24' alt='' width='24' /></a>" +
+						"</td>" +
+						"<!-- END Reddit -->" +
+						"" +
+						"<td height='45' valign='middle' width='200'>&nbsp;</td>" +
+						"" +
+						"<table cellspacing='0' align='center' style='font-size: 14px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='540' cellpadding='0'>" +
+						"<tr>" +
+						"<td valign='top'>" +
+						"<p style='font-size: 10; font-family: Arial, sans-serif; color: #888888;'>This message was sent to dmastagx@hotmail.com. If you don't want to receive these E-Mails from Real Lean Fitness in the future, please <a href='www.Google.com'>unsubscribe</a>.</p>" +
+						"</td>" +
+						"</tr>" +
+						"</table>" +
+						"" +
+						"</tr>" +
+						"</table>" +
+						"<br>" +
+						"</td>" +
+						"</tr>" +
+						"</table>" +
+						"" +
+						"" +
+						"<table cellspacing='0' align='center' style='font-size: 12px; line-height: 20px; font-family: Arial, sans-serif; color: #666666;' width='560' cellpadding='0'>" +
+						"" +
+						"<tr><td align='center' valign='top'>" +
+						"" +
+						"<!-- START FOOTER CONTENT -->" +
+						"<p>&copy; 2014 <b style='color: #333333;'>www.RealLeanFitness.com</b>. All rights reserved.</p>" +
+						"<!-- END FOOTER CONTENT -->" +
+						"" +
+						"</td></tr></table>" +
+						"" +
+						"<br />" +
+						"" +
+						"</td>" +
+						"</tr>" +
+						"</table>" +
+						"<!-- END Wrapper Table-->" +
 						"</body>" +
-						"</html>";
+						"</html>" +
+						"<!-- ************************************** END FIXED JAVA HTML CLOSING ************************************** -->";
 		
 		
-		return GoogleEMail;
+		return FullSampleEMail;
 	}
-	
+*/	
 	
 }

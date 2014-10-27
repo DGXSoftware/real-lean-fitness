@@ -5,6 +5,8 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.servlet.http.HttpServletResponse;
 
+import dgx.software.com.UtilityPackage.GlobalTools;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -114,7 +116,7 @@ public class MailJavaBean {
 			// Add all the EMailReceiver Recipients (Delimited by a Semicolon ";")
 			String [] EMailReceiverArray = EMailReceiver.split(";");
 			for(int i = 0 ; i < EMailReceiverArray.length; i++){
-				System.out.println("Send To = " + EMailReceiverArray[i]);
+				//System.out.println("Send To = " + EMailReceiverArray[i]);
 				CompleteSenderMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(EMailReceiverArray[i]));
 			}
 
@@ -137,7 +139,14 @@ public class MailJavaBean {
 	// Send a successful HTML Forward response
 	private void sendSuccessForward(HttpServletResponse response) throws IOException {
 		
+        // Since the Password Change was successful
+        // Return the user Home via a Successful Countdown Forward Message
+        String SuccessMessage = "You E-Mail was successfully submitted!\n\n ~ Thank You.";
+        String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
+		response.sendRedirect(SuccessURL);
+		
 		// Send a successful HTML Forward response
+		/*
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<body>");
@@ -147,7 +156,7 @@ public class MailJavaBean {
 		out.println("<meta http-equiv='REFRESH' content='0; url=/' />");
 		out.println("</body>");
 		out.println("</html>");
-		
+		*/
 	}
 	
 	// Send an Error HTML Forward response

@@ -25,38 +25,35 @@
 //MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com");
 //MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com;dmastagx@hotmail.com;rosariojairo@gmail.com");
 MyMailJavaBean.setEMailReceiver("dmastagx@hotmail.com");
+//MyMailJavaBean.setEMailReceiver("RealLeanFitness@GMail.com");
 
 //Set the E-Mail Header Subject
 //MyMailJavaBean.setEMailSubject(request.getParameter( "SenderSubject" ));
-MyMailJavaBean.setEMailSubject("Testing Subject <3");
+MyMailJavaBean.setEMailSubject("Testing Subject <333");
 
 // Set the E-Mail Body
-String CustomBodyHTML =
-"						" +
-"                       		<h1>Password Change:</h1>" +
-		"                            <p>To reset your password, please visit the following page:</p>" +
-		"							<a href='www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db'>www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db</a>" +
-		"							 " +
-		"                            <p>&nbsp;</p>" +
-		"							<p>When you visit that page, you will be able to change your password. Upon a successful password change a confirmation E-Mail will be sent to you.</p>" +
-		"                            <p>&nbsp;</p>" +
-		"							<p>Your username is: MegamanX</p>" +
-		"                            <p>&nbsp;</p>" +
-		"                            <p>To edit your profile, go to this page:</p>" +
-		"							<a href='www.RealLeanFitness.com?do=editprofile'>www.RealLeanFitness.com?do=editprofile</a>" +
-		"						    <p>&nbsp;</p>" +
-		"                            <p>Thanks for helping us maintain the security of your account.</p>" +
-		"							<p>&nbsp;</p>" +
-		"                            <p>~ The RealLeanFitness Support Team</p>" +
-		"							<a href='www.RealLeanFitness.com?do=contactsupport'>www.RealLeanFitness.com?do=contactsupport</a>" +
-		"						";;
+String CustomHTMLBody =
+"<h2 style='font-size: 18px; font-family: Arial, sans-serif; color: #000;'>Password Change:</h2>" +
+"" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>To reset your password, please visit the following page:</p>" +
+"<a href='www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db'>www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db</a>" +
+"<p>&nbsp;</p>" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>When you visit that page, you will be able to change your password. Upon a successful password change an E-Mail confirmation will be sent to you.</p>" +
+"<p>&nbsp;</p>" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>Your username is: <b>MegamanX</b></p>" +
+"<p>&nbsp;</p>" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>To edit your profile, go to this page:</p>" +
+"<a href='www.RealLeanFitness.com?do=editprofile'>www.RealLeanFitness.com?do=editprofile</a>" +
+"<p>&nbsp;</p>" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>Thanks for helping us maintain the security of your account.</p>" +
+"<p>&nbsp;</p>" +
+"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>~ The RealLeanFitness Support Team</p>" +
+"<a href='www.RealLeanFitness.com?do=contactsupport'>www.RealLeanFitness.com?do=contactsupport</a></p>";
 
+// Generate the Complete HTML E-Mail
 String RLFHTMLEMail = "";
-//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailStart());
-//RLFHTMLEMail = RLFHTMLEMail.concat(CustomBodyHTML);
-//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.EMailEnd());
-
-RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
+RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, null);
+//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, "DGX123@RLF.com");
 
 System.out.println(RLFHTMLEMail);
 
