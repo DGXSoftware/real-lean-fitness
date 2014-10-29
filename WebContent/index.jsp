@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%-- JSP Imports --%>
+<%@ page import = "java.net.URLDecoder" %>
+<%@ page import = "java.net.URLEncoder" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,7 +25,9 @@ if(Action != null){
 		String User = (String) request.getParameter("usr");
 		String Key = (String) request.getParameter("key");
 		if(User != null && Key != null){
-		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+Action+"&usr="+User+"&key="+Key);
+		String EncodedUser = URLEncoder.encode(User, "UTF-8");
+		String EncodedKey = URLEncoder.encode(Key, "UTF-8");
+		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+Action+"&usr="+EncodedUser+"&key="+EncodedKey);
 		}
 	}
 }

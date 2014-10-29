@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpSession;
 
 import dgx.software.com.JavaBeanPackage.MailJavaBean;
 import dgx.software.com.UtilityPackage.MailTemplate;
+import dgx.software.com.UtilityPackage.AESEncryption;
 import dgx.software.com.UtilityPackage.GlobalTools;
 
 //import dgx.software.com.UtilityPackage.GlobalMethods;
@@ -98,13 +101,19 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 		try {
 
 			// EXAMPLE: http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+			// Define the Query String Field Names
 			String ActionField = "do";
 			String UserField = "usr";
 			String KeyField = "key";
 			
+			// Define the Query String Field Values
 			String ActionValue = "fpwdc";
 			String UserValue = "";
-			String KeyValue = "965c21ae0dde31bc1c488b49ef08e93fbd1ab3db"; 
+	        // Get the Current Date
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			String NewDateAndTime = SDF.format(c.getTime());
+			String KeyValue = NewDateAndTime; 
 			
 			// Variables for Account basic information
 			String UserEMail = Request.getParameter("UserEMail");
@@ -140,17 +149,22 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			// EXAMPLE: 
 			// http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
 			// www.RealLeanFitness.com?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
-			String Image_Location = "http://" + Request.getServerName() +":"+ Request.getServerPort() + Request.getContextPath();
+			String CurrentHostName = "http://" + Request.getServerName() +":"+ Request.getServerPort() + Request.getContextPath();
          
+			// Encrypt the sensitive data
+			AESEncryption AES = new AESEncryption();
+			String EncryptedUserValue = AES.getURLEncodedAESEncryption(UserValue);
+			String EncryptedKeyValue = AES.getURLEncodedAESEncryption(KeyValue);
+            
 			// Generate the Full Password Change URL
 			String PasswordChangeURL = "";
-			PasswordChangeURL = PasswordChangeURL.concat(Image_Location + "?");
+			PasswordChangeURL = PasswordChangeURL.concat(CurrentHostName + "?");
 			PasswordChangeURL = PasswordChangeURL.concat(ActionField + "=");
 			PasswordChangeURL = PasswordChangeURL.concat(ActionValue + "&");
 			PasswordChangeURL = PasswordChangeURL.concat(UserField + "=");
-			PasswordChangeURL = PasswordChangeURL.concat(UserValue + "&");
+			PasswordChangeURL = PasswordChangeURL.concat(EncryptedUserValue + "&");
 			PasswordChangeURL = PasswordChangeURL.concat(KeyField + "=");
-			PasswordChangeURL = PasswordChangeURL.concat(KeyValue + "");
+			PasswordChangeURL = PasswordChangeURL.concat(EncryptedKeyValue + "");
 			
 			//System.out.println("PasswordChangeURL = " + PasswordChangeURL);
 			

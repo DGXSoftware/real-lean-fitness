@@ -18,28 +18,52 @@ PROPERTIES: Front-End Work / Back-End Work
 <%@ page import = "java.sql.Statement" %>
 <%@ page import = "java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
+<%@ page import = "java.net.URLDecoder" %>
+<%@ page import = "java.net.URLEncoder" %>
+<%@ page import = "dgx.software.com.UtilityPackage.AESEncryption" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 		<%
+		
+		// Object to Decrypt the sensitive data
+		//AESEncryption AESUser = new AESEncryption();
+		//AESEncryption AESKey = new AESEncryption();
+		AESEncryption AES = new AESEncryption();
+		
 		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
-		String Action = (String) request.getParameter("do");
-		String User = (String) request.getParameter("usr");
-		String Key = (String) request.getParameter("key");
+		// Get the ActionValue
+	    String ActionValue = (String) request.getParameter("do");
+		
+	    // Get the Encrypted UserValue and Decrypt it
+		String UserValue = (String) request.getParameter("usr");
+		UserValue = AES.getAESDecryption(UserValue);
+		
+		// Get the Encrypted UserValue and Decrypt it
+		String KeyValue = (String) request.getParameter("key");
+		KeyValue = AES.getAESDecryption(KeyValue);
 		
 		// Set Null query string values to Empty Strings to avoid Null Pointer Exceptions
-		if(Action == null){ Action = ""; }
-		if(User == null){ User = ""; }
-		if(Key == null){ Key = ""; }
+		if(ActionValue == null){ ActionValue = ""; }
+		if(UserValue == null){ UserValue = ""; }
+		if(KeyValue == null){ KeyValue = ""; }
 		
-		// Decrypt the Query String and validate that all values are valid
+		// Validate that all query string values are valid
+		
+		// If IsValidAction is not Empty then It's Valid
 		boolean IsValidAction = false;
-		if(!Action.equals("")){ IsValidAction = true;}
+		if(!ActionValue.equals("")){ IsValidAction = true; }
 	
+		// If IsValidUser is not Empty then It's Valid
 		boolean IsValidUser = false;
-		if(!User.equals("")){ IsValidUser = true;}
+		if(!UserValue.equals("")){ IsValidUser = true; }
 		
+		// If IsValidUser is not Empty and is not expired then It's Valid
 		boolean IsValidKey = false;
-		if(!Key.equals("")){ IsValidKey = true;}
+		if(!KeyValue.equals("")){ 
+			if(!GlobalTools.isLinkExpired(KeyValue)){
+				IsValidKey = true;
+			}
+		}
 		
 		%>
 
@@ -209,7 +233,7 @@ function submitForgotPasswordChange() {
 		<br />
         
         <!-- Pass the Target Username with the Form Submit -->
-        <input type="hidden" name="TargetUsername" value="<%= User %>" />
+        <input type="hidden" name="TargetUsername" value="<%= UserValue %>" />
         
         <!-- Change Password Button -->
 		<input type='button' id='ForgotChangePasswordButton' name='ForgotChangePasswordButton' value='Change Password' onClick="submitForgotPasswordChange();" />
