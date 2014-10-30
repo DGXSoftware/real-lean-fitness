@@ -96,8 +96,8 @@ function submitRegistrationRequest() {
             // Before load, notify the user that the request may take a while 
             beforeSend: function() {
 
-                // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
-                $('#RegistrationFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
+            // Use AJAX to Inject the Sending Now HTML to the appropriate DIV
+            $('#RegistrationFormFeedbackDiv').html("<div id='BeforeSendResults'><font color='blue' size='+2'><b> Sending Now! </b></font></div>");
                 
                         },
                             

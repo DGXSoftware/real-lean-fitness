@@ -24,7 +24,7 @@ Gender VARCHAR(32),
 Date_Of_Birth DATE, 
 Account_Created_On DATETIME, 
 Is_Activated CHAR(1), 
-In_NewsLetter CHAR(1), 
+Is_Verified CHAR(1), 
  
 PRIMARY KEY (Account_ID), 
 UNIQUE (Account_ID), 

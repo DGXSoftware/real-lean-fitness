@@ -31,7 +31,7 @@ ECHO Gender VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Date_Of_Birth DATE, >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Account_Created_On DATETIME, >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO Is_Activated CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
-ECHO In_NewsLetter CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO Is_Verified CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO PRIMARY KEY (Account_ID), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO UNIQUE (Account_ID), >> TEMP\DGXExecuteTemporarySQLCommand.txt

@@ -96,11 +96,13 @@ public class PasswordChangeServlet extends HttpServlet {
 			// Variables for Account basic information
 			String TargetUsername = Request.getParameter("TargetUsername");
 			String OldPassword = Request.getParameter("OldPassword");
-			String ConfirmationOldPassword = Request.getParameter("ConfirmationOldPassword");
+			String OldPasswordConfirmation = Request.getParameter("OldPasswordConfirmation");
 			String NewPassword = Request.getParameter("NewPassword");
 			
+			System.out.println("OldPassword = " + OldPassword);
+			
 			// If the Old Password is not equals to the Confirmation Old Password, throw an exception
-			if(!ConfirmationOldPassword.equals(OldPassword)){
+			if(!OldPasswordConfirmation.equals(OldPassword)){
 				throw new RuntimeException("Invalid Password Confirmation. Please re-confirm your password.");
 			}
 			

@@ -52,7 +52,8 @@ public class MailTemplate {
 						"<tr>" +
 						"<td valign='top'>" +
 						"<!-- ************************************** END FIXED JAVA HTML OPENING ************************************** -->" +
-						"<!-- ************************************** START CUSTOM JAVA BODY ************************************** -->";
+						"<!-- ************************************** START CUSTOM JAVA BODY ************************************** -->" +
+						"";
 
 		
 		return EMailStart;
@@ -151,7 +152,8 @@ public class MailTemplate {
 				"<p style='font-size: 9; font-family: Arial, sans-serif; color: #888888;'>This message was sent to dmastagx@hotmail.com. If you don't want to receive these E-Mails from Real Lean Fitness in the future, please <a href='"+NewsletterUnsubscribeURL+"'>unsubscribe</a>.</p>" +
 				"</td>" +
 				"</tr>" +
-				"</table>";
+				"</table>" +
+				"";
 		        }
 		        
 		EMailEnd = EMailEnd +
@@ -182,8 +184,8 @@ public class MailTemplate {
 				"<!-- END Wrapper Table-->" +
 				"</body>" +
 				"</html>" +
-				"<!-- ************************************** END FIXED JAVA HTML CLOSING ************************************** -->";
-		
+				"<!-- ************************************** END FIXED JAVA HTML CLOSING ************************************** -->" +
+		        "";
 		return EMailEnd;
 		
 	}

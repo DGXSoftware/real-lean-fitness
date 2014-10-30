@@ -63,7 +63,7 @@ if(AccountIDToActivate.equals("")){
 }else{
 
 	// Set the Cancel Message
-	String CancelMessage = "Transaction Canceled. Returning to homepage.";
+	String CancelMessage = "PayPal Transaction Canceled. Returning to homepage.";
 	
 	// Define the PayPalSuccessURL and PayPalCancelURL
 	String PayPalSuccessURL = "http://www.RealLeanFitness.com/JSP/PayPal/PayPalSuccess.jsp?Account_ID=" + AccountIDToActivate;

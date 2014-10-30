@@ -107,7 +107,7 @@ function submitRequestForgotPasswordChange() {
             <%
             // Since the Password Change was successful
             // Return the user Home via a Successful Countdown Forward Message
-            String SuccessMessage = "Please check your E-Mail on instructions to change your password.";
+            String SuccessMessage = "Please check your E-Mail for instructions to change your password.";
             String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
             %>
                 

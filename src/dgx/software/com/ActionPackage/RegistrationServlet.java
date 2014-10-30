@@ -116,9 +116,9 @@ public class RegistrationServlet extends HttpServlet {
 			// Variables for Account creation Date
 			String Account_Created_On = "NOW()";
 			
-			// Default Values
+			// Default Account Status Values
 			char IsActivated = 'N';
-			char InNewsLetter = 'Y';
+			char IsVerified = 'N';
 		
 			// Create an Entry for the new account that was created in the RLF_Accounts Table.
 			String AccountSQLQuery = "INSERT INTO RLF_Accounts (" +
@@ -131,7 +131,7 @@ public class RegistrationServlet extends HttpServlet {
 					"Date_Of_Birth," +
 					"Account_Created_On," +
 					"Is_Activated," +
-					"In_NewsLetter" +
+					"Is_Verified" +
 					")" +
 					"VALUES (" +
 					"\""+Username+"\"," +
@@ -143,7 +143,7 @@ public class RegistrationServlet extends HttpServlet {
 					"\""+Date_Of_Birth+"\"," +
 					""+Account_Created_On+"," +
 					"\""+IsActivated+"\"," +
-					"\""+InNewsLetter+"\"" +
+					"\""+IsVerified+"\"" +
 					");" +
 					"";
 			

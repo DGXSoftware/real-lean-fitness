@@ -100,7 +100,6 @@ function isValidNameField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFee
 	 return false;
 	//Return Invalid
 	}
-	
 
 }
 
@@ -463,6 +462,61 @@ function isValidConfirmation(CurrentTextFieldID, CurrentTextFieldIconID, Current
 	
 }
 
+//NAME: isValidRandomField
+//DESCRIPTION: Tests if the value of a field is not Empty 
+//PARAMETERS: CurrentTextFieldID = ID attribute value for the field
+//            CurrentTextFieldIconID = ID attribute value for the field icon
+//            CurrentFeedbackDivID = ID attribute value for the Summary Feedback DIV
+//            IsEmptyPermitted = Decide if this is a required field (true = Optional Field, false = Required Field)
+//RETURN: true = Field is Valid (Not Epty)
+//    false = Field is NOT Valid (Empty)
+function isValidRandomField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+
+	// Default to Empty not permitted (Ignored parameter)
+	IsEmptyPermitted = false;
+
+	// Get the Field and Field Icon Objects
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldIconObject = document.getElementById(CurrentTextFieldIconID);
+	
+	// Get the Field Name
+	// Also, find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeautifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+	// If a Form Feedback Div Name is provided set it so that this method alerts about Invalid input in the Feedback Div.
+	var AlertOnBadInput = null;
+	if (CurrentFeedbackDivID === ''){
+	AlertOnBadInput = false;
+	}else {
+	AlertOnBadInput = true;
+	}
+
+	// Validate the Current Field (Check if the current field is Empty)
+	if(isEmptyField(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID) === false){
+	// Return Valid
+	CurrentTextFieldIconObject.src = "/Images/Icons/Valid/Valid(16x16).png";
+	CurrentTextFieldIconObject.style.visibility = "visible";
+	if (AlertOnBadInput == true){
+	$('#'+CurrentFeedbackDivID+'').empty();
+	CurrentTextFieldObject.style.background = "white";
+	}
+	return true;
+	//Return Valid
+	}else {
+	//Return Invalid
+	 CurrentTextFieldIconObject.src = "/Images/Icons/Invalid/Invalid(16x16).png";
+	 CurrentTextFieldIconObject.style.visibility = "visible";
+	 if (AlertOnBadInput == true){
+	 $('#'+CurrentFeedbackDivID+'').html("<div id='RegistrationErrorFeedbackDiv'>Invalid "+CurrentTextFieldName+".</div>");
+   CurrentTextFieldObject.style.background = "yellow"; 
+	 }
+	 return false;
+	//Return Invalid
+	}
+
+}
+
 /********************************************************************************************************************************************/
 /********************************************************************************************************************************************/
 /********************************************************************************************************************************************/
@@ -637,6 +691,35 @@ function isValidConfirmationAlert(CurrentTextFieldID, CurrentTextFieldIconID, Cu
     	msg += 'It does not match the ' + CurrentTextFieldToConfirmName + ': [ ' + CurrentTextFieldToConfirmObject.value + ' ]\n\n';
     	alert(msg);
     	CurrentTextFieldToConfirmObject.focus();	
+    	return false;
+    }else{
+    	return true;
+    }
+}
+
+// isValidRandomFieldAlert
+function isValidRandomFieldAlert(CurrentTextFieldID, CurrentTextFieldIconID, CurrentFeedbackDivID, IsEmptyPermitted){
+    
+	// Default to Empty not permitted (Ignored parameter)
+	IsEmptyPermitted = false;
+	
+	// Get the Current Field ID and use it to get the Field's display name
+	// Find each occurrence of a lower case character followed by an upper case character, and insert a space between them.
+	// Example; The text "HelloBeatifulWorld" will become "Hello Beautiful World" 
+	var CurrentTextFieldObject = document.getElementById(CurrentTextFieldID);
+	var CurrentTextFieldName = CurrentTextFieldObject.name.replace(/([a-z])([A-Z])/g, "$1 $2");
+	
+    if(!isValidRandomField(CurrentTextFieldID,CurrentTextFieldIconID,CurrentFeedbackDivID,IsEmptyPermitted)){
+
+    	// Only Allow Letters (SIZE: ? - ?)
+    	var msg  = 'Invalid ' + CurrentTextFieldName + ': [ ' + CurrentTextFieldObject.value + ' ]\n\n';
+    	msg += 'Your ' + CurrentTextFieldName;
+    	if (IsEmptyPermitted == false) {msg += ' cannot be empty.';}
+    	//msg += '\nIt must also be between ? - ? characters long.';
+    	//if (IsEmptyPermitted == true) {msg += '\n\nNOTE: A blank ' + CurrentTextFieldName + ' is also permitted.';}
+    	alert(msg);
+    	CurrentTextFieldObject.focus();
+    	
     	return false;
     }else{
     	return true;

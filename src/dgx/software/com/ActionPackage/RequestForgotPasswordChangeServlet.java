@@ -30,8 +30,6 @@ import dgx.software.com.UtilityPackage.MailTemplate;
 import dgx.software.com.UtilityPackage.AESEncryption;
 import dgx.software.com.UtilityPackage.GlobalTools;
 
-//import dgx.software.com.UtilityPackage.GlobalMethods;
-
 @SuppressWarnings("serial")
 public class RequestForgotPasswordChangeServlet extends HttpServlet {
 	
@@ -180,7 +178,7 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			// Set the E-Mail Body
 			String CustomHTMLBody =
 			"<h2 style='font-size: 18px; font-family: Arial, sans-serif; color: #000;'>Password Change:</h2>" +
-			"" +
+			"<p>&nbsp;</p>" +
 			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>To reset your password, please visit the following page:</p>" +
 			"<a href='"+PasswordChangeURL+"'>"+PasswordChangeURL+"</a>" +
 			"<p>&nbsp;</p>" +
@@ -218,7 +216,7 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// (Account NOT Found) Write the Error Response
-			String LoginErrorMessage = "The Password Change E-Mail failed to send. Please try again.";
+			String LoginErrorMessage = "This is not an active E-Mail in our system. Please provide an active E-Mail.";
 			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, LoginErrorMessage);"
 			throw new RuntimeException(LoginErrorMessage);
 		}

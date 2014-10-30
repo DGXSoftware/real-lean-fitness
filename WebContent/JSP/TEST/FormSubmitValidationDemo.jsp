@@ -53,7 +53,7 @@ body {
   <form name="MyForm" action="">
   
   
-  <label for="FirstName">
+<label for="FirstName">
 <input type="text" id="FirstName" name="FirstName" onKeyUp="isValidNameField('FirstName','FirstNameIcon','',false);" />
 <img id="FirstNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
 </label>

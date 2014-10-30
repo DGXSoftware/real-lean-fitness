@@ -56,7 +56,7 @@ boolean AccountWasActivated = MyUserSQLDBJavaBean.activateAccount(request, respo
 
 // Proceed with successful activation
 if(AccountWasActivated == true){
-	String SuccessfulMessage = "Your account has been successfully activated!";
+	String SuccessfulMessage = "PayPal Transaction Success! Your account has been successfully activated!";
 	response.sendRedirect(GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessfulMessage+"");
 }
 //Proceed with bad activation
