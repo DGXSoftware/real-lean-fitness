@@ -8,5 +8,7 @@
 </head>
 <body>
 
+<h1>Newsletter Subscription</h1>
+
 </body>
 </html>

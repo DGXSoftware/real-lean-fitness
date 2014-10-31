@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>E-Mail Verification</title>
 </head>
 <body>
+
+<h1>E-Mail Verification</h1>
 
 </body>
 </html>

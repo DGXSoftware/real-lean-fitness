@@ -53,6 +53,9 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_Settings_NewsletterSubscription %>
 	public static final String GTV_Settings_NewsletterSubscription = "/JSP/UserPages/Settings/NewsletterSubscription.jsp";
 	
+	// <%= GlobalTools.GTV_Settings_EMailVerification %>
+	public static final String GTV_Settings_EMailVerification = "/JSP/UserPages/Settings/EMailVerification.jsp";
+    
 	// <%= GlobalTools.GTV_ContactUs %>
 	public static final String GTV_ContactUs = "/JSP/Mail/ContactUs.jsp";
 	
@@ -226,8 +229,8 @@ public class GlobalTools {
 		if(SessionIsVerified.equals("N")){
 		
 		// If the user is Not activated, point them to the Account Activation Site
-		String AccountActivationURL = "/JSP/UserPages/Settings/EMailVerification" + "?" + "RegistrationUsername=" + SessionUsername;
-		
+		String AccountActivationURL = GlobalTools.GTV_Settings_EMailVerification;
+			
 		out.println("<div class='VerificationFixedMessage'>");
 		out.println("<p>Your E-Mail is not verified. Please <a href='" + AccountActivationURL + "'>Click here</a> to verify your E-Mail.</p>");
 		out.println("</div>");

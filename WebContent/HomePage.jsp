@@ -477,9 +477,9 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
       });
 </script>
 
-
-<!-- This scripts are unrelated to page loading  -->
-<script src="/JavaScript/LocalStorage/RLFHomePageLocalStorage.js"></script>
+<!-- These scripts are unrelated to page loading  -->
+<!-- Enable Local Storage -->
+<script src="/JavaScript/LocalStorage.js?UserRememberMeCheckBoxID=LoginRememberMe&UserFieldRememberListIDs=LoginUsername;LoginPassword"></script>
 
 <%
 }else{
