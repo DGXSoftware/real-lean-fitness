@@ -98,7 +98,7 @@ public class LoginServlet extends HttpServlet {
 			String LoginPassword = Request.getParameter("LoginPassword");
 
 			// SQL Query
-			String SQLQuery = "SELECT Account_ID, Username, First_Name, Is_Activated FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
+			String SQLQuery = "SELECT Account_ID, Username, First_Name, Is_Activated, Is_Verified FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
 
 			// Get the SQLQueryOutput
 			ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);
@@ -114,7 +114,8 @@ public class LoginServlet extends HttpServlet {
 			String Username = SQLQueryOutput.getString("Username");
 			String FirstName = SQLQueryOutput.getString("First_Name");
 			String IsActivated = SQLQueryOutput.getString("Is_Activated");
-			
+			String IsVerified = SQLQueryOutput.getString("Is_Verified");
+            
 			// Returns null if no session already exists 
 			HttpSession CurrentSession =  Request.getSession(false);
 			
@@ -135,6 +136,7 @@ public class LoginServlet extends HttpServlet {
 			if(Username != null) CurrentSession.setAttribute("Username", Username);
 			if(FirstName != null) CurrentSession.setAttribute("FirstName", FirstName);
 			if(IsActivated != null) CurrentSession.setAttribute("IsActivated", IsActivated);
+			if(IsVerified != null) CurrentSession.setAttribute("IsVerified", IsVerified);
 
 			// Reset the Pointer changed by the if statement above
 			SQLQueryOutput.beforeFirst();

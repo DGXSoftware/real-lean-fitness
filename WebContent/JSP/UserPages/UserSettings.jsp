@@ -35,6 +35,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+		String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	
 %>
 
@@ -58,18 +59,26 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
 		
 		<!-- Include the Stylesheet Files -->
-		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css' />
+		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
+		
+		<!-- Include the jQuery Files -->
+		<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
+		<!--
+		EXTERNAL jQuery Import
+		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		-->
 		
 		<!-- Include the JavaScript Files -->
-		<script language='javascript' type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
+		<!-- <script type='text/javascript' src='/JavaScript/FieldConvenience.js' > </script> -->
 		
 		</head>
 		
 		<body>
 
         <%
-        // Display a Fixed DIV that reminds non activated users how to activate.
-        GlobalTools.displayActivationMessage(out, SessionUsername, SessionIsActivated);
+        // Display a Fixed DIV that reminds non activated users how to activate and how to verify their account.
+        GlobalTools.displayUserStatusMessage(out, SessionUsername, SessionIsActivated, SessionIsVerified);
 	    %>
 
 		<div id='container'>

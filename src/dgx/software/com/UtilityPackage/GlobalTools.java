@@ -156,16 +156,16 @@ public class GlobalTools {
 	}
 	
 	/*************************************************************************************************
-	NAME:        displayActivationMessage
+	NAME:        displayUserStatusMessage
 	DESCRIPTION: Displays a Fixed DIV that reminds non activated users how to activate.
 	PARAMETERS:  (JspWriter out, String SessionUsername, String SessionIsActivated)
 	RETURN:      VOID
 	SIDE-EFFECT: NONE.
 	*************************************************************************************************/
 	// Returns a Successful HTML Response and forward appropriately.
-	public static void displayActivationMessage(JspWriter out, String SessionUsername, String SessionIsActivated) throws IOException{
+	public static void displayUserStatusMessage(JspWriter out, String SessionUsername, String SessionIsActivated, String SessionIsVerified) throws IOException{
 		
-		// START HTML Response
+		// START Activation HTML Response
 		out.println("");
 		out.println("<style>");
 		out.println("");
@@ -176,7 +176,7 @@ public class GlobalTools {
 		out.println("width: 100%;");
 		out.println("overflow-y: auto;");
 		out.println("color: black;");
-		out.println("background-color: white;");
+		out.println("background-color: orange;");
 		out.println("border: solid 1px red;");
 		out.println("padding: 2px 5px;");
 		out.println("margin: auto;");
@@ -198,8 +198,49 @@ public class GlobalTools {
 		out.println("</div>");
 	    
 	    }
-		// END HTML Response
+		// END Activation HTML Response
 
+		// START Verification HTML Response
+		out.println("");
+		out.println("<style>");
+		out.println("");
+		out.println(".VerificationFixedMessage {");
+		out.println("top: auto;");
+		out.println("left: auto;");
+		out.println("max-height: 100%;");
+		out.println("width: 100%;");
+		out.println("overflow-y: auto;");
+		out.println("color: black;");
+		out.println("background-color:cyan;");
+		out.println("border: solid 1px red;");
+		out.println("padding: 2px 5px;");
+		out.println("margin: auto;");
+		out.println("text-align: center;");
+		out.println("position: relative;");
+		out.println("}");
+		out.println("");
+		out.println("</style>");
+		out.println("");
+        
+		// If SessionIsActivated is 'N' for No, then show the message below.
+		if(SessionIsVerified.equals("N")){
+		
+		// If the user is Not activated, point them to the Account Activation Site
+		String AccountActivationURL = "/JSP/UserPages/Settings/EMailVerification" + "?" + "RegistrationUsername=" + SessionUsername;
+		
+		out.println("<div class='VerificationFixedMessage'>");
+		out.println("<p>Your E-Mail is not verified. Please <a href='" + AccountActivationURL + "'>Click here</a> to verify your E-Mail.</p>");
+		out.println("</div>");
+	    
+	    }
+		// END Verification HTML Response
+		
+		
+		
+		
+		
+		
+		
 		// Close the stream to complete the page
 		//out.close();
 		

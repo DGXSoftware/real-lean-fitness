@@ -35,6 +35,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+		String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	
 %>
 
@@ -61,9 +62,6 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<!-- Include the Stylesheet Files -->
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
 		
-		<!-- Include the JavaScript Files -->
-		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
-		
 		<!-- Include the jQuery Files -->
 		<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
 		<!--
@@ -71,10 +69,14 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		-->
 		
+		<!-- Include the JavaScript Files -->
+		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/FieldConvenience.js' > </script>
+		
 <script>
 
 // Submits the Login Request
-function submitPasswordChange() {
+function submitForm() {
 
     // Validate the User Input before Submitting. Set it so it Alerts about the specific User
     // Input that is invalid. IF this method returns false, stop further execution and don't submit.
@@ -201,7 +203,7 @@ function submitPasswordChange() {
         <input type="hidden" name="TargetUsername" value="<%= SessionUsername %>" />
         
         <!-- Change Password Button -->
-		<input type='button' id='ChangePasswordButton' name='ChangePasswordButton' value='Change Password' onClick="submitPasswordChange();" />
+		<input type='button' id='ChangePasswordButton' name='ChangePasswordButton' value='Change Password' onClick="submitForm();" />
         
 		</form>
 	    

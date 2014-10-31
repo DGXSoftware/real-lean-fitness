@@ -102,7 +102,8 @@ public class RegistrationServlet extends HttpServlet {
 			String EMail = Request.getParameter("RegistrationEMail");
 			String Gender = Request.getParameter("RegistrationGender");
 			String Date_Of_Birth = Request.getParameter("RegistrationBirthYear") + "-" + Request.getParameter("RegistrationBirthMonth") + "-" + Request.getParameter("RegistrationBirthDay");
-
+			//String SignUpForNewsletter = Request.getParameter("SignUpForNewsletter");
+			
 			// Variables for Account creation Date
 			/*
 			Date CurrentDate = new Date();

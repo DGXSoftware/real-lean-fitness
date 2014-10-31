@@ -82,6 +82,7 @@ if(IsValidAction == true && IsValidUser == true && IsValidKey == true){
 		//String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		//String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		//String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+		//String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	
 %>
 
@@ -108,9 +109,6 @@ if(IsValidAction == true && IsValidUser == true && IsValidKey == true){
 		<!-- Include the Stylesheet Files -->
 		<link rel='stylesheet' type='text/css' href='/CSS/RLFStyle.css?<%= Math.random() %>' />
 		
-		<!-- Include the JavaScript Files -->
-		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
-		
 		<!-- Include the jQuery Files -->
 		<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
 		<!--
@@ -118,10 +116,14 @@ if(IsValidAction == true && IsValidUser == true && IsValidKey == true){
 		<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		-->
 		
+		<!-- Include the JavaScript Files -->
+		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
+		<script type='text/javascript' src='/JavaScript/FieldConvenience.js' > </script>
+		
 <script>
 
-// Submits the Login Request
-function submitForgotPasswordChange() {
+// Submits the Request
+function submitForm() {
 
     // Validate the User Input before Submitting. Set it so it Alerts about the specific User
     // Input that is invalid. IF this method returns false, stop further execution and don't submit.
@@ -236,7 +238,7 @@ function submitForgotPasswordChange() {
         <input type="hidden" name="TargetUsername" value="<%= UserValue %>" />
         
         <!-- Change Password Button -->
-		<input type='button' id='ForgotChangePasswordButton' name='ForgotChangePasswordButton' value='Change Password' onClick="submitForgotPasswordChange();" />
+		<input type='button' id='ForgotChangePasswordButton' name='ForgotChangePasswordButton' value='Change Password' onClick="submitForm();" />
         
 		</form>
 	    

@@ -19,15 +19,7 @@ var UserSubmitButtonName = "LoginButton";
     	  
     	  // Retrieve the Appropriate Credentials from Local Storage 
     	  getLocalStorageCredentials(UserFieldRememberListIDs);
-    	  
-    	  // On Click Manage the Local Storage (Remember or Forget Credentials)
-    	  $("#"+ UserSubmitButtonName).click(function(){
-    		  
-    			// Manage Local Storage to Remember or Forget Credentials
-    		    manageLocalStorageSubmit();
-    	    }); 
-
-    	  
+        
       });
 
 /* ======================================================================================================================================= */

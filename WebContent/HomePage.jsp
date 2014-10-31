@@ -55,18 +55,38 @@ if(!(GlobalTools.isUserCurrentlyLoggedIn(request,response))){
 </style>
 
 <script>
-
-//Handle User Submit for Registration once the user presses Enter on a Registration Field
-function checkIfEnteredPressedForRegistration(event){
+// START: ENABLE FIELD CONVENIENVE
+$(document).ready(function() {
 	
-	    // If Entered was pressed Submit the Registration Form
-	    if (event.which == 13 || event.keyCode == 13) {
-	    	submitRegistrationRequest();
-	            //code to execute here
-	            return false;
-	        }
+	// ENABLE: Highlight all Values for all Text Fields when focused
+    $("input:text").focus(function() { $(this).select(); } );
+	
+    // ENABLE: Highlight all Values for all Password Fields when focused
+    $("input:password").focus(function() { $(this).select(); } );
+  	
+    // ENABLE: Submit on Enter press For all Text Fields with an ID of pattern "Registration"
+    // Use JQuery to gather all the matching "Registration*" elements
+    $("[id^=Registration]").keypress(function (e) {
+  	  if (e.which == 13) {
+  	    submitRegistrationRequest();
+  	    return false;
+  	  }
+  	});
+  	
+    // ENABLE: Submit on Enter press For all Text Fields with an ID of pattern "Login"
+    // Use JQuery to gather all the matching "Login*" elements
+    $("[id^=Login]").keypress(function (e) {
+  	  if (e.which == 13) {
+  	    submitLoginRequest();
+  	    return false;
+  	  }
+  	});
+    
+});
+//END: ENABLE FIELD CONVENIENVE
+</script>
 
-}
+<script>
 
 // Submits the Registration Request
 function submitRegistrationRequest() {
@@ -74,18 +94,9 @@ function submitRegistrationRequest() {
 	// Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
 	// IF this method returns false, stop further execution and don't submit.
 	if (validateFormOnSubmit("RegistrationFormFeedbackDiv") === false){ return false; }
-	
-	/* RETIRED */
-	/*
-	// If the Registration User Input was not validated successfully, stop further processing (Do not Submit) 
-	if(validateRegistrationFormInput() === false){
-		return false;
-	}
-	*/
 
 // Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
 // IF this method returns false, stop further execution and don't submit.
-
 
         var jqxhr = $.ajax({
             type:       "POST",
@@ -146,18 +157,6 @@ function submitRegistrationRequest() {
 
 <script>
 
-//Handle User Submit for Login once the user presses Enter on a Login Field
-function checkIfEnteredPressedForLogin(event){
-	
-	    // If Entered was pressed Submit the Login Form
-	    if (event.which == 13 || event.keyCode == 13) {
-	    	submitLoginRequest();
-	            //code to execute here
-	            return false;
-	        }
-
-}
-
 // Submits the Login Request
 function submitLoginRequest() {
 
@@ -168,7 +167,6 @@ function submitLoginRequest() {
 
 // Validate the User Input before Submitting. Set it so it Alerts about the specific User Input that is invalid. 
 // IF this method returns false, stop further execution and don't submit.
-
 
         var jqxhr = $.ajax({
             type:       "POST",
@@ -188,6 +186,9 @@ function submitLoginRequest() {
             // show alert with results
             success:    function(data, status) {
 
+    		// Manage Local Storage to Remember or Forget Credentials
+    		manageLocalStorageSubmit();
+            	
             // Redirect to the appropriate page upon successful Login authentication
             window.location = "<%= GlobalTools.GTV_UserProfile %>";
 
@@ -330,10 +331,19 @@ function submitLoginRequest() {
 		<!-- Call the (populateDateMenu) to populate the RegistrationBirthDay, RegistrationBirthMonth, and RegistrationBirthYear Drop-Down Menu-->
 		<script type='text/javascript'>populateDateMenu('RegistrationBirthDay', 'RegistrationBirthMonth', 'RegistrationBirthYear');</script> 
 		 
+		<br/>
+		<br/>
+		<br/>
+		
+		<label for="SignUpForNewsletter">
+		<input type="checkbox" name="SignUpForNewsletter" id="SignUpForNewsletter">Sign up for our newsletter<br>
+		<script>document.getElementById("SignUpForNewsletter").checked = true;</script>
+		</label>
+		
 		<br />
 		<br />
 		<br />
-		 
+		
 		<!-- Registration Button -->
 		<input type='button' id='RegistrationButton' name='RegistrationButton' value='Register' onClick="submitRegistrationRequest();" />
 
@@ -358,7 +368,7 @@ function submitLoginRequest() {
 		<div id="LoginFormFeedbackDiv" name="LoginFormFeedbackDiv"></div>
 		
 		<!-- Retrieve the Username -->
-		<p> Username: </p> <input type='text' id='LoginUsername' name='LoginUsername' size='32' onkeypress="return checkIfEnteredPressedForLogin(event);" />
+		<p> Username: </p> <input type='text' id='LoginUsername' name='LoginUsername' size='32' />
 		<script type='text/javascript'>
 		// Set the initial focus on the LoginUsername Element
 		document.getElementById('LoginUsername').focus();
@@ -367,7 +377,7 @@ function submitLoginRequest() {
 		<br />
 		 
 		<!-- Retrieve the Password -->
-		<p> Password: </p> <input type='password' id='LoginPassword' name='LoginPassword' size='32' onkeypress="return checkIfEnteredPressedForLogin(event);" />
+		<p> Password: </p> <input type='password' id='LoginPassword' name='LoginPassword' size='32' />
 		 
 		<p>&#160;</p>
 		 
@@ -427,9 +437,9 @@ int RandomNumber = (int)(Math.random() * Range) + Min;
         document.getElementById("RegistrationEMail").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("RegistrationEMailConfirmation").value = "DGX_" + "<%= RandomNumber %>" + "@RLF.com";
         document.getElementById("RegistrationGender").selectedIndex = "2";
-        document.getElementById("RegistrationBirthDay").selectedIndex = "4";
-        document.getElementById("RegistrationBirthMonth").selectedIndex = "4";
-        document.getElementById("RegistrationBirthYear").selectedIndex = "4";
+        document.getElementById("RegistrationBirthDay").selectedIndex = "18";
+        document.getElementById("RegistrationBirthMonth").selectedIndex = "10";
+        document.getElementById("RegistrationBirthYear").selectedIndex = "28";
         
         // LOGIN TEST STUFF
         //document.getElementById("LoginUsername").value = "TestUsername9437";
