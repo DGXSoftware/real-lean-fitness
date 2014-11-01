@@ -369,7 +369,7 @@ function submitLoginRequest() {
 		
 		<!-- Retrieve the Username -->
 		<p> Username: </p> <input type='text' id='LoginUsername' name='LoginUsername' size='32' />
-		<script type='text/javascript'>
+		<script>
 		// Set the initial focus on the LoginUsername Element
 		document.getElementById('LoginUsername').focus();
 		</script>

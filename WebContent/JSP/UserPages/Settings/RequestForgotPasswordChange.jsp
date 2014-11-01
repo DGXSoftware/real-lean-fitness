@@ -23,8 +23,10 @@ PROPERTIES: Front-End Work / Back-End Work
 
 
 <%
-boolean AlwaysTrue = true;
 // Display the main body if the user is not logged in, else forward the users to the Homepage
+//if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
+// Allow Everybody to see this page
+boolean AlwaysTrue = true;
 if(AlwaysTrue == true){
 	
 		// attempt to process a vote and display current results
@@ -173,6 +175,10 @@ function submitForm() {
         <input type="text" id="UserEMail" name="UserEMail" onKeyUp="isValidEMail('UserEMail','UserEMailIcon','',false);" 
         title='New Password' size='32' maxlength='32' />
         <img id="UserEMailIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <script>
+		// Set the initial focus on the UserEMail Element
+		document.getElementById('UserEMail').focus();
+		</script>
         </label>
 		
         <br />

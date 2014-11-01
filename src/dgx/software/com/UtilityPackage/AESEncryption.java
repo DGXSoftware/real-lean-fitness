@@ -122,6 +122,10 @@ public class AESEncryption {
     // Get an Encrypted String from PlainText
     public String getAESEncryption (String TextToEncrypt){
     	
+    	// Return Null for Requests with Null Parameters or Empty Strings
+    	if(TextToEncrypt == null) return null;
+    	else if(TextToEncrypt.equals("")){return null;}
+    	
     	// Encrypt and Return
         final String strToEncrypt = TextToEncrypt;
         AESEncryption.encrypt(strToEncrypt);
@@ -134,6 +138,10 @@ public class AESEncryption {
     // Get a Decrypted/PlainText String from an Encrypted String
     public String getAESDecryption (String TextToDecrypt){
 
+    	// Return Null for Requests with Null Parameters or Empty Strings
+    	if(TextToDecrypt == null) return null;
+    	else if(TextToDecrypt.equals("")){return null;}
+    	
     	// Decrypt and Return
         final String strToDecrypt =  TextToDecrypt;
         AESEncryption.decrypt(strToDecrypt);
@@ -145,6 +153,10 @@ public class AESEncryption {
     
     // Get an Encrypted String from PlainText (And Add URL Encoding for query string use)
     public String getURLEncodedAESEncryption (String TextToEncryptAndEncode){
+    	
+    	// Return Null for Requests with Null Parameters or Empty Strings
+    	if(TextToEncryptAndEncode == null) return null;
+    	else if(TextToEncryptAndEncode.equals("")){return null;}
     	
     	try {
     	
@@ -165,6 +177,10 @@ public class AESEncryption {
     // Get a Decrypted/PlainText String from an Encrypted String (And Add URL Decoding for query string use)
     public String getURLDecodedAESDecryption (String TextToDecodeAndDecrypt){
         
+    	// Return Null for Requests with Null Parameters or Empty Strings
+    	if(TextToDecodeAndDecrypt == null) return null;
+    	else if(TextToDecodeAndDecrypt.equals("")){return null;}
+    	
     	try {
     		
     		// Decode, Decrypt, then return

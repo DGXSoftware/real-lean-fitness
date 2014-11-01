@@ -22,14 +22,19 @@
 	
 	<!-- Include the jQuery Files -->
 	<script type='text/javascript' src="/JavaScript/JQuery/jquery.js"></script>
+	<!--
+	EXTERNAL jQuery Import
+	<script type = "text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	-->
 	
 	<!-- Include the Contact Me JavaScript File -->
 	<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js?<%= Math.random() %>' > </script>
+	<script type='text/javascript' src='/JavaScript/FieldConvenience.js' > </script>
 	<script type='text/javascript' src='/JavaScript/Captcha.js' > </script>
-		
+	
 	<script>
 	
-	function SubmitContactUs(f){
+	function submitForm(f){
 		
         // Validate the User Input before Submitting. Set it so it Alerts about the specific User
         // Input that is invalid. IF this method returns false, stop further execution and don't submit.
@@ -49,9 +54,15 @@
         //If the Sender Message is not valid Alert so, and stop further processing
         if(!isValidRandomFieldAlert('SenderMessage','SenderMessageIcon','',false)){ return false; }
 
+        // Assign the SenderSubject Value to SenderSubjectSummary
+        document.getElementById("SenderSubjectSummary").value = document.getElementById("SenderSubject").value;
+        
+        // Personalize the SenderSubject by adding "RLF Contact Us - "
+        document.getElementById("SenderSubject").value='RLF Contact Us - ' + document.getElementById("SenderSubject").value;
+        
             var jqxhr = $.ajax({
                 type:       "POST",
-                url:        "/SendEMailServlet",
+                url:        "/ContactUsEMailServlet",
                 cache:      false,
                 data:       $("form").serialize(),
                     
@@ -129,12 +140,12 @@
  <!-- Create the Contact Us Form -->
 <form id="ContactUsForm" name="ContactUsForm" method="post" >
 
-<!-- Login For Feedback Div -->
-<div id="ContactUsFormFeedbackDiv" name="ContactUsFormFeedbackDiv"></div>
-
 <b>We would love to hear from you!&nbsp; Fill out the form below and we'll get back to you as soon possible.</b>
 
 <br />
+<br />
+<!-- Feedback DIV -->
+<div id="ContactUsFormFeedbackDiv" name="ContactUsFormFeedbackDiv"></div>
 <br />
 <br />
 
@@ -145,6 +156,10 @@
         <input type="text" id="SenderFirstName" name="SenderFirstName" onKeyUp="isValidNameField('SenderFirstName','SenderFirstNameIcon','',false);" 
         title='Sender First Name' size='32' maxlength='32' />
         <img id="SenderFirstNameIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <script>
+		// Set the initial focus on the OldPassword Element
+		document.getElementById('SenderFirstName').focus();
+		</script>
         </label>
         
 <br />
@@ -250,11 +265,14 @@ $( document ).ready(function() {
 </script>
 <!-- END DISABLED Captcha and Attachment -->
 
- <!-- Set the E-Mail Recipient -->
+<!-- Set the E-Mail Recipient -->
 <input type="hidden" id="Recipient" name="Recipient" value="RealLeanFitness@GMail.com" />
 
+<!-- Set the E-Mail Recipient -->
+<input type="hidden" id="SenderSubjectSummary" name="SenderSubjectSummary" value="" />
+
 <center>
-<input type="button" name="MyContactMeSubmitButton" Value="Submit Form" onClick="SubmitContactUs(document.ContactUsForm);" />
+<input type="button" name="MyContactMeSubmitButton" Value="Submit Form" onClick="submitForm();" />
 </center>
  
  </form>
@@ -262,11 +280,11 @@ $( document ).ready(function() {
 <script>
 // TEMPORARY TEST VALUES
 $( document ).ready(function() {
-	//document.getElementById("SenderFirstName").value='TESTFIRSTNAME';
-	//document.getElementById("SenderLastName").value='TESTLASTNAME';
-	//document.getElementById("SenderEMail").value='RealLeanFitness@GMail.com';
-	//document.getElementById("SenderSubject").value='TEST SUBJECT';
-	//document.getElementById("SenderMessage").value='TEST SENDER MESSAGE';
+	document.getElementById("SenderFirstName").value='TESTFIRSTNAME';
+	document.getElementById("SenderLastName").value='TESTLASTNAME';
+	document.getElementById("SenderEMail").value='RealLeanFitness@GMail.com';
+	document.getElementById("SenderSubject").value='TEST SUBJECT';
+	document.getElementById("SenderMessage").value='TEST SENDER MESSAGE';
 });
 </script>
  

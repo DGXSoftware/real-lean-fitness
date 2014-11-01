@@ -176,6 +176,10 @@ function submitForm() {
         <input type="text" id="OldPassword" name="OldPassword" onKeyUp="isValidPassword('OldPassword','OldPasswordIcon','',false); isValidConfirmation('OldPasswordConfirmation','OldPasswordConfirmationIcon','','OldPassword',false);" 
         title='Old Password' size='32' maxlength='32' />
         <img id="OldPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <script>
+		// Set the initial focus on the OldPassword Element
+		document.getElementById('OldPassword').focus();
+		</script>
         </label>
 		 
 		<!-- Password VARCHAR(32) -->

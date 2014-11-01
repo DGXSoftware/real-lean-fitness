@@ -26,19 +26,17 @@ PROPERTIES: Front-End Work / Back-End Work
 		<%
 		
 		// Object to Decrypt the sensitive data
-		//AESEncryption AESUser = new AESEncryption();
-		//AESEncryption AESKey = new AESEncryption();
 		AESEncryption AES = new AESEncryption();
 		
-		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=1000000000&key=965c21ae0dde31bc1c488b49ef08e93fbd1ab3db
+		// EXAMPLE: http://localhost:8080?do=fpwdc&usr=oNh70K0CQQE375uT%2BXSibQ%3D%3D&key=WPgRqb2XuZH29hbhWhlFW5M8V912lxd%2Bb%2B56UiT%2BsKU%3D
 		// Get the ActionValue
 	    String ActionValue = (String) request.getParameter("do");
 		
-	    // Get the Encrypted UserValue and Decrypt it
+	    // Get the Encrypted and Encoded UserValue and Retrieve it Decoded then decrypt
 		String UserValue = (String) request.getParameter("usr");
 		UserValue = AES.getAESDecryption(UserValue);
 		
-		// Get the Encrypted UserValue and Decrypt it
+		// Get the Encrypted and Encoded KeyValue and Retrieve it Decoded then decrypt
 		String KeyValue = (String) request.getParameter("key");
 		KeyValue = AES.getAESDecryption(KeyValue);
 		
@@ -220,6 +218,10 @@ function submitForm() {
         <input type="text" id="NewPassword" name="NewPassword" onKeyUp="isValidPassword('NewPassword','NewPasswordIcon','',false); isValidConfirmation('NewPasswordConfirmation','NewPasswordConfirmationIcon','','NewPassword',false);" 
         title='New Password' size='32' maxlength='32' />
         <img id="NewPasswordIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        <script>
+		// Set the initial focus on the NewPassword Element
+		document.getElementById('NewPassword').focus();
+		</script>
         </label>
 		 
 		<!-- Password VARCHAR(32) -->

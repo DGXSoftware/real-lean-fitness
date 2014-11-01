@@ -32,7 +32,7 @@ import dgx.software.com.UtilityPackage.GlobalTools;
 
 
 @SuppressWarnings("serial")
-public class SendEMailServlet extends HttpServlet {
+public class ContactUsEMailServlet extends HttpServlet {
 	
 	// SQL Connection Objects
 	private Connection SQLConnection;
@@ -96,17 +96,34 @@ public class SendEMailServlet extends HttpServlet {
 		/* START Servlet Response */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
-		// attempt to process a vote and display current results
+		// Attempt to send the E-Mail
 		try {
 
+			// Get the Mandatory E-Mail Information
 			String EMailReceiver = Request.getParameter("Recipient");
-			String EMailSubject = Request.getParameter("SenderSubject");
-			
 			String SenderFirstName = Request.getParameter("SenderFirstName");
 			String SenderLastName = Request.getParameter("SenderLastName");
 			String SenderEMail = Request.getParameter("SenderEMail");
+			String SenderSubject = Request.getParameter("SenderSubject");
+			String SenderSubjectSummary = Request.getParameter("SenderSubjectSummary");
 			String SenderMessage = Request.getParameter("SenderMessage");
 			// DISABLED: String SenderFileAttachment = Request.getParameter("SenderFileAttachment");
+			
+			// If any of the Mandatory E-Mail Information is null throw an error
+			if(
+			EMailReceiver == null ||
+			SenderFirstName == null ||
+			SenderLastName == null ||
+			SenderEMail == null ||
+			SenderSubject == null ||
+			SenderSubjectSummary == null ||
+			SenderMessage == null
+			){
+				// Mandatory E-Mail Information Missing
+				//String EMailErrorMessage = "The E-Mail failed to send. Please provide all Mandatory E-Mail Information.";
+				throw new RuntimeException();
+			}
+			
 			
 			// Define the MailJavaBean object
 			MailJavaBean PasswordMailJavaBean = new MailJavaBean();
@@ -115,27 +132,41 @@ public class SendEMailServlet extends HttpServlet {
 			PasswordMailJavaBean.setEMailReceiver(EMailReceiver);
 			
 			//Set the E-Mail Header Subject
-			PasswordMailJavaBean.setEMailSubject(EMailSubject);
+			PasswordMailJavaBean.setEMailSubject(SenderSubject);
 			
-			// Set the E-Mail Body
+			// Set the Custom E-Mail Body Prefix
+			String CustomHTMLBodyPrefix =
+			"<h2 style='font-size: 18px; font-family: Arial, sans-serif; color: #000;'>"+SenderSubjectSummary+":</h2>" +
+			"<p>&nbsp;</p>";
+			
+			// Set the Custom E-Mail Body
 			String CustomHTMLBody =
-			"<h2 style='font-size: 18px; font-family: Arial, sans-serif; color: #000;'>"+EMailSubject+":</h2>" +
+			"<p><b>Sender First Name:</b> "+SenderFirstName+"</p>" +
 			"<p>&nbsp;</p>" +
-			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'><b>Sender First Name:</b> "+SenderFirstName+"</p>" +
+			"<p><b>Sender Last Name:</b> "+SenderLastName+"</p>" +
 			"<p>&nbsp;</p>" +
-			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'><b>Sender Last Name:</b> "+SenderLastName+"</p>" +
+			"<p><b>Sender EMail:</b> "+SenderEMail+"</p>" +
 			"<p>&nbsp;</p>" +
-			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'><b>Sender EMail:</b> "+SenderEMail+"</p>" +
+			"<p><b>Sender Message:</b> "+SenderMessage+"</p>";
+			
+			// Set the Custom E-Mail Body Postfix
+			String CustomHTMLBodyPostfix =
 			"<p>&nbsp;</p>" +
-			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'><b>Sender Message:</b> "+SenderMessage+"</p>" +
-			"<p>&nbsp;</p>" +
-			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>~ The RealLeanFitness Support Team</p>" +
+			"<p'>~ The RealLeanFitness Support Team</p>" +
 			"";
+            
+			// Style All "<p>" tags
+			CustomHTMLBody = CustomHTMLBody.replaceAll("<p>", "<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>");
+			
+			
+			// Generate the Complete Custom HTML Body
+			String CompleteCustomHTMLBody = CustomHTMLBodyPrefix + CustomHTMLBody + CustomHTMLBodyPostfix;
+			
 			
 			// Generate the Complete HTML E-Mail
 			String RLFHTMLEMail = "";
 			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, UserEMail);
-			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, null);
+			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CompleteCustomHTMLBody, null);
 
 			//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 			
@@ -148,12 +179,11 @@ public class SendEMailServlet extends HttpServlet {
 			// Send the E-Mail
 			PasswordMailJavaBean.sendEMail(Response);
 					
-			}catch (Exception SQLEX) {
+			}catch (Exception EX) {
 			
-			// (Account NOT Found) Write the Error Response
-			String LoginErrorMessage = "The E-Mail failed to send. Please try again.";
-			// Replaces "GlobalMethods.writeForwardHTMLErrorResponse(Request, Response, GlobalTools.GTV_Homepage, LoginErrorMessage);"
-			throw new RuntimeException(LoginErrorMessage);
+			// EMail Failed To Send
+			String EMailErrorMessage = "The E-Mail failed to send. Please provide all Mandatory E-Mail Information.";
+			throw new RuntimeException(EMailErrorMessage);
 		}
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */

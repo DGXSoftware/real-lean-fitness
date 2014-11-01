@@ -30,6 +30,18 @@ if(Action != null){
 		response.sendRedirect(GlobalTools.GTV_Settings_ForgotPasswordChange + "?do="+Action+"&usr="+EncodedUser+"&key="+EncodedKey);
 		}
 	}
+	
+	if(Action.equals("vfy")){
+		String User = (String) request.getParameter("usr");
+		String EMail = (String) request.getParameter("key");
+		if(User != null && EMail != null){
+		String EncodedUser = URLEncoder.encode(User, "UTF-8");
+		String EncodedEMail = URLEncoder.encode(EMail, "UTF-8");
+		response.sendRedirect(GlobalTools.GTV_Settings_EMailVerification + "?do="+Action+"&usr="+EncodedUser+"&key="+EncodedEMail);
+        
+		}
+	}
+	
 }
 
 %>

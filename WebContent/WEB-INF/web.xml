@@ -115,17 +115,31 @@
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
-<!-- START SendEMailServlet Definition -->
+<!-- START EMailVerificationServlet Definition -->
 <servlet>
-    <servlet-name>SendEMailServlet</servlet-name>
-	<servlet-class>dgx.software.com.ActionPackage.SendEMailServlet</servlet-class>
+    <servlet-name>EMailVerificationServlet</servlet-name>
+	<servlet-class>dgx.software.com.ActionPackage.EMailVerificationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
 	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
 	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
 </servlet>
-<servlet-mapping><servlet-name>SendEMailServlet</servlet-name><url-pattern>/SendEMailServlet</url-pattern></servlet-mapping>
-<!-- END SendEMailServlet Definition -->
+<servlet-mapping><servlet-name>EMailVerificationServlet</servlet-name><url-pattern>/EMailVerificationServlet</url-pattern></servlet-mapping>
+<!-- END EMailVerificationServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+<!-- START ContactUsEMailServlet Definition -->
+<servlet>
+    <servlet-name>ContactUsEMailServlet</servlet-name>
+	<servlet-class>dgx.software.com.ActionPackage.ContactUsEMailServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>ContactUsEMailServlet</servlet-name><url-pattern>/ContactUsEMailServlet</url-pattern></servlet-mapping>
+<!-- END ContactUsEMailServlet Definition -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 

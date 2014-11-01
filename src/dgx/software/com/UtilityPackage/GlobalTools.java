@@ -65,6 +65,9 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_CountdownForwardMessage %>
 	public static final String GTV_CountdownForwardMessage = "/JSP/Tools/CountdownForwardMessage.jsp";
 	
+	// <%= GlobalTools.GTV_Error_QueryStringReader %>
+	public static final String GTV_Error_QueryStringReader = "/JSP/Error/QueryStringReader.jsp";
+    
 	
 /**************************************************************************************************/
 /* END GLOBAL VARIABLES */	
