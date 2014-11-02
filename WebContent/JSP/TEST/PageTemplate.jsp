@@ -35,6 +35,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
+		String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	
 %>
 

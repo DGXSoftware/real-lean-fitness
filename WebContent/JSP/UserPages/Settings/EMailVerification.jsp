@@ -125,8 +125,9 @@ function submitEMailVerificationActivationForm() {
             <%
             // Since the E-Mail Verification was successful
             // Return the user Home via a Successful Countdown Forward Message
+            // Plus log the user out so they can re-log with their new credentials
             String SuccessMessage = "You E-Mail was successfully verified! Please re-log to view your changes.";
-            String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
+            String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage + "&RedirectURL=" + GlobalTools.GTV_Servlet_Logout;
             %>
                     
             // Forward to the Success URL
@@ -140,9 +141,9 @@ function submitEMailVerificationActivationForm() {
             error:      function(xhr, textStatus, thrownError) {
 
                 <%
-                // Since the Password Change was successful
+                // Since the E-Mail verification was unsuccessful
                 // Return the user Home via a Successful Countdown Forward Message
-                String CancelMessage = "Failed to send instructions to verify your account. Please try again";
+                String CancelMessage = "Your E-Mail verification process failed. Please try again";
                 String CancelMessageURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"";
                 %>
                     
@@ -228,7 +229,7 @@ function submitEMailVerificationSendForm() {
             success:    function(data, status) {
 
             <%
-            // Since the Password Change was successful
+            // Since the Verification E-Mail was sent successfully
             // Return the user Home via a Successful Countdown Forward Message
             String SuccessMessage = "Please check your E-Mail for instructions to verify your E-Mail address.";
             String SuccessURL = GlobalTools.GTV_CountdownForwardMessage + "?SuccessMessage="+SuccessMessage+"";
@@ -245,7 +246,7 @@ function submitEMailVerificationSendForm() {
             error:      function(xhr, textStatus, thrownError) {
 
                 <%
-                // Since the Password Change was successful
+                // Since the Verification E-Mail failed to send
                 // Return the user Home via a Successful Countdown Forward Message
                 String CancelMessage = "Failed to send instructions to verify your account. Please try again";
                 String CancelMessageURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"";

@@ -68,7 +68,10 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_Error_QueryStringReader %>
 	public static final String GTV_Error_QueryStringReader = "/JSP/Error/QueryStringReader.jsp";
     
-	
+	// <%= GlobalTools.GTV_Servlet_Logout %>
+	public static final String GTV_Servlet_Logout = "/LogOutServlet";
+    
+
 /**************************************************************************************************/
 /* END GLOBAL VARIABLES */	
 /**************************************************************************************************/

@@ -35,8 +35,8 @@ Then after a few seconds it will forward their request to the Homepage.
 		-->
 		
 		<style>
-		#online_title { font-size: 20px; color: green; text-align:center; }
-		#offline_title { font-size: 20px; color: red; text-align:center; }
+		#success_title { font-size: 20px; color: green; text-align:center; }
+		#cancel_title { font-size: 20px; color: red; text-align:center; }
 		#BackButton { font-size: 20px; color: red; text-align:center; }
 		</style>
 		
@@ -68,7 +68,7 @@ if (request.getParameter("CancelMessage") != null){
 	// Only display this extra message if a CancelMessage was provided in the query string
 	if(!MessageToDisplay.equals("")){
 		%>
-		<div id="offline_title"><%= MessageToDisplay %></div>
+		<div id="cancel_title"><%= MessageToDisplay %></div>
 		<%
 	}
 }
@@ -80,7 +80,7 @@ if (request.getParameter("SuccessMessage") != null){
 	// Only display this extra message if a CancelMessage was provided in the query string
 	if(!MessageToDisplay.equals("")){
 		%>
-		<div id="online_title"><%= MessageToDisplay %></div>
+		<div id="success_title"><%= MessageToDisplay %></div>
 		<%
 	}
 }
@@ -119,7 +119,7 @@ $(document).ready(function () {
         var iTimeRemaining = $("#CountdownSeconds").html();
         iTimeRemaining = eval(iTimeRemaining);
         if (iTimeRemaining == 0) {
-            location.href = "<%= GlobalTools.GTV_Homepage %>";
+            location.href = "<%= request.getParameter("RedirectURL") == null ? GlobalTools.GTV_Homepage : request.getParameter("RedirectURL") %>";
         } else {
             $("#CountdownSeconds").html(iTimeRemaining - 1);
         }
@@ -132,7 +132,7 @@ $(document).ready(function () {
 
 <!-- Fast Forward Button -->
 <div id="FastForwardButton">
-<input type="button" onclick="location.href ='/'" value="Please Click here if you do not wish to wait any longer." />
+<input type="button" onclick="location.href ='<%= request.getParameter("RedirectURL") == null ? GlobalTools.GTV_Homepage : request.getParameter("RedirectURL") %>'" value="Please Click here if you do not wish to wait any longer." />
 </div>
 <!-- END Countdown Redirect -->
 <%
