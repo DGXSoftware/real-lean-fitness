@@ -119,12 +119,12 @@
 		<div id="header"></div>
 		<div id="nav">
 			<ul>
+			    <li><a href="<%= GlobalTools.GTV_Homepage %>">Home</a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"></a></li>
-				<li><a href="<%= GlobalTools.GTV_Homepage %>">Home</a></li>
 			</ul>
 		</div>
 		<div id="content">
