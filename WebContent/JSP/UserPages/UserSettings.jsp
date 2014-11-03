@@ -106,7 +106,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<p><b><a href="<%= GlobalTools.GTV_Settings_UserAccount %>">Change Account Settings</a></b><span> - Edit your account settings.</span></p>
 		<p><b><a href="<%= GlobalTools.GTV_Settings_UserInformation %>">Edit Personal Information</a></b><span> - Edit your Personal information.</span></p>
         <p><b><a href="<%= GlobalTools.GTV_Settings_PasswordChange %>">Change Password</a></b><span> - Change your current password for a new one.</span></p>
-        <p><b><a href="<%= GlobalTools.GTV_Settings_NewsletterSubscription %>">Newsletter Subscription</a></b><span> - Manage Newsletter Subscription.</span></p>
+        <p><b><a href="<%= GlobalTools.GTV_Settings_NewsletterSubscription %>">Newsletter Subscription</a></b><span> - Manage your Newsletter Subscription.</span></p>
         <p><b><a href="<%= GlobalTools.GTV_Settings_EMailVerification %>">E-Mail Verification</a></b><span> - Re-send an E-Mail verification.</span></p>
 
 		</form>

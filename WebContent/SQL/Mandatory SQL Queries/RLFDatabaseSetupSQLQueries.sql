@@ -111,74 +111,6 @@ ALTER TABLE RLF_Accounts AUTO_INCREMENT = 1000000000;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-CREATE TABLE RLF__FAKE_Accounts (
-
-Account_ID INT NOT NULL AUTO_INCREMENT,
-Username VARCHAR(32) NOT NULL,
-EMail VARCHAR(255),
-
-
-PRIMARY KEY (EMail),
-UNIQUE (Account_ID),
-UNIQUE (Username),
-UNIQUE (EMail)
-
-)ENGINE=INNODB;
-
-/* Create the NewsLetter Table */
-USE RLFDB;
-DROP TABLE RLF_NewsLetter;
-CREATE TABLE RLF_NewsLetter (
-
-Account_ID INT NOT NULL,
-
-EMail VARCHAR(255) NOT NULL,
-
-Full_Name VARCHAR(32),
-Is_Subscribed CHAR(1),
-Subscribed_On DATETIME,
-
-PRIMARY KEY (EMail),
-UNIQUE (EMail),
-FOREIGN KEY (EMail) REFERENCES RLF__FAKE_Accounts (EMail) ON DELETE CASCADE
-
-)ENGINE=INNODB;
-
-
-INSERT INTO RLF_NewsLetter (EMail, Full_Name, Is_Subscribed, Subscribed_On)
-VALUES ('Dalvis.Gomez@Hotmail.com','Dalvis Gomez','Y',NOW());
-
-
-INSERT INTO RLF_NewsLetter (Account_ID, EMail, Full_Name, Is_Subscribed, Subscribed_On)
-VALUES ('1000000000','Dalvis.Gomez@Hotmail.com','Dalvis Gomez','Y',NOW());
-
-
-Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`rlfdb`.`rlf_newsletter`, CONSTRAINT `rlf_newsletter_ibfk_1` FOREIGN KEY (`EMail`) REFERENCES `rlf_accounts` (`EMail`) ON DELETE CASCADE)	0.171 sec
-
-Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`rlfdb`.`rlf_newsletter`, CONSTRAINT `rlf_newsletter_ibfk_1` FOREIGN KEY (`EMail`) REFERENCES `rlf__fake_accounts` (`EMail`) ON DELETE CASCADE)
-
-WHY THE FUCK DOES THIS WORK ?!?!?!?!?! Adding EMail as Foreign Key messes things up
-
-
-CREATE TABLE RLF_NewsLetter (
-
-EMail VARCHAR(255) NOT NULL,
-Account_ID INT NOT NULL,
-Full_Name VARCHAR(32),
-Is_Subscribed CHAR(1),
-Subscribed_On DATETIME,
-
-PRIMARY KEY (EMail),
-UNIQUE (EMail),
-FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE
-
-)ENGINE=INNODB;
-
-INSERT INTO RLF_NewsLetter (Account_ID, EMail, Full_Name, Is_Subscribed, Subscribed_On)
-VALUES ('1000000000','Dalvis.Gomez@Hotmail.com','Dalvis Gomez','Y',NOW());
-
-/* ---------------------------------------------------------------------------------------------------------------- */
-
 /* Create the Images Table */
 CREATE TABLE RLF_Images (
 
@@ -214,6 +146,22 @@ FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE
 )ENGINE=INNODB;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Create the Newsletters Table */
+CREATE TABLE RLF_Newsletters (
+
+EMail VARCHAR(255) NOT NULL,
+Full_Name VARCHAR(32),
+In_Newsletter CHAR(1),
+Subscribed_On DATETIME,
+Has_Account CHAR(1),
+
+PRIMARY KEY (EMail),
+UNIQUE (EMail)
+
+)ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------------------------- */
 DROP All Tables and Database
 /* ---------------------------------------------------------------------------------------------------------------- */
@@ -222,6 +170,7 @@ DROP All Tables and Database
 USE RLFDB;
 
 /* Drop All The RLF Tables */
+DROP TABLE RLF_Newsletters;
 DROP TABLE RLF_User_Information;
 DROP TABLE RLF_Images;
 DROP TABLE RLF_Accounts;

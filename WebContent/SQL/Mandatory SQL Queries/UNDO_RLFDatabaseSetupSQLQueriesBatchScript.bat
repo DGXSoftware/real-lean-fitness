@@ -15,6 +15,7 @@ ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO /* Drop All The RLF Tables */ >> TEMP/DGXExecuteTemporarySQLCommand.txt
 ECHO DROP TABLE RLF_User_Information; >> TEMP/DGXExecuteTemporarySQLCommand.txt
 ECHO DROP TABLE RLF_Images; >> TEMP/DGXExecuteTemporarySQLCommand.txt
+ECHO DROP TABLE RLF_Newsletters; >> TEMP/DGXExecuteTemporarySQLCommand.txt
 ECHO DROP TABLE RLF_Accounts; >> TEMP/DGXExecuteTemporarySQLCommand.txt
 ECHO. >> TEMP/DGXExecuteTemporarySQLCommand.txt
 

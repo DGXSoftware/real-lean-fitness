@@ -143,11 +143,6 @@ public class EMailVerificationServlet extends HttpServlet {
 				throw new RuntimeException("Your E-Mail verification information was not correct. Your E-Mail failed to verify.");
 			}
 			
-			// Log the User out here so they can login with their new verified status
-			// This can be done with the Countdown JSP Revamp when Destination support is added
-			
-			
-			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
 			
@@ -267,7 +262,7 @@ public class EMailVerificationServlet extends HttpServlet {
 			// Generate the Complete HTML E-Mail
 			String RLFHTMLEMail = "";
 			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, UserEMail);
-			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, null);
+			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, null);
 
 			//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 			

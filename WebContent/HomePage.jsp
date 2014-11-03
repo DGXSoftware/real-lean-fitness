@@ -227,7 +227,7 @@ function submitLoginRequest() {
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
 		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<li><a href='<%= GlobalTools.GTV_Settings_NewsletterSubscription %>?UserType=AnonymousEnable'>Newsletter</a></li>
 		<li><a href='<%= GlobalTools.GTV_ContactUs %>'>Contact Us</a></li>
 		</ul>
 		</div>

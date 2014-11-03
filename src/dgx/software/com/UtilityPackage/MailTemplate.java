@@ -1,16 +1,19 @@
 package dgx.software.com.UtilityPackage;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class MailTemplate {
 
 	// Generates a Complete HTML E-Mail
-	public static String getCompleteHTMLEMail(String CustomHTMLBody, String EMailToUnsubscribe){
+	public static String getCompleteHTMLEMail(HttpServletRequest Request, HttpServletResponse Response, String CustomHTMLBody, String EMailToUnsubscribe){
 		
 		String CompleteHTMLEMail = "";
 		
 		// Call the Opening and CLosing Methods to Generate a Complete HTML E-Mail
 	    CompleteHTMLEMail = CompleteHTMLEMail.concat(getHTMLEMailOpening());
 	    CompleteHTMLEMail = CompleteHTMLEMail.concat(CustomHTMLBody);
-	    CompleteHTMLEMail = CompleteHTMLEMail.concat(getHTMLEMailClosing(EMailToUnsubscribe));
+	    CompleteHTMLEMail = CompleteHTMLEMail.concat(getHTMLEMailClosing(Request, Response, EMailToUnsubscribe));
 		
 		return CompleteHTMLEMail;
 	}
@@ -62,16 +65,26 @@ public class MailTemplate {
 	
 	
 	// Returns the Fixed HTML Closing of the E-Mail HTML (Fixed until the Custom part ends)
-	private static String getHTMLEMailClosing(String EMailToUnsubscribe){
+	private static String getHTMLEMailClosing(HttpServletRequest Request, HttpServletResponse Response, String EMailToUnsubscribe){
 		
+		// Decide weather we should show the Unsubscribe URL in the E-Mail
 		boolean ShowUnsubscribeURL = false;
 		if(EMailToUnsubscribe == null){
 			EMailToUnsubscribe = "";
 			}else{
 				ShowUnsubscribeURL = true;
 			}
-		String NewsletterUnsubscribeURL = GlobalTools.GTV_Settings_NewsletterSubscription + "?" + "EMail=" + EMailToUnsubscribe;
 		
+		// Get the Hostname
+		String CurrentHostName = "http://" + Request.getServerName() +":"+ Request.getServerPort() + Request.getContextPath();
+        
+		// Define the Newsletter Unsubscribe URL
+		// EX: http://localhost:8080/JSP/UserPages/Settings/NewsletterSubscription.jsp?UserType=UserDisable&UserEMail=DMGX@RLF.com
+		String NewsletterUnsubscribeURL = "";
+		NewsletterUnsubscribeURL = NewsletterUnsubscribeURL.concat(CurrentHostName);
+		NewsletterUnsubscribeURL = NewsletterUnsubscribeURL.concat(GlobalTools.GTV_Settings_NewsletterSubscription);
+		NewsletterUnsubscribeURL = NewsletterUnsubscribeURL.concat("?UserType=UserDisable&UserEMail="+EMailToUnsubscribe+"");
+
 		String EMailEnd = "";
 		EMailEnd = 
 				"<!-- ****************************************** END CUSTOM JAVA BODY ****************************************** -->" +

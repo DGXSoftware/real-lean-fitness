@@ -280,11 +280,13 @@ $( document ).ready(function() {
 <script>
 // TEMPORARY TEST VALUES
 $( document ).ready(function() {
+	/*
 	document.getElementById("SenderFirstName").value='TESTFIRSTNAME';
 	document.getElementById("SenderLastName").value='TESTLASTNAME';
 	document.getElementById("SenderEMail").value='RealLeanFitness@GMail.com';
 	document.getElementById("SenderSubject").value='TEST SUBJECT';
 	document.getElementById("SenderMessage").value='TEST SENDER MESSAGE';
+    */
 });
 </script>
  

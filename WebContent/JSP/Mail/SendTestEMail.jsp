@@ -52,7 +52,7 @@ String CustomHTMLBody =
 
 // Generate the Complete HTML E-Mail
 String RLFHTMLEMail = "";
-RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, null);
+RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(request, response, CustomHTMLBody, null);
 //RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, "DGX123@RLF.com");
 
 System.out.println(RLFHTMLEMail);

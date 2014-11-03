@@ -196,8 +196,8 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			
 			// Generate the Complete HTML E-Mail
 			String RLFHTMLEMail = "";
-			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, UserEMail);
-			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, null);
+			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, UserEMail);
+			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, null);
 
 			//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 			

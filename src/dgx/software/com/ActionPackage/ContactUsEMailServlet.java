@@ -166,7 +166,7 @@ public class ContactUsEMailServlet extends HttpServlet {
 			// Generate the Complete HTML E-Mail
 			String RLFHTMLEMail = "";
 			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CustomHTMLBody, UserEMail);
-			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(CompleteCustomHTMLBody, null);
+			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CompleteCustomHTMLBody, null);
 
 			//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 			

@@ -80,6 +80,23 @@ ECHO UNIQUE (Account_ID), >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 ECHO )ENGINE=INNODB; >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
+
+:: Create the Newsletters Table
+ECHO /* Create the Newsletters Table */ >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO CREATE TABLE RLF_Newsletters ( >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO EMail VARCHAR(255) NOT NULL, >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO Full_Name VARCHAR(32), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO In_Newsletter CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO Subscribed_On DATETIME, >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO Has_Account CHAR(1), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO PRIMARY KEY (EMail), >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO UNIQUE (EMail) >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO )ENGINE=INNODB; >> TEMP\DGXExecuteTemporarySQLCommand.txt
+ECHO. >> TEMP\DGXExecuteTemporarySQLCommand.txt
 
 ::==================================================================================================================::
 :: END THE MySQL QUERY; Save Query lines to the TEMP\DGXExecuteTemporarySQLCommand File ::

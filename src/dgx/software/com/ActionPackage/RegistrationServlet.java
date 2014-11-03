@@ -94,7 +94,10 @@ public class RegistrationServlet extends HttpServlet {
 		// attempt to process a vote and display current results
 		try {
 
-			// Variables for Account basic information
+/* START RLF_Accounts INSERT */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+	
+			// Mandatory Variables for Account creation
 			String Username = Request.getParameter("RegistrationUsername");
 			String FirstName = Request.getParameter("RegistrationFirstName");
 			String LastName = Request.getParameter("RegistrationLastName");
@@ -102,7 +105,21 @@ public class RegistrationServlet extends HttpServlet {
 			String EMail = Request.getParameter("RegistrationEMail");
 			String Gender = Request.getParameter("RegistrationGender");
 			String Date_Of_Birth = Request.getParameter("RegistrationBirthYear") + "-" + Request.getParameter("RegistrationBirthMonth") + "-" + Request.getParameter("RegistrationBirthDay");
-			//String SignUpForNewsletter = Request.getParameter("SignUpForNewsletter");
+
+			// If any of the Mandatory E-Mail Information is null throw an error
+			if(
+				Username == null ||
+				FirstName == null ||
+				LastName == null ||
+				Password == null ||
+				EMail == null ||
+				Gender == null ||
+				Date_Of_Birth == null
+			){
+				// Mandatory E-Mail Information Missing
+				//String EMailErrorMessage = "The E-Mail failed to send. Please provide all Mandatory E-Mail Information.";
+				throw new RuntimeException("Account creation failed. Please provide all Mandatory account Information.");
+			}
 			
 			// Variables for Account creation Date
 			/*
@@ -122,7 +139,7 @@ public class RegistrationServlet extends HttpServlet {
 			char IsVerified = 'N';
 		
 			// Create an Entry for the new account that was created in the RLF_Accounts Table.
-			String AccountSQLQuery = "INSERT INTO RLF_Accounts (" +
+			String InsertAccountSQLQuery = "INSERT INTO RLF_Accounts (" +
 					"Username," +
 					"First_Name," +
 					"Last_Name," +
@@ -149,8 +166,14 @@ public class RegistrationServlet extends HttpServlet {
 					"";
 			
 			// Create the Account
-			SQLStatement.executeUpdate(AccountSQLQuery);
-		
+			SQLStatement.executeUpdate(InsertAccountSQLQuery);
+			
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+/* END RLF_Accounts INSERT */
+			
+/* START RLF_User_Information INSERT */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+			
 			// Records the assigned Account ID for the Currently created Username.
 			String AccountID = "";
 			
@@ -169,7 +192,7 @@ public class RegistrationServlet extends HttpServlet {
 			}
 			
 			// Create an Entry for the new account that was created in the RLF_User_Information Table.
-			String UserInformationSQLQuery = "INSERT INTO RLF_User_Information (" +
+			String InsertUserInformationSQLQuery = "INSERT INTO RLF_User_Information (" +
 					"Account_ID," +
 					"Location_Address," +
 					"Location_City," +
@@ -188,7 +211,82 @@ public class RegistrationServlet extends HttpServlet {
 					"";
 			
 			// Create the UserInformation Entry
-			SQLStatement.executeUpdate(UserInformationSQLQuery);
+			SQLStatement.executeUpdate(InsertUserInformationSQLQuery);
+			
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+/* END RLF_User_Information INSERT */
+
+/* START RLF_Newsletters INSERT */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+			
+			// Records the assigned E-Mail for the Currently created Username.
+			String NewsletterEMail = "";
+			
+			// Decide wether or not the user's Newsletter subscription will be Active or Not
+			char InNewsletter = 'Y';
+			String SignUpForNewsletter = Request.getParameter("SignUpForNewsletter");
+			if(SignUpForNewsletter != null){
+			if(!SignUpForNewsletter.equals("")){InNewsletter = 'Y';}else{InNewsletter = 'N';}
+			}else{InNewsletter = 'N';}
+			
+			// Has Account ("Y" will be the Fixed Value Here)
+			char HasAccount = 'Y';
+			
+			// Select the E-Mail From the Currently created Username.
+			String NewsletterEMailSQLQuery = "SELECT EMail FROM RLF_NewsLetters WHERE EMail ='"+EMail+"';";
+			
+			// Get the EMailSQLQueryOutput ResultSet
+			ResultSet EMailSQLQueryOutput = SQLStatement.executeQuery(NewsletterEMailSQLQuery);
+			
+			// Check if this E-Mail record already exists in the RLF_NewsLetters Table
+			if(EMailSQLQueryOutput.next()){
+
+			// If it does, update it and mark it as existing in the accounts table
+				
+			// Set the assigned E-Mail for the Currently created Username.
+			NewsletterEMail = EMailSQLQueryOutput.getString("EMail");
+
+			// NewsLetter Update Query
+			String UpdateNewsLetterSQLQuery = "UPDATE RLF_NewsLetters SET Full_Name='"+(FirstName + " " + LastName)+"', In_Newsletter='"+InNewsletter+"', Has_Account='"+HasAccount+"' WHERE EMail='"+NewsletterEMail+"';";
+			
+			// Update the NewsLetter Entry
+			// 1 = Update Successful
+			// 0 = Update Failed
+			int SQLQueryResultsCode = SQLStatement.executeUpdate(UpdateNewsLetterSQLQuery);
+			
+			// If the Update SQL Query Failed to Update, throw an exception
+			if(SQLQueryResultsCode == 0){
+				throw new RuntimeException("Failed to update the account mark for your Newsletter subscription.");
+			}
+			
+			}else{
+			
+			// If it doesn't, add the record and mark it as existing in the accounts table
+			
+			// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
+			String InsertNewsLetterSQLQuery = "INSERT INTO RLF_NewsLetters (" +
+					"EMail," +
+					"Full_Name," +
+					"In_Newsletter," +
+					"Subscribed_On," +
+					"Has_Account" +
+					")" +
+					"VALUES(" +
+					"\""+EMail+"\"," +
+					"\""+(FirstName + " " + LastName)+"\"," +
+					"\""+InNewsletter+"\"," +
+					""+Account_Created_On+"," +
+					"\""+HasAccount+"\"" +
+					");" +
+					"";
+
+			// Create the NewsLetter Entry
+			SQLStatement.executeUpdate(InsertNewsLetterSQLQuery);
+				
+			}
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+/* END RLF_Newsletters INSERT */			
 			
 			// Close the ResultSet
 			try {UsernameSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}

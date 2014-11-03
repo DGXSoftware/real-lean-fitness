@@ -68,6 +68,21 @@ FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE
  
 )ENGINE=INNODB; 
  
+/* Create the Newsletters Table */ 
+CREATE TABLE RLF_Newsletters ( 
+ 
+EMail VARCHAR(255) NOT NULL, 
+Full_Name VARCHAR(32), 
+In_Newsletter CHAR(1), 
+Subscribed_On DATETIME, 
+Has_Account CHAR(1), 
+ 
+PRIMARY KEY (EMail), 
+UNIQUE (EMail) 
+ 
+)ENGINE=INNODB; 
+ 
+ 
 =============================================================================================================== 
 SQL QUERY OUTPUT 
 =============================================================================================================== 
