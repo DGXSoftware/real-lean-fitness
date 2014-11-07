@@ -223,12 +223,10 @@ function submitLoginRequest() {
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='<%= GlobalTools.GTV_Settings_NewsletterSubscription %>?UserType=AnonymousEnable'>Newsletter</a></li>
-		<li><a href='<%= GlobalTools.GTV_ContactUs %>'>Contact Us</a></li>
+		<%
+		// Print the Home Menu Items
+		GlobalTools.printPageMenuItems(out,"Home","");
+		%>
 		</ul>
 		</div>
 		<div id='content'>

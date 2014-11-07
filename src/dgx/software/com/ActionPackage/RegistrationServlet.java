@@ -290,6 +290,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 			// Close the ResultSet
 			try {UsernameSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			try {EMailSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// Write the HTML Successful Response
 			// DISABLED;  Handled By AJAX Call

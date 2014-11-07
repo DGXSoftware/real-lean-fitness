@@ -124,7 +124,6 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			
 			// If we DO NOT Have an Empty Result Set, Work with it (Account Found).
 			if(SQLQueryOutput.next()){
-	
 
 			// Variables for User Session
 			// NOTE: Before Adding new variables make sure the SQLQuery retrieves it
@@ -194,10 +193,9 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			"<p style='font-size: 14; font-family: Arial, sans-serif; color: #000;'>~ The RealLeanFitness Support Team</p>" +
 			"<a href='www.RealLeanFitness.com?do=contactsupport'>www.RealLeanFitness.com?do=contactsupport</a></p>";
 			
-			// Generate the Complete HTML E-Mail
+			// Generate the Complete HTML E-Mail (Without a Newsletter Unsubscribe link)
 			String RLFHTMLEMail = "";
-			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, UserEMail);
-			//RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, null);
+			RLFHTMLEMail = MailTemplate.getCompleteHTMLEMail(Request, Response, CustomHTMLBody, null);
 
 			//RLFHTMLEMail = RLFHTMLEMail.concat(MailTemplate.GoogleEMail());
 			

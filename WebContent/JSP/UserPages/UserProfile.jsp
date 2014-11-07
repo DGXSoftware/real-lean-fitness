@@ -132,12 +132,10 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<li><a href='<%= GlobalTools.GTV_UserProfile %>'><%=SessionFirstName%></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='<%= GlobalTools.GTV_UserSettings %>'>Settings</a></li>
-		<li><a href='/LogOutServlet'>Log Out</a></li>
+		<%
+		// Print the Logged In Menu Items
+		GlobalTools.printPageMenuItems(out,"LoggedIn",SessionFirstName);
+		%>
 		</ul>
 		</div>
 		<div id='content'>
@@ -234,12 +232,10 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<div id='footer'>
 		<ul>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<%
+		// Print the Empty Menu Items
+		GlobalTools.printPageMenuItems(out,"Empty","");
+		%>
 		</ul>
 		<span>Copyright © 2014</span>
 		</div>

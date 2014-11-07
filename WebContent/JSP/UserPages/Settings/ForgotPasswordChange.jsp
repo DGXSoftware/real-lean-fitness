@@ -192,12 +192,10 @@ function submitForm() {
 		<div id='header'></div>
 		<div id='nav'>
 		<ul>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<%
+		// Print the Empty Menu Items
+		GlobalTools.printPageMenuItems(out,"Empty","");
+		%>
 		</ul>
 		</div>
 		<div id='content'>
@@ -261,12 +259,10 @@ function submitForm() {
 		
 		<div id='footer'>
 		<ul>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<%
+		// Print the Empty Menu Items
+		GlobalTools.printPageMenuItems(out,"Empty","");
+		%>
 		</ul>
 		<span>Copyright © 2014</span>
 		</div>

@@ -98,23 +98,23 @@ public class LoginServlet extends HttpServlet {
 			String LoginPassword = Request.getParameter("LoginPassword");
 
 			// SQL Query
-			String SQLQuery = "SELECT Account_ID, Username, First_Name, Is_Activated, Is_Verified FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
+			String LoginSQLQuery = "SELECT Account_ID, Username, First_Name, Is_Activated, Is_Verified FROM RLF_Accounts WHERE Username='"+LoginUsername+"' AND Password=MD5('"+LoginPassword+"');";
 
 			// Get the SQLQueryOutput
-			ResultSet SQLQueryOutput = SQLStatement.executeQuery(SQLQuery);
+			ResultSet LoginSQLQueryOutput = SQLStatement.executeQuery(LoginSQLQuery);
 			
 			// If we DO NOT Have an Empty Result Set, Work with it (Account Found).
-			if(SQLQueryOutput.next()){
+			if(LoginSQLQueryOutput.next()){
 	
 			// Handle User log in below; Create Session and Redirect accordingly
 				
 			// Variables for User Session
 			// NOTE: Before Adding new variables make sure the SQLQuery retrieves it
-			String AccountID = SQLQueryOutput.getString("Account_ID");
-			String Username = SQLQueryOutput.getString("Username");
-			String FirstName = SQLQueryOutput.getString("First_Name");
-			String IsActivated = SQLQueryOutput.getString("Is_Activated");
-			String IsVerified = SQLQueryOutput.getString("Is_Verified");
+			String AccountID = LoginSQLQueryOutput.getString("Account_ID");
+			String Username = LoginSQLQueryOutput.getString("Username");
+			String FirstName = LoginSQLQueryOutput.getString("First_Name");
+			String IsActivated = LoginSQLQueryOutput.getString("Is_Activated");
+			String IsVerified = LoginSQLQueryOutput.getString("Is_Verified");
             
 			// Returns null if no session already exists 
 			HttpSession CurrentSession =  Request.getSession(false);
@@ -139,10 +139,10 @@ public class LoginServlet extends HttpServlet {
 			if(IsVerified != null) CurrentSession.setAttribute("IsVerified", IsVerified);
 
 			// Reset the Pointer changed by the if statement above
-			SQLQueryOutput.beforeFirst();
+			LoginSQLQueryOutput.beforeFirst();
 			
 			// Close the ResultSet
-			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			try {LoginSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// Write the HTML Successful Response
 			// DISABLED;  Handled By AJAX Call
@@ -151,7 +151,7 @@ public class LoginServlet extends HttpServlet {
 			}else {
 			
 			// Close the ResultSet
-			try {SQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			try {LoginSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 			// (Account NOT Found) Write the Error Response
 			String LoginErrorMessage = "Your login information was not correct, please try again.";

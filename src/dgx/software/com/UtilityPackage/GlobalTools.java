@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -492,12 +491,93 @@ public class GlobalTools {
 			
 		}
 		
-		// Returns a Successful HTML Response and forward appropriately.
-		public static void writeForwardHTMLSuccessResponse(ServletConfig config){
-	
-		}
+		/*************************************************************************************************
+		NAME:        printPageMenuItems
+		DESCRIPTION: Dynamically prints the Menu Item for various Page Types.
+		PARAMETERS:  (JspWriter out, String PageType, String SessionFirstName)
+		RETURN:      VOID
+		SIDE-EFFECT: NONE.
+		*************************************************************************************************/
+		public static void printPageMenuItems(JspWriter out, String PageType, String SessionFirstName) throws IOException{
 		
-		// Compares a Start Date Vs. a Stop Date and if It's older than the specified hours mark it as expired (Calculates in 24 Hours)
+			/*
+			<ul>
+			<%
+			// Print the Home Menu Items
+			GlobalTools.printPageMenuItems(out,"Home","");
+			%>
+			</ul>
+			*/
+			if(PageType.equals("Home")){
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_Settings_NewsletterSubscription+"?UserType=AnonymousEnable'>Newsletter</a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_ContactUs+"'>Contact Us</a></li>");
+			}
+			
+			/*
+			<ul>
+			<%
+			// Print the Logged In Menu Items
+			GlobalTools.printPageMenuItems(out,"LoggedIn",SessionFirstName);
+			%>
+			</ul>
+			*/
+			if(PageType.equals("LoggedIn")){
+			out.println("<li><a href='"+GlobalTools.GTV_UserProfile+"'>"+SessionFirstName+"</a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_UserSettings+"'>Settings</a></li>");
+			out.println("<li><a href='/LogOutServlet'>Log Out</a></li>");
+			}
+			
+			/*
+			<ul>
+			<%
+			// Print the Logged Out Menu Items
+			GlobalTools.printPageMenuItems(out,"LoggedOut","");
+			%>
+			</ul>
+			*/
+			if(PageType.equals("LoggedOut")){
+			out.println("<li><a href='"+GlobalTools.GTV_Homepage+"'>Home</a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			}
+			
+			/*
+			<ul>
+			<%
+			// Print the Empty Menu Items
+			GlobalTools.printPageMenuItems(out,"Empty","");
+			%>
+			</ul>
+			*/
+			if(PageType.equals("Empty")){
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='#'></a></li>");
+			}
+			
+		}
+			
+		
+		/*************************************************************************************************
+		NAME:        isLinkExpired
+		DESCRIPTION: Compares a Start Date Vs. a Stop Date and if It's older than the specified hours mark it as expired (Calculates in 24 Hours)
+		PARAMETERS:  (String OldDateAndTime)
+		RETURN:      VOID
+		SIDE-EFFECT: NONE.
+		*************************************************************************************************/
 		public static boolean isLinkExpired(String OldDateAndTime){
 	 
 	        // Get the Current Date

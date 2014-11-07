@@ -190,6 +190,9 @@ public class NewsletterSubscriptionServlet extends HttpServlet {
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
 			
+			// Close the ResultSet
+			try {EMailSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			
 		} // end try
 		// if database exception occurs, return error page
 		catch (SQLException SQLEX) {
@@ -290,6 +293,9 @@ public class NewsletterSubscriptionServlet extends HttpServlet {
 			
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* END Servlet Response */
+			
+			// Close the ResultSet
+			try {EMailSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 		} // end try
 		// if database exception occurs, return error page
