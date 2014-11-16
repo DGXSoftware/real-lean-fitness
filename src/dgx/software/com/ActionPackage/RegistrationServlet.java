@@ -222,7 +222,7 @@ public class RegistrationServlet extends HttpServlet {
 			// Records the assigned E-Mail for the Currently created Username.
 			String NewsletterEMail = "";
 			
-			// Decide wether or not the user's Newsletter subscription will be Active or Not
+			// Decide whether or not the user's Newsletter subscription will be Active or Not
 			char InNewsletter = 'Y';
 			String SignUpForNewsletter = Request.getParameter("SignUpForNewsletter");
 			if(SignUpForNewsletter != null){
@@ -286,7 +286,7 @@ public class RegistrationServlet extends HttpServlet {
 			}
 
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END RLF_Newsletters INSERT */			
+/* END RLF_Newsletters INSERT */		
 			
 			// Close the ResultSet
 			try {UsernameSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}

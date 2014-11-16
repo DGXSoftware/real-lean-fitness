@@ -1,6 +1,5 @@
 <!--
-GOAL: Temporarily displays a custom Good or Bad Message to the user.
-Then after a few seconds it will forward their request to the Homepage.
+GOAL: RLF Program Player
 -->
 
 <%-- JSP Imports --%>
@@ -16,7 +15,7 @@ Then after a few seconds it will forward their request to the Homepage.
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>Countdown Player</title>
+		<title>RLF Program Player</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -118,13 +117,13 @@ if(SkipCountdown == false){
 
 #PlayerHeader {font-size:20pt; color:blue; font-family:Calibri; text-align:center;}
 
-#CountdownMessage {font-size:20pt; color:blue; font-family:Calibri; text-align:center;}
-#CountdownSeconds {font-size:25pt; color:Red; font-family:Calibri; text-align:center;}
-#FastForwardButton {font-size:12pt; colo:black; font-family:Calibri; text-align:center;}
-#StatusMessage {font-size:20pt; color:green; font-family:Calibri; text-align:center;}
+#CountdownMessage {font-size:20pt; color:blue; font-family:calibri; text-align:center;}
+#CountdownSeconds {font-size:25pt; color:Red; font-family:calibri; text-align:center;}
+#FastForwardButton {font-size:12pt; color:black; font-family:calibri; text-align:center;}
+#StatusMessage {font-size:20pt; color:green; font-family:calibri; text-align:center;}
 
-#MyImageDiv {font-size:20pt; color:blue; font-family:Calibri; text-align:center; cursor: pointer; }
-#MyButtonDiv {font-size:25pt; color:Red; font-family:Calibri; text-align:center;}
+#MyImageDiv {font-size:20pt; color:blue; font-family:calibri; text-align:center; cursor: pointer; }
+#StartStopToggleButtonDiv {font-size:25pt; color:Red; font-family:calibri; text-align:center;}
 
 </style>
 
@@ -151,64 +150,109 @@ if(SkipCountdown == false){
 // 1. Pause Button - DONE
 // How to handle refreshes
 
-var ImageNameArray = [
-"Bulbasaur" ,
-"Ivysaur" ,
+// Get the Current User CheckPoint
+var CheckPointImageIndex = 0;
+
+var JS_PID_Array = [
+//1,
+//2,
+3,
+//4,
+//5,
+6,
+//7,
+//8,
+9,
+//10,
+11
+];
+
+var JS_Exercise_Name_Array = [
+//"Bulbasaur" ,
+//"Ivysaur" ,
 "Venusaur" ,
-"Charmander" ,
-"Charmeleon" ,
+//"Charmander" ,
+//"Charmeleon" ,
 "Charizard" ,
-"Squirtle" ,
-"Wartortle" ,
+//"Squirtle" ,
+//"Wartortle" ,
 "Blastoise" ,
-"Pikachu" ,
+//"Pikachu" ,
 "Raichu"
 ];
 
-var ImageURLArray = [
-"http://static.giantbomb.com/uploads/scale_small/13/135472/1891758-001bulbasaur.png" ,
-"http://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png" ,
+var JS_Demonstration_Array = [
+//"http://static.giantbomb.com/uploads/scale_small/13/135472/1891758-001bulbasaur.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/13/135472/1891759-002ivysaur.png" ,
 "http://static.giantbomb.com/uploads/scale_small/13/135472/1891760-003venusaur.png" ,
-"http://static.giantbomb.com/uploads/scale_small/0/6087/2438704-1202149925_t.png" ,
-"http://static.giantbomb.com/uploads/scale_small/13/135472/1891762-005charmeleon.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/0/6087/2438704-1202149925_t.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/13/135472/1891762-005charmeleon.png" ,
 "http://static.giantbomb.com/uploads/scale_small/13/135472/1891763-006charizard.png" ,
-"http://static.giantbomb.com/uploads/scale_small/13/135472/1891764-007squirtle.png" ,
-"http://static.giantbomb.com/uploads/scale_small/13/135472/1891809-008wartortle.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/13/135472/1891764-007squirtle.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/13/135472/1891809-008wartortle.png" ,
 "http://static.giantbomb.com/uploads/scale_small/13/135472/1891810-009blastoise.png" ,
-"http://static.giantbomb.com/uploads/scale_small/0/6087/2437349-pikachu.png" ,
+//"http://static.giantbomb.com/uploads/scale_small/0/6087/2437349-pikachu.png" ,
 "http://static.giantbomb.com/uploads/scale_small/13/135472/1898248-026raichu.png"
 ];
 
-var ImageTimeArray = [
-5,10,5,10,5,10,5,10,5,10,1000
+var JS_Time_Seconds_Array = [
+//1,
+//1,
+5,
+//1,
+//1,
+5,
+//1,
+//1,
+5,
+//1,
+5
 ];
 
-var ImageIndex = 0;
+// Set Image CheckPoints Here
+var CurrentImageIndex = 0;
+CurrentImageIndex = CurrentImageIndex + CheckPointImageIndex;
 
 // Set Initial Values
 document.getElementById("StatusMessage").innerHTML = "RUNNING: ";
-document.getElementById("CountdownMessage").innerHTML = ImageNameArray[ImageIndex]  + " ";
-document.getElementById("CountdownSeconds").innerHTML = ImageTimeArray[ImageIndex];
-document.getElementById("MyImage").src = ImageURLArray[ImageIndex];
+document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex]  + " ";
+document.getElementById("CountdownSeconds").innerHTML = JS_Time_Seconds_Array[CurrentImageIndex];
+document.getElementById("MyImage").src = JS_Demonstration_Array[CurrentImageIndex];
 
 var IsRunning = true;
 
 // Redirect to Homepage
 $(document).ready(function () {
-    window.setInterval(function () {
+	var refreshId = window.setInterval(function () {
         var iTimeRemaining = $("#CountdownSeconds").html();
         iTimeRemaining = eval(iTimeRemaining);
         if (iTimeRemaining == 0) {
+
+        	// Increase the Image Index
+        	CurrentImageIndex += 1;
         	
-        	// Update Values
-        	ImageIndex += 1;
-        	document.getElementById("CountdownMessage").innerHTML = ImageNameArray[ImageIndex] + " ";
-        	document.getElementById("CountdownSeconds").innerHTML = ImageTimeArray[ImageIndex];
-        	document.getElementById("MyImage").src = ImageURLArray[ImageIndex];
+        	// Act upon showing the last Array Iteration
+        	if(CurrentImageIndex >= JS_Exercise_Name_Array.length){
+    			
+    			// Break out of window.setInterval
+    			clearInterval(refreshId);
+        	}else{
+        	
+        	document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex] + " ";
+        	document.getElementById("CountdownSeconds").innerHTML = JS_Time_Seconds_Array[CurrentImageIndex];
+        	document.getElementById("MyImage").src = JS_Demonstration_Array[CurrentImageIndex];
+        	
+        	}
         	
         } else {
         	if(IsRunning === true){
+        	
+        	// Update the Time Countdown
             $("#CountdownSeconds").html(iTimeRemaining - 1);
+            
+			// Update the % Bar
+			updatePercentageBar();
+            
         	}
         }
     }, 1000);
@@ -218,7 +262,7 @@ function ToggleCountdown(){
 	 
 	if(IsRunning === true){
 		IsRunning = false;
-		document.getElementById("MyButton").src = "http://www.clipartbest.com/cliparts/yco/e9a/ycoe9abMi.png";
+		document.getElementById("StartStopToggleButton").src = "http://www.clipartbest.com/cliparts/yco/e9a/ycoe9abMi.png";
 		document.getElementById("StatusMessage").innerHTML = "STOPPED: ";
 		document.getElementById("StatusMessage").style.color = "red";
 		return false;
@@ -226,7 +270,7 @@ function ToggleCountdown(){
 	
 	if(IsRunning === false){
 		IsRunning = true;
-		document.getElementById("MyButton").src = "http://theologygaming.com/wp-content/uploads/2014/08/Pause.png";
+		document.getElementById("StartStopToggleButton").src = "http://theologygaming.com/wp-content/uploads/2014/08/Pause.png";
 		document.getElementById("StatusMessage").innerHTML = "RUNNING: ";
 		document.getElementById("StatusMessage").style.color = "green";
 		return false;
@@ -237,15 +281,59 @@ function ToggleCountdown(){
 
 </script>
 
+<script>
+
+// Set the Max Percentage Bar Time to calculate the Bar % Reach to Max
+var MaxProgramTime = 0;
+for(var i = 0 ; i < JS_Time_Seconds_Array.length; i++){
+	MaxProgramTime = MaxProgramTime + JS_Time_Seconds_Array[i];
+	
+}
+
+//Set the Elapsed Time to calculate the Bar % Progress, and Apply the CheckPoint Time
+var ElapsedProgramTime = 0;
+for(var i = 0 ; i < CheckPointImageIndex; i++){
+	ElapsedProgramTime = ElapsedProgramTime + JS_Time_Seconds_Array[i];
+}
+
+// Update the PercentageBar
+function updatePercentageBar() {
+	
+	// Increase Elapsed Time by a Second
+	ElapsedProgramTime = ElapsedProgramTime + 1;
+
+	// Get the Current Bar % and Update the Graphical Bar
+    var percentage = Math.round((ElapsedProgramTime/MaxProgramTime)*100)
+      if (percentage <= 100) {
+        $('#PercentageBarInnerDiv').css("width", percentage + "%");
+		$('#PercentageBarInnerText').text(percentage + "%");
+      }else{
+    	  //alert("Percentage is over 100% at = " + percentage "%");
+      }
+      
+}
+</script>
+
 <br/>
 
-<div id="MyButtonDiv">
+<div id="StartStopToggleButtonDiv">
 <input type="image" src="http://theologygaming.com/wp-content/uploads/2014/08/Pause.png" 
-name="MyButton" id="MyButton" value="Toggle Countdown" onClick="ToggleCountdown();" 
+name="StartStopToggleButton" id="StartStopToggleButton" value="Toggle Countdown" onClick="ToggleCountdown();" 
 width="48" height="48"/>
 </div>
 
 <br/>
+<br/>
+
+<style>
+.centered { text-align: center; }
+</style>
+<form id="PercentageBar" class="centered">
+<div id="PercentageBarOuterDiv" style="width: 300px; height: 20px; z-index: 1; position: relative; border: 1px solid grey; border-radius: 5px; -moz-border-radius: 5px;">
+<div id="PercentageBarInnerDiv" style="width: 0%; height: 100%; z-index: 2; float:left; background-color: lightblue;"></div>
+<div id="PercentageBarInnerText" style="width: 100%; height: 100%; z-index: 3; position: absolute; top: 0; left: 0; color: black; font-weight: bold; text-align: center;">0%</div>
+</div>
+</form>
 
 <!-- Fast Forward Button -->
 <!--

@@ -157,6 +157,20 @@
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
+<!-- START ProgramCheckpointServlet Definition -->
+<servlet>
+    <servlet-name>ProgramCheckpointServlet</servlet-name>
+	<servlet-class>dgx.software.com.ActionPackage.ProgramCheckpointServlet</servlet-class>
+	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
+    <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+</servlet>
+<servlet-mapping><servlet-name>ProgramCheckpointServlet</servlet-name><url-pattern>/ProgramCheckpointServlet</url-pattern></servlet-mapping>
+<!-- END ProgramCheckpointServlet Definition -->
+
+<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
 <!-- START LogOutServlet Definition -->
 <servlet>
     <servlet-name>LogOutServlet</servlet-name>

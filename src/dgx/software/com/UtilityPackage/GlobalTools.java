@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -336,6 +335,202 @@ public class GlobalTools {
 		
 	}
 	
+	/*************************************************************************************************
+	NAME:        getTableColumnAndValuePairViaExerciseID
+	DESCRIPTION: Gets all the Column Names and Values from a specific Table using
+	a desired UniqueColumnName and UniqueColumnValue. It allows you to choose the columns via an Array.
+	Once the 2D ArrayList<ArrayList<String>> is retrieved the data is retrieved as following
+	Index 0 = Column Names
+	Index 1 = Values
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String UniqueColumnName, String UniqueColumnValue, String [] Table_Column_Add)
+	RETURN:      ArrayList<ArrayList<String>>
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static ArrayList<ArrayList<String>> getTableColumnAndValuePairData(HttpServletRequest Request, HttpServletResponse Response, String TableName, String UniqueColumnName, String UniqueColumnValue, String [] Table_Column_Add) throws SQLException {
+		
+		// Temporary ArrayList Variables
+		ArrayList<ArrayList<String>> Temporary_ColumnValuePair = new ArrayList<ArrayList<String>>();
+		ArrayList <String> Temporary_Column_List = new ArrayList<String>();
+		ArrayList <String> Temporary_Values_List = new ArrayList<String>();
+
+		// Generate the SQL Select Query
+		// NOTE: Where clause strings are not case sensitive
+		String ColumnsToSelect = "";
+		for(int i = 0; i < Table_Column_Add.length; i++){
+			ColumnsToSelect = ColumnsToSelect.concat(Table_Column_Add[i]);
+			if(i < (Table_Column_Add.length -1)){ ColumnsToSelect = ColumnsToSelect.concat(" ,"); }
+		}
+		String SelectSQLQuery = "SELECT "+ColumnsToSelect+" FROM "+TableName+" WHERE "+UniqueColumnName+"='"+UniqueColumnValue+"';";
+		
+		// Get the SQLQueryOutput
+		ResultSet SQLQueryResultSetOutput = SQLStatement.executeQuery(SelectSQLQuery);
+		
+		// If we DO NOT Have an Empty Result Set, Work with it and send a successful HTML Response
+		if(SQLQueryResultSetOutput.next()){
+		
+		// Reset the Pointer changed by the if statement above
+			SQLQueryResultSetOutput.beforeFirst();
+		
+		// Records the ResultSetMetaData
+		ResultSetMetaData SQLQueryOutputMetaData = null;
+		
+		try {
+	
+	        // Get the ResultSetMetaData
+		    SQLQueryOutputMetaData = SQLQueryResultSetOutput.getMetaData();
+	
+		} catch (SQLException sqlException) {
+	        sqlException.printStackTrace();		
+
+		}
+		
+    	try {
+        
+    	// Go over the Rows
+    	while (SQLQueryResultSetOutput.next()) {
+
+    	// Go over the Columns
+    	// NOTE : i = 2 because we want to skip the first item (Account_ID)
+    	for(int i = 1 ; i < SQLQueryOutputMetaData.getColumnCount() + 1; i++){
+    		
+    		// Get the Current SQL Result Values
+    		String CurrentColumnName = SQLQueryOutputMetaData.getColumnName(i);
+    		String CurrentValue = SQLQueryResultSetOutput.getString(i);
+            
+    		// Add the current Column and Value
+    		Temporary_Column_List.add(CurrentColumnName);
+    		Temporary_Values_List.add(CurrentValue);
+    		
+		}
+			
+		}
+			} catch (SQLException SQLEX) {
+					SQLEX.printStackTrace();
+				}
+			}
+
+		// Add the Columns and Values List to the ColumnValue Pair List
+		Temporary_ColumnValuePair.add(Temporary_Column_List);
+		Temporary_ColumnValuePair.add(Temporary_Values_List);
+		
+		return Temporary_ColumnValuePair;
+		
+	}
+	
+	/*************************************************************************************************
+	NAME:        getProgramCheckpointTableCellData
+	DESCRIPTION: Updates the RLF_Program_CheckPoints.
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID)
+	RETURN:      void
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static String getProgramCheckpointTableCellData(HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID) throws SQLException {
+		
+/* START RLF_Program_CheckPoints INSERT */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+
+		// Records the assigned Last_PID from the Table from the Current User.
+		String Last_Checkpoint_ID = "";
+		
+		// Select the PID From the Current User.
+		String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
+		
+		// Get the LastPIDSQLQueryOutput ResultSet
+		ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+		
+		// Check if this PID record already exists in the RLF_Program_CheckPoints Table
+		if(LastPIDSQLQueryOutput.next()){
+
+		// If it does, simply update the existing record since it already exists in the Table
+					
+		// Get the Table Last_PID for the Current User.
+		Last_Checkpoint_ID = LastPIDSQLQueryOutput.getString("Last_PID");
+		
+		// Close the ResultSet
+		try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		
+		return Last_Checkpoint_ID;
+		
+		}else{
+			return null;
+		}
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+/* END RLF_Program_CheckPoints INSERT */	
+		
+	}
+	
+	/*************************************************************************************************
+	NAME:        setProgramCheckpointTableCellData
+	DESCRIPTION: Updates the RLF_Program_CheckPoints.
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID, String New_PID)
+	RETURN:      void
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static void setProgramCheckpointTableCellData(HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID, String New_PID) throws SQLException {
+		
+/* START RLF_Program_CheckPoints INSERT */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+					
+		// Variables for last save Date
+		String Last_PID_Saved_On = "NOW()";
+					
+		// Select the PID From the Current User.
+		String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
+		
+		// Get the LastPIDSQLQueryOutput ResultSet
+		ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+					
+		// Check if this PID record already exists in the RLF_Program_CheckPoints Table
+		if(LastPIDSQLQueryOutput.next()){
+
+		// If it does, simply update the existing record since it already exists in the Table
+
+		// Program Checkpoint Update Query
+		String UpdateProgramCheckpointSQLQuery = "UPDATE RLF_Program_CheckPoints SET Last_PID='"+New_PID+"', Last_PID_Saved_On="+Last_PID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
+		
+		// Update the Program Checkpoint Entry
+		// 1 = Update Successful
+		// 0 = Update Failed
+		int SQLQueryResultsCode = SQLStatement.executeUpdate(UpdateProgramCheckpointSQLQuery);
+					
+		// If the Update SQL Query Failed to Update, throw an exception
+		if(SQLQueryResultsCode == 0){
+		throw new RuntimeException("Failed to update the account mark for your Newsletter subscription.");
+		}
+					
+		}else{
+					
+		// If it doesn't, simply add a new record to the table
+		
+		// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
+		String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
+				"Account_ID," +
+				"Last_PID," +
+				"Last_PID_Saved_On" +
+				")" +
+				"VALUES(" +
+				"\""+SessionAccountID+"\"," +
+				"\""+New_PID+"\"," +
+				""+Last_PID_Saved_On+"" +
+				");" +
+				"";
+
+		// Create the NewsLetter Entry
+		SQLStatement.executeUpdate(InsertProgramCheckpointSQLQuery);
+						
+					}
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+/* END RLF_Program_CheckPoints INSERT */	
+		
+		
+		// Close the ResultSet
+		try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		
+	}
+		
+	
 		/*************************************************************************************************
 		NAME:        writeForwardHTMLSuccessResponse
 		DESCRIPTION: Handle successful forwarding responses.
@@ -629,5 +824,99 @@ public class GlobalTools {
 			return false;
 			
 		}
+
+		/*************************************************************************************************
+		NAME:        updateGenericTableCellData (INCOMPLETE BETA!!!!!!!!!!!!!!!)
+		DESCRIPTION: Gets all the Column Names and Values from a specific Table using
+		a desired UniqueColumnName and UniqueColumnValue. It allows you to choose the columns via an Array.
+		Once the 2D ArrayList<ArrayList<String>> is retrieved the data is retrieved as following
+		Index 0 = Column Names
+		Index 1 = Values
+		PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String UniqueColumnName, String UniqueColumnValue, String [] Table_Column_Add)
+		RETURN:      ArrayList<ArrayList<String>>
+		SIDE-EFFECT: NONE.
+		*************************************************************************************************/
+		public static void updateGenericTableCellData(
+		HttpServletRequest Request, HttpServletResponse Response, 
+		String TableName, 
+		String WhereColumnName,
+		String WhereColumnValue,
+		String UpdateColumnName,
+		String UpdateColumnValue,
+		String [] Table_Column_Add) 
+		throws SQLException {
+			
+			// Variables for Account Exercise CheckPoint Entries
+
+			// TableName = RLF_Program_CheckPoints
+			// WhereColumnName = Account_ID
+			// WhereColumnValue = 1000000006
+			// UpdateColumnName = Last_PID // MAKE ADAPT ARRAY
+			// UpdateColumnValue = 18 // MAKE ADAPT ARRAY
+			
+			String Last_PID_Saved_On = "NOW()";
+			
+	/* START RLF_Newsletters INSERT */
+	/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+						
+			// Select the PID From the Current User.
+			//String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+UniqueColumnValue+"';";
+			String ProgramCheckpointSQLQuery = "SELECT "+UpdateColumnName+" FROM "+TableName+" WHERE "+WhereColumnName+" ='"+WhereColumnValue+"';";
+			
+			// Get the LastPIDSQLQueryOutput ResultSet
+			ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+						
+			// Check if this PID record already exists in the RLF_Program_CheckPoints Table
+			if(LastPIDSQLQueryOutput.next()){
+
+			// If it does, simply update the existing record since it already exists in the Table
+
+			// Program Checkpoint Update Query
+			String UpdateProgramCheckpointSQLQuery = "UPDATE "+TableName+" SET "+UpdateColumnName+"='"+UpdateColumnValue+"', Last_PID_Saved_On="+Last_PID_Saved_On+" WHERE "+WhereColumnName+"='"+WhereColumnValue+"';";
+			
+			// Update the Program Checkpoint Entry
+			// 1 = Update Successful
+			// 0 = Update Failed
+			int SQLQueryResultsCode = SQLStatement.executeUpdate(UpdateProgramCheckpointSQLQuery);
+						
+			// If the Update SQL Query Failed to Update, throw an exception
+			if(SQLQueryResultsCode == 0){
+			throw new RuntimeException("Failed to update the account mark for your Newsletter subscription.");
+			}
+						
+			}else{
+						
+			// If it doesn't, simply add a new record to the table
+			
+			// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
+			String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
+					"Account_ID," +
+					"Last_PID," +
+					"Last_PID_Saved_On" +
+					")" +
+					"VALUES(" +
+					"\""+WhereColumnValue+"\"," +
+					"\""+UpdateColumnValue+"\"," +
+					""+Last_PID_Saved_On+"" +
+					");" +
+					"";
+
+			// Create the NewsLetter Entry
+			SQLStatement.executeUpdate(InsertProgramCheckpointSQLQuery);
+							
+						}
+
+	/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+	/* END RLF_Newsletters INSERT */	
+			
+			
+			// Close the ResultSet
+			try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			
+		}
 		
+		public static void testGlobalTools(){
+			System.out.println("IT WORKS !!!!!!!!!!!!!!");
+		}
+				
 }
