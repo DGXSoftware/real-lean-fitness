@@ -32,7 +32,7 @@ String CurrentProgramIndex = "1";
 String Last_PID = GlobalTools.getProgramCheckpointTableCellData(request, response, SessionAccountID);
 
 // Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Programs_Pokemon";
+String CurrentProgramNameTable = "RLF_Programs";
 String [] CurrentProgramNameColumns = {"Program"};
 String CurrentProgramColumnName = "PID";
 String CurrentProgramColumnValue = CurrentProgramIndex;
@@ -41,8 +41,8 @@ ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getT
 
 
 // Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Programs_Pokemon";
-String [] CompleteProgramNameColumns = {"PID","Program","Exercise_Name","Time_Seconds","Equipment","Demonstration","Description"};
+String CompleteProgramNameTable = "RLF_Programs";
+String [] CompleteProgramNameColumns = {"PID","Exercise_Type","Program","Exercise_Name","Time_Seconds","Equipment","Demonstration","Description"};
 String CompleteProgramColumnName = "Program"; 
 String CompleteProgramColumnValue = CurrentProgramNameFieldValuePair.get(1).get(0);
 ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
@@ -53,6 +53,7 @@ ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.get
 // Declare the JavaScript Program Arrays
 var JS_PID_Array = []; // PID
 var JS_Program_Array = []; // Program
+var JS_Exercise_Type_Array = []; // Exercise_Type
 var JS_Exercise_Name_Array = []; // Exercise_Name
 var JS_Time_Seconds_Array = []; // Time_Seconds
 var JS_Equipment_Array = []; // Equipment
@@ -91,6 +92,16 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 		%>
 		<script>
 		JS_Exercise_Name_Array.push("<%= CurrentValue %>");
+		</script>
+		<%
+		continue;
+	}
+	
+	// Generate the JS_Exercise_Type_Array
+	if(CurrentColumnName.equals("Exercise_Type")){
+		%>
+		<script>
+		JS_Exercise_Type_Array.push("<%= CurrentValue %>");
 		</script>
 		<%
 		continue;
@@ -156,7 +167,7 @@ var CheckPointImageIndex = <%= CheckpointSkips %>;
 <script>
 
 for(var i = 0; i < JS_Exercise_Name_Array.length; i++){
-	//alert(JS_Exercise_Name_Array[i]);
+	//alert(JS_Exercise_Type_Array[i]);
 }
 
 </script>

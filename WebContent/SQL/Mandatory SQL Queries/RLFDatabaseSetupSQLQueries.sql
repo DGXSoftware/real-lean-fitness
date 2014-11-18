@@ -162,6 +162,60 @@ UNIQUE (EMail)
 )ENGINE=INNODB;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Create the Exercise Programs Table */
+CREATE TABLE RLF_Programs (
+
+PID INTEGER NOT NULL AUTO_INCREMENT,
+Program varchar(64) NOT NULL,
+Exercise_Type varchar(64) NOT NULL,
+Exercise_Name varchar(64) NOT NULL,
+Time_Seconds INTEGER NOT NULL,
+Equipment varchar(64) NOT NULL,
+Demonstration varchar(1024) NOT NULL,
+Description varchar(5000) NOT NULL,
+
+PRIMARY KEY (PID)
+
+)ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Create the Exercise Programs Table */
+CREATE TABLE RLF_Programs (
+
+PID INTEGER NOT NULL AUTO_INCREMENT,
+Program varchar(64) NOT NULL,
+Exercise_Type varchar(64) NOT NULL,
+Exercise_Name varchar(64) NOT NULL,
+Time_Seconds INTEGER NOT NULL,
+Equipment varchar(64) NOT NULL,
+Demonstration varchar(1024) NOT NULL,
+Description varchar(5000) NOT NULL,
+
+PRIMARY KEY (PID)
+
+)ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Create the Exercise Programs Checkpoint Table */
+CREATE TABLE RLF_Program_CheckPoints (
+
+Account_ID INT NOT NULL,
+Last_Program INT,
+Last_Program_Saved_On DATETIME,
+Last_PID INT,
+Last_PID_Saved_On DATETIME,
+
+PRIMARY KEY (Account_ID),
+UNIQUE (Account_ID),
+FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE,
+FOREIGN KEY (Last_PID) REFERENCES RLF_Programs (PID) ON DELETE CASCADE
+
+)ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------------------------- */
 DROP All Tables and Database
 /* ---------------------------------------------------------------------------------------------------------------- */
@@ -170,6 +224,8 @@ DROP All Tables and Database
 USE RLFDB;
 
 /* Drop All The RLF Tables */
+DROP TABLE RLF_Program_CheckPoints;
+DROP TABLE RLF_Programs;
 DROP TABLE RLF_Newsletters;
 DROP TABLE RLF_User_Information;
 DROP TABLE RLF_Images;

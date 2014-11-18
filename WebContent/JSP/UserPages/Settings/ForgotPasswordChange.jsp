@@ -58,7 +58,7 @@ PROPERTIES: Front-End Work / Back-End Work
 		// If IsValidUser is not Empty and is not expired then It's Valid
 		boolean IsValidKey = false;
 		if(!KeyValue.equals("")){ 
-			if(!GlobalTools.isLinkExpired(KeyValue)){
+			if(!GlobalTools.isLinkExpired(KeyValue, 2)){
 				IsValidKey = true;
 			}
 		}

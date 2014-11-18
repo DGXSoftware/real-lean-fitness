@@ -44,7 +44,7 @@ GOAL: RLF Program Player
 
 		<%
 
-		String SessionAccountID = "1000000005";
+		String SessionAccountID = "1000000004";
 
 		%>
 		
@@ -205,7 +205,7 @@ String Last_PID = GlobalTools.getProgramCheckpointTableCellData(request, respons
 
 
 // Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Programs_Pokemon";
+String CurrentProgramNameTable = "RLF_Programs";
 String [] CurrentProgramNameColumns = {"Program"};
 String CurrentProgramColumnName = "PID";
 String CurrentProgramColumnValue = CurrentProgramIndex;
@@ -214,8 +214,8 @@ ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getT
 
 
 // Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Programs_Pokemon";
-String [] CompleteProgramNameColumns = {"PID","Program","Exercise_Name","Time_Seconds","Equipment","Demonstration","Description"};
+String CompleteProgramNameTable = "RLF_Programs";
+String [] CompleteProgramNameColumns = {"PID","Exercise_Type","Program","Exercise_Name","Time_Seconds","Equipment","Demonstration","Description"};
 String CompleteProgramColumnName = "Program"; 
 String CompleteProgramColumnValue = CurrentProgramNameFieldValuePair.get(1).get(0);
 ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
@@ -226,6 +226,7 @@ ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.get
 // Declare the JavaScript Program Arrays
 var JS_PID_Array = []; // PID
 var JS_Program_Array = []; // Program
+var JS_Exercise_Type_Array = []; // Exercise_Type
 var JS_Exercise_Name_Array = []; // Exercise_Name
 var JS_Time_Seconds_Array = []; // Time_Seconds
 var JS_Equipment_Array = []; // Equipment
@@ -258,6 +259,16 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 	
 	// Generate the JS_Program_Array
 	if(CurrentColumnName.equals("Program")){}
+	
+	// Generate the JS_Exercise_Type_Array
+	if(CurrentColumnName.equals("Exercise_Type")){
+		%>
+		<script>
+		JS_Exercise_Type_Array.push("<%= CurrentValue %>");
+		</script>
+		<%
+		continue;
+	}
 	
 	// Generate the JS_Exercise_Name_Array
 	if(CurrentColumnName.equals("Exercise_Name")){
@@ -395,7 +406,7 @@ function ToggleCountdown(){
 	if(IsRunning === true){
 		IsRunning = false;
 		document.getElementById("StartStopToggleButton").src = "http://www.clipartbest.com/cliparts/yco/e9a/ycoe9abMi.png";
-		document.getElementById("StatusMessage").innerHTML = "STOPPED: ";
+		document.getElementById("StatusMessage").innerHTML = "PAUSED: ";
 		document.getElementById("StatusMessage").style.color = "red";
 		return false;
 	}

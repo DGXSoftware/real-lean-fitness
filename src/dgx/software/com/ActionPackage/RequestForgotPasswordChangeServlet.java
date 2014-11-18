@@ -109,7 +109,7 @@ public class RequestForgotPasswordChangeServlet extends HttpServlet {
 			String UserValue = "";
 	        // Get the Current Date
 			Calendar c = Calendar.getInstance();
-			SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String NewDateAndTime = SDF.format(c.getTime());
 			String KeyValue = NewDateAndTime; 
 			

@@ -107,7 +107,7 @@
 
 <!-- START Reddit -->
 <td height='45' valign='middle' width='50'>
-<a href='https://www.reddit.com' title='' style='color: #3a3a3a; text-decoration: none;'>
+<a href='http://www.reddit.com/submit?url=http%3A//www.RealLeanFitness.com&title=Real%20Lean%20Fitness' title='' style='color: #3a3a3a; text-decoration: none;'>
 <img src='http://DGXSoftware.com/RLF/JSP/Mail/Pictures/Reddit-Logo.png' border='0' height='24' alt='' width='24' /></a>
 </td>
 <!-- END Reddit -->
