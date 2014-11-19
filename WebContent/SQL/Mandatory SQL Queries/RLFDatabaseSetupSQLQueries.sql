@@ -163,37 +163,35 @@ UNIQUE (EMail)
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Exercise Programs Table */
+/* Create the Programs Table */
 CREATE TABLE RLF_Programs (
 
-PID INTEGER NOT NULL AUTO_INCREMENT,
-Program varchar(64) NOT NULL,
-Exercise_Type varchar(64) NOT NULL,
-Exercise_Name varchar(64) NOT NULL,
-Time_Seconds INTEGER NOT NULL,
-Equipment varchar(64) NOT NULL,
-Demonstration varchar(1024) NOT NULL,
+Program_ID INTEGER NOT NULL AUTO_INCREMENT,
+Program_Type varchar(64) NOT NULL,
+Program_Name varchar(64) NOT NULL,
+Secondary_Program_Name varchar(64) NOT NULL,
+Equipment_List varchar(64) NOT NULL,
 Description varchar(5000) NOT NULL,
 
-PRIMARY KEY (PID)
+PRIMARY KEY (Program_ID)
 
 )ENGINE=INNODB;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Exercise Programs Table */
-CREATE TABLE RLF_Programs (
+/* Create the Exercise Table */
+CREATE TABLE RLF_Exercises (
 
-PID INTEGER NOT NULL AUTO_INCREMENT,
-Program varchar(64) NOT NULL,
+Exercise_ID INTEGER NOT NULL AUTO_INCREMENT,
+Program_Name varchar(64) NOT NULL,
 Exercise_Type varchar(64) NOT NULL,
 Exercise_Name varchar(64) NOT NULL,
-Time_Seconds INTEGER NOT NULL,
-Equipment varchar(64) NOT NULL,
-Demonstration varchar(1024) NOT NULL,
+Time_In_Seconds INTEGER NOT NULL,
+Equipment_List varchar(64) NOT NULL,
+Demonstration_URL varchar(1024) NOT NULL,
 Description varchar(5000) NOT NULL,
 
-PRIMARY KEY (PID)
+PRIMARY KEY (Exercise_ID)
 
 )ENGINE=INNODB;
 
@@ -203,15 +201,16 @@ PRIMARY KEY (PID)
 CREATE TABLE RLF_Program_CheckPoints (
 
 Account_ID INT NOT NULL,
-Last_Program INT,
-Last_Program_Saved_On DATETIME,
-Last_PID INT,
-Last_PID_Saved_On DATETIME,
+Last_Program_ID INT,
+Last_Program_ID_Saved_On DATETIME,
+Last_Exercise_ID INT,
+Last_Exercise_ID_Saved_On DATETIME,
+Random_Exercise_Key varchar(64),
 
 PRIMARY KEY (Account_ID),
 UNIQUE (Account_ID),
 FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE,
-FOREIGN KEY (Last_PID) REFERENCES RLF_Programs (PID) ON DELETE CASCADE
+FOREIGN KEY (Last_Exercise_ID) REFERENCES RLF_Exercises (Exercise_ID) ON DELETE CASCADE
 
 )ENGINE=INNODB;
 
@@ -225,6 +224,7 @@ USE RLFDB;
 
 /* Drop All The RLF Tables */
 DROP TABLE RLF_Program_CheckPoints;
+DROP TABLE RLF_Exercises;
 DROP TABLE RLF_Programs;
 DROP TABLE RLF_Newsletters;
 DROP TABLE RLF_User_Information;
@@ -235,3 +235,20 @@ DROP TABLE RLF_Accounts;
 DROP DATABASE RLFDB;
 
 /* ================================================================================================================ */
+
+Chest and Back (Back and Chest Boost)
+Plyometrics (Explosive Movement Boost)
+Shoulders and Arms (Arms and Soulders Boost)
+Yoga X (Yoga Flex)
+Legs and Back (Back and Legs Boost)
+Kenpo X (Martial Arts)
+X Stretch (Stretch Flex)
+Core Synergistics (Essential Muscle Boost)
+Chest, Shoulders and Triceps (Triceps, Shoulders and Chest Boost)
+Back and Biceps (Biceps and Back Boost)
+Cardio X (Cardio Boost)
+Ab Ripper X (Abdominal Boost)
+
+/* ================================================================================================================ */
+
+

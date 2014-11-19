@@ -421,76 +421,74 @@ public class GlobalTools {
 	}
 	
 	/*************************************************************************************************
-	NAME:        getProgramCheckpointTableCellData
-	DESCRIPTION: Updates the RLF_Program_CheckPoints.
+	NAME:        getSingleTableCellData
+	DESCRIPTION: Gets Data from a specific table
 	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID)
 	RETURN:      void
 	SIDE-EFFECT: NONE.
 	*************************************************************************************************/
-	public static String getProgramCheckpointTableCellData(HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID) throws SQLException {
+	public static String getSingleTableCellData(HttpServletRequest Request, HttpServletResponse Response, String TableName, String ColumnToSelect, String WhereColumnName, String WhereColumnValue) throws SQLException {
 		
-/* START RLF_Program_CheckPoints INSERT */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		// Records the assigned PreviousLastColumnToSelectValue from the Table from the Current User.
+		String PreviousLastColumnToSelectValue = "";
+		
+		// Select the ColumnToSelect From the Current User.
+		String ColumnToSelectSQLQuery = "SELECT "+ColumnToSelect+" FROM "+TableName+" WHERE "+WhereColumnName+" ='"+WhereColumnValue+"';";
+		
+		// Get the ColumnToSelectSQLQueryOutput ResultSet
+		ResultSet ColumnToSelectSQLQueryOutput = SQLStatement.executeQuery(ColumnToSelectSQLQuery);
+		
+		// Check if this ColumnToSelect record already exists in the Table
+		if(ColumnToSelectSQLQueryOutput.next()){
 
-		// Records the assigned Last_PID from the Table from the Current User.
-		String Last_Checkpoint_ID = "";
-		
-		// Select the PID From the Current User.
-		String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
-		
-		// Get the LastPIDSQLQueryOutput ResultSet
-		ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
-		
-		// Check if this PID record already exists in the RLF_Program_CheckPoints Table
-		if(LastPIDSQLQueryOutput.next()){
-
-		// If it does, simply update the existing record since it already exists in the Table
+		// If it does, simply return the value
 					
-		// Get the Table Last_PID for the Current User.
-		Last_Checkpoint_ID = LastPIDSQLQueryOutput.getString("Last_PID");
+		// Get the Table PreviousLastColumnToSelectValue for the Current User.
+		PreviousLastColumnToSelectValue = ColumnToSelectSQLQueryOutput.getString(ColumnToSelect);
 		
 		// Close the ResultSet
-		try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		try {ColumnToSelectSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
-		return Last_Checkpoint_ID;
+		return PreviousLastColumnToSelectValue;
 		
 		}else{
+			// If no data was recovered from the Database return null
 			return null;
 		}
 
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END RLF_Program_CheckPoints INSERT */	
-		
 	}
 	
 	/*************************************************************************************************
-	NAME:        setProgramCheckpointTableCellData
-	DESCRIPTION: Updates the RLF_Program_CheckPoints.
-	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID, String New_PID)
+	NAME:        setSingleTableCellData
+	DESCRIPTION: Sets Data for a specific table
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID, String New_Exercise_ID)
 	RETURN:      void
 	SIDE-EFFECT: NONE.
 	*************************************************************************************************/
-	public static void setProgramCheckpointTableCellData(HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID, String New_PID) throws SQLException {
+	public static void setSingleTableCellData(HttpServletRequest Request, HttpServletResponse Response, 
+			String TableName,
+			String UniqueKeyName,
+			String UniqueKeyValue,
+			String SetColumnName,
+			String SetColumnValue,
+			String WhereColumnName,
+			String WhereColumnValue) 
+			throws SQLException {
 		
-/* START RLF_Program_CheckPoints INSERT */
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 					
-		// Variables for last save Date
-		String Last_PID_Saved_On = "NOW()";
-					
-		// Select the PID From the Current User.
-		String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
+		// Select the Exercise_ID From the Current User.
+		String ProgramCheckpointSQLQuery = "SELECT "+SetColumnName+" FROM "+TableName+" WHERE "+WhereColumnName+"='"+WhereColumnValue+"';";
 		
-		// Get the LastPIDSQLQueryOutput ResultSet
-		ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+		// Get the LastExerciseIDSQLQueryOutput ResultSet
+		ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 					
-		// Check if this PID record already exists in the RLF_Program_CheckPoints Table
-		if(LastPIDSQLQueryOutput.next()){
+		// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+		if(LastExerciseIDSQLQueryOutput.next()){
 
 		// If it does, simply update the existing record since it already exists in the Table
 
 		// Program Checkpoint Update Query
-		String UpdateProgramCheckpointSQLQuery = "UPDATE RLF_Program_CheckPoints SET Last_PID='"+New_PID+"', Last_PID_Saved_On="+Last_PID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
+		String UpdateProgramCheckpointSQLQuery = "UPDATE "+TableName+" SET "+SetColumnName+"='"+SetColumnValue+"' WHERE "+WhereColumnName+"='"+WhereColumnValue+"';";
 		
 		// Update the Program Checkpoint Entry
 		// 1 = Update Successful
@@ -506,30 +504,24 @@ public class GlobalTools {
 					
 		// If it doesn't, simply add a new record to the table
 		
-		// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
-		String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
-				"Account_ID," +
-				"Last_PID," +
-				"Last_PID_Saved_On" +
+		// Create an Entry for the new account that was created in the Table.
+		String InsertProgramCheckpointSQLQuery = "INSERT INTO "+TableName+" (" +
+				""+UniqueKeyName+"," +
+				""+SetColumnName+"" +
 				")" +
 				"VALUES(" +
-				"\""+SessionAccountID+"\"," +
-				"\""+New_PID+"\"," +
-				""+Last_PID_Saved_On+"" +
+				"\""+UniqueKeyValue+"\"," +
+				"\""+SetColumnValue+"\"" +
 				");" +
 				"";
 
-		// Create the NewsLetter Entry
+		// Create the Table Entry
 		SQLStatement.executeUpdate(InsertProgramCheckpointSQLQuery);
 						
 					}
 
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-/* END RLF_Program_CheckPoints INSERT */	
-		
-		
 		// Close the ResultSet
-		try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		try {LastExerciseIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 		
 	}
 		
@@ -902,28 +894,28 @@ public class GlobalTools {
 			// TableName = RLF_Program_CheckPoints
 			// WhereColumnName = Account_ID
 			// WhereColumnValue = 1000000006
-			// UpdateColumnName = Last_PID // MAKE ADAPT ARRAY
+			// UpdateColumnName = Last_Exercise_ID // MAKE ADAPT ARRAY
 			// UpdateColumnValue = 18 // MAKE ADAPT ARRAY
 			
-			String Last_PID_Saved_On = "NOW()";
+			String Last_Exercise_ID_Saved_On = "NOW()";
 			
 	/* START RLF_Newsletters INSERT */
 	/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 						
-			// Select the PID From the Current User.
-			//String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+UniqueColumnValue+"';";
+			// Select the Exercise_ID From the Current User.
+			//String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+UniqueColumnValue+"';";
 			String ProgramCheckpointSQLQuery = "SELECT "+UpdateColumnName+" FROM "+TableName+" WHERE "+WhereColumnName+" ='"+WhereColumnValue+"';";
 			
-			// Get the LastPIDSQLQueryOutput ResultSet
-			ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+			// Get the LastExerciseIDSQLQueryOutput ResultSet
+			ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 						
-			// Check if this PID record already exists in the RLF_Program_CheckPoints Table
-			if(LastPIDSQLQueryOutput.next()){
+			// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+			if(LastExerciseIDSQLQueryOutput.next()){
 
 			// If it does, simply update the existing record since it already exists in the Table
 
 			// Program Checkpoint Update Query
-			String UpdateProgramCheckpointSQLQuery = "UPDATE "+TableName+" SET "+UpdateColumnName+"='"+UpdateColumnValue+"', Last_PID_Saved_On="+Last_PID_Saved_On+" WHERE "+WhereColumnName+"='"+WhereColumnValue+"';";
+			String UpdateProgramCheckpointSQLQuery = "UPDATE "+TableName+" SET "+UpdateColumnName+"='"+UpdateColumnValue+"', Last_Exercise_ID_Saved_On="+Last_Exercise_ID_Saved_On+" WHERE "+WhereColumnName+"='"+WhereColumnValue+"';";
 			
 			// Update the Program Checkpoint Entry
 			// 1 = Update Successful
@@ -942,13 +934,13 @@ public class GlobalTools {
 			// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
 			String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
 					"Account_ID," +
-					"Last_PID," +
-					"Last_PID_Saved_On" +
+					"Last_Exercise_ID," +
+					"Last_Exercise_ID_Saved_On" +
 					")" +
 					"VALUES(" +
 					"\""+WhereColumnValue+"\"," +
 					"\""+UpdateColumnValue+"\"," +
-					""+Last_PID_Saved_On+"" +
+					""+Last_Exercise_ID_Saved_On+"" +
 					");" +
 					"";
 
@@ -962,7 +954,7 @@ public class GlobalTools {
 			
 			
 			// Close the ResultSet
-			try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+			try {LastExerciseIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 		}
 		

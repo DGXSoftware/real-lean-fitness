@@ -7,10 +7,6 @@
 
 String SessionAccountID = "1000000005";
 
-// String SessionAccountID, String New_PID
-//GlobalTools.setProgramCheckpointTableCellData(request, response, SessionAccountID,"90");
-
-
 
 %>
 

@@ -86,7 +86,7 @@ public class ProgramCheckpointServlet extends HttpServlet {
 
 		// Variables for Program Checkpoint
 		String SessionAccountID = Request.getParameter("SessionAccountID");;
-		String New_PID = Request.getParameter("New_PID");;
+		String New_Exercise_ID = Request.getParameter("New_Exercise_ID");;
 		
 		/* START RLF_Program_CheckPoints INSERT */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -94,21 +94,21 @@ public class ProgramCheckpointServlet extends HttpServlet {
 			try {
 		
 			// Variables for last save Date
-			String Last_PID_Saved_On = "NOW()";
+			String Last_Exercise_ID_Saved_On = "NOW()";
 							
-			// Select the PID From the Current User.
-			String ProgramCheckpointSQLQuery = "SELECT Last_PID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
+			// Select the Exercise_ID From the Current User.
+			String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
 				
-			// Get the LastPIDSQLQueryOutput ResultSet
-			ResultSet LastPIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
+			// Get the LastExerciseIDSQLQueryOutput ResultSet
+			ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 							
-			// Check if this PID record already exists in the RLF_Program_CheckPoints Table
-			if(LastPIDSQLQueryOutput.next()){
+			// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+			if(LastExerciseIDSQLQueryOutput.next()){
 
 			// If it does, simply update the existing record since it already exists in the Table
 
 			// Program Checkpoint Update Query
-			String UpdateProgramCheckpointSQLQuery = "UPDATE RLF_Program_CheckPoints SET Last_PID='"+New_PID+"', Last_PID_Saved_On="+Last_PID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
+			String UpdateProgramCheckpointSQLQuery = "UPDATE RLF_Program_CheckPoints SET Last_Exercise_ID='"+New_Exercise_ID+"', Last_Exercise_ID_Saved_On="+Last_Exercise_ID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
 				
 			// Update the Program Checkpoint Entry
 			// 1 = Update Successful
@@ -117,27 +117,27 @@ public class ProgramCheckpointServlet extends HttpServlet {
 							
 			// If the Update SQL Query Failed to Update, throw an exception
 			if(SQLQueryResultsCode == 0){
-			throw new RuntimeException("Failed to update the account mark for your Newsletter subscription.");
+			throw new RuntimeException("Failed to update your Last Exercise ID.");
 			}
 							
 			}else{
 							
 			// If it doesn't, simply add a new record to the table
 				
-			// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
+			// Create an Entry for the new account that was created in the RLF_Program_CheckPoints Table.
 			String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
 					"Account_ID," +
-					"Last_PID," +
-					"Last_PID_Saved_On" +
+					"Last_Exercise_ID," +
+					"Last_Exercise_ID_Saved_On" +
 					")" +
 					"VALUES(" +
 					"\""+SessionAccountID+"\"," +
-					"\""+New_PID+"\"," +
-					""+Last_PID_Saved_On+"" +
+					"\""+New_Exercise_ID+"\"," +
+					""+Last_Exercise_ID_Saved_On+"" +
 					");" +
 					"";
 
-			// Create the NewsLetter Entry
+			// Create the Table Entry
 			SQLStatement.executeUpdate(InsertProgramCheckpointSQLQuery);
 								
 							}
@@ -147,7 +147,7 @@ public class ProgramCheckpointServlet extends HttpServlet {
 				
 				
 				// Close the ResultSet
-				try {LastPIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+				try {LastExerciseIDSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
 			
 		} // end try
 		// if database exception occurs, return error page

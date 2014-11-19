@@ -49,14 +49,14 @@ GOAL: RLF Program Player
 		%>
 		
 //Submits the Request
-function submitProgramCheckpointUpdate(New_PID_Value) {
+function submitProgramCheckpointUpdate(New_Exercise_ID_Value) {
 	
-		// Submit via AJAX and pass the current SessionAccountID and New_PID_Value
+		// Submit via AJAX and pass the current SessionAccountID and New_Exercise_ID_Value
         var jqxhr = $.ajax({
             type:       "POST",
             url:        "/ProgramCheckpointServlet",
             cache:      false,
-            data:       $("#ProgramCheckpointForm").serialize()+"&SessionAccountID=<%= SessionAccountID %>&New_PID="+New_PID_Value+"",
+            data:       $("#ProgramCheckpointForm").serialize()+"&SessionAccountID=<%= SessionAccountID %>&New_Exercise_ID="+New_Exercise_ID_Value+"",
                 
             // Before load, notify the user that the request may take a while 
             beforeSend: function() {
@@ -200,45 +200,64 @@ if(SkipCountdown == false){
 //Decide the Current Program Index (Can be any index from the program)
 String CurrentProgramIndex = "1";
 
-//Get the Current User's Last_PID if any
-String Last_PID = GlobalTools.getProgramCheckpointTableCellData(request, response, SessionAccountID);
-
+//Get the Current User's Last_Exercise_ID if any
+String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Program_CheckPoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
 
 // Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Programs";
-String [] CurrentProgramNameColumns = {"Program"};
-String CurrentProgramColumnName = "PID";
+String CurrentProgramNameTable = "RLF_Exercises";
+String [] CurrentProgramNameColumns = {"Program_Name"};
+String CurrentProgramColumnName = "Exercise_ID";
 String CurrentProgramColumnValue = CurrentProgramIndex;
 ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CurrentProgramNameTable, CurrentProgramColumnName, CurrentProgramColumnValue, CurrentProgramNameColumns);
 
 
 
 // Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Programs";
-String [] CompleteProgramNameColumns = {"PID","Exercise_Type","Program","Exercise_Name","Time_Seconds","Equipment","Demonstration","Description"};
-String CompleteProgramColumnName = "Program"; 
+String CompleteProgramNameTable = "RLF_Exercises";
+String [] CompleteProgramNameColumns = {"Exercise_ID","Program_Name","Exercise_Type","Exercise_Name","Time_In_Seconds","Equipment_List","Demonstration_URL","Description"};
+String CompleteProgramColumnName = "Program_Name"; 
 String CompleteProgramColumnValue = CurrentProgramNameFieldValuePair.get(1).get(0);
 ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
+
+
+// Declare and get the LongRandomKey for randomizing the 2D Array List
+Long LongRandomKey = null;
+// Get the Random Key from the Database for this user (If Any)
+String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"RLF_Program_CheckPoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
+if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
+	//System.out.println("Make Key from the Database!");
+	LongRandomKey = Long.parseLong(LongRandomDatabaseKey);
+}else{
+	//System.out.println("Make Key from scratch!");
+	LongRandomKey = System.nanoTime();
+	// Save the new Random Key to the Database for this user
+	
+	GlobalTools.setSingleTableCellData(request, response,"RLF_Program_CheckPoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
+			
+}
+
+// Randomize the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.randomize2DArrayList(CompleteProgramNameFieldValuePair, LongRandomKey);
 
 
 %>
 <script>
 // Declare the JavaScript Program Arrays
-var JS_PID_Array = []; // PID
-var JS_Program_Array = []; // Program
+var JS_Exercise_ID_Array = []; // Exercise_ID
+var JS_Program_Name_Array = []; // Program_Name
 var JS_Exercise_Type_Array = []; // Exercise_Type
 var JS_Exercise_Name_Array = []; // Exercise_Name
-var JS_Time_Seconds_Array = []; // Time_Seconds
-var JS_Equipment_Array = []; // Equipment
-var JS_Demonstration_Array = []; // Demonstration
+var JS_Time_In_Seconds_Array = []; // Time_In_Seconds
+var JS_Equipment_List_Array = []; // Equipment_List
+var JS_Demonstration_URL_Array = []; // Demonstration_URL
 var JS_Description_Array = []; // Description
 </script>
 <%
 
-//Declare the PID IndexArrayList
-ArrayList<String> PIDIndexArrayList = new ArrayList<String>();
+//Declare the ExerciseID IndexArrayList
+ArrayList<String> ExerciseIDIndexArrayList = new ArrayList<String>();
 
-//Generate all the JavaScript Arrays and the PID IndexArrayList
+//Generate all the JavaScript Arrays and the ExerciseID IndexArrayList
 for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
     
 	// Get the Current SQL Result Values
@@ -246,19 +265,19 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 	//String UserDisplayCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
 	String CurrentValue = CompleteProgramNameFieldValuePair.get(1).get(i);
 	
-	// Generate the JS_PID_Array
-	if(CurrentColumnName.equals("PID")){
-		PIDIndexArrayList.add(CurrentValue);
+	// Generate the JS_Exercise_ID_Array
+	if(CurrentColumnName.equals("Exercise_ID")){
+		ExerciseIDIndexArrayList.add(CurrentValue);
 		%>
 		<script>
-		JS_PID_Array.push("<%= CurrentValue %>");
+		JS_Exercise_ID_Array.push("<%= CurrentValue %>");
 		</script>
 		<%
 		continue;
 	}
 	
-	// Generate the JS_Program_Array
-	if(CurrentColumnName.equals("Program")){}
+	// Generate the JS_Program_Name_Array
+	if(CurrentColumnName.equals("Program_Name")){}
 	
 	// Generate the JS_Exercise_Type_Array
 	if(CurrentColumnName.equals("Exercise_Type")){
@@ -280,24 +299,24 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 		continue;
 	}
 	
-	// Generate the JS_Time_Seconds_Array
-	if(CurrentColumnName.equals("Time_Seconds")){
+	// Generate the JS_Time_In_Seconds_Array
+	if(CurrentColumnName.equals("Time_In_Seconds")){
 		%>
 		<script>
-		JS_Time_Seconds_Array.push(<%= Integer.parseInt(CurrentValue) %>);
+		JS_Time_In_Seconds_Array.push(<%= Integer.parseInt(CurrentValue) %>);
 		</script>
 		<%
 		continue;
 	}	
 	
-	// Generate the JS_Equipment_Array
-	if(CurrentColumnName.equals("Equipment")){}
+	// Generate the JS_Equipment_List_Array
+	if(CurrentColumnName.equals("Equipment_List")){}
 	
-	// Generate the JS_Demonstration_Array
-	if(CurrentColumnName.equals("Demonstration")){
+	// Generate the JS_Demonstration_URL_Array
+	if(CurrentColumnName.equals("Demonstration_URL")){
 		%>
 		<script>
-		JS_Demonstration_Array.push("<%= CurrentValue %>");
+		JS_Demonstration_URL_Array.push("<%= CurrentValue %>");
 		</script>
 		<%
 		continue;
@@ -311,16 +330,16 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 //Calculate the Checkpoint Skips
 int CheckpointSkips = 0;
 
-//If the Last User Program Index Checkpoint is null, then set it to the program's initial PID
-if(Last_PID == null){
-	// If the Database returned null, set it to the default program's PID
-	Last_PID = PIDIndexArrayList.get(0);
+//If the Last User Program Index Checkpoint is null, then set it to the program's initial Exercise_ID
+if(Last_Exercise_ID == null){
+	// If the Database returned null, set it to the default program's Exercise_ID
+	Last_Exercise_ID = ExerciseIDIndexArrayList.get(0);
 	
 }else{
 
 //Figure out how much to skip
-for(int i = 0 ; i < PIDIndexArrayList.size(); i++){
-	if(PIDIndexArrayList.get(i).equals(Last_PID)){
+for(int i = 0 ; i < ExerciseIDIndexArrayList.size(); i++){
+	if(ExerciseIDIndexArrayList.get(i).equals(Last_Exercise_ID)){
 		CheckpointSkips = i;
 		break;
 	}
@@ -355,9 +374,10 @@ CurrentImageIndex = CurrentImageIndex + CheckPointImageIndex;
 // Set Initial Values
 document.getElementById("StatusMessage").innerHTML = "RUNNING: ";
 document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex]  + " ";
-document.getElementById("CountdownSeconds").innerHTML = JS_Time_Seconds_Array[CurrentImageIndex];
-document.getElementById("MyImage").src = JS_Demonstration_Array[CurrentImageIndex];
+document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
+document.getElementById("MyImage").src = JS_Demonstration_URL_Array[CurrentImageIndex];
 
+// Set the PLayer as running
 var IsRunning = true;
 
 // Redirect to Homepage
@@ -379,11 +399,11 @@ $(document).ready(function () {
         	
         	// Update the Current Demonstration
         	document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex] + " ";
-        	document.getElementById("CountdownSeconds").innerHTML = JS_Time_Seconds_Array[CurrentImageIndex];
-        	document.getElementById("MyImage").src = JS_Demonstration_Array[CurrentImageIndex];
+        	document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
+        	document.getElementById("MyImage").src = JS_Demonstration_URL_Array[CurrentImageIndex];
         	
-        	// Save the New PID Value
-        	submitProgramCheckpointUpdate(JS_PID_Array[CurrentImageIndex]);
+        	// Save the New Exercise_ID Value
+        	submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex]);
         	
         	}
         	
@@ -428,14 +448,14 @@ function ToggleCountdown(){
 
 // Set the Max Percentage Bar Time to calculate the Bar % Reach to Max
 var MaxProgramTime = 0;
-for(var i = 0 ; i < JS_Time_Seconds_Array.length; i++){
-	MaxProgramTime = MaxProgramTime + JS_Time_Seconds_Array[i];
+for(var i = 0 ; i < JS_Time_In_Seconds_Array.length; i++){
+	MaxProgramTime = MaxProgramTime + JS_Time_In_Seconds_Array[i];
 }
 
 //Set the Elapsed Time to calculate the Bar % Progress, and Apply the CheckPoint Time
 var ElapsedProgramTime = 0;
 for(var i = 0 ; i < CheckPointImageIndex; i++){
-	ElapsedProgramTime = ElapsedProgramTime + JS_Time_Seconds_Array[i];
+	ElapsedProgramTime = ElapsedProgramTime + JS_Time_In_Seconds_Array[i];
 }
 
 // Update the PercentageBar
