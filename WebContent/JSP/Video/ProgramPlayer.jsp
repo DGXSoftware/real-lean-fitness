@@ -239,7 +239,18 @@ if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
 // Randomize the CompleteProgramNameFieldValuePair 2D ArrayList
 GlobalTools.randomize2DArrayList(CompleteProgramNameFieldValuePair, LongRandomKey);
 
+// Pair up all Left/Right elements for the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.shiftSequential2DArrayListElements(CompleteProgramNameFieldValuePair, 1, " Left", " Right");
 
+/* 
+//Print all Exercise Names
+for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(1).size(); i++){
+	if(CompleteProgramNameFieldValuePair.get(0).get(i).equals("Exercise_Name")){
+		System.out.println(CompleteProgramNameFieldValuePair.get(1).get(i));
+	}
+}
+*/
+		
 %>
 <script>
 // Declare the JavaScript Program Arrays

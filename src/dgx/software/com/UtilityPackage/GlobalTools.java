@@ -541,6 +541,97 @@ public class GlobalTools {
 		
 	}
 	
+	/*************************************************************************************************
+	NAME:        shiftSequential2DArrayListElements
+	DESCRIPTION: Goes through a 2D ArrayList and couples Elements that should be next to each 
+	other delimited by the "LeftEndsWithDelimiter" and "RightEndsWithDelimiter" of a "ElementShiftLeaderColumn".
+	PARAMETERS: (ArrayList <ArrayList<String>> Master2DXMLRequestArrayList, int ElementShiftLeaderColumn, String LeftEndsWithDelimiter, String RightEndsWithDelimiter)
+	RETURN:      void
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static void shiftSequential2DArrayListElements(ArrayList <ArrayList<String>> Master2DXMLRequestArrayList, int ElementShiftLeaderColumn, String LeftEndsWithDelimiter, String RightEndsWithDelimiter){
+		
+		// Temporary Alteration for "ElementShiftLeaderColumn" to avoid running over the same shifted columns
+		String RightTemporaryLeaderColumnAlteration = "RDGX";
+		String LeftTemporaryLeaderColumnAlteration = "LDGX";
+		
+		// Iterate through the 2D Array List until All Right Versions are removed (RightEndsWithDelimiter).
+		while(true){
+		
+			// Assume that the 2D Array has no Right Versions (RightEndsWithDelimiter)
+			boolean RightVersionExists = false;
+			
+			// Look through the 2D Array using the "ElementShiftLeaderColumn"
+			for(int i = 0 ; i < Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).size(); i++){
+				
+			// Get the current "ElementShiftLeaderColumn" value
+			String CurrentValue = Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).get(i);
+			
+			// If at any point the current "ElementShiftLeaderColumn" element value ends with (RightEndsWithDelimiter) 
+			// Shift all the 2D Array List column indexes to the right of the (LeftEndsWithDelimiter)
+			if(CurrentValue.endsWith(RightEndsWithDelimiter)){
+				
+				// Since CurrentValue.endsWith(RightEndsWithDelimiter) Mark RightVersionExists as True
+				RightVersionExists = true;
+				
+				// Get the current Element's new Index to add it there and Old Index to remove it from
+				int ShiftAddIndex = Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).indexOf(CurrentValue.replaceAll(RightEndsWithDelimiter, LeftEndsWithDelimiter)) + 1;
+				
+				// find when to keep as i or when to do i-1 when choosing an Index to remove
+				int ShiftRemoveIndex = 0;
+				if(ShiftAddIndex > i){
+					ShiftRemoveIndex = i;
+				}else{
+					ShiftRemoveIndex = i + 1;
+				}
+				
+				// use the ShiftAddIndex and ShiftRemoveIndex to shift all 2D Array Elements in accordance of the Shift led by the "ElementShiftLeaderColumn"
+				for(int k = 0; k < Master2DXMLRequestArrayList.size(); k++){
+				
+				// If we are shifting the "ElementShiftLeaderColumn" Alter the Shifted value by adding the "TemporaryLeaderColumnAlteration" so we can skip it in future iterations
+				if(k == ElementShiftLeaderColumn){
+					
+					// Right Temporary Leader Column Alteration
+					Master2DXMLRequestArrayList.get(k).add(ShiftAddIndex, Master2DXMLRequestArrayList.get(k).get(i) + RightTemporaryLeaderColumnAlteration);
+					
+					// Left Temporary Leader Column Alteration
+					Master2DXMLRequestArrayList.get(k).set(ShiftAddIndex - 1, Master2DXMLRequestArrayList.get(k).get(ShiftAddIndex - 1) + LeftTemporaryLeaderColumnAlteration);
+					
+				}else{
+					// Else, Shift as Usual for all other columns
+					Master2DXMLRequestArrayList.get(k).add(ShiftAddIndex, Master2DXMLRequestArrayList.get(k).get(i));
+				}
+				// Remove the old Current Value which we just re-added to complete the current value Shift
+				Master2DXMLRequestArrayList.get(k).remove(ShiftRemoveIndex);
+				}
+				
+				// Break out of the for loop to continue going forward searching for new Right Versions (RightEndsWithDelimiter)
+				break;
+				
+			}
+			
+		}
+
+		// If at Any point we don't encounter any new Right Versions (RightEndsWithDelimiter) undo any "ElementShiftLeaderColumn" alterations and exit the while loop
+		if(RightVersionExists == false){
+			
+			// Remove all Temporary Leader Column Alterations
+			for(int i = 0 ; i < Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).size(); i++){
+				
+				// Right Temporary Leader Column Alteration
+				Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).set(i, Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).get(i).replaceAll(RightTemporaryLeaderColumnAlteration, ""));
+				
+				// Left Temporary Leader Column Alteration
+				Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).set(i, Master2DXMLRequestArrayList.get(ElementShiftLeaderColumn).get(i).replaceAll(LeftTemporaryLeaderColumnAlteration, ""));
+			}
+			
+			break;
+			}
+		
+		}
+		
+	}
+	
 		/*************************************************************************************************
 		NAME:        writeForwardHTMLSuccessResponse
 		DESCRIPTION: Handle successful forwarding responses.
