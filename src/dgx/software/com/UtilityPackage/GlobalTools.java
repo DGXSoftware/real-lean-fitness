@@ -36,6 +36,9 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_UserSettings %>
 	public static final String GTV_UserSettings = "/JSP/UserPages/UserSettings.jsp";
 	
+	// <%= GlobalTools.GTV_GettingStarted %>
+	public static final String GTV_GettingStarted= "/JSP/UserPages/GettingStarted.jsp";
+	
 	// <%= GlobalTools.GTV_Settings_UserAccount %>
 	public static final String GTV_Settings_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
 	
@@ -482,7 +485,7 @@ public class GlobalTools {
 		// Get the LastExerciseIDSQLQueryOutput ResultSet
 		ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 					
-		// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+		// Check if this Exercise_ID record already exists in the rlf_programs_checkpoints Table
 		if(LastExerciseIDSQLQueryOutput.next()){
 
 		// If it does, simply update the existing record since it already exists in the Table
@@ -823,7 +826,7 @@ public class GlobalTools {
 			*/
 			if(PageType.equals("LoggedIn")){
 			out.println("<li><a href='"+GlobalTools.GTV_UserProfile+"'>"+SessionFirstName+"</a></li>");
-			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_GettingStarted+"'>Getting Started</a></li>");
 			out.println("<li><a href='#'></a></li>");
 			out.println("<li><a href='#'></a></li>");
 			out.println("<li><a href='"+GlobalTools.GTV_UserSettings+"'>Settings</a></li>");
@@ -982,7 +985,7 @@ public class GlobalTools {
 			
 			// Variables for Account Exercise CheckPoint Entries
 
-			// TableName = RLF_Program_CheckPoints
+			// TableName = rlf_programs_checkpoints
 			// WhereColumnName = Account_ID
 			// WhereColumnValue = 1000000006
 			// UpdateColumnName = Last_Exercise_ID // MAKE ADAPT ARRAY
@@ -994,13 +997,13 @@ public class GlobalTools {
 	/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 						
 			// Select the Exercise_ID From the Current User.
-			//String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+UniqueColumnValue+"';";
+			//String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM rlf_programs_checkpoints WHERE Account_ID ='"+UniqueColumnValue+"';";
 			String ProgramCheckpointSQLQuery = "SELECT "+UpdateColumnName+" FROM "+TableName+" WHERE "+WhereColumnName+" ='"+WhereColumnValue+"';";
 			
 			// Get the LastExerciseIDSQLQueryOutput ResultSet
 			ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 						
-			// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+			// Check if this Exercise_ID record already exists in the rlf_programs_checkpoints Table
 			if(LastExerciseIDSQLQueryOutput.next()){
 
 			// If it does, simply update the existing record since it already exists in the Table
@@ -1023,7 +1026,7 @@ public class GlobalTools {
 			// If it doesn't, simply add a new record to the table
 			
 			// Create an Entry for the new account that was created in the RLF_NewsLetters Table.
-			String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
+			String InsertProgramCheckpointSQLQuery = "INSERT INTO rlf_programs_checkpoints (" +
 					"Account_ID," +
 					"Last_Exercise_ID," +
 					"Last_Exercise_ID_Saved_On" +

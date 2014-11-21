@@ -201,10 +201,10 @@ if(SkipCountdown == false){
 String CurrentProgramIndex = "1";
 
 //Get the Current User's Last_Exercise_ID if any
-String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Program_CheckPoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
+String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
 
 // Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Exercises";
+String CurrentProgramNameTable = "RLF_Programs_Exercises";
 String [] CurrentProgramNameColumns = {"Program_Name"};
 String CurrentProgramColumnName = "Exercise_ID";
 String CurrentProgramColumnValue = CurrentProgramIndex;
@@ -213,7 +213,7 @@ ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getT
 
 
 // Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Exercises";
+String CompleteProgramNameTable = "RLF_Programs_Exercises";
 String [] CompleteProgramNameColumns = {"Exercise_ID","Program_Name","Exercise_Type","Exercise_Name","Time_In_Seconds","Equipment_List","Demonstration_URL","Description"};
 String CompleteProgramColumnName = "Program_Name"; 
 String CompleteProgramColumnValue = CurrentProgramNameFieldValuePair.get(1).get(0);
@@ -223,7 +223,7 @@ ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.get
 // Declare and get the LongRandomKey for randomizing the 2D Array List
 Long LongRandomKey = null;
 // Get the Random Key from the Database for this user (If Any)
-String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"RLF_Program_CheckPoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
+String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
 if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
 	//System.out.println("Make Key from the Database!");
 	LongRandomKey = Long.parseLong(LongRandomDatabaseKey);
@@ -232,7 +232,7 @@ if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
 	LongRandomKey = System.nanoTime();
 	// Save the new Random Key to the Database for this user
 	
-	GlobalTools.setSingleTableCellData(request, response,"RLF_Program_CheckPoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
+	GlobalTools.setSingleTableCellData(request, response,"rlf_programs_checkpoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
 			
 }
 

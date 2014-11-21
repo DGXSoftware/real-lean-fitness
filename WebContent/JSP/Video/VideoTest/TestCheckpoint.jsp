@@ -21,18 +21,22 @@ String SessionAccountID = "1000000005";
 
 
 <!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
 <!-- START DYNAMIC JAVA CODE -->
 <!-- ************************************************************************************** -->
-<%
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
 
-// Decide the Current Program Index (Can be any index from the program)
+<%
+//Decide the Current Program Index (Can be any index from the program)
 String CurrentProgramIndex = "1";
 
 //Get the Current User's Last_Exercise_ID if any
-String Last_Exercise_ID = GlobalTools.getProgramCheckpointTableCellData(request, response, SessionAccountID);
+String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
 
-//Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Exercises";
+// Get the CurrentProgramNameFieldValuePair
+String CurrentProgramNameTable = "RLF_Programs_Exercises";
 String [] CurrentProgramNameColumns = {"Program_Name"};
 String CurrentProgramColumnName = "Exercise_ID";
 String CurrentProgramColumnValue = CurrentProgramIndex;
@@ -40,14 +44,45 @@ ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getT
 
 
 
-//Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Exercises";
+// Get the CompleteProgramNameFieldValuePair
+String CompleteProgramNameTable = "RLF_Programs_Exercises";
 String [] CompleteProgramNameColumns = {"Exercise_ID","Program_Name","Exercise_Type","Exercise_Name","Time_In_Seconds","Equipment_List","Demonstration_URL","Description"};
 String CompleteProgramColumnName = "Program_Name"; 
 String CompleteProgramColumnValue = CurrentProgramNameFieldValuePair.get(1).get(0);
 ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
 
 
+// Declare and get the LongRandomKey for randomizing the 2D Array List
+Long LongRandomKey = null;
+// Get the Random Key from the Database for this user (If Any)
+String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
+if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
+	//System.out.println("Make Key from the Database!");
+	LongRandomKey = Long.parseLong(LongRandomDatabaseKey);
+}else{
+	//System.out.println("Make Key from scratch!");
+	LongRandomKey = System.nanoTime();
+	// Save the new Random Key to the Database for this user
+	
+	GlobalTools.setSingleTableCellData(request, response,"rlf_programs_checkpoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
+			
+}
+
+// Randomize the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.randomize2DArrayList(CompleteProgramNameFieldValuePair, LongRandomKey);
+
+// Pair up all Left/Right elements for the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.shiftSequential2DArrayListElements(CompleteProgramNameFieldValuePair, 1, " Left", " Right");
+
+/* 
+//Print all Exercise Names
+for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(1).size(); i++){
+	if(CompleteProgramNameFieldValuePair.get(0).get(i).equals("Exercise_Name")){
+		System.out.println(CompleteProgramNameFieldValuePair.get(1).get(i));
+	}
+}
+*/
+		
 %>
 <script>
 // Declare the JavaScript Program Arrays
@@ -67,7 +102,7 @@ ArrayList<String> ExerciseIDIndexArrayList = new ArrayList<String>();
 
 //Generate all the JavaScript Arrays and the ExerciseID IndexArrayList
 for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
-  
+    
 	// Get the Current SQL Result Values
 	String CurrentColumnName = CompleteProgramNameFieldValuePair.get(0).get(i);
 	//String UserDisplayCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
@@ -135,7 +170,7 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
 
 }
 
-// Calculate the Checkpoint Skips
+//Calculate the Checkpoint Skips
 int CheckpointSkips = 0;
 
 //If the Last User Program Index Checkpoint is null, then set it to the program's initial Exercise_ID
@@ -155,6 +190,7 @@ for(int i = 0 ; i < ExerciseIDIndexArrayList.size(); i++){
 
 }
 
+
 %>
 <script>
 // Set the Current User CheckPoint
@@ -164,16 +200,12 @@ var CheckPointImageIndex = <%= CheckpointSkips %>;
 
 %>
 
-<script>
-
-for(var i = 0; i < JS_Exercise_Name_Array.length; i++){
-	//alert(JS_Exercise_Type_Array[i]);
-}
-
-</script>
-
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 <!-- END DYNAMIC JAVA CODE -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 
 

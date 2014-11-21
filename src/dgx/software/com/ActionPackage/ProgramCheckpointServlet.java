@@ -88,7 +88,7 @@ public class ProgramCheckpointServlet extends HttpServlet {
 		String SessionAccountID = Request.getParameter("SessionAccountID");;
 		String New_Exercise_ID = Request.getParameter("New_Exercise_ID");;
 		
-		/* START RLF_Program_CheckPoints INSERT */
+		/* START rlf_programs_checkpoints INSERT */
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 							
 			try {
@@ -97,18 +97,18 @@ public class ProgramCheckpointServlet extends HttpServlet {
 			String Last_Exercise_ID_Saved_On = "NOW()";
 							
 			// Select the Exercise_ID From the Current User.
-			String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM RLF_Program_CheckPoints WHERE Account_ID ='"+SessionAccountID+"';";
+			String ProgramCheckpointSQLQuery = "SELECT Last_Exercise_ID FROM rlf_programs_checkpoints WHERE Account_ID ='"+SessionAccountID+"';";
 				
 			// Get the LastExerciseIDSQLQueryOutput ResultSet
 			ResultSet LastExerciseIDSQLQueryOutput = SQLStatement.executeQuery(ProgramCheckpointSQLQuery);
 							
-			// Check if this Exercise_ID record already exists in the RLF_Program_CheckPoints Table
+			// Check if this Exercise_ID record already exists in the rlf_programs_checkpoints Table
 			if(LastExerciseIDSQLQueryOutput.next()){
 
 			// If it does, simply update the existing record since it already exists in the Table
 
 			// Program Checkpoint Update Query
-			String UpdateProgramCheckpointSQLQuery = "UPDATE RLF_Program_CheckPoints SET Last_Exercise_ID='"+New_Exercise_ID+"', Last_Exercise_ID_Saved_On="+Last_Exercise_ID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
+			String UpdateProgramCheckpointSQLQuery = "UPDATE rlf_programs_checkpoints SET Last_Exercise_ID='"+New_Exercise_ID+"', Last_Exercise_ID_Saved_On="+Last_Exercise_ID_Saved_On+" WHERE Account_ID='"+SessionAccountID+"';";
 				
 			// Update the Program Checkpoint Entry
 			// 1 = Update Successful
@@ -124,8 +124,8 @@ public class ProgramCheckpointServlet extends HttpServlet {
 							
 			// If it doesn't, simply add a new record to the table
 				
-			// Create an Entry for the new account that was created in the RLF_Program_CheckPoints Table.
-			String InsertProgramCheckpointSQLQuery = "INSERT INTO RLF_Program_CheckPoints (" +
+			// Create an Entry for the new account that was created in the rlf_programs_checkpoints Table.
+			String InsertProgramCheckpointSQLQuery = "INSERT INTO rlf_programs_checkpoints (" +
 					"Account_ID," +
 					"Last_Exercise_ID," +
 					"Last_Exercise_ID_Saved_On" +
@@ -143,7 +143,7 @@ public class ProgramCheckpointServlet extends HttpServlet {
 							}
 
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-	/* END RLF_Program_CheckPoints INSERT */	
+	/* END rlf_programs_checkpoints INSERT */	
 				
 				
 				// Close the ResultSet
