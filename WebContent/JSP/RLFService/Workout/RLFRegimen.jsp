@@ -101,9 +101,74 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<form action='' method='get' id='RLFRegimenForm' name='RLFRegimenForm'>
 		 
 <%
+
+// TO DO
+//1. Read Last Program ID
+//2. If Null or Empty set it to assign the default value of 1
+//3. If Value is found figure out if the day has changed, If so add 1 to the ID, If not leave alone
+//3. Get and Pass the Program Name of the Last Program ID from the DB to the player
+//4. After Session check, check If the Primary_Program_Name is NULL
+// If It's Null  Do the Database Work and set the Primary_Program_Name
+// If It's Not Null, check if the Day has changed
+// If the Day has changed then do the DB Work to get the  to set Primary_Program_Name
+// If the day has not changed then don't do anything
+
 /*
 //Get the Current User's Last_Exercise_ID if any
-String Last_Program_ID = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Last_Program_ID", "Account_ID", SessionAccountID);
+String Last_Program_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID", "Account_ID", SessionAccountID);
+
+
+//Get the CompleteProgramNameFieldValuePair
+String CompleteProgramNameTable = "RLF_Programs_Strategies";
+String [] CompleteProgramNameColumns = {"Program_ID","Program_Regimen","Primary_Program_Name","Secondary_Program_Name"};
+String CompleteProgramColumnName = "Program_ID"; 
+String CompleteProgramColumnValue = Last_Program_ID;
+ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
+
+
+//Declare the ExerciseID IndexArrayList
+ArrayList<String> ExerciseIDIndexArrayList = new ArrayList<String>();
+
+//Generate all the JavaScript Arrays and the ExerciseID IndexArrayList
+for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
+  
+	// Get the Current SQL Result Values
+	String CurrentColumnName = CompleteProgramNameFieldValuePair.get(0).get(i);
+	//String UserDisplayCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
+	String CurrentValue = CompleteProgramNameFieldValuePair.get(1).get(i);
+	
+	// Generate the JS_Exercise_ID_Array
+	if(CurrentColumnName.equals("Primary_Program_Name")){
+		ExerciseIDIndexArrayList.add(CurrentValue);
+		%>
+		<script>
+		JS_Exercise_ID_Array.push("<%= CurrentValue %>");
+		</script>
+		<%
+		continue;
+	}
+
+}
+
+//Calculate the Checkpoint Skips
+int CheckpointSkips = 0;
+
+//If the Last User Program Index Checkpoint is null, then set it to the program's initial Exercise_ID
+if(Last_Program_ID == null){
+	// If the Database returned null, set it to the default program's Exercise_ID
+	Last_Program_ID = ExerciseIDIndexArrayList.get(0);
+	
+}else{
+
+//Figure out how much to skip
+for(int i = 0 ; i < ExerciseIDIndexArrayList.size(); i++){
+	if(ExerciseIDIndexArrayList.get(i).equals(Last_Program_ID)){
+		CheckpointSkips = i;
+		break;
+	}
+}
+
+}
 
 
 //Decide the Current Program Index (Can be any index from the program)
@@ -117,12 +182,12 @@ String CurrentProgramColumnValue = CurrentProgramIndex;
 ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CurrentProgramNameTable, CurrentProgramColumnName, CurrentProgramColumnValue, CurrentProgramNameColumns);
 */
 
-String ProgramForToday = "Back and Chest Boost";
-CurrentSession.setAttribute("ProgramForToday", ProgramForToday);
+String Primary_Program_Name = "Back and Chest Boost";
+CurrentSession.setAttribute("Primary_Program_Name", Primary_Program_Name);
 
 %>
 
-		<p><b><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>"><%= ProgramForToday %></a></b><span> - Begin your daily workout for the day.</span></p>
+		<p><b><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>"><%= Primary_Program_Name %></a></b><span> - Begin your daily workout for the day.</span></p>
 
 		<br/>
 		<br/>
@@ -130,7 +195,7 @@ CurrentSession.setAttribute("ProgramForToday", ProgramForToday);
 		<br/>
 
         <!-- Pass the Target Username with the Form Submit -->
-        <input type="hidden" name="ProgramForToday" value="<%= ProgramForToday %>" />
+        <input type="hidden" name="ProgramForToday" value="<%= Primary_Program_Name %>" />
 
         <!-- Change Username Button -->
 		<input type='button' id='RLFRegimenButton' name='RLFRegimenButton' value='Submit' onClick="submitForm(document.RLFRegimenForm);" />

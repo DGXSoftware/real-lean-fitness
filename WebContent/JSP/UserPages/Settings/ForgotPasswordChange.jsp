@@ -285,7 +285,7 @@ function submitForm() {
 }else{
 
 	
-    // Since the Query String crednetials were invalid or expired
+    // Since the Query String credentials were invalid or expired
     // Return the user Home via a Cancel Countdown Forward Message
     String CancelMessage = "Invalid or expired password key. Please retry your request.";
     String CancelURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"";

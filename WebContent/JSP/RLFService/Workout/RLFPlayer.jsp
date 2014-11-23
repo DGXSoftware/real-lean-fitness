@@ -1,11 +1,5 @@
 <!--
 GOAL: RLF Program Player.
-
-PROPERTIES: Front-End Work / Back-End Work
-1. User Page Display (HTML/CSS)
-2. User Page Interactions (HTML/JavaScript)
-3. User SQL Database Access (SQL)
-*/
 -->
 
 <!-- Disable Cache -->
@@ -31,8 +25,82 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 	String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
 	String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
+	String Primary_Program_Name = (String) CurrentSession.getAttribute("Primary_Program_Name");
 	
 %>
+
+<%
+
+		// TEST STUFF
+		SessionAccountID = "1000000006";
+		SessionFirstName = "DMGX";
+		Primary_Program_Name = "Back and Chest Boost";
+
+		// Only proceed if we have a valid program name to Follow
+		if(Primary_Program_Name != null){
+
+%>
+
+
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- START DYNAMIC JAVA CODE -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+
+<%
+//Get the Current User's Last_Exercise_ID if any
+String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Checkpoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
+
+// Get the CompleteProgramNameFieldValuePair
+String CompleteProgramNameTable = "RLF_Programs_Exercises";
+String [] CompleteProgramNameColumns = {"Exercise_ID","Program_Name","Exercise_Type","Exercise_Name","Time_In_Seconds","Equipment_List","Demonstration_URL","Description"};
+String CompleteProgramColumnName = "Program_Name"; 
+String CompleteProgramColumnValue = Primary_Program_Name; // Get the Current Program Name
+ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
+
+// Declare and get the LongRandomKey for randomizing the 2D Array List
+Long LongRandomKey = null;
+// Get the Random Key from the Database for this user (If Any)
+String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Checkpoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
+if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
+	//System.out.println("Make Key from the Database!");
+	LongRandomKey = Long.parseLong(LongRandomDatabaseKey);
+}else{
+	//System.out.println("Make Key from scratch!");
+	LongRandomKey = System.nanoTime();
+	// Save the new Random Key to the Database for this user
+	
+	GlobalTools.setSingleTableCellData(request, response,"RLF_Programs_Checkpoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
+			
+}
+
+// Randomize the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.randomize2DArrayList(CompleteProgramNameFieldValuePair, LongRandomKey);
+
+// Pair up all Left/Right elements for the CompleteProgramNameFieldValuePair 2D ArrayList
+GlobalTools.shiftSequential2DArrayListElements(CompleteProgramNameFieldValuePair, 1, " Left", " Right");
+
+/* 
+//Print all Exercise Names
+for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(1).size(); i++){
+	if(CompleteProgramNameFieldValuePair.get(0).get(i).equals("Exercise_Name")){
+		System.out.println(CompleteProgramNameFieldValuePair.get(1).get(i));
+	}
+}
+*/
+		
+%>
+
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- END DYNAMIC JAVA CODE -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
+<!-- ************************************************************************************** -->
 
 
 <!-- START HTML RESPONSE  -->
@@ -155,8 +223,8 @@ function submitProgramCheckpointUpdate(New_Exercise_ID_Value) {
 #FastForwardButton {font-size:12pt; color:black; font-family:calibri; text-align:center;}
 #StatusMessage {font-size:20pt; color:green; font-family:calibri; text-align:center;}
 
-#MyImageDiv {font-size:20pt; color:blue; font-family:calibri; text-align:center; cursor: pointer; }
-#StartStopToggleButtonDiv {font-size:25pt; color:Red; font-family:calibri; text-align:center;}
+#PlayerDemonstrationDiv {font-size:20pt; color:blue; font-family:calibri; text-align:center; cursor: pointer; }
+#PlayerControlsDiv {font-size:25pt; color:Red; font-family:calibri; text-align:center;}
 
 </style>
 
@@ -173,8 +241,8 @@ function submitProgramCheckpointUpdate(New_Exercise_ID_Value) {
 //document.getElementById("CountdownMessage").innerHTML = "AAAAAAAA";
 </script>
 
-<div id="MyImageDiv">
-<img id="MyImage" name="MyImage" onClick="ToggleCountdown();" src="" height="300" width="300" /> 
+<div id="PlayerDemonstrationDiv">
+<img id="PlayerDemonstration" name="PlayerDemonstration" onClick="PlayerStartStopToggle();" src="" height="300" width="300" /> 
 </div>
 
 <!-- ************************************************************************************** -->
@@ -185,63 +253,6 @@ function submitProgramCheckpointUpdate(New_Exercise_ID_Value) {
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 
-<%
-/* UNUSED: WILL BE OBTAINED AND PASSED BY THE PROGRAM STRATEGY PAGE
-//Decide the Current Program Index (Can be any index from the program)
-String CurrentProgramIndex = "1";
-
-//Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Programs_Exercises";
-String [] CurrentProgramNameColumns = {"Program_Name"};
-String CurrentProgramColumnName = "Exercise_ID";
-String CurrentProgramColumnValue = CurrentProgramIndex;
-ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CurrentProgramNameTable, CurrentProgramColumnName, CurrentProgramColumnValue, CurrentProgramNameColumns);
-*/
-
-//String ProgramForToday = (String) CurrentSession.getAttribute("ProgramForToday");
-
-//Get the Current User's Last_Exercise_ID if any
-String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
-
-// Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Programs_Exercises";
-String [] CompleteProgramNameColumns = {"Exercise_ID","Program_Name","Exercise_Type","Exercise_Name","Time_In_Seconds","Equipment_List","Demonstration_URL","Description"};
-String CompleteProgramColumnName = "Program_Name"; 
-String CompleteProgramColumnValue = "Back and Chest Boost"; //ProgramForToday; // Get the Current Program Name
-ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
-
-// Declare and get the LongRandomKey for randomizing the 2D Array List
-Long LongRandomKey = null;
-// Get the Random Key from the Database for this user (If Any)
-String LongRandomDatabaseKey = GlobalTools.getSingleTableCellData(request, response,"rlf_programs_checkpoints","Random_Exercise_Key", "Account_ID", SessionAccountID);
-if(LongRandomDatabaseKey != null && !LongRandomDatabaseKey.equals("")){
-	//System.out.println("Make Key from the Database!");
-	LongRandomKey = Long.parseLong(LongRandomDatabaseKey);
-}else{
-	//System.out.println("Make Key from scratch!");
-	LongRandomKey = System.nanoTime();
-	// Save the new Random Key to the Database for this user
-	
-	GlobalTools.setSingleTableCellData(request, response,"rlf_programs_checkpoints","Account_ID",SessionAccountID,"Random_Exercise_Key",LongRandomKey.toString(),"Account_ID",SessionAccountID);
-			
-}
-
-// Randomize the CompleteProgramNameFieldValuePair 2D ArrayList
-GlobalTools.randomize2DArrayList(CompleteProgramNameFieldValuePair, LongRandomKey);
-
-// Pair up all Left/Right elements for the CompleteProgramNameFieldValuePair 2D ArrayList
-GlobalTools.shiftSequential2DArrayListElements(CompleteProgramNameFieldValuePair, 1, " Left", " Right");
-
-/* 
-//Print all Exercise Names
-for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(1).size(); i++){
-	if(CompleteProgramNameFieldValuePair.get(0).get(i).equals("Exercise_Name")){
-		System.out.println(CompleteProgramNameFieldValuePair.get(1).get(i));
-	}
-}
-*/
-		
-%>
 <script>
 // Declare the JavaScript Program Arrays
 var JS_Exercise_ID_Array = []; // Exercise_ID
@@ -376,7 +387,7 @@ CurrentImageIndex = CurrentImageIndex + CheckPointImageIndex;
 document.getElementById("StatusMessage").innerHTML = "RUNNING: ";
 document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex]  + " ";
 document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
-document.getElementById("MyImage").src = JS_Demonstration_URL_Array[CurrentImageIndex];
+document.getElementById("PlayerDemonstration").src = JS_Demonstration_URL_Array[CurrentImageIndex];
 
 // Set the PLayer as running
 var IsRunning = true;
@@ -401,7 +412,7 @@ $(document).ready(function () {
         	// Update the Current Demonstration
         	document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex] + " ";
         	document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
-        	document.getElementById("MyImage").src = JS_Demonstration_URL_Array[CurrentImageIndex];
+        	document.getElementById("PlayerDemonstration").src = JS_Demonstration_URL_Array[CurrentImageIndex];
         	
         	// Save the New Exercise_ID Value
         	submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex]);
@@ -422,11 +433,12 @@ $(document).ready(function () {
     }, 1000);
 });
 
-function ToggleCountdown(){
+//Starts and Stops the Player
+function PlayerStartStopToggle(){
 	 
 	if(IsRunning === true){
 		IsRunning = false;
-		document.getElementById("StartStopToggleButton").src = "http://www.clipartbest.com/cliparts/yco/e9a/ycoe9abMi.png";
+		document.getElementById("PlayerStartStopToggleButton").src = "http://dgxsoftware.com/RLF/JSP/RLFService/Pictures/PlayButton.png";
 		document.getElementById("StatusMessage").innerHTML = "PAUSED: ";
 		document.getElementById("StatusMessage").style.color = "red";
 		return false;
@@ -434,7 +446,7 @@ function ToggleCountdown(){
 	
 	if(IsRunning === false){
 		IsRunning = true;
-		document.getElementById("StartStopToggleButton").src = "http://theologygaming.com/wp-content/uploads/2014/08/Pause.png";
+		document.getElementById("PlayerStartStopToggleButton").src = "http://dgxsoftware.com/RLF/JSP/RLFService/Pictures/PauseButton.png";
 		document.getElementById("StatusMessage").innerHTML = "RUNNING: ";
 		document.getElementById("StatusMessage").style.color = "green";
 		return false;
@@ -442,6 +454,40 @@ function ToggleCountdown(){
 	
 }
 
+
+//Starts and Stops the Player
+function PlayerRewind(){
+	
+	//alert("CurrentImageIndex = " + CurrentImageIndex);
+	
+	//CheckPointImageIndex = CheckPointImageIndex - 1;
+	
+	// Save the New Exercise_ID Value
+	//submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex - 1]);
+	
+	//CurrentImageIndex = CurrentImageIndex - 1;
+	
+	
+	//location.reload(); 
+	//PlayerRefresh();
+}
+
+//Starts and Stops the Player
+function PlayerForward(){
+	
+	//alert("Fast FOrward Bruuuuh!");
+	
+}
+
+//Starts and Stops the Player
+function PlayerRefresh(){
+	
+	//alert("Refresh Bruuuuh!");
+	
+	//clearInterval(refreshId);
+	
+	//$("#RLFPlayerBody").load("#RLFPlayerBody");
+}
 
 </script>
 
@@ -479,10 +525,23 @@ function updatePercentageBar() {
 
 <br/>
 
-<div id="StartStopToggleButtonDiv">
-<input type="image" src="http://theologygaming.com/wp-content/uploads/2014/08/Pause.png" 
-name="StartStopToggleButton" id="StartStopToggleButton" value="Toggle Countdown" onClick="ToggleCountdown();" 
+<div id="PlayerControlsDiv">
+
+<!-- PlayerStartStopToggleButton -->
+<input type="image" src="http://dgxsoftware.com/RLF/JSP/RLFService/Pictures/RewindButton.png" 
+name="RewindButton" id="RewindButton" value="Rewind" onClick="PlayerRewind();" 
 width="48" height="48"/>
+
+<!-- PlayerStartStopToggleButton -->
+<input type="image" src="http://dgxsoftware.com/RLF/JSP/RLFService/Pictures/PauseButton.png" 
+name="PlayerStartStopToggleButton" id="PlayerStartStopToggleButton" value="Start / Stop" onClick="PlayerStartStopToggle();" 
+width="48" height="48"/>
+
+<!-- PlayerStartStopToggleButton -->
+<input type="image" src="http://dgxsoftware.com/RLF/JSP/RLFService/Pictures/ForwardButton.png" 
+name="ForwardButton" id="ForwardButton" value="Forward" onClick="PlayerForward();" 
+width="48" height="48"/>
+
 </div>
 
 <br/>
@@ -553,15 +612,29 @@ width="48" height="48"/>
 
 <%
 
+	}else{
+	
+    // Since the Query String credentials were invalid or expired
+    // Return the user Home via a Cancel Countdown Forward Message
+    String CancelMessage = "Invalid Program. Please use the Workout Manager.";
+    String CancelURL = GlobalTools.GTV_CountdownForwardMessage + "?CancelMessage="+CancelMessage+"";
+
+    // Forward the User back to the Homepage
+	response.sendRedirect(CancelURL);
+	
+	}
+
 		// End Try; if an exception occurs, return the error page
 		}catch (Exception EX) {EX.printStackTrace();} // end catch
 %>
 
 <%
+
 }else{
 
 	// The current user does NOT have a session, therefore redirect them to the Homepage
 	response.sendRedirect(GlobalTools.GTV_Homepage);
 
 }
+
 %>
