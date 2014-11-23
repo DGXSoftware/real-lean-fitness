@@ -164,6 +164,18 @@ UNIQUE (EMail)
 /* ---------------------------------------------------------------------------------------------------------------- */
 
 /* Create the Programs Table */
+CREATE TABLE RLF_Regimens (
+
+Regimen_Name varchar(64) NOT NULL,
+Description varchar(5000) NOT NULL,
+
+PRIMARY KEY (Regimen_Name)
+
+)ENGINE=INNODB;
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Create the Programs Table */
 CREATE TABLE RLF_Programs (
 
 Program_Number INT,
@@ -177,15 +189,16 @@ PRIMARY KEY (Program_Name)
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Programs Strategy Table */
+/* Create the Programs Strategies Table */
 CREATE TABLE RLF_Programs_Strategies (
 
 Program_ID INTEGER NOT NULL AUTO_INCREMENT,
-Program_Strategy varchar(64) NOT NULL,
+Program_Regimen varchar(64) NOT NULL,
 Primary_Program_Name varchar(64) NOT NULL,
 Secondary_Program_Name varchar(64) NOT NULL,
 
 PRIMARY KEY (Program_ID),
+FOREIGN KEY (Program_Regimen) REFERENCES RLF_Regimens (Regimen_Name) ON DELETE CASCADE,
 FOREIGN KEY (Primary_Program_Name) REFERENCES RLF_Programs (Program_Name) ON DELETE CASCADE,
 FOREIGN KEY (Secondary_Program_Name) REFERENCES RLF_Programs (Program_Name) ON DELETE CASCADE
 
@@ -216,6 +229,7 @@ FOREIGN KEY (Program_Name) REFERENCES RLF_Programs (Program_Name) ON DELETE CASC
 CREATE TABLE RLF_Programs_CheckPoints (
 
 Account_ID INT NOT NULL,
+Last_Regimen_Name varchar(64),
 Last_Program_ID INT,
 Last_Program_ID_Saved_On DATETIME,
 Last_Exercise_ID INT,
@@ -225,6 +239,7 @@ Random_Exercise_Key varchar(64),
 PRIMARY KEY (Account_ID),
 UNIQUE (Account_ID),
 FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE,
+FOREIGN KEY (Last_Regimen_Name) REFERENCES RLF_Regimens (Regimen_Name) ON DELETE CASCADE,
 FOREIGN KEY (Last_Program_ID) REFERENCES RLF_Programs_Strategies (Program_ID) ON DELETE CASCADE,
 FOREIGN KEY (Last_Exercise_ID) REFERENCES RLF_Programs_Exercises (Exercise_ID) ON DELETE CASCADE
 
@@ -244,6 +259,7 @@ DROP TABLE RLF_Programs_CheckPoints;
 DROP TABLE RLF_Programs_Exercises;
 DROP TABLE RLF_Programs_Strategies;
 DROP TABLE RLF_Programs;
+DROP TABLE RLF_Regimens;
 DROP TABLE RLF_Newsletters;
 DROP TABLE RLF_User_Information;
 DROP TABLE RLF_Images;

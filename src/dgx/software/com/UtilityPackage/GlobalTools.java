@@ -36,9 +36,6 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_UserSettings %>
 	public static final String GTV_UserSettings = "/JSP/UserPages/UserSettings.jsp";
 	
-	// <%= GlobalTools.GTV_GettingStarted %>
-	public static final String GTV_GettingStarted= "/JSP/UserPages/GettingStarted.jsp";
-	
 	// <%= GlobalTools.GTV_Settings_UserAccount %>
 	public static final String GTV_Settings_UserAccount = "/JSP/UserPages/Settings/UserAccount.jsp";
 	
@@ -69,9 +66,24 @@ public class GlobalTools {
 	// <%= GlobalTools.GTV_CountdownForwardMessage %>
 	public static final String GTV_CountdownForwardMessage = "/JSP/Tools/CountdownForwardMessage.jsp";
 	
+	// <%= GlobalTools.GTV_GettingStarted %>
+	public static final String GTV_RLFService_GettingStarted= "/JSP/RLFService/GettingStarted.jsp";
+	
+	// <%= GlobalTools.GTV_RLFService_RLFRegimen %>
+	public static final String GTV_RLFService_RLFRegimen = "/JSP/RLFService/Workout/RLFRegimen.jsp";
+	
+	// <%= GlobalTools.GTV_RLFService_RLFPlayer %>
+	public static final String GTV_RLFService_RLFPlayer = "/JSP/RLFService/Workout/RLFPlayer.jsp";
+	
+	// <%= GlobalTools.GTV_RLFService_RLFStats %>
+	public static final String GTV_RLFService_RLFWorkoutStatusReport = "/JSP/RLFService/Workout/RLFWorkoutStatusReport.jsp";
+    
+	// <%= GlobalTools.GTV_RLFService_RLFMealManager %>
+	public static final String GTV_RLFService_RLFMealManager = "/JSP/RLFService/Meal/RLFMealManager.jsp";
+	
 	// <%= GlobalTools.GTV_Error_QueryStringReader %>
 	public static final String GTV_Error_QueryStringReader = "/JSP/Error/QueryStringReader.jsp";
-    
+	
 	// <%= GlobalTools.GTV_Servlet_Logout %>
 	public static final String GTV_Servlet_Logout = "/LogOutServlet";
     
@@ -826,9 +838,9 @@ public class GlobalTools {
 			*/
 			if(PageType.equals("LoggedIn")){
 			out.println("<li><a href='"+GlobalTools.GTV_UserProfile+"'>"+SessionFirstName+"</a></li>");
-			out.println("<li><a href='"+GlobalTools.GTV_GettingStarted+"'>Getting Started</a></li>");
-			out.println("<li><a href='#'></a></li>");
-			out.println("<li><a href='#'></a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_RLFService_GettingStarted+"'>Getting Started</a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_RLFService_RLFRegimen+"'>Workout Regimen</a></li>");
+			out.println("<li><a href='"+GlobalTools.GTV_RLFService_RLFMealManager+"'>Meal Manager</a></li>");
 			out.println("<li><a href='"+GlobalTools.GTV_UserSettings+"'>Settings</a></li>");
 			out.println("<li><a href='/LogOutServlet'>Log Out</a></li>");
 			}

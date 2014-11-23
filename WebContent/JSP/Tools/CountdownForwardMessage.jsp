@@ -108,7 +108,7 @@ if(SkipCountdown == false){
 <style>
 #CountdownMessage {font-size:20pt; color:blue; font-family:Calibri; text-align:center;}
 #CountdownSeconds {font-size:25pt; color:Red; font-family:Calibri; text-align:center;}
-#FastForwardButton {font-size:12pt; colo:black; font-family:Calibri; text-align:center;}
+#FastForwardButton {font-size:12pt; color:black; font-family:Calibri; text-align:center;}
 </style>
 
 <div id="CountdownMessage">You will be redirected in <span id="CountdownSeconds">5</span> seconds.</div>

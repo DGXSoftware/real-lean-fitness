@@ -1,23 +1,12 @@
 <!--
-GOAL: Instructs the user on getting started with the application.
-
-PROPERTIES: Front-End Work / Back-End Work
-1. User Page Display (HTML/CSS)
-2. User Page Interactions (HTML/JavaScript)
-3. User SQL Database Access (SQL)
-*/
+GOAL: Manages the User's Programs
 -->
 
 <!-- Disable Cache -->
 <% response.addHeader("Cache-Control","no-cache"); %> 
 
 <%-- JSP Imports --%>
-<%@ page import = "java.sql.Connection" %>
-<%@ page import = "java.sql.DriverManager" %>
-<%@ page import = "java.sql.ResultSetMetaData" %>
-<%@ page import = "java.sql.Statement" %>
-<%@ page import = "java.sql.ResultSet" %>
-<%@ page import = "java.sql.SQLException" %>
+<%@ page import = "java.util.ArrayList" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
 
 <%
@@ -31,7 +20,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		HttpSession CurrentSession =  request.getSession(false);
 			
 		// Variables for Account session information
-		//String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
+		String SessionAccountID = (String) CurrentSession.getAttribute("AccountID");
 		String SessionUsername = (String) CurrentSession.getAttribute("Username");
 		String SessionFirstName = (String) CurrentSession.getAttribute("FirstName");
 		String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
@@ -50,7 +39,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<head>
 		
 		<!-- Set the Title for the Website Page -->
-		<title>Getting Started</title>
+		<title>Status Report</title>
 		
 		<!-- Set the Favicon for the Website page -->
 		<link rel='Shortcut Icon' type='image/ico' href='/Images/favicon.ico'/>
@@ -71,6 +60,16 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<!-- Include the JavaScript Files -->
 		<script type='text/javascript' src='/JavaScript/Validation/GlobalFieldValidation.js' > </script>
 		<!-- <script type='text/javascript' src='/JavaScript/FieldConvenience.js' > </script> -->
+		
+		<script>
+		
+		function submitForm(){
+			
+			alert("Status Report!");
+			
+		}
+		
+		</script>
 		
 		</head>
 		
@@ -95,16 +94,15 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<div id='content'>
 		<div id='left'>
 		<div class='post'>
-		<h1>Getting Started</h1>
+		<h1>Status Report</h1>
 		
 		<p align='left'>&#160;</p>
 		
-		<form action='' method='post' id='UserInformationForm' name='UserInformationForm'>
-		 
-		<p><b><a href="<%= GlobalTools.GTV_Homepage %>">Step 1: Set your workout preference</a></b><span> - Choose between increasing performance or getting lean.</span></p>
-		<p><b><a href="<%= GlobalTools.GTV_Homepage %>">Step 2: Run your first workout program</a></b><span> - Begin your daily workout for the day.</span></p>
-		<p><b><a href="<%= GlobalTools.GTV_Homepage %>">Step 3: Check your stats</a></b><span> - Learn about your progress so far.</span></p>
+		<form action='' method='get' id='RLFStatusReportForm' name='RLFStatusReportForm'>
 
+        <!-- Change Username Button -->
+		<input type='button' id='RLFStatusReportButton' name='RLFStatusReportButton' value='Submit' onClick="submitForm();" />
+        
 		</form>
 		
 		</div>
