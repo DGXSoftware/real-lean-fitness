@@ -45,7 +45,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
-<!-- START DYNAMIC JAVA CODE -->
+<!-- START JAVA DATABASE CODE -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
@@ -97,7 +97,7 @@ for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(1).size(); i++){
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
-<!-- END DYNAMIC JAVA CODE -->
+<!-- END JAVA DATABASE CODE -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
 <!-- ************************************************************************************** -->
@@ -405,17 +405,13 @@ $(document).ready(function () {
         	// Act upon showing the last Array Iteration
         	if(CurrentImageIndex >= JS_Exercise_Name_Array.length){
     			
-    			// Break out of window.setInterval
-    			clearInterval(refreshId);
+        		// Wrap up the Program Demonstration
+        		endProgramDemonstration();
+        		
         	}else{
         	
         	// Update the Current Demonstration
-        	document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex] + " ";
-        	document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
-        	document.getElementById("PlayerDemonstration").src = JS_Demonstration_URL_Array[CurrentImageIndex];
-        	
-        	// Save the New Exercise_ID Value
-        	submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex]);
+        	refreshPlayerDemonstration();
         	
         	}
         	
@@ -454,40 +450,88 @@ function PlayerStartStopToggle(){
 	
 }
 
+// Refreshes the PercentageBar progress without Updating it
+function refreshPercentageBar() {
 
-//Starts and Stops the Player
+	// Recalculate the Elapsed Time to calculate the Bar % Progress, and Apply the CurrentImageIndex Time
+	ElapsedProgramTime = 0;
+	for(var i = 0 ; i < CurrentImageIndex; i++){
+		ElapsedProgramTime = ElapsedProgramTime + JS_Time_In_Seconds_Array[i];
+	}
+	
+	// Get the Current Bar % and Update the Graphical Bar
+    var percentage = Math.round((ElapsedProgramTime/MaxProgramTime)*100);
+      if (percentage <= 100) {
+        $('#PercentageBarInnerDiv').css("width", percentage + "%");
+		$('#PercentageBarInnerText').text(percentage + "%");
+      }else{
+    	  //alert("Percentage is over 100% at = " + percentage "%");
+      }
+      
+}
+
+function endProgramDemonstration(){
+	
+	alert("WE ARE DONE!");
+	
+	// Break out of window.setInterval
+	clearInterval(refreshId);
+}
+
+// Refresh the Current Demonstration
+function refreshPlayerDemonstration(){
+
+// Only Refresh if we are in an Array Index that is not out of bounds
+if(JS_Exercise_ID_Array[CurrentImageIndex] != null){
+	
+// Update the Current Demonstration
+document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[CurrentImageIndex] + " ";
+document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
+document.getElementById("PlayerDemonstration").src = JS_Demonstration_URL_Array[CurrentImageIndex];
+
+//Save the New Exercise_ID Value
+submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex]);
+
+// Refresh the Percentage Bar
+refreshPercentageBar();
+
+}else{
+	// DO NOTHING ACTUALLY : Don't skip Past the Last or First Index
+	//endProgramDemonstration();
+}
+
+}
+
+// Rewind Skip the current player Demonstration
 function PlayerRewind(){
 	
-	//alert("CurrentImageIndex = " + CurrentImageIndex);
+	// Only Rewind if Rewinding will not lead to an Array Index that is not out of bounds
+	if(JS_Exercise_ID_Array[CurrentImageIndex - 1] != null){
 	
-	//CheckPointImageIndex = CheckPointImageIndex - 1;
+	// Rewind the CurrentImageIndex and refresh the PlayerDemonstration
+	CurrentImageIndex = CurrentImageIndex - 1;
+	refreshPlayerDemonstration();
 	
-	// Save the New Exercise_ID Value
-	//submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex - 1]);
-	
-	//CurrentImageIndex = CurrentImageIndex - 1;
-	
-	
-	//location.reload(); 
-	//PlayerRefresh();
+	}else{
+		// DO NOTHING: Don't update Past the Last or First Index
+	}
 }
 
-//Starts and Stops the Player
+// Forward Skip the current player Demonstration
 function PlayerForward(){
+
+	// Only Skip Forward if Skipping will not lead to an Array Index that is not out of bounds
+	if(JS_Exercise_ID_Array[CurrentImageIndex + 1] != null){
 	
-	//alert("Fast FOrward Bruuuuh!");
+	// Forward Skip the CurrentImageIndex and refresh the PlayerDemonstration
+	CurrentImageIndex = CurrentImageIndex + 1;
+	refreshPlayerDemonstration();
 	
+	}else{
+		// DO NOTHING: Don't update Past the Last or First Index
+	}
 }
 
-//Starts and Stops the Player
-function PlayerRefresh(){
-	
-	//alert("Refresh Bruuuuh!");
-	
-	//clearInterval(refreshId);
-	
-	//$("#RLFPlayerBody").load("#RLFPlayerBody");
-}
 
 </script>
 
@@ -505,7 +549,7 @@ for(var i = 0 ; i < CheckPointImageIndex; i++){
 	ElapsedProgramTime = ElapsedProgramTime + JS_Time_In_Seconds_Array[i];
 }
 
-// Update the PercentageBar
+// Update the PercentageBar for every second that occirred
 function updatePercentageBar() {
 	
 	// Increase Elapsed Time by a Second
@@ -521,6 +565,7 @@ function updatePercentageBar() {
       }
       
 }
+
 </script>
 
 <br/>
