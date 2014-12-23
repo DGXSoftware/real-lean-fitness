@@ -8,6 +8,9 @@ GOAL: Manages the User's Programs
 <%-- JSP Imports --%>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "dgx.software.com.UtilityPackage.GlobalTools" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.Calendar" %>
 
 <%
 // Display the main body if the user is not logged in, else forward the users to the Homepage
@@ -27,6 +30,20 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	
 %>
+
+		<%
+		// Get the Current Date
+		// NOTE: "HH" converts hour in 24 hours format (0-23), day calculation
+		Calendar RegimenCalendar = Calendar.getInstance();
+		
+		// Get Today's Date
+		SimpleDateFormat RegimenDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String TodaysDate = RegimenDateFormat.format(RegimenCalendar.getTime());
+		
+		// Get Today's Date and Time
+		SimpleDateFormat RegimenDateAndTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String TodaysDateAndTime = RegimenDateAndTimeFormat.format(RegimenCalendar.getTime());
+		%>
 
 
 <!-- START HTML RESPONSE -->
@@ -63,12 +80,51 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		
 		<script>
 		
-		function submitForm(){
+		//Submits the Request
+		function submitProgramCheckpointUpdate(Last_Regimen_Name, Last_Program_ID, Last_Program_ID_Saved_On, Last_Program_ID_Percentage) {
+
+			// Get the Last_Regimen_Name value by using the Dropdown Menu ID
+			var DropdownElementID = document.getElementById(Last_Regimen_Name);
+			var Last_Regimen_Name = DropdownElementID.options[DropdownElementID.selectedIndex].value;
 			
-			alert("GO!");
+				// Submit via AJAX and pass the request for the current SessionAccountID
+		        var jqxhr = $.ajax({
+		            type:       "POST",
+		            url:        "/ProgramCheckpointServlet",
+		            cache:      false,
+		            data:       $("#ProgramCheckpointForm").serialize()+"&Account_ID=<%= SessionAccountID %>&Last_Regimen_Name="+Last_Regimen_Name+"&Last_Program_ID="+Last_Program_ID+"&Last_Program_ID_Saved_On="+Last_Program_ID_Saved_On+"&Last_Program_ID_Percentage="+Last_Program_ID_Percentage+"",
+		            
+		            // Before load, notify the user that the request may take a while 
+		            beforeSend: function() {
+		            	
+		                        },
+		                            
+		            // If user remains on page for the results, show alert with results
+		            success:    function(data, status) {
+					
+		            // Since the Workout Regimen was chosen successfully
+		            // Return the user back to this same page via a Successful Countdown Forward Message
+		            var SuccessMessage = "You are now ready to begin your "+Last_Regimen_Name+" workout Regimen. Good Luck!";
+		            var SuccessURL = "<%= GlobalTools.GTV_CountdownForwardMessage %>" + "?SuccessMessage=" + SuccessMessage + "&RedirectURL=" + "<%= GlobalTools.GTV_RLFService_RLFRegimen %>";
+		                
+		            // Forward to the Success URL
+		            window.location = SuccessURL;
+		                
+		                     },
+		                     
+		           // If there is an error and the user hasn't yet closed the
+		           // browser, display the message. Otherwise it will come in the email
+		            error:      function(xhr, textStatus, thrownError) {
+
+		            // Stop further processing
+		            return false;
+		            
+		                        }
+		                });
 			
-		}
-		
+		    }
+
+
 		</script>
 		
 		</head>
@@ -94,114 +150,179 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		<div id='content'>
 		<div id='left'>
 		<div class='post'>
-		<h1>Workout Manager</h1>
+		<h1>Workout Manager - <%= TodaysDate %></h1>
 		
 		<p align='left'>&#160;</p>
+		
+<%
+	
+	// Get the following Initial Regimen values from the RLF_Programs_CheckPoints Table
+	//Last_Regimen_Name varchar(64),
+	//Last_Program_ID INT,
+	//Last_Program_ID_Saved_On DATETIME,
+	String Last_Regimen_Name = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Regimen_Name", "Account_ID", SessionAccountID);
+	String Last_Program_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID", "Account_ID", SessionAccountID);
+	String Last_Program_ID_Saved_On = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID_Saved_On", "Account_ID", SessionAccountID);
+
+	// TEST
+	//Last_Regimen_Name = "Real Performance";
+	//Last_Program_ID = "1";
+	//Last_Program_ID_Saved_On = TodaysDateAndTime;
+	
+	//TO DO
+	//1. Have this set the inital Regimen values - (DONE)
+	//2. Have the Player record the % in the Database everytime It's updated - (DONE)
+	//3. Only move to new Program if Date moved up and previous program % is higher than 0%
+	//4. When you move to the new program, record the the previous percentage and Program name a new database (For statistics)
+	//5. Create a apage that uses this new table's data to show statistics for all programs
+	
+	// If any of the Initial Regimen values are null, send the user to an alternative form to set these values
+	if( Last_Regimen_Name != null && Last_Program_ID != null && Last_Program_ID_Saved_On != null ){
+		
+%>
 		
 		<form action='' method='get' id='RLFRegimenForm' name='RLFRegimenForm'>
 		 
 <%
 
-// TO DO
-//1. Read Last Program ID
-//2. If Null or Empty set it to assign the default value of 1
-//3. If Value is found figure out if the day has changed, If so add 1 to the ID, If not leave alone
-//3. Get and Pass the Program Name of the Last Program ID from the DB to the player
-//4. After Session check, check If the Primary_Program_Name is NULL
-// If It's Null  Do the Database Work and set the Primary_Program_Name
-// If It's Not Null, check if the Day has changed
-// If the Day has changed then do the DB Work to get the  to set Primary_Program_Name
-// If the day has not changed then don't do anything
+//Get the Current User's Last_Program_Sequence_Number using the last Program ID
+String Last_Program_Sequence_Number = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Strategies","Program_Sequence_Number", "Program_ID", Last_Program_ID);
 
-/*
-//Get the Current User's Last_Exercise_ID if any
-String Last_Program_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID", "Account_ID", SessionAccountID);
+// Get the Current Program Percentage
+String Last_Program_ID_Percentage = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID_Percentage", "Account_ID", SessionAccountID);
 
-
-//Get the CompleteProgramNameFieldValuePair
-String CompleteProgramNameTable = "RLF_Programs_Strategies";
-String [] CompleteProgramNameColumns = {"Program_ID","Program_Regimen","Primary_Program_Name","Secondary_Program_Name"};
-String CompleteProgramColumnName = "Program_ID"; 
-String CompleteProgramColumnValue = Last_Program_ID;
-ArrayList<ArrayList<String>> CompleteProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CompleteProgramNameTable, CompleteProgramColumnName, CompleteProgramColumnValue, CompleteProgramNameColumns);
-
-
-//Declare the ExerciseID IndexArrayList
-ArrayList<String> ExerciseIDIndexArrayList = new ArrayList<String>();
-
-//Generate all the JavaScript Arrays and the ExerciseID IndexArrayList
-for(int i = 0 ; i < CompleteProgramNameFieldValuePair.get(0).size(); i++){
-  
-	// Get the Current SQL Result Values
-	String CurrentColumnName = CompleteProgramNameFieldValuePair.get(0).get(i);
-	//String UserDisplayCurrentColumnName = CurrentColumnName.replaceAll("_", " ");
-	String CurrentValue = CompleteProgramNameFieldValuePair.get(1).get(i);
+//Check if Last_Program_ID_Saved_On and TodaysDateAndTime are on the same day
+if(GlobalTools.isNewDayAfterOldDay(TodaysDateAndTime, Last_Program_ID_Saved_On)){
+	//System.out.println("New Day comes After!");
 	
-	// Generate the JS_Exercise_ID_Array
-	if(CurrentColumnName.equals("Primary_Program_Name")){
-		ExerciseIDIndexArrayList.add(CurrentValue);
-		%>
-		<script>
-		JS_Exercise_ID_Array.push("<%= CurrentValue %>");
-		</script>
-		<%
-		continue;
-	}
+// If the date has changed, and if the Last_Program_ID_Percentage is not = 0, then 
+if(!Last_Program_ID_Percentage.equals("0")){
 
-}
-
-//Calculate the Checkpoint Skips
-int CheckpointSkips = 0;
-
-//If the Last User Program Index Checkpoint is null, then set it to the program's initial Exercise_ID
-if(Last_Program_ID == null){
-	// If the Database returned null, set it to the default program's Exercise_ID
-	Last_Program_ID = ExerciseIDIndexArrayList.get(0);
+	// Add 1 to the Last_Program_Sequence_Number
+	Last_Program_Sequence_Number = "" + (Integer.parseInt(Last_Program_Sequence_Number) + 1);
 	
 }else{
-
-//Figure out how much to skip
-for(int i = 0 ; i < ExerciseIDIndexArrayList.size(); i++){
-	if(ExerciseIDIndexArrayList.get(i).equals(Last_Program_ID)){
-		CheckpointSkips = i;
-		break;
-	}
+	// SET THE CURRENT DATE HERE
+	System.out.println("SET THE CURRENT DATE HERE");
+	
+	// PROBLEM
+	// If we arrive on a new day, but the percentage was 0 and we don't update the sequence
+	//we can test drive the current sequence, get a percentage and then come back and be promoted
+	
+	//SOLUTION
+	// If the percentage is not = 0 overwrite the DB date and reload the page with JavaScript
+	
 }
 
+	
+
+// IF WE ARE PAST THE LAST "Program_Sequence_Number" Possible which is currently 91 , set it back to the starting point
+if(Last_Program_Sequence_Number.equals("92")){
+	Last_Program_Sequence_Number = "1";
 }
 
 
-//Decide the Current Program Index (Can be any index from the program)
-String CurrentProgramIndex = "1";
 
-//Get the CurrentProgramNameFieldValuePair
-String CurrentProgramNameTable = "RLF_Programs_Exercises";
-String [] CurrentProgramNameColumns = {"Program_Name"};
-String CurrentProgramColumnName = "Exercise_ID";
-String CurrentProgramColumnValue = CurrentProgramIndex;
-ArrayList<ArrayList<String>> CurrentProgramNameFieldValuePair = GlobalTools.getTableColumnAndValuePairData(request, response, CurrentProgramNameTable, CurrentProgramColumnName, CurrentProgramColumnValue, CurrentProgramNameColumns);
-*/
+}else{
+	// SAME DAY OR PREVIOUS DAY: Do Nothing!
+	//System.out.println("New Day comes Before or is same as old day!");
+}
 
-String Primary_Program_Name = "Back and Chest Boost";
+//Where Regimen and New Program Order column
+//Get the Primary and Secondary Program Names
+String [] WhereColumnFields = {"Program_Regimen", "Program_Sequence_Number"};
+String [] WhereColumnValues = {Last_Regimen_Name, Last_Program_Sequence_Number};
+String Primary_Program_Name = GlobalTools.getSingleTableCellDataMultipleWhere(request, response,"RLF_Programs_Strategies","Primary_Program_Name", WhereColumnFields, WhereColumnValues);
+String Secondary_Program_Name = GlobalTools.getSingleTableCellDataMultipleWhere(request, response,"RLF_Programs_Strategies","Secondary_Program_Name", WhereColumnFields, WhereColumnValues);
+
+System.out.println("-------------------------------------------");
+System.out.println("Last_Regimen_Name = " + Last_Regimen_Name);
+System.out.println("Primary_Program_Name = " + Primary_Program_Name);
+System.out.println("Secondary_Program_Name = " + Secondary_Program_Name);
+System.out.println("-------------------------------------------");
+
 CurrentSession.setAttribute("Primary_Program_Name", Primary_Program_Name);
+CurrentSession.setAttribute("Secondary_Program_Name", Secondary_Program_Name);
 
 %>
 
-		<p><b><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>"><%= Primary_Program_Name %></a></b><span> - Begin your daily workout for the day.</span></p>
+<%
+
+// Display the % Color in green if the user achieved 100%
+String PercentageColor = "red";
+if(Last_Program_ID_Percentage.equals("100")){
+PercentageColor = "green";
+}
+%>
+
+		<h4><%= Last_Regimen_Name %></h2>
+		<br/>
+		<div>
+		<p><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>"><%= Primary_Program_Name %></a></p>
+		<span style="color:<%= PercentageColor %>"><%= Last_Program_ID_Percentage %>% Completed </span>
+		<span> - Click to begin your daily workout for the day.</span>
+		</div>
 
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-
-        <!-- Pass the Target Username with the Form Submit -->
-        <input type="hidden" name="ProgramForToday" value="<%= Primary_Program_Name %>" />
-
-        <!-- Change Username Button -->
-		<input type='button' id='RLFRegimenButton' name='RLFRegimenButton' value='Submit' onClick="submitForm(document.RLFRegimenForm);" />
-        
-
+		
 		</form>
+		
+	<%
+	}else{
+
+		//If the Last_Program_ID is null, then set it to the default value of 1
+		//if(Last_Program_ID == null){ Last_Program_ID = "1"; }
+		
+		//If the Last_Program_ID is null, then set it to the default value of today's date and time
+		//if(Last_Program_ID_Saved_On == null){ Last_Program_ID_Saved_On = TodaysDateAndTime; }
+
+		
+%>
+
+	<!-- Form to set initial Regimen Data -->
+	<form action='' method='get' id='RLFRegimenSetupForm' name='RLFRegimenSetupForm'>
+	 
+	 	<!-- Last_Regimen_Name varchar(64) -->
+		<div id="UserRegimenChoiceDiv">
+		<label id="UserRegimenChoiceLabel" for="UserRegimenChoice">
+		<p> Choose a Workout Regimen : </p>
+		<select id="UserRegimenChoice" name="UserRegimenChoice" onChange="isValidDropDownField('UserRegimenChoice','UserRegimenChoiceIcon','',false);" >
+        <option value="" disabled selected style="display:none">Workout Regimen</option>
+        <option value="Real Lean">Real Lean</option>
+        <option value="Real Performance">Real Performance</option>
+        </select>
+        <img id="UserRegimenChoiceIcon" src="/Images/Icons/Valid/Valid(16x16).png" style="visibility:hidden;" />
+        </label>
+        </div>
+	
+	<script>
+      // Use JQuery to execute JavaScript code as soon as the page loads
+      $(document).ready(function(){
+    	  
+        // As soon as the Role is changed, Remove the Index Drop Down Item which has an empty value of ('').
+        $('#UserRegimenChoice').on('change', function() {
+        	$("#UserRegimenChoice option[value='']").remove();
+        });
+        
+      });
+</script>
+	
+    <br />
+    <br />
+    <br />
+	
+    <!-- Change Username Button -->
+	<input type='button' id='RLFRegimenSetupButton' name='RLFRegimenSetupButton' value='Submit' onClick="submitProgramCheckpointUpdate('UserRegimenChoice','1','NOW()','0');" />
+    
+
+	</form>
+	
+	<%
+	}
+	%>
 		
 		</div>
 		

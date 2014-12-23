@@ -333,8 +333,13 @@ function submitLoginRequest() {
 		<br/>
 		<br/>
 		
+		<label for="AcceptedTermsAndConditions">
+		<input type="checkbox" name="AcceptedTermsAndConditions" id="AcceptedTermsAndConditions">I have read and accept all <a href="www.google.com">Terms and Conditions.</a><br>
+		<script>document.getElementById("AcceptedTermsAndConditions").checked = true;</script>
+		</label>
+		
 		<label for="SignUpForNewsletter">
-		<input type="checkbox" name="SignUpForNewsletter" id="SignUpForNewsletter">Sign up for our newsletter<br>
+		<input type="checkbox" name="SignUpForNewsletter" id="SignUpForNewsletter">Subscribe to the Real Lean Fitness Newsletter for the latest news and updates!<br>
 		<script>document.getElementById("SignUpForNewsletter").checked = true;</script>
 		</label>
 		

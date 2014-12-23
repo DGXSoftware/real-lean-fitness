@@ -26,15 +26,16 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	String SessionIsActivated = (String) CurrentSession.getAttribute("IsActivated");
 	String SessionIsVerified = (String) CurrentSession.getAttribute("IsVerified");
 	String Primary_Program_Name = (String) CurrentSession.getAttribute("Primary_Program_Name");
+	String Secondary_Program_Name = (String) CurrentSession.getAttribute("Secondary_Program_Name");
 	
 %>
 
 <%
 
 		// TEST STUFF
-		SessionAccountID = "1000000006";
-		SessionFirstName = "DMGX";
-		Primary_Program_Name = "Back and Chest Boost";
+		//SessionAccountID = "1000000006";
+		//SessionFirstName = "DMGX";
+		//Primary_Program_Name = "Back and Chest Boost";
 
 		// Only proceed if we have a valid program name to Follow
 		if(Primary_Program_Name != null){
@@ -51,7 +52,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 <!-- ************************************************************************************** -->
 
 <%
-//Get the Current User's Last_Exercise_ID if any
+//Get the Current User's Last_Exercise_ID, if any
 String Last_Exercise_ID = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Checkpoints","Last_Exercise_ID", "Account_ID", SessionAccountID);
 
 // Get the CompleteProgramNameFieldValuePair
@@ -154,15 +155,15 @@ function PlayerResultsBodyToggle(){
 }
 		
 //Submits the Request
-function submitProgramCheckpointUpdate(New_Exercise_ID_Value) {
+function submitProgramCheckpointUpdate(Last_Program_ID_Percentage, Last_Exercise_ID, Last_Exercise_ID_Saved_On) {
 	
-		// Submit via AJAX and pass the current SessionAccountID and New_Exercise_ID_Value
+		// Submit via AJAX and pass the request for the current SessionAccountID
         var jqxhr = $.ajax({
             type:       "POST",
             url:        "/ProgramCheckpointServlet",
             cache:      false,
-            data:       $("#ProgramCheckpointForm").serialize()+"&SessionAccountID=<%= SessionAccountID %>&New_Exercise_ID="+New_Exercise_ID_Value+"",
-                
+            data:       $("#ProgramCheckpointForm").serialize()+"&Account_ID=<%= SessionAccountID %>&Last_Program_ID_Percentage="+Last_Program_ID_Percentage+"&Last_Exercise_ID="+Last_Exercise_ID+"&Last_Exercise_ID_Saved_On="+Last_Exercise_ID_Saved_On+"",
+            
             // Before load, notify the user that the request may take a while 
             beforeSend: function() {
             	
@@ -364,6 +365,9 @@ for(int i = 0 ; i < ExerciseIDIndexArrayList.size(); i++){
 <script>
 // Set the Current User CheckPoint
 var CheckPointImageIndex = <%= CheckpointSkips %>;
+
+// Set the default record of the Current Program Percentage
+var CurrentProgramPercentage = 0;
 </script>
 <%
 
@@ -468,6 +472,8 @@ function refreshPercentageBar() {
     	  //alert("Percentage is over 100% at = " + percentage "%");
       }
       
+      // Record the latest Percentage
+      CurrentProgramPercentage = percentage;
 }
 
 function endProgramDemonstration(){
@@ -489,11 +495,11 @@ document.getElementById("CountdownMessage").innerHTML = JS_Exercise_Name_Array[C
 document.getElementById("CountdownSeconds").innerHTML = JS_Time_In_Seconds_Array[CurrentImageIndex];
 document.getElementById("PlayerDemonstration").src = JS_Demonstration_URL_Array[CurrentImageIndex];
 
-//Save the New Exercise_ID Value
-submitProgramCheckpointUpdate(JS_Exercise_ID_Array[CurrentImageIndex]);
-
 // Refresh the Percentage Bar
 refreshPercentageBar();
+
+//Save the New Exercise_ID Value
+submitProgramCheckpointUpdate(CurrentProgramPercentage, JS_Exercise_ID_Array[CurrentImageIndex], "NOW()");
 
 }else{
 	// DO NOTHING ACTUALLY : Don't skip Past the Last or First Index
@@ -564,6 +570,8 @@ function updatePercentageBar() {
     	  //alert("Percentage is over 100% at = " + percentage "%");
       }
       
+      // Record the latest Percentage
+      CurrentProgramPercentage = percentage;
 }
 
 </script>

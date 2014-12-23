@@ -162,8 +162,12 @@ UNIQUE (EMail)
 )ENGINE=INNODB;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Programs Table */
+/* Create the Regimens Table */
 CREATE TABLE RLF_Regimens (
 
 Regimen_Name varchar(64) NOT NULL,
@@ -194,6 +198,7 @@ CREATE TABLE RLF_Programs_Strategies (
 
 Program_ID INTEGER NOT NULL AUTO_INCREMENT,
 Program_Regimen varchar(64) NOT NULL,
+Program_Sequence_Number INT,
 Primary_Program_Name varchar(64) NOT NULL,
 Secondary_Program_Name varchar(64) NOT NULL,
 
@@ -232,6 +237,7 @@ Account_ID INT NOT NULL,
 Last_Regimen_Name varchar(64),
 Last_Program_ID INT,
 Last_Program_ID_Saved_On DATETIME,
+Last_Program_ID_Percentage INT,
 Last_Exercise_ID INT,
 Last_Exercise_ID_Saved_On DATETIME,
 Random_Exercise_Key varchar(64),
@@ -260,6 +266,7 @@ DROP TABLE RLF_Programs_Exercises;
 DROP TABLE RLF_Programs_Strategies;
 DROP TABLE RLF_Programs;
 DROP TABLE RLF_Regimens;
+
 DROP TABLE RLF_Newsletters;
 DROP TABLE RLF_User_Information;
 DROP TABLE RLF_Images;

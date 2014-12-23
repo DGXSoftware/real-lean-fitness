@@ -437,8 +437,8 @@ public class GlobalTools {
 	
 	/*************************************************************************************************
 	NAME:        getSingleTableCellData
-	DESCRIPTION: Gets Data from a specific table
-	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String SessionAccountID)
+	DESCRIPTION: Gets Data from a specific table using a where value.
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String ColumnToSelect, String WhereColumnName, String WhereColumnValue)
 	RETURN:      void
 	SIDE-EFFECT: NONE.
 	*************************************************************************************************/
@@ -449,6 +449,55 @@ public class GlobalTools {
 		
 		// Select the ColumnToSelect From the Current User.
 		String ColumnToSelectSQLQuery = "SELECT "+ColumnToSelect+" FROM "+TableName+" WHERE "+WhereColumnName+" ='"+WhereColumnValue+"';";
+		
+		// Get the ColumnToSelectSQLQueryOutput ResultSet
+		ResultSet ColumnToSelectSQLQueryOutput = SQLStatement.executeQuery(ColumnToSelectSQLQuery);
+		
+		// Check if this ColumnToSelect record already exists in the Table
+		if(ColumnToSelectSQLQueryOutput.next()){
+
+		// If it does, simply return the value
+					
+		// Get the Table PreviousLastColumnToSelectValue for the Current User.
+		PreviousLastColumnToSelectValue = ColumnToSelectSQLQueryOutput.getString(ColumnToSelect);
+		
+		// Close the ResultSet
+		try {ColumnToSelectSQLQueryOutput.close();} catch (SQLException e) {e.printStackTrace();}
+		
+		return PreviousLastColumnToSelectValue;
+		
+		}else{
+			// If no data was recovered from the Database return null
+			return null;
+		}
+
+	}
+	
+	/*************************************************************************************************
+	NAME:        getSingleTableCellDataMultipleWhere
+	DESCRIPTION: Gets Data from a specific table using several where values.
+	PARAMETERS:  (HttpServletRequest Request, HttpServletResponse Response, String TableName, String ColumnToSelect, String WhereColumnFields, String WhereColumnValues)
+	RETURN:      void
+	SIDE-EFFECT: NONE.
+	*************************************************************************************************/
+	public static String getSingleTableCellDataMultipleWhere(HttpServletRequest Request, HttpServletResponse Response, String TableName, String ColumnToSelect, String [] WhereColumnFields, String [] WhereColumnValues) throws SQLException {
+		
+		// Records the assigned PreviousLastColumnToSelectValue from the Table from the Current User.
+		String PreviousLastColumnToSelectValue = "";
+		
+		// Start the Query
+		// Select the ColumnToSelect From the Current User.
+		String ColumnToSelectSQLQuery = "SELECT "+ColumnToSelect+" FROM "+TableName+" WHERE ";
+		
+		for(int i = 0 ; i < WhereColumnFields.length; i++){
+		
+		// Add the Where Fields and Values for narrowing data
+		if(i != 0) {ColumnToSelectSQLQuery = ColumnToSelectSQLQuery + " AND ";}
+		ColumnToSelectSQLQuery = ColumnToSelectSQLQuery + WhereColumnFields[i] + " ='" + WhereColumnValues[i] +"'";
+		}
+		
+		// Close the Query
+		ColumnToSelectSQLQuery = ColumnToSelectSQLQuery + ";";
 		
 		// Get the ColumnToSelectSQLQueryOutput ResultSet
 		ResultSet ColumnToSelectSQLQueryOutput = SQLStatement.executeQuery(ColumnToSelectSQLQuery);
@@ -882,13 +931,14 @@ public class GlobalTools {
 		}
 			
 		/*************************************************************************************************
-		NAME:        isSameDay
-		DESCRIPTION: Compares an Old Date Vs. a New Date and lets you know if they are from different days of the year (Calculates in 365 Days)
+		NAME:        isOldDateAfterNewDate
+		DESCRIPTION: Compares an Old Date Vs. a New Date and lets you know if the new Date
+		comes after the old date (Calculates in 365 Days)
 		PARAMETERS: (String OldDateEvent, String NewDateEvent)
 		RETURN:      VOID
 		SIDE-EFFECT: NONE.
 		*************************************************************************************************/
-		public static boolean isSameDay(String OldDateEvent, String NewDateEvent) throws ParseException{
+		public static boolean isNewDayAfterOldDay(String OldDateEvent, String NewDateEvent) throws ParseException{
 			
 			//HH converts hour in 24 hours format (0-23), day calculation
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -904,15 +954,19 @@ public class GlobalTools {
 			NewEventCalendarObject.setTime(NewEventDateObject);
 			
 			// Get the Unique Date ID OldDayOfYearPlusYear and NewDayOfYearPlusYear for comparison
-			String OldDayOfYearPlusYear = OldEventCalendarObject.get(Calendar.YEAR) + "-" + OldEventCalendarObject.get(Calendar.YEAR);
-			String NewDayOfYearPlusYear = NewEventCalendarObject.get(Calendar.YEAR) + "-" + NewEventCalendarObject.get(Calendar.YEAR);
+			String OldDayOfYearPlusYear = OldEventCalendarObject.get(Calendar.YEAR) + "" + OldEventCalendarObject.get(Calendar.DAY_OF_YEAR);
+			String NewDayOfYearPlusYear = NewEventCalendarObject.get(Calendar.YEAR) + "" + NewEventCalendarObject.get(Calendar.DAY_OF_YEAR);
+			
+			// Turn the OldDayOfYearPlusYear and NewDayOfYearPlusYear into Integers
+			int IntegerOldDayOfYearPlusYear = Integer.parseInt(OldDayOfYearPlusYear);
+			int IntegerNewDayOfYearPlusYear = Integer.parseInt(NewDayOfYearPlusYear);
 			
 			// Compare the Old Date Vs. the New Date and return if It's a New Day
-			if (OldDayOfYearPlusYear.equals(NewDayOfYearPlusYear)) {
-				   //System.out.println("It's the same day");
+			if (IntegerNewDayOfYearPlusYear > IntegerOldDayOfYearPlusYear) {
+				   //System.out.println("New Day comes After!");
 				   return true;
 			   }else{
-				   //System.out.println("It's NOT the same day");
+				   //System.out.println("New Day comes Before or is same as old day!");
 				   return false;
 			   }
 			

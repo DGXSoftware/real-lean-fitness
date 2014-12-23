@@ -162,7 +162,7 @@ function submitForm() {
 		<!-- Login For Feedback Div -->
 		<div id="RequestForgotPasswordChangeFormFeedbackDiv" name="RequestForgotPasswordChangeFormFeedbackDiv"></div>
 		
-		<!-- Gender VARCHAR(32) -->
+		<!-- In_Newsletter CHAR(1) -->
 		<div id="UserNewsletterActionDiv">
 		<label id="UserNewsletterActionLabel" for="UserNewsletterAction">
 		<p> Enable or Disable : </p>
