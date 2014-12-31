@@ -1,0 +1,1724 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <script type="text/javascript">
+ 
+ (function(){(function(){function c(a){this.t={};this.tick=function(a,b,c){b=void 0!=c?c:(new Date).getTime();this.t[a]=b;if(void 0==c)try{window.console.timeStamp("CSI/"+a)}catch(d){}};this.tick("start",null,a)}var a;window.performance&&(a=window.performance.timing);var b=a?new c(a.responseStart):new c;window.jstiming={Timer:c,load:b};a&&(b=a.navigationStart,a=a.responseStart,0<b&&a>=b&&(window.jstiming.srt=a-b));try{a=null,window.chrome&&window.chrome.csi&&(a=Math.floor(window.chrome.csi().pageT)),null==a&&
+window.gtbExternal&&(a=window.gtbExternal.pageT()),null==a&&window.external&&(a=window.external.pageT),a&&(window.jstiming.pt=a)}catch(d){}})();})();
+
+ 
+ 
+ 
+ 
+ var codesite_token = "ABZ6GAfwF0oQ9GfnUinmzSlR56TjpwHR3g:1419999118123";
+ 
+ 
+ var CS_env = {"projectHomeUrl": "/p/real-lean-fitness", "profileUrl": "/u/105518246561075610317/", "token": "ABZ6GAfwF0oQ9GfnUinmzSlR56TjpwHR3g:1419999118123", "assetVersionPath": "http://www.gstatic.com/codesite/ph/1729405847801014513", "domainName": null, "projectName": "real-lean-fitness", "assetHostPath": "http://www.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": "dalvis.gomez1018@gmail.com"};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+ 
+ </script>
+ 
+ 
+ <title>.jsdtscope - 
+ real-lean-fitness -
+ 
+ 
+ Real Lean Fitness - Google Project Hosting
+ </title>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/1729405847801014513/css/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/1729405847801014513/css/ph_detail.css" >
+ 
+ 
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/1729405847801014513/css/d_sb.css" >
+ 
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/1729405847801014513/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ 
+  tr.inline_comment {
+ background: #fff;
+ vertical-align: top;
+ }
+ div.draft, div.published {
+ padding: .3em;
+ border: 1px solid #999; 
+ margin-bottom: .1em;
+ font-family: arial, sans-serif;
+ max-width: 60em;
+ }
+ div.draft {
+ background: #ffa;
+ } 
+ div.published {
+ background: #e5ecf9;
+ }
+ div.published .body, div.draft .body {
+ padding: .5em .1em .1em .1em;
+ max-width: 60em;
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -pre-wrap;
+ white-space: -o-pre-wrap;
+ word-wrap: break-word;
+ font-size: 1em;
+ }
+ div.draft .actions {
+ margin-left: 1em;
+ font-size: 90%;
+ }
+ div.draft form {
+ padding: .5em .5em .5em 0;
+ }
+ div.draft textarea, div.published textarea {
+ width: 95%;
+ height: 10em;
+ font-family: arial, sans-serif;
+ margin-bottom: .5em;
+ }
+
+ 
+ .nocursor, .nocursor td, .cursor_hidden, .cursor_hidden td {
+ background-color: white;
+ height: 2px;
+ }
+ .cursor, .cursor td {
+ background-color: darkblue;
+ height: 2px;
+ display: '';
+ }
+ 
+ 
+.list {
+ border: 1px solid white;
+ border-bottom: 0;
+}
+
+ 
+ </style>
+</head>
+<body class="t4">
+<script type="text/javascript">
+ window.___gcfg = {lang: 'en'};
+ (function() 
+ {var po = document.createElement("script");
+ po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(po, s);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ 
+ 
+ <a href="#" id="multilogin-dropdown" onclick="return false;"
+ ><u><b>dalvis.gomez1018@gmail.com</b></u> <small>&#9660;</small></a>
+ 
+ 
+ | <a href="/u/105518246561075610317/" id="projects-dropdown" onclick="return false;"
+ ><u>My favorites</u> <small>&#9660;</small></a>
+ | <a href="/u/105518246561075610317/" onclick="_CS_click('/gb/ph/profile');"
+ title="Profile, Updates, and Settings"
+ ><u>Profile</u></a>
+ | <a href="https://www.google.com/accounts/Logout?continue=http%3A%2F%2Fcode.google.com%2Fp%2Freal-lean-fitness%2Fsource%2Fbrowse%2F.settings%2F.jsdtscope" 
+ onclick="_CS_click('/gb/ph/signout');"
+ ><u>Sign out</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+ <table style="padding:0px; margin: 0px 0px 10px 0px; width:100%" cellpadding="0" cellspacing="0"
+ itemscope itemtype="http://schema.org/CreativeWork">
+ <tr style="height: 58px;">
+ 
+ 
+ 
+ <td id="plogo">
+ <link itemprop="url" href="/p/real-lean-fitness">
+ <a href="/p/real-lean-fitness/">
+ 
+ <img src="http://www.gstatic.com/codesite/ph/images/defaultlogo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em">
+ 
+ <div id="pname">
+ <a href="/p/real-lean-fitness/"><span itemprop="name">real-lean-fitness</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link"
+ href="/p/real-lean-fitness/"><span itemprop="description">Real Lean Fitness</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space:nowrap;text-align:right; vertical-align:bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" value="" type="text">
+ 
+ <input type="submit" name="projectsearch" value="Search projects" >
+ </form>
+ 
+ </tr>
+ </table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="/p/real-lean-fitness/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/real-lean-fitness/w/list" class="tab ">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/real-lean-fitness/issues/list"
+ class="tab ">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/real-lean-fitness/source/checkout"
+ class="tab active">Source</a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <div class=gtbc></div>
+</div>
+<table cellspacing="0" cellpadding="0" width="100%" align="center" border="0" class="st">
+ <tr>
+ 
+ 
+ 
+ 
+ 
+ 
+ <td class="subt">
+ <div class="st2">
+ <div class="isf">
+ 
+ 
+
+
+ <span class="inst1"><a href="/p/real-lean-fitness/source/checkout">Checkout</a></span> &nbsp;
+ <span class="inst2"><a href="/p/real-lean-fitness/source/browse/">Browse</a></span> &nbsp;
+ <span class="inst3"><a href="/p/real-lean-fitness/source/list">Changes</a></span> &nbsp;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </form>
+ <script type="text/javascript">
+ 
+ function codesearchQuery(form) {
+ var query = document.getElementById('q').value;
+ if (query) { form.action += '%20' + query; }
+ }
+ </script>
+ </div>
+</div>
+
+ </td>
+ 
+ 
+ 
+ <td align="right" valign="top" class="bevel-right"></td>
+ </tr>
+</table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol"
+ 
+>
+
+ 
+
+
+
+
+<div class="expand">
+<div id="colcontrol">
+<style type="text/css">
+ #file_flipper { white-space: nowrap; padding-right: 2em; }
+ #file_flipper.hidden { display: none; }
+ #file_flipper .pagelink { color: #0000CC; text-decoration: underline; }
+ #file_flipper #visiblefiles { padding-left: 0.5em; padding-right: 0.5em; }
+</style>
+<table id="nav_and_rev" class="list"
+ cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+ 
+ <td nowrap="nowrap" class="src_crumbs src_nav" width="33%">
+ <strong class="src_nav">Source path:&nbsp;</strong>
+ <span id="crumb_root">
+ 
+ <a href="/p/real-lean-fitness/source/browse/">svn</a>/&nbsp;</span>
+ <span id="crumb_links" class="ifClosed"><a href="/p/real-lean-fitness/source/browse/.settings/">.settings</a><span class="sp">/&nbsp;</span>.jsdtscope</span>
+ 
+ 
+
+
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="center">
+ <a href="/p/real-lean-fitness/source/browse/.settings/.jsdtscope?edit=1"
+ ><img src="http://www.gstatic.com/codesite/ph/images/pencil-y14.png"
+ class="edit_icon">Edit file</a>
+ </td>
+ 
+ 
+ <td nowrap="nowrap" width="33%" align="right">
+ <table cellpadding="0" cellspacing="0" style="font-size: 100%"><tr>
+ 
+ 
+ <td class="flipper"><b>r77</b></td>
+ 
+ </tr></table>
+ </td> 
+ </tr>
+</table>
+
+<div class="fc">
+ 
+ 
+ 
+<style type="text/css">
+.undermouse span {
+ background-image: url(http://www.gstatic.com/codesite/ph/images/comments.gif); }
+</style>
+<table class="opened" id="review_comment_area"
+><tr>
+<td id="nums">
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+<pre><table width="100%" id="nums_table_0"><tr id="gr_svn77_1"
+
+><td id="1"><a href="#1">1</a></td></tr
+><tr id="gr_svn77_2"
+
+><td id="2"><a href="#2">2</a></td></tr
+><tr id="gr_svn77_3"
+
+><td id="3"><a href="#3">3</a></td></tr
+><tr id="gr_svn77_4"
+
+><td id="4"><a href="#4">4</a></td></tr
+><tr id="gr_svn77_5"
+
+><td id="5"><a href="#5">5</a></td></tr
+><tr id="gr_svn77_6"
+
+><td id="6"><a href="#6">6</a></td></tr
+><tr id="gr_svn77_7"
+
+><td id="7"><a href="#7">7</a></td></tr
+><tr id="gr_svn77_8"
+
+><td id="8"><a href="#8">8</a></td></tr
+><tr id="gr_svn77_9"
+
+><td id="9"><a href="#9">9</a></td></tr
+><tr id="gr_svn77_10"
+
+><td id="10"><a href="#10">10</a></td></tr
+><tr id="gr_svn77_11"
+
+><td id="11"><a href="#11">11</a></td></tr
+><tr id="gr_svn77_12"
+
+><td id="12"><a href="#12">12</a></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="nocursor"><td></td></tr></table></pre>
+</td>
+<td id="lines">
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+<pre ><table id="src_table_0"><tr
+id=sl_svn77_1
+
+><td class="source">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br></td></tr
+><tr
+id=sl_svn77_2
+
+><td class="source">&lt;classpath&gt;<br></td></tr
+><tr
+id=sl_svn77_3
+
+><td class="source">	&lt;classpathentry kind=&quot;src&quot; path=&quot;WebContent&quot;/&gt;<br></td></tr
+><tr
+id=sl_svn77_4
+
+><td class="source">	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.JRE_CONTAINER&quot;/&gt;<br></td></tr
+><tr
+id=sl_svn77_5
+
+><td class="source">	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.WebProject&quot;&gt;<br></td></tr
+><tr
+id=sl_svn77_6
+
+><td class="source">		&lt;attributes&gt;<br></td></tr
+><tr
+id=sl_svn77_7
+
+><td class="source">			&lt;attribute name=&quot;hide&quot; value=&quot;true&quot;/&gt;<br></td></tr
+><tr
+id=sl_svn77_8
+
+><td class="source">		&lt;/attributes&gt;<br></td></tr
+><tr
+id=sl_svn77_9
+
+><td class="source">	&lt;/classpathentry&gt;<br></td></tr
+><tr
+id=sl_svn77_10
+
+><td class="source">	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.baseBrowserLibrary&quot;/&gt;<br></td></tr
+><tr
+id=sl_svn77_11
+
+><td class="source">	&lt;classpathentry kind=&quot;output&quot; path=&quot;&quot;/&gt;<br></td></tr
+><tr
+id=sl_svn77_12
+
+><td class="source">&lt;/classpath&gt;<br></td></tr
+></table></pre>
+<pre><table width="100%"><tr class="cursor_stop cursor_hidden"><td></td></tr></table></pre>
+</td>
+</tr></table>
+
+ 
+<script type="text/javascript">
+ var lineNumUnderMouse = -1;
+ 
+ function gutterOver(num) {
+ gutterOut();
+ var newTR = document.getElementById('gr_svn77_' + num);
+ if (newTR) {
+ newTR.className = 'undermouse';
+ }
+ lineNumUnderMouse = num;
+ }
+ function gutterOut() {
+ if (lineNumUnderMouse != -1) {
+ var oldTR = document.getElementById(
+ 'gr_svn77_' + lineNumUnderMouse);
+ if (oldTR) {
+ oldTR.className = '';
+ }
+ lineNumUnderMouse = -1;
+ }
+ }
+ var numsGenState = {table_base_id: 'nums_table_'};
+ var srcGenState = {table_base_id: 'src_table_'};
+ var alignerRunning = false;
+ var startOver = false;
+ function setLineNumberHeights() {
+ if (alignerRunning) {
+ startOver = true;
+ return;
+ }
+ numsGenState.chunk_id = 0;
+ numsGenState.table = document.getElementById('nums_table_0');
+ numsGenState.row_num = 0;
+ if (!numsGenState.table) {
+ return; // Silently exit if no file is present.
+ }
+ srcGenState.chunk_id = 0;
+ srcGenState.table = document.getElementById('src_table_0');
+ srcGenState.row_num = 0;
+ alignerRunning = true;
+ continueToSetLineNumberHeights();
+ }
+ function rowGenerator(genState) {
+ if (genState.row_num < genState.table.rows.length) {
+ var currentRow = genState.table.rows[genState.row_num];
+ genState.row_num++;
+ return currentRow;
+ }
+ var newTable = document.getElementById(
+ genState.table_base_id + (genState.chunk_id + 1));
+ if (newTable) {
+ genState.chunk_id++;
+ genState.row_num = 0;
+ genState.table = newTable;
+ return genState.table.rows[0];
+ }
+ return null;
+ }
+ var MAX_ROWS_PER_PASS = 1000;
+ function continueToSetLineNumberHeights() {
+ var rowsInThisPass = 0;
+ var numRow = 1;
+ var srcRow = 1;
+ while (numRow && srcRow && rowsInThisPass < MAX_ROWS_PER_PASS) {
+ numRow = rowGenerator(numsGenState);
+ srcRow = rowGenerator(srcGenState);
+ rowsInThisPass++;
+ if (numRow && srcRow) {
+ if (numRow.offsetHeight != srcRow.offsetHeight) {
+ numRow.firstChild.style.height = srcRow.offsetHeight + 'px';
+ }
+ }
+ }
+ if (rowsInThisPass >= MAX_ROWS_PER_PASS) {
+ setTimeout(continueToSetLineNumberHeights, 10);
+ } else {
+ alignerRunning = false;
+ if (startOver) {
+ startOver = false;
+ setTimeout(setLineNumberHeights, 500);
+ }
+ }
+ }
+ function initLineNumberHeights() {
+ // Do 2 complete passes, because there can be races
+ // between this code and prettify.
+ startOver = true;
+ setTimeout(setLineNumberHeights, 250);
+ window.onresize = setLineNumberHeights;
+ }
+ initLineNumberHeights();
+</script>
+
+ 
+ 
+ <div id="log">
+ <div style="text-align:right">
+ <a class="ifCollapse" href="#" onclick="_toggleMeta(this); return false">Show details</a>
+ <a class="ifExpand" href="#" onclick="_toggleMeta(this); return false">Hide details</a>
+ </div>
+ <div class="ifExpand">
+ 
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="changelog">
+ <p>Change log</p>
+ <div>
+ <a href="/p/real-lean-fitness/source/detail?spec=svn77&amp;r=18">r18</a>
+ by DGXSoftware
+ on May 25, 2014
+ &nbsp; <a href="/p/real-lean-fitness/source/diff?spec=svn77&r=18&amp;format=side&amp;path=/.settings/.jsdtscope&amp;old_path=/.settings/.jsdtscope&amp;old=">Diff</a>
+ </div>
+ <pre>Add AJAX Submission to the Registration
+and Login Forms. Also added Registration
+Error Message for Duplicate Usernames and
+E-Mails.</pre>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+ var detail_url = '/p/real-lean-fitness/source/detail?r=18&spec=svn77';
+ var publish_url = '/p/real-lean-fitness/source/detail?r=18&spec=svn77#publish';
+ // describe the paths of this revision in javascript.
+ var changed_paths = [];
+ var changed_urls = [];
+ 
+ changed_paths.push('/.classpath');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.classpath?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.project');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.project?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings/.jsdtscope');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/.jsdtscope?r\x3d18\x26spec\x3dsvn77');
+ 
+ var selected_path = '/.settings/.jsdtscope';
+ 
+ 
+ changed_paths.push('/.settings/org.eclipse.jdt.core.prefs');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/org.eclipse.jdt.core.prefs?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings/org.eclipse.wst.common.component');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.common.component?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings/org.eclipse.wst.common.project.facet.core.xml');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.common.project.facet.core.xml?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings/org.eclipse.wst.jsdt.ui.superType.container');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.jsdt.ui.superType.container?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/.settings/org.eclipse.wst.jsdt.ui.superType.name');
+ changed_urls.push('/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.jsdt.ui.superType.name?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/WebContent/HomePage.jsp');
+ changed_urls.push('/p/real-lean-fitness/source/browse/WebContent/HomePage.jsp?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/WebContent/SQL/Mandatory SQL Queries/DGXExecuteSQLCommandOutput.txt');
+ changed_urls.push('/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/DGXExecuteSQLCommandOutput.txt?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries Batch Script.bat');
+ changed_urls.push('/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries Batch Script.bat?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries.sql');
+ changed_urls.push('/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries.sql?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/MainDGX.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/MainDGX.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/AAAAA.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/AAAAA.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/AGenericServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/AGenericServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Main.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Main.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/MainTest.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MainTest.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/MyCustomComparator.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyCustomComparator.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/MyEventNode.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyEventNode.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/MyTagSupport.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyTagSupport.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/SQLQueryPractice.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/SQLQueryPractice.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePage.jsp');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePage.jsp?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePageServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePageServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/AGoogleDistanceMatrixAPITest.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/AGoogleDistanceMatrixAPITest.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/CDL.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/CDL.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/Cookie.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/Cookie.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/CookieList.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/CookieList.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/HTTP.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/HTTP.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/HTTPTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/HTTPTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONArray.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONArray.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONException.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONException.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONML.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONML.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONObject$Null.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONObject$Null.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONObject.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONObject.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONString.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONString.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONStringer.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONStringer.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/JSONWriter.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONWriter.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/XML.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/XML.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Test/org/json/XMLTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/XMLTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/DGXPackage/Validate.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Validate.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/MailPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/MailPackage/MailJavaBean$SMTPAuthenticator.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage/MailJavaBean$SMTPAuthenticator.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/MailPackage/MailJavaBean.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage/MailJavaBean.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/ImageFileUploadServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/ImageFileUploadServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/LogOutServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/LogOutServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/LoginServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/LoginServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/RegistrationServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/RegistrationServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/UserInformationServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/UserInformationServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ServletPackage/UserProfileServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/UserProfileServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/TestPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/TestPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/TestPackage/ThrowErrorServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/TestPackage/ThrowErrorServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/UtilityPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/UtilityPackage/GlobalMethods.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage/GlobalMethods.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/UtilityPackage/UserSessionValidator.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage/UserSessionValidator.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ValidationPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ValidationPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/dgx/software/com/ValidationPackage/EMailValidationServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ValidationPackage/EMailValidationServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/AAAAA.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/AAAAA.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/AGenericServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/AGenericServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Main.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Main.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/MainTest.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/MainTest.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/MyCustomComparator.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/MyCustomComparator.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/MyEventNode.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/MyEventNode.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/MyTagSupport.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/MyTagSupport.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/SQLQueryPractice.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/SQLQueryPractice.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/ConvertedServletToJSPPackage');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/ConvertedServletToJSPPackage/HomePage.jsp');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage/HomePage.jsp?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/ConvertedServletToJSPPackage/HomePageServlet.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage/HomePageServlet.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/AGoogleDistanceMatrixAPITest.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/AGoogleDistanceMatrixAPITest.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/CDL.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/CDL.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/Cookie.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/Cookie.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/CookieList.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/CookieList.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/HTTP.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/HTTP.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/HTTPTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/HTTPTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONArray.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONArray.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONException.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONException.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONML.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONML.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONObject$Null.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONObject$Null.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONObject.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONObject.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONString.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONString.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONStringer.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONStringer.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/JSONWriter.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONWriter.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/XML.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/XML.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Test/org/json/XMLTokener.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/XMLTokener.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/build/classes/test/Validate.class');
+ changed_urls.push('/p/real-lean-fitness/source/browse/build/classes/test/Validate.class?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/src/dgx/software/com/ServletPackage/LoginServlet.java');
+ changed_urls.push('/p/real-lean-fitness/source/browse/src/dgx/software/com/ServletPackage/LoginServlet.java?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ changed_paths.push('/src/dgx/software/com/ServletPackage/RegistrationServlet.java');
+ changed_urls.push('/p/real-lean-fitness/source/browse/src/dgx/software/com/ServletPackage/RegistrationServlet.java?r\x3d18\x26spec\x3dsvn77');
+ 
+ 
+ function getCurrentPageIndex() {
+ for (var i = 0; i < changed_paths.length; i++) {
+ if (selected_path == changed_paths[i]) {
+ return i;
+ }
+ }
+ }
+ function getNextPage() {
+ var i = getCurrentPageIndex();
+ if (i < changed_paths.length - 1) {
+ return changed_urls[i + 1];
+ }
+ return null;
+ }
+ function getPreviousPage() {
+ var i = getCurrentPageIndex();
+ if (i > 0) {
+ return changed_urls[i - 1];
+ }
+ return null;
+ }
+ function gotoNextPage() {
+ var page = getNextPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoPreviousPage() {
+ var page = getPreviousPage();
+ if (!page) {
+ page = detail_url;
+ }
+ window.location = page;
+ }
+ function gotoDetailPage() {
+ window.location = detail_url;
+ }
+ function gotoPublishPage() {
+ window.location = publish_url;
+ }
+</script>
+
+ 
+ <style type="text/css">
+ #review_nav {
+ border-top: 3px solid white;
+ padding-top: 6px;
+ margin-top: 1em;
+ }
+ #review_nav td {
+ vertical-align: middle;
+ }
+ #review_nav select {
+ margin: .5em 0;
+ }
+ </style>
+ <div id="review_nav">
+ <table><tr><td>Go to:&nbsp;</td><td>
+ <select name="files_in_rev" onchange="window.location=this.value">
+ 
+ <option value="/p/real-lean-fitness/source/browse/.classpath?r=18&amp;spec=svn77"
+ 
+ >/.classpath</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.project?r=18&amp;spec=svn77"
+ 
+ >/.project</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings?r=18&amp;spec=svn77"
+ 
+ >/.settings</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/.jsdtscope?r=18&amp;spec=svn77"
+ selected="selected"
+ >/.settings/.jsdtscope</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/org.eclipse.jdt.core.prefs?r=18&amp;spec=svn77"
+ 
+ >...tings/org.eclipse.jdt.core.prefs</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.common.component?r=18&amp;spec=svn77"
+ 
+ >...org.eclipse.wst.common.component</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.common.project.facet.core.xml?r=18&amp;spec=svn77"
+ 
+ >...st.common.project.facet.core.xml</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.jsdt.ui.superType.container?r=18&amp;spec=svn77"
+ 
+ >....wst.jsdt.ui.superType.container</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/.settings/org.eclipse.wst.jsdt.ui.superType.name?r=18&amp;spec=svn77"
+ 
+ >...lipse.wst.jsdt.ui.superType.name</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/WebContent/HomePage.jsp?r=18&amp;spec=svn77"
+ 
+ >/WebContent/HomePage.jsp</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/DGXExecuteSQLCommandOutput.txt?r=18&amp;spec=svn77"
+ 
+ >...s/DGXExecuteSQLCommandOutput.txt</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries Batch Script.bat?r=18&amp;spec=svn77"
+ 
+ >...tup SQL Queries Batch Script.bat</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/WebContent/SQL/Mandatory SQL Queries/RLF Mandatory Setup SQL Queries.sql?r=18&amp;spec=svn77"
+ 
+ >... Mandatory Setup SQL Queries.sql</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build?r=18&amp;spec=svn77"
+ 
+ >/build</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes?r=18&amp;spec=svn77"
+ 
+ >/build/classes</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/MainDGX.class?r=18&amp;spec=svn77"
+ 
+ >/build/classes/MainDGX.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx?r=18&amp;spec=svn77"
+ 
+ >/build/classes/dgx</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage?r=18&amp;spec=svn77"
+ 
+ >/build/classes/dgx/DGXPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/AAAAA.class?r=18&amp;spec=svn77"
+ 
+ >...asses/dgx/DGXPackage/AAAAA.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/AGenericServlet.class?r=18&amp;spec=svn77"
+ 
+ >...DGXPackage/AGenericServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Main.class?r=18&amp;spec=svn77"
+ 
+ >...lasses/dgx/DGXPackage/Main.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MainTest.class?r=18&amp;spec=svn77"
+ 
+ >...es/dgx/DGXPackage/MainTest.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyCustomComparator.class?r=18&amp;spec=svn77"
+ 
+ >...Package/MyCustomComparator.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyEventNode.class?r=18&amp;spec=svn77"
+ 
+ >...dgx/DGXPackage/MyEventNode.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/MyTagSupport.class?r=18&amp;spec=svn77"
+ 
+ >...gx/DGXPackage/MyTagSupport.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/SQLQueryPractice.class?r=18&amp;spec=svn77"
+ 
+ >...GXPackage/SQLQueryPractice.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test?r=18&amp;spec=svn77"
+ 
+ >/build/classes/dgx/DGXPackage/Test</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage?r=18&amp;spec=svn77"
+ 
+ >...est/ConvertedServletToJSPPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePage.jsp?r=18&amp;spec=svn77"
+ 
+ >...ServletToJSPPackage/HomePage.jsp</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/ConvertedServletToJSPPackage/HomePageServlet.class?r=18&amp;spec=svn77"
+ 
+ >...JSPPackage/HomePageServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org?r=18&amp;spec=svn77"
+ 
+ >.../classes/dgx/DGXPackage/Test/org</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json?r=18&amp;spec=svn77"
+ 
+ >...ses/dgx/DGXPackage/Test/org/json</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/AGoogleDistanceMatrixAPITest.class?r=18&amp;spec=svn77"
+ 
+ >...oogleDistanceMatrixAPITest.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/CDL.class?r=18&amp;spec=svn77"
+ 
+ >...XPackage/Test/org/json/CDL.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/Cookie.class?r=18&amp;spec=svn77"
+ 
+ >...ckage/Test/org/json/Cookie.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/CookieList.class?r=18&amp;spec=svn77"
+ 
+ >...e/Test/org/json/CookieList.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/HTTP.class?r=18&amp;spec=svn77"
+ 
+ >...Package/Test/org/json/HTTP.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/HTTPTokener.class?r=18&amp;spec=svn77"
+ 
+ >.../Test/org/json/HTTPTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONArray.class?r=18&amp;spec=svn77"
+ 
+ >...ge/Test/org/json/JSONArray.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONException.class?r=18&amp;spec=svn77"
+ 
+ >...est/org/json/JSONException.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONML.class?r=18&amp;spec=svn77"
+ 
+ >...ckage/Test/org/json/JSONML.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONObject$Null.class?r=18&amp;spec=svn77"
+ 
+ >...t/org/json/JSONObject$Null.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONObject.class?r=18&amp;spec=svn77"
+ 
+ >...e/Test/org/json/JSONObject.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONString.class?r=18&amp;spec=svn77"
+ 
+ >...e/Test/org/json/JSONString.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONStringer.class?r=18&amp;spec=svn77"
+ 
+ >...Test/org/json/JSONStringer.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONTokener.class?r=18&amp;spec=svn77"
+ 
+ >.../Test/org/json/JSONTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/JSONWriter.class?r=18&amp;spec=svn77"
+ 
+ >...e/Test/org/json/JSONWriter.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/XML.class?r=18&amp;spec=svn77"
+ 
+ >...XPackage/Test/org/json/XML.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Test/org/json/XMLTokener.class?r=18&amp;spec=svn77"
+ 
+ >...e/Test/org/json/XMLTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/DGXPackage/Validate.class?r=18&amp;spec=svn77"
+ 
+ >...es/dgx/DGXPackage/Validate.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software?r=18&amp;spec=svn77"
+ 
+ >/build/classes/dgx/software</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com?r=18&amp;spec=svn77"
+ 
+ >/build/classes/dgx/software/com</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage?r=18&amp;spec=svn77"
+ 
+ >...ses/dgx/software/com/MailPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage/MailJavaBean$SMTPAuthenticator.class?r=18&amp;spec=svn77"
+ 
+ >...JavaBean$SMTPAuthenticator.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/MailPackage/MailJavaBean.class?r=18&amp;spec=svn77"
+ 
+ >...m/MailPackage/MailJavaBean.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage?r=18&amp;spec=svn77"
+ 
+ >.../dgx/software/com/ServletPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/ImageFileUploadServlet.class?r=18&amp;spec=svn77"
+ 
+ >...age/ImageFileUploadServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/LogOutServlet.class?r=18&amp;spec=svn77"
+ 
+ >...rvletPackage/LogOutServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/LoginServlet.class?r=18&amp;spec=svn77"
+ 
+ >...ervletPackage/LoginServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/RegistrationServlet.class?r=18&amp;spec=svn77"
+ 
+ >...ackage/RegistrationServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/UserInformationServlet.class?r=18&amp;spec=svn77"
+ 
+ >...age/UserInformationServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ServletPackage/UserProfileServlet.class?r=18&amp;spec=svn77"
+ 
+ >...Package/UserProfileServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/TestPackage?r=18&amp;spec=svn77"
+ 
+ >...ses/dgx/software/com/TestPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/TestPackage/ThrowErrorServlet.class?r=18&amp;spec=svn77"
+ 
+ >...tPackage/ThrowErrorServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage?r=18&amp;spec=svn77"
+ 
+ >.../dgx/software/com/UtilityPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage/GlobalMethods.class?r=18&amp;spec=svn77"
+ 
+ >...ilityPackage/GlobalMethods.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/UtilityPackage/UserSessionValidator.class?r=18&amp;spec=svn77"
+ 
+ >...ckage/UserSessionValidator.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ValidationPackage?r=18&amp;spec=svn77"
+ 
+ >...x/software/com/ValidationPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/dgx/software/com/ValidationPackage/EMailValidationServlet.class?r=18&amp;spec=svn77"
+ 
+ >...age/EMailValidationServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/AAAAA.class?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/AAAAA.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/AGenericServlet.class?r=18&amp;spec=svn77"
+ 
+ >...asses/test/AGenericServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Main.class?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/Main.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/MainTest.class?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/MainTest.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/MyCustomComparator.class?r=18&amp;spec=svn77"
+ 
+ >...es/test/MyCustomComparator.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/MyEventNode.class?r=18&amp;spec=svn77"
+ 
+ >...d/classes/test/MyEventNode.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/MyTagSupport.class?r=18&amp;spec=svn77"
+ 
+ >.../classes/test/MyTagSupport.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/SQLQueryPractice.class?r=18&amp;spec=svn77"
+ 
+ >...sses/test/SQLQueryPractice.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/Test</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage?r=18&amp;spec=svn77"
+ 
+ >...est/ConvertedServletToJSPPackage</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage/HomePage.jsp?r=18&amp;spec=svn77"
+ 
+ >...ServletToJSPPackage/HomePage.jsp</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/ConvertedServletToJSPPackage/HomePageServlet.class?r=18&amp;spec=svn77"
+ 
+ >...JSPPackage/HomePageServlet.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/Test/org</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/Test/org/json</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/AGoogleDistanceMatrixAPITest.class?r=18&amp;spec=svn77"
+ 
+ >...oogleDistanceMatrixAPITest.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/CDL.class?r=18&amp;spec=svn77"
+ 
+ >...ses/test/Test/org/json/CDL.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/Cookie.class?r=18&amp;spec=svn77"
+ 
+ >.../test/Test/org/json/Cookie.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/CookieList.class?r=18&amp;spec=svn77"
+ 
+ >...t/Test/org/json/CookieList.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/HTTP.class?r=18&amp;spec=svn77"
+ 
+ >...es/test/Test/org/json/HTTP.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/HTTPTokener.class?r=18&amp;spec=svn77"
+ 
+ >.../Test/org/json/HTTPTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONArray.class?r=18&amp;spec=svn77"
+ 
+ >...st/Test/org/json/JSONArray.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONException.class?r=18&amp;spec=svn77"
+ 
+ >...est/org/json/JSONException.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONML.class?r=18&amp;spec=svn77"
+ 
+ >.../test/Test/org/json/JSONML.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONObject$Null.class?r=18&amp;spec=svn77"
+ 
+ >...t/org/json/JSONObject$Null.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONObject.class?r=18&amp;spec=svn77"
+ 
+ >...t/Test/org/json/JSONObject.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONString.class?r=18&amp;spec=svn77"
+ 
+ >...t/Test/org/json/JSONString.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONStringer.class?r=18&amp;spec=svn77"
+ 
+ >...Test/org/json/JSONStringer.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONTokener.class?r=18&amp;spec=svn77"
+ 
+ >.../Test/org/json/JSONTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/JSONWriter.class?r=18&amp;spec=svn77"
+ 
+ >...t/Test/org/json/JSONWriter.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/XML.class?r=18&amp;spec=svn77"
+ 
+ >...ses/test/Test/org/json/XML.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Test/org/json/XMLTokener.class?r=18&amp;spec=svn77"
+ 
+ >...t/Test/org/json/XMLTokener.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/build/classes/test/Validate.class?r=18&amp;spec=svn77"
+ 
+ >/build/classes/test/Validate.class</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/src/dgx/software/com/ServletPackage/LoginServlet.java?r=18&amp;spec=svn77"
+ 
+ >...ServletPackage/LoginServlet.java</option>
+ 
+ <option value="/p/real-lean-fitness/source/browse/src/dgx/software/com/ServletPackage/RegistrationServlet.java?r=18&amp;spec=svn77"
+ 
+ >...Package/RegistrationServlet.java</option>
+ 
+ </select>
+ </td></tr></table>
+ 
+ 
+ 
+
+
+
+ 
+ </div>
+ 
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="older_bubble">
+ <p>Older revisions</p>
+ 
+ <a href="/p/real-lean-fitness/source/list?path=/.settings/.jsdtscope&start=18">All revisions of this file</a>
+ </div>
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ 
+ <div class="pmeta_bubble_bg" style="border:1px solid white">
+ <div class="round4"></div>
+ <div class="round2"></div>
+ <div class="round1"></div>
+ <div class="box-inner">
+ <div id="fileinfo_bubble">
+ <p>File info</p>
+ 
+ <div>Size: 503 bytes,
+ 12 lines</div>
+ 
+ <div><a href="//real-lean-fitness.googlecode.com/svn/.settings/.jsdtscope">View raw file</a></div>
+ </div>
+ 
+ </div>
+ <div class="round1"></div>
+ <div class="round2"></div>
+ <div class="round4"></div>
+ </div>
+ </div>
+ </div>
+
+
+</div>
+
+</div>
+</div>
+
+
+<script src="http://www.gstatic.com/codesite/ph/1729405847801014513/js/source_file_scripts.js"></script>
+
+ <script type="text/javascript" src="http://www.gstatic.com/codesite/ph/1729405847801014513/js/kibbles.js"></script>
+ <script type="text/javascript">
+ var lastStop = null;
+ var initialized = false;
+ 
+ function updateCursor(next, prev) {
+ if (prev && prev.element) {
+ prev.element.className = 'cursor_stop cursor_hidden';
+ }
+ if (next && next.element) {
+ next.element.className = 'cursor_stop cursor';
+ lastStop = next.index;
+ }
+ }
+ 
+ function pubRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftRevealed(data) {
+ updateCursorForCell(data.cellId, 'cursor_stop cursor_hidden');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ 
+ function draftDestroyed(data) {
+ updateCursorForCell(data.cellId, 'nocursor');
+ if (initialized) {
+ reloadCursors();
+ }
+ }
+ function reloadCursors() {
+ kibbles.skipper.reset();
+ loadCursors();
+ if (lastStop != null) {
+ kibbles.skipper.setCurrentStop(lastStop);
+ }
+ }
+ // possibly the simplest way to insert any newly added comments
+ // is to update the class of the corresponding cursor row,
+ // then refresh the entire list of rows.
+ function updateCursorForCell(cellId, className) {
+ var cell = document.getElementById(cellId);
+ // we have to go two rows back to find the cursor location
+ var row = getPreviousElement(cell.parentNode);
+ row.className = className;
+ }
+ // returns the previous element, ignores text nodes.
+ function getPreviousElement(e) {
+ var element = e.previousSibling;
+ if (element.nodeType == 3) {
+ element = element.previousSibling;
+ }
+ if (element && element.tagName) {
+ return element;
+ }
+ }
+ function loadCursors() {
+ // register our elements with skipper
+ var elements = CR_getElements('*', 'cursor_stop');
+ var len = elements.length;
+ for (var i = 0; i < len; i++) {
+ var element = elements[i]; 
+ element.className = 'cursor_stop cursor_hidden';
+ kibbles.skipper.append(element);
+ }
+ }
+ function toggleComments() {
+ CR_toggleCommentDisplay();
+ reloadCursors();
+ }
+ function keysOnLoadHandler() {
+ // setup skipper
+ kibbles.skipper.addStopListener(
+ kibbles.skipper.LISTENER_TYPE.PRE, updateCursor);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_top', 50);
+ // Set the 'offset' option to return the middle of the client area
+ // an option can be a static value, or a callback
+ kibbles.skipper.setOption('padding_bottom', 100);
+ // Register our keys
+ kibbles.skipper.addFwdKey("n");
+ kibbles.skipper.addRevKey("p");
+ kibbles.keys.addKeyPressListener(
+ 'u', function() { window.location = detail_url; });
+ kibbles.keys.addKeyPressListener(
+ 'r', function() { window.location = detail_url + '#publish'; });
+ 
+ kibbles.keys.addKeyPressListener('j', gotoNextPage);
+ kibbles.keys.addKeyPressListener('k', gotoPreviousPage);
+ 
+ 
+ }
+ </script>
+<script src="http://www.gstatic.com/codesite/ph/1729405847801014513/js/code_review_scripts.js"></script>
+<script type="text/javascript">
+ function showPublishInstructions() {
+ var element = document.getElementById('review_instr');
+ if (element) {
+ element.className = 'opened';
+ }
+ }
+ var codereviews;
+ function revsOnLoadHandler() {
+ // register our source container with the commenting code
+ var paths = {'svn77': '/.settings/.jsdtscope'}
+ codereviews = CR_controller.setup(
+ {"projectHomeUrl": "/p/real-lean-fitness", "profileUrl": "/u/105518246561075610317/", "token": "ABZ6GAfwF0oQ9GfnUinmzSlR56TjpwHR3g:1419999118123", "assetVersionPath": "http://www.gstatic.com/codesite/ph/1729405847801014513", "domainName": null, "projectName": "real-lean-fitness", "assetHostPath": "http://www.gstatic.com/codesite/ph", "relativeBaseUrl": "", "loggedInUserEmail": "dalvis.gomez1018@gmail.com"}, '', 'svn77', paths,
+ CR_BrowseIntegrationFactory);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, showPublishInstructions);
+ 
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_PUB_PLATE, pubRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.REVEAL_DRAFT_PLATE, draftRevealed);
+ codereviews.registerActivityListener(CR_ActivityType.DISCARD_DRAFT_COMMENT, draftDestroyed);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ var initialized = true;
+ reloadCursors();
+ }
+ window.onload = function() {keysOnLoadHandler(); revsOnLoadHandler();};
+
+</script>
+<script type="text/javascript" src="http://www.gstatic.com/codesite/ph/1729405847801014513/js/dit_scripts.js"></script>
+
+ 
+ 
+ 
+ <script type="text/javascript" src="http://www.gstatic.com/codesite/ph/1729405847801014513/js/ph_core.js"></script>
+ 
+ 
+ 
+ 
+</div> 
+
+<div id="footer" dir="ltr">
+ <div class="text">
+ <a href="/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+
+ 
+ 
+
+
+ 
+ 
+ <script type="text/javascript">_CS_reportToCsi();</script>
+ 
+ </body>
+</html>
+
