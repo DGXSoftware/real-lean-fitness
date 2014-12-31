@@ -185,43 +185,44 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 		 
 <%
 
+//Get the Current Program Percentage
+String Last_Program_ID_Percentage = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID_Percentage", "Account_ID", SessionAccountID);
+
+// PROBLEM
+// If we arrive on a new day, but the percentage was 0 and we don't update the sequence
+//we can test drive the current sequence, get a percentage and then come back and be promoted
+
+//SOLUTION
+// If the percentage is = 0 overwrite the Last_Program_ID_Saved_On with TodaysDateAndTime and write this value to the DB's Last_Program_ID_Saved_On column.
+// This will make it so that the new Last_Program_ID_Saved_On date will be the date that the program was actually ran.
+
+
+//If the date has changed, and if the Last_Program_ID_Percentage is not = 0, then 
+if(Last_Program_ID_Percentage.equals("0")){
+
+	//APPLY SOLUTION
+	//
+	Last_Program_ID_Saved_On = TodaysDateAndTime;
+	
+}
+
+
+
+
 //Get the Current User's Last_Program_Sequence_Number using the last Program ID
 String Last_Program_Sequence_Number = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Strategies","Program_Sequence_Number", "Program_ID", Last_Program_ID);
 
-// Get the Current Program Percentage
-String Last_Program_ID_Percentage = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_CheckPoints","Last_Program_ID_Percentage", "Account_ID", SessionAccountID);
-
 //Check if Last_Program_ID_Saved_On and TodaysDateAndTime are on the same day
 if(GlobalTools.isNewDayAfterOldDay(TodaysDateAndTime, Last_Program_ID_Saved_On)){
-	//System.out.println("New Day comes After!");
-	
-// If the date has changed, and if the Last_Program_ID_Percentage is not = 0, then 
-if(!Last_Program_ID_Percentage.equals("0")){
+	// NEW DAY: Update the Last_Program_Sequence_Number
 
 	// Add 1 to the Last_Program_Sequence_Number
 	Last_Program_Sequence_Number = "" + (Integer.parseInt(Last_Program_Sequence_Number) + 1);
 	
-}else{
-	// SET THE CURRENT DATE HERE
-	System.out.println("SET THE CURRENT DATE HERE");
-	
-	// PROBLEM
-	// If we arrive on a new day, but the percentage was 0 and we don't update the sequence
-	//we can test drive the current sequence, get a percentage and then come back and be promoted
-	
-	//SOLUTION
-	// If the percentage is not = 0 overwrite the DB date and reload the page with JavaScript
-	
-}
-
-	
-
 // IF WE ARE PAST THE LAST "Program_Sequence_Number" Possible which is currently 91 , set it back to the starting point
 if(Last_Program_Sequence_Number.equals("92")){
 	Last_Program_Sequence_Number = "1";
 }
-
-
 
 }else{
 	// SAME DAY OR PREVIOUS DAY: Do Nothing!
