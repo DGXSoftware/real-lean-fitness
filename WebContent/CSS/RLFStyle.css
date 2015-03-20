@@ -21,14 +21,14 @@ body {
 }
 /******************** HEADER ********************/
 #header {
-	width:750px;
+	width:800px;
 	height:137px;
 	margin-left:25px;
 	background-image:url(/Images/DGSoftware_Header.jpg);
 	display:block;
 }
 #nav {
-	width:744px;
+	width:794px;
 	height:22px;
 	margin: 2px 0px 2px 25px;
 	background-color:#a5cae5;
@@ -61,7 +61,7 @@ body {
 /******************** CONTENT ********************/
 p, h1, a, span{font-family: Arial, Helvetica, sans-serif;}
 #content {
-	width:750px;
+	width:800px;
 	margin-left:25px;
 	background-color:#a5cae5;
 }
