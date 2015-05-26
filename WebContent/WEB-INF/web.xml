@@ -1,8 +1,8 @@
 <web-app xmlns= "http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">                                       
 
 <!-- General description of your Web application -->
-<display-name>Real Lean Fitness</display-name>                                     
-<description>The World's BEST Fitness program!</description>                                 
+<display-name>Real Lean Fitness</display-name>
+<description>The World's BEST Fitness Program!</description>
 
     <!-- Start of Servlet definitions -->
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -25,8 +25,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.LoginServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>LoginServlet</servlet-name><url-pattern>/LoginServlet</url-pattern></servlet-mapping>
 <!-- END LoginServlet Definition -->
@@ -39,8 +39,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.RegistrationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>RegistrationServlet</servlet-name><url-pattern>/RegistrationServlet</url-pattern></servlet-mapping>
 <!-- END RegistrationServlet Definition -->
@@ -55,8 +55,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.ImageFileUploadServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
 	<init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>ImageFileUploadServlet</servlet-name><url-pattern>/ImageFileUploadServlet</url-pattern></servlet-mapping>
 <!-- END ImageFileUploadServlet Definition -->
@@ -79,8 +79,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.PasswordChangeServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>PasswordChangeServlet</servlet-name><url-pattern>/PasswordChangeServlet</url-pattern></servlet-mapping>
 <!-- END PasswordChangeServlet Definition -->
@@ -93,8 +93,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.ForgotPasswordChangeServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>ForgotPasswordChangeServlet</servlet-name><url-pattern>/ForgotPasswordChangeServlet</url-pattern></servlet-mapping>
 <!-- END ForgotPasswordChangeServlet Definition -->
@@ -107,8 +107,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.RequestForgotPasswordChangeServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>RequestForgotPasswordChangeServlet</servlet-name><url-pattern>/RequestForgotPasswordChangeServlet</url-pattern></servlet-mapping>
 <!-- END RequestForgotPasswordChangeServlet Definition -->
@@ -121,8 +121,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.EMailVerificationServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>EMailVerificationServlet</servlet-name><url-pattern>/EMailVerificationServlet</url-pattern></servlet-mapping>
 <!-- END EMailVerificationServlet Definition -->
@@ -135,8 +135,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.NewsletterSubscriptionServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>NewsletterSubscriptionServlet</servlet-name><url-pattern>/NewsletterSubscriptionServlet</url-pattern></servlet-mapping>
 <!-- END NewsletterSubscriptionServlet Definition -->
@@ -149,8 +149,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.ContactUsEMailServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>ContactUsEMailServlet</servlet-name><url-pattern>/ContactUsEMailServlet</url-pattern></servlet-mapping>
 <!-- END ContactUsEMailServlet Definition -->
@@ -163,8 +163,8 @@
 	<servlet-class>dgx.software.com.ActionPackage.ProgramCheckpointServlet</servlet-class>
 	<init-param><param-name>DriverName</param-name><param-value>com.mysql.jdbc.Driver</param-value></init-param>
     <init-param><param-name>DatabaseURL</param-name><param-value>jdbc:mysql://localhost:10000/RLFDB</param-value></init-param>
-	<init-param><param-name>DatabaseUser</param-name><param-value>RLFSoftware</param-value></init-param>
-	<init-param><param-name>DatabasePassword</param-name><param-value>RLFPassword</param-value></init-param>
+	<init-param><param-name>DatabaseUser</param-name><param-value>DGXSoftware</param-value></init-param>
+	<init-param><param-name>DatabasePassword</param-name><param-value>DGXPassword</param-value></init-param>
 </servlet>
 <servlet-mapping><servlet-name>ProgramCheckpointServlet</servlet-name><url-pattern>/ProgramCheckpointServlet</url-pattern></servlet-mapping>
 <!-- END ProgramCheckpointServlet Definition -->
@@ -229,13 +229,13 @@
   <context-param>
     <description>This is the DB DatabaseUser.</description>  
     <param-name>DatabaseUser</param-name>  
-    <param-value>RLFSoftware</param-value>  
+    <param-value>DGXSoftware</param-value>  
   </context-param>
   
   <context-param>  
     <description>This is the DB DatabasePassword.</description>  
     <param-name>DatabasePassword</param-name>  
-    <param-value>RLFPassword</param-value>  
+    <param-value>DGXPassword</param-value>  
   </context-param>
 
 <!-- START Listener -->

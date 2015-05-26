@@ -35,13 +35,13 @@ mysql  --port=10000 --host=localhost -u root -p
 /* ---------------------------------------------------------------------------------------------------------------- */
 
 /* Create an User and Password */
-CREATE USER 'RLFSoftware'@'localhost' IDENTIFIED BY 'RLFPassword';
+CREATE USER 'DGXSoftware'@'localhost' IDENTIFIED BY 'DGXPassword';
 
 /* Grant the user access to use the database and login */
 /* NOTE: The asterisks in this command refer to the database and table (respectively) that 
 they can access—this specific command allows to the user to read, edit, execute and perform 
 all tasks across all the databases and tables.  */
-GRANT ALL PRIVILEGES ON *.* TO 'RLFSoftware'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'DGXSoftware'@'localhost';
 
 /* Once you have finalized the permissions that you want to set up for your new users, 
 always be sure to reload all the privileges.  */
@@ -51,7 +51,7 @@ FLUSH PRIVILEGES;
 SELECT User,Host,Password from MySQL.USER;
 
 /* Delete an User */
-DROP USER 'RLFSoftware'@'localhost';
+DROP USER 'DGXSoftware'@'localhost';
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
@@ -211,8 +211,8 @@ FOREIGN KEY (Secondary_Program_Name) REFERENCES RLF_Programs (Program_Name) ON D
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Exercise Table */
-CREATE TABLE RLF_Programs_Exercises (Fixed Reference Data) (
+/* Create the Exercise Table (Fixed Reference Data) */
+CREATE TABLE RLF_Programs_Exercises (
 
 Exercise_ID INTEGER NOT NULL AUTO_INCREMENT,
 Program_Name varchar(64) NOT NULL,
