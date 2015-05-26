@@ -83,7 +83,7 @@ USE RLFDB;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Accounts Table */
+/* Create the Accounts Table (Dynamic User Data) */
 CREATE TABLE RLF_Accounts (
 
 Account_ID INT NOT NULL AUTO_INCREMENT,
@@ -111,7 +111,7 @@ ALTER TABLE RLF_Accounts AUTO_INCREMENT = 1000000000;
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Images Table */
+/* Create the Images Table (Dynamic User Data) */
 CREATE TABLE RLF_Images (
 
 Image_ID INT NOT NULL AUTO_INCREMENT,
@@ -128,7 +128,7 @@ FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the UserInformation Table */
+/* Create the UserInformation Table (Dynamic User Data) */
 CREATE TABLE RLF_User_Information (
 
 Account_ID INT NOT NULL,
@@ -147,7 +147,7 @@ FOREIGN KEY (Account_ID) REFERENCES RLF_Accounts (Account_ID) ON DELETE CASCADE
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Newsletters Table */
+/* Create the Newsletters Table (Dynamic User Data) */
 CREATE TABLE RLF_Newsletters (
 
 EMail VARCHAR(255) NOT NULL,
@@ -167,7 +167,7 @@ UNIQUE (EMail)
 /* ---------------------------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Regimens Table */
+/* Create the Regimens Table (Fixed Reference Data) */
 CREATE TABLE RLF_Regimens (
 
 Regimen_Name varchar(64) NOT NULL,
@@ -179,7 +179,7 @@ PRIMARY KEY (Regimen_Name)
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Programs Table */
+/* Create the Programs Table (Fixed Reference Data) */
 CREATE TABLE RLF_Programs (
 
 Program_Number INT,
@@ -193,7 +193,7 @@ PRIMARY KEY (Program_Name)
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Programs Strategies Table */
+/* Create the Programs Strategies Table (Fixed Reference Data) */
 CREATE TABLE RLF_Programs_Strategies (
 
 Program_ID INTEGER NOT NULL AUTO_INCREMENT,
@@ -212,7 +212,7 @@ FOREIGN KEY (Secondary_Program_Name) REFERENCES RLF_Programs (Program_Name) ON D
 /* ---------------------------------------------------------------------------------------------------------------- */
 
 /* Create the Exercise Table */
-CREATE TABLE RLF_Programs_Exercises (
+CREATE TABLE RLF_Programs_Exercises (Fixed Reference Data) (
 
 Exercise_ID INTEGER NOT NULL AUTO_INCREMENT,
 Program_Name varchar(64) NOT NULL,
@@ -230,7 +230,7 @@ FOREIGN KEY (Program_Name) REFERENCES RLF_Programs (Program_Name) ON DELETE CASC
 
 /* ---------------------------------------------------------------------------------------------------------------- */
 
-/* Create the Exercise Programs Checkpoint Table */
+/* Create the Exercise Programs Checkpoint Table (Dynamic User Data) */
 CREATE TABLE RLF_Programs_CheckPoints (
 
 Account_ID INT NOT NULL,

@@ -977,7 +977,7 @@ public class GlobalTools {
 		DESCRIPTION: Compares a Start Date Vs. a Stop Date and if It's older than the specified hours mark it as expired (Calculates in 24 Hours)
 		Also allow the user to set how many hours would have to pass before the item is marked as Expired
 		PARAMETERS: (String OldDateAndTime, int HoursPassedToMarkAsExpired)
-		RETURN:      VOID
+		RETURN:      boolean
 		SIDE-EFFECT: NONE.
 		*************************************************************************************************/
 		public static boolean isLinkExpired(String OldDateAndTime, int HoursPassedToMarkAsExpired){
@@ -1028,6 +1028,121 @@ public class GlobalTools {
 			
 		}
 
+		/*************************************************************************************************
+		NAME:        isNewDateInFutureOfOldDate
+		DESCRIPTION: Compares an Old Date Vs. a New Date and if It lets you know if the New Date is in the Future of the Old One (Even by a second)
+		PARAMETERS: (String OldDateAndTime, String NewDateAndTime, String DateFormat)
+		RETURN:      boolean
+		SIDE-EFFECT: NONE.
+		*************************************************************************************************/
+	    public static boolean isNewDateInFutureOfOldDate(String OldDateAndTime, String NewDateAndTime, String DateFormat){
+
+	            // Get the current date
+	            // NOE: "HH" converts hour in 24 hours format (0-23), day calculation
+	            SimpleDateFormat SDF = new SimpleDateFormat(DateFormat);
+
+	            // Declare the OldDateAndTime and newDateAndTime Date Objects
+	            Date NewDateObject = null;
+	            Date OldDateObject = null;
+
+	            try {
+
+	                  NewDateObject = SDF.parse(NewDateAndTime);
+	                  OldDateObject = SDF.parse(OldDateAndTime);
+
+	                  // in Milliseconds
+	                  long diff = OldDateObject.getTime() - NewDateObject.getTime();
+
+	                 
+
+	                  // Get the Current Date Differences From the Alleged Future Date
+	                  // (Negative Difference = Future Date is After Current Date) = Method Returns true
+	                  // (Positive Difference = Future Date is Before Current Date) = Method Returns false
+	                  long diffSeconds = diff / 1000 % 60;
+	                  long diffMinutes = diff / (60 * 1000) % 60;
+	                  long diffHours = diff / (60 * 60 * 1000) % 24;
+	                  long diffDays = diff / (24 * 60 * 60 * 1000);
+
+	                  // (Negative Difference = Future Date Days are After Current Date) = Method Returns true
+	                  if (diffDays < 0){
+	                        return true;
+	                  }
+
+	                  // (Negative Difference = Future Date Hours are After Current Date) = Method Returns true
+	                  if (diffHours < 0){
+	                        return true;
+	                  }
+
+	                  // (Negative Difference = Future Date Minutes are After Current Date) = Method Returns true
+	                  if (diffMinutes < 0){
+	                        return true;
+	                  }
+
+	                  // (Negative Difference = Future Date Seconds are After Current Date) = Method Returns true
+	                  if (diffSeconds < 0){
+	                        return true;
+	                  }
+	                  
+	            }catch(Exception EX){
+
+	                  EX.printStackTrace();
+
+	            }
+
+	            // (Positive Difference = Future Date is Before Current Date) = Method Returns false
+	            return false;
+
+	    }
+
+		/*************************************************************************************************
+		NAME:        isDateBetweenDayHourRange
+		DESCRIPTION: Let's you know if a Given Date's hour is between a specified range of hours.
+		PARAMETERS: (String GivenDate, String DateFormatString, int LowestHour, int HighestHour)
+		RETURN:      boolean
+		SIDE-EFFECT: NONE.
+		*************************************************************************************************/
+	    public static boolean isDateBetweenDayHourRange(String GivenDate, String DateFormatString, int LowestHour, int HighestHour) throws ParseException{
+
+	      // Declare the SimpleDateFormat Objects
+
+	            String HourFormatString = "HH";
+
+	            SimpleDateFormat DateFormat = new SimpleDateFormat(DateFormatString);
+
+	            DateFormat.setLenient(false);
+
+	            SimpleDateFormat HourFormat = new SimpleDateFormat(HourFormatString);
+
+	            HourFormat.setLenient(false);
+
+	     
+
+	            //Get the Given Date's Hour
+
+	            int GivenHour = Integer.parseInt(HourFormat.format(DateFormat.parse(GivenDate)));
+
+	           
+
+	            // Verify if the Given hour is equals or higher than the LowestHour and also Equals or lower than the HighestHour
+
+	            if(GivenHour >= LowestHour && GivenHour <= HighestHour){
+
+	                  // Valid Range
+
+	                  return true;
+
+	            }else{
+
+	                  // Invalid Range
+
+	                  return false;
+
+	            }
+
+	     
+
+	    }
+		
 		/*************************************************************************************************
 		NAME:        updateGenericTableCellData (INCOMPLETE BETA!!!!!!!!!!!!!!!)
 		DESCRIPTION: Gets all the Column Names and Values from a specific Table using

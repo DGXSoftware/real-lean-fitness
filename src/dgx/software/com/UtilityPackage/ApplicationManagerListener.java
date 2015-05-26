@@ -2,6 +2,7 @@ package dgx.software.com.UtilityPackage;
 
 import java.util.Enumeration;
 import java.util.Properties;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,10 +25,20 @@ public class ApplicationManagerListener implements ServletContextListener {
             properties.setProperty(key, value);
         }
         
+        try{
         // Initialize the following Methods for the following Beans
         dgx.software.com.JavaBeanPackage.PayPalJavaBean.setServletContextProperties(properties);
         dgx.software.com.JavaBeanPackage.UserSQLOperationJavaBean.setServletContextProperties(properties);
         dgx.software.com.UtilityPackage.GlobalTools.setServletContextProperties(properties);
+        }catch(Exception EX){
+        	System.out.println("================================== DGX CUSTOM ERROR ==================================");
+        	System.out.println("ERROR DESCRIPTION: Exception sending context initialized event to listener instance of class dgx.software.com.UtilityPackage.ApplicationManagerListener");
+        	System.out.println("ERROR MESSAGE: java.lang.RuntimeException: The Database is Unavailable. Please Try again later.");
+        	System.out.println("ERROR SOLUTION: Check the \"web.xml\" file and make sure that all the Database Credentials are properly set for a successful Database Connection.");
+        	System.out.println("================================== DGX CUSTOM ERROR ==================================");
+        	EX.printStackTrace();
+        }
+        
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

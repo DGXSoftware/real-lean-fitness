@@ -174,7 +174,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 	//2. Have the Player record the % in the Database everytime It's updated - (DONE)
 	//3. Only move to new Program if Date moved up and previous program % is higher than 0%
 	//4. When you move to the new program, record the the previous percentage and Program name a new database (For statistics)
-	//5. Create a apage that uses this new table's data to show statistics for all programs
+	//5. Create a page that uses this new table's data to show statistics for all programs
 	
 	// If any of the Initial Regimen values are null, send the user to an alternative form to set these values
 	if( Last_Regimen_Name != null && Last_Program_ID != null && Last_Program_ID_Saved_On != null ){
@@ -182,7 +182,7 @@ if(GlobalTools.isUserCurrentlyLoggedIn(request,response)){
 %>
 		
 		<form action='' method='get' id='RLFRegimenForm' name='RLFRegimenForm'>
-		 
+		
 <%
 
 //Get the Current Program Percentage
@@ -195,6 +195,35 @@ String Last_Program_ID_Percentage = GlobalTools.getSingleTableCellData(request, 
 //SOLUTION
 // If the percentage is = 0 overwrite the Last_Program_ID_Saved_On with TodaysDateAndTime and write this value to the DB's Last_Program_ID_Saved_On column.
 // This will make it so that the new Last_Program_ID_Saved_On date will be the date that the program was actually ran.
+
+
+// START TESTING STUFF
+System.out.println("=====================");
+TodaysDateAndTime = "2015-05-20 23:59:59";
+System.out.println("TodaysDateAndTime = " + TodaysDateAndTime);
+System.out.println("Last_Program_ID_Saved_On = " + Last_Program_ID_Saved_On);
+System.out.println("=====================");
+
+// TO DO : WORK ON DATING SITE ?!?!??!?!
+// START HERE
+//GlobalTools.isNewDateInFutureOfOldDate(null, null, null);
+if(GlobalTools.isNewDateInFutureOfOldDate(Last_Program_ID_Saved_On, TodaysDateAndTime, "yyyy-MM-dd HH:mm:ss")){
+//if(GlobalTools.isNewDayAfterOldDay(Last_Program_ID_Saved_On, TodaysDateAndTime)){
+	System.out.println("NEW WORKOUT DAY");
+}else{
+	System.out.println("TODAY IS SAME DAY OR BEFORE");
+}
+System.out.println("=====================");
+//END TESTING STUFF
+
+
+/*
+TEST Single DB Update
+*/
+
+// SAMPLE: Update Last_Program_ID Cell
+//GlobalTools.setSingleTableCellData(Request, Response, TableName, UniqueKeyName, UniqueKeyValue, SetColumnName, SetColumnValue, WhereColumnName, WhereColumnValue)
+//GlobalTools.setSingleTableCellData(request, response, "RLF_Programs_CheckPoints", "Account_ID", SessionAccountID, "Last_Program_ID", "2", "Account_ID", SessionAccountID);
 
 
 //If the date has changed, and if the Last_Program_ID_Percentage is not = 0, then 
@@ -212,9 +241,11 @@ if(Last_Program_ID_Percentage.equals("0")){
 //Get the Current User's Last_Program_Sequence_Number using the last Program ID
 String Last_Program_Sequence_Number = GlobalTools.getSingleTableCellData(request, response,"RLF_Programs_Strategies","Program_Sequence_Number", "Program_ID", Last_Program_ID);
 
+/*
 //Check if Last_Program_ID_Saved_On and TodaysDateAndTime are on the same day
-if(GlobalTools.isNewDayAfterOldDay(TodaysDateAndTime, Last_Program_ID_Saved_On)){
+if(GlobalTools.isNewDayAfterOldDay(Last_Program_ID_Saved_On, TodaysDateAndTime)){
 	// NEW DAY: Update the Last_Program_Sequence_Number
+	System.out.println("NEW DAY: Update the Last_Program_Sequence_Number!");
 
 	// Add 1 to the Last_Program_Sequence_Number
 	Last_Program_Sequence_Number = "" + (Integer.parseInt(Last_Program_Sequence_Number) + 1);
@@ -227,7 +258,10 @@ if(Last_Program_Sequence_Number.equals("92")){
 }else{
 	// SAME DAY OR PREVIOUS DAY: Do Nothing!
 	//System.out.println("New Day comes Before or is same as old day!");
+	System.out.println("SAME DAY OR PREVIOUS DAY: Do Nothing!");
+
 }
+*/
 
 //Where Regimen and New Program Order column
 //Get the Primary and Secondary Program Names
@@ -236,11 +270,13 @@ String [] WhereColumnValues = {Last_Regimen_Name, Last_Program_Sequence_Number};
 String Primary_Program_Name = GlobalTools.getSingleTableCellDataMultipleWhere(request, response,"RLF_Programs_Strategies","Primary_Program_Name", WhereColumnFields, WhereColumnValues);
 String Secondary_Program_Name = GlobalTools.getSingleTableCellDataMultipleWhere(request, response,"RLF_Programs_Strategies","Secondary_Program_Name", WhereColumnFields, WhereColumnValues);
 
+/*
 System.out.println("-------------------------------------------");
 System.out.println("Last_Regimen_Name = " + Last_Regimen_Name);
 System.out.println("Primary_Program_Name = " + Primary_Program_Name);
 System.out.println("Secondary_Program_Name = " + Secondary_Program_Name);
 System.out.println("-------------------------------------------");
+*/
 
 CurrentSession.setAttribute("Primary_Program_Name", Primary_Program_Name);
 CurrentSession.setAttribute("Secondary_Program_Name", Secondary_Program_Name);
@@ -256,10 +292,10 @@ PercentageColor = "green";
 }
 %>
 
-		<h4><%= Last_Regimen_Name %></h2>
+		<h4><%= Last_Regimen_Name %> Regimen</h2>
 		<br/>
 		<div>
-		<p><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>"><%= Primary_Program_Name %></a></p>
+		<p><a href="<%= GlobalTools.GTV_RLFService_RLFPlayer %>">Day <%= Last_Program_Sequence_Number %> - <%= Primary_Program_Name %></a></p>
 		<span style="color:<%= PercentageColor %>"><%= Last_Program_ID_Percentage %>% Completed </span>
 		<span> - Click to begin your daily workout for the day.</span>
 		</div>
